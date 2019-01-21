@@ -1,21 +1,17 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import ApplicationState from './src/store/app/';
+import ApplicationState from '@store/app/';
 import RootContainer from './src/root-container'
 
 import { AppLoading, SplashScreen } from 'expo';
 import { Provider, observer } from 'mobx-react';
-import { DEVICE_WIDTH, DEVICE_HEIGHT } from './src/utils/constants';
+import { DEVICE_WIDTH, DEVICE_HEIGHT } from '@utils/constants';
 
 const AppSplashWrapper = styled.View`
 	flex: 1;
 	width: ${DEVICE_WIDTH};
 	height: ${DEVICE_HEIGHT};
 `;
-
-// const AppLoadingWrapper = styled(AppLoading)`
-// 	background-color: ${ props => props.theme.BLACK };
-// `;
 
 const SplashImage = styled.Image`
 	flex: 1;
@@ -27,6 +23,10 @@ const SplashImage = styled.Image`
 export default class App extends React.Component {
 	constructor(props){
 		super(props);
+
+		if(__DEV__) {
+			import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
+		}
 	}
 
 	componentDidMount(){}

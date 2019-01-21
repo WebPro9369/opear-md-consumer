@@ -15,14 +15,8 @@ class ApplicationState {
     DemostrationVariable  : false
   }
 
-
-  /*
-    This is some example data we might want to persist to storage.
-    This is handy for storing a session token, favourites lists, or other data that needs to be retrieved across app restarts.
-    See https://github.com/pinqy520/mobx-persist for docs.
-  */
-  @persist('object') @observable persistedUserData    =   {
-    name : 'Some Data',
+  @persist('object') @observable persistedUserData = {
+	name : 'Some Data',
     count : 0
   };
 
@@ -33,14 +27,9 @@ const hydrate = create({
   jsonify: true  // if you use AsyncStorage, this needs to be true
 })
 
-/*
-  We create and export a singleton (a single instance of our state).
-  This allows us to use inject and regular import to access the state.
-*/
 const singleton = new ApplicationState();
 export default singleton;
 
-// We hydrate anything we've persisted so that it is updated into the state on creation
 hydrate('persistedUserData', singleton).then(()=>{
-  console.log("Hydrated: persistedUserData")
+	console.log("Hydrated: persistedUserData")
 });

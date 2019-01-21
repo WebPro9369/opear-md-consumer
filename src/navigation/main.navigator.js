@@ -1,32 +1,29 @@
-import DashboardScreen from '../screens/dashboard';
+import DashboardScreen from '@screens/dashboard';
 
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import { colors } from '../utils/constants';
+import { colors } from '@utils/constants';
 
 const MainNavigator = createStackNavigator({
-  Dashboard: {
-    screen: DashboardScreen,
-    navigationOptions: ({ navigation }) =>  ({
-      title: 'Logo',
-      swipeEnabled: true,
-      header: null,
-      headerStyle: {
-        backgroundColor: colors.CYAN,
-      },
-      headerTitleStyle: {
-        color: colors.VIVIDWHITE,
-        backgroundColor: colors.BLACK,
-      },
-      cardStyle: {
-        backgroundColor: colors.BLACK,
-      }
-    }),
-  },
+	Dashboard: {
+    	screen: DashboardScreen,
+    	navigationOptions: ({ navigation }) =>  ({
+      		title: 'Dashboard'
+    	}),
+  	},
 }, {
-  cardStyle: {
-    backgroundColor: colors.BLACK,
-  },
-  mode: 'modal',
+	initialRouteName: 'Dashboard',
+	defaultNavigationOptions: {
+		headerStyle: {
+		  	backgroundColor: colors.WHITE,
+		},
+		headerTintColor: colors.CYAN,
+		headerTitleStyle: {
+			color: colors.CYAN  
+		},
+	},
+  	cardStyle: {
+    	backgroundColor: colors.WHITE,
+  	},
 });
 
 const AppNavigationContainer = createAppContainer(MainNavigator);
