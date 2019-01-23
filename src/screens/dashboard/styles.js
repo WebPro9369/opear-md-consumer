@@ -26,11 +26,11 @@ export const MoreServicesButtonWrapper = styled.TouchableOpacity`
 	margin: 20px;
 	bottom: 0px;
 	height: 30px;
-`;
 
-export const MoreServicesButtonText = styled.Text`
-	color: ${colors.CYAN};
-	fontSize: 16;
+	& > Text {
+		color: ${colors.CYAN};
+		fontSize: 16;
+	}
 `;
 
 // export const ServiceItemButton = styled(ServiceButton)`

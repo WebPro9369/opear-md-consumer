@@ -1,7 +1,7 @@
 import React from 'react';
 import ServiceButton from '../../components/service-button';
 
-import { View, FlatList } from 'react-native';
+import { Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { colors } from '@utils/constants';
@@ -9,8 +9,6 @@ import {
 	ContainerView,
 	TitleText,
 	MoreServicesButtonWrapper,
-	MoreServicesButtonText,
-	ServiceItemButton,
 	ServicesListView,
 	styles
 } from './styles';
@@ -34,7 +32,7 @@ class DashboardScreen extends React.PureComponent {
 					numColumns={2}
 				/>
 				<MoreServicesButtonWrapper>
-					<MoreServicesButtonText>More Services <Ionicons name="ios-arrow-down" size={14} color={colors.CYAN} /></MoreServicesButtonText>
+					<Text>More Services <Ionicons name="ios-arrow-down" size={14} color={colors.CYAN} /></Text>
 				</MoreServicesButtonWrapper>
 			</ContainerView>
 		)
