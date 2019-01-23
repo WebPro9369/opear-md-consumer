@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 80041,
-  "expoServerNgrokUrl": "https://fz-y2d.robert-matter.opear.exp.direct",
-  "packagerNgrokUrl": "https://packager.fz-y2d.robert-matter.opear.exp.direct",
-  "ngrokPid": 80068
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
