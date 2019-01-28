@@ -32,17 +32,3 @@ export const MoreServicesButtonWrapper = styled.TouchableOpacity`
 		fontSize: 16;
 	}
 `;
-
-// export const ServiceItemButton = styled(ServiceButton)`
-// 	padding: 20px;
-// `;
-
-export const ServicesListView = styled.FlatList`
-	padding: 10px;
-`;
-
-export const styles = StyleSheet.create({
-	servicesList: {
-		flex: 1
-	}
-});
