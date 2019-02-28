@@ -25,6 +25,7 @@ const colors = {
   LIGHTBLUE: "#74D9F6",
   VIVIDORANGE: "#FC4214",
   DULLORANGE: "#D01217",
+  GREEN: "#40be65",
   LIGHTGREEN: "rgb(118, 219, 148)",
   BADGE_TEXT_GREY: "rgba(0,0,0,0.6)",
   BADGE_BACKGROUND: "#efeff4"
