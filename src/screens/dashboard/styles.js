@@ -26,9 +26,4 @@ export const MoreServicesButtonWrapper = styled.TouchableOpacity`
 	margin: 20px;
 	bottom: 0px;
 	height: 30px;
-
-	& > Text {
-		color: ${colors.CYAN};
-		fontSize: 16;
-	}
 `;
