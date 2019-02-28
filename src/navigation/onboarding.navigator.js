@@ -1,26 +1,44 @@
-import {
-	createStackNavigator
-} from 'react-navigation';
-import AskLocationScreen from '@screens/onboarding/ask-location';
-import {
-	colors
-} from '@utils/constants';
+import React from "react";
+import { Image } from "react-native";
+import { createStackNavigator } from "react-navigation";
+import AskLocationScreen from "../screens/onboarding/ask-location";
+import NameCaptureScreen from "../screens/onboarding/name-capture";
+import EmailCaptureScreen from "../screens/onboarding/email-capture";
+import CreatePasswordScreen from "../screens/onboarding/create-password";
+import PhoneNumberScreen from "../screens/onboarding/phone-number";
+import { colors } from "@utils/constants";
 
-const OnboardingNavigator = createStackNavigator({
-	AskLocation: {
-    screen: AskLocationScreen,
-    navigationOptions: {
-      title: 'Welcome to opear'
+const OnboardingNavigator = createStackNavigator(
+  {
+    AskLocation: {
+      screen: AskLocationScreen,
+      navigationOptions: {
+        title: "Welcome to opear"
+      }
+    },
+    NameCapture: {
+      screen: NameCaptureScreen
+    },
+    EmailCapture: {
+      screen: EmailCaptureScreen
+    },
+    CreatePassword: {
+      screen: CreatePasswordScreen
+    },
+    PhoneNumber: {
+      screen: PhoneNumberScreen
     }
-	}
-}, {
-  initialRouteName: 'AskLocation',
-  defaultNavigationOptions: {
-    headerLeft: null,
-    headerTitleStyle: {
-      textAlign: 'left'
+  },
+  {
+    initialRouteName: "AskLocation",
+    defaultNavigationOptions: {
+      headerBackTitle: null,
+      headerBackImage: <Image source={require("../../assets/images/Back.png")} style={{marginLeft: 16}} />,
+      headerTitleStyle: {
+        textAlign: "left"
+      }
     }
   }
-});
+);
 
 export default OnboardingNavigator;
