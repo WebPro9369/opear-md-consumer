@@ -12,7 +12,7 @@ import EditChildScreen from "../screens/account/edit-child";
 
 const SettingsNavigator = createStackNavigator(
   {
-    Default1: {
+    Default: {
       screen: SettingsScreen
     },
     EditAdress: {
@@ -29,7 +29,7 @@ const SettingsNavigator = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Default1",
+    initialRouteName: "Default",
     headerMode: "none",
     defaultNavigationOptions: {
       headerBackTitle: null
