@@ -1,12 +1,14 @@
 import React from 'react';
 import {
-	ContainerView
+	ContainerView,
+	TitleText
 } from './styles';
 
 class AddChildScreen extends React.PureComponent {
 	render () {
 		return (
 			<ContainerView>
+				<TitleText>Visits Screen Coming Soon...</TitleText>
 			</ContainerView>
 		)
 	}

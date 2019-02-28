@@ -17,35 +17,7 @@ class DashboardScreen extends React.PureComponent {
     ];
     return (
       <ContainerView>
-        <TitleText>How can we help?</TitleText>
-        <View style={{ marginHorizontal: 10 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              flex: 1,
-              justifyContent: "space-between"
-            }}
-          >
-            <ServiceButton title="a" />
-            <ServiceButton title="b" />
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              flex: 1,
-              justifyContent: "space-between"
-            }}
-          >
-            <ServiceButton title="c" />
-            <ServiceButton title="d" />
-          </View>
-        </View>
-        <MoreServicesButtonWrapper>
-          <Text>
-            More Services{" "}
-            <Ionicons name="ios-arrow-down" size={14} color={colors.CYAN} />
-          </Text>
-        </MoreServicesButtonWrapper>
+        <TitleText>Dashboard Screen Coming Soon</TitleText>
       </ContainerView>
     );
   }
