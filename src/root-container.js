@@ -16,7 +16,7 @@ export default class RootContainer extends React.Component {
 		return (
 			<ThemeProvider theme={colors}>
 				<Root>
-					<StatusBar hidden />
+					<StatusBar />
 					<AppNavigationContainer />
 				</Root>
 			</ThemeProvider>
