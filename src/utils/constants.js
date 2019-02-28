@@ -13,6 +13,7 @@ const colors = {
   PINK_500: "#E91E63",
 
   BLACK: "#000000",
+  BLUE: "#2699fb",
   CARBON: "#1E1E1E",
   MIDGREY: "#6F6F6F",
   FLUORESCENT: "#D0FF00",
@@ -24,7 +25,9 @@ const colors = {
   LIGHTBLUE: "#74D9F6",
   VIVIDORANGE: "#FC4214",
   DULLORANGE: "#D01217",
-  LIGHTGREEN: "rgb(118, 219, 148)"
+  LIGHTGREEN: "rgb(118, 219, 148)",
+  BADGE_TEXT_GREY: "rgba(0,0,0,0.6)",
+  BADGE_BACKGROUND: "#efeff4"
 };
 
 export { DEVICE_WIDTH, DEVICE_HEIGHT, colors };
