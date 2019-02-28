@@ -9,7 +9,7 @@ class AuthLoadingScreen extends Component {
 
   _bootstrapAsync = async () => {
     const userAuthenticated = false;
-    this.props.navigation.navigate(userAuthenticated ? "Dashboard" : "Onboarding");
+    this.props.navigation.navigate(userAuthenticated ? "Tabs" : "Onboarding");
   }
 
   render() {
