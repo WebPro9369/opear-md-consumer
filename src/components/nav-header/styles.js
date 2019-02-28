@@ -7,6 +7,7 @@ export const Wrapper = styled.View`
   height: auto;
   display: flex;
   flexDirection: row;
+  alignItems: center;
   paddingTop: ${props => props.size === "small" ? "12px" : "24px"};
   paddingBottom: ${props => props.size === "small" ? "12px" : "24px"};
 `;
@@ -23,12 +24,13 @@ export const ServiceText = styled.Text`
   fontFamily: "Flama-Medium";
   textAlign: left;
   fontSize: ${props => props.size === "small" ? "20px" : "28px"};
-  lineHeight: ${props => props.size === "small" ? "30px" : "36px"};
+  lineHeight: ${props => props.size === "large" ? "40px" : "30px"};
 `;
 
 export const StyledBackButtonIcon = styled.Image`
   width: 25px;
   height: 16px;
+  marginRight: 12px;
 `;
 
 StyledBackButtonIcon.defaultProps = {
