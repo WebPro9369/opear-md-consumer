@@ -1,10 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator } from "react-navigation";
 import { Entypo, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import AccountNavigator from "./account.navigator";
 import DashboardScreen from "../screens/dashboard";
 import VisitsScreen from "../screens/visits";
 import ChildrenScreen from "../screens/children";
-import AccountScreen from "../screens/account";
 import { colors } from "../utils/constants";
 
 const TabNavigator = createBottomTabNavigator(
@@ -31,7 +31,7 @@ const TabNavigator = createBottomTabNavigator(
       })
     },
     Account: {
-      screen: AccountScreen,
+      screen: AccountNavigator,
       navigationOptions: ({ navigation }) => ({
         title: "Account",
         tabBarLabel: "Account"
@@ -39,7 +39,7 @@ const TabNavigator = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "Dashboard",
+    initialRouteName: "Account",
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
@@ -69,7 +69,7 @@ const TabNavigator = createBottomTabNavigator(
     }),
     tabBarOptions: {
       activeTintColor: colors.LIGHTGREEN,
-      inactiveTintColor: colors.BLACK
+      inactiveTintColor: colors.MIDGREY
     }
   }
 );
