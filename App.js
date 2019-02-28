@@ -33,6 +33,7 @@ export default class App extends React.Component {
 	componentDidMount(){
 		Font.loadAsync({
 			'Flama-Light': require('@fonts/FlamaLight_Regular.otf'),
+			'Flama-Basic': require('@fonts/Flama_Regular.otf'),
 			'Flama-Medium': require('@fonts/FlamaMedium_Regular.otf'),
 		});
 	}
