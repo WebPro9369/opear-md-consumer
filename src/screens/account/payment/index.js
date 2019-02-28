@@ -23,7 +23,7 @@ class PaymentScreen extends React.Component {
           title="Payment settings"
           size="medium"
           hasBackButton={true}
-          onPressBackButton={() => goBack()}
+          onPressBackButton={() => navigate("Account")}
         />
         <View>
           <View style={{ paddingTop: 16, paddingBottom: 16 }}>

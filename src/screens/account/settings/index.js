@@ -25,7 +25,7 @@ class SettingsScreen extends React.Component {
             title="Settings"
             size="medium"
             hasBackButton={true}
-            onPressBackButton={() => goBack()}
+            onPressBackButton={() => navigate("Account")}
           />
         </HeaderWrapper>
         <ScrollView>
@@ -36,8 +36,9 @@ class SettingsScreen extends React.Component {
               source={require("../../../../assets/images/Doctor.png")}
               showEditButton
               editButton={{
-                iconStyle: {
-                  color: colors.WHITE
+                containerStyle: {
+                  backgroundColor: colors.GREEN,
+                  borderRadius: 12
                 },
                 size: 24
               }}
