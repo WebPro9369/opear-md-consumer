@@ -14,6 +14,7 @@ export const ServiceTouchableButtonWrapper = styled.TouchableOpacity`
 	alignItems: center;
 	height: 100%;
 	padding: 13px;
+	borderRadius: 5px;
 `;
 
 export const ServiceText = styled.Text`
