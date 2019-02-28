@@ -3,17 +3,23 @@ import { Image, View } from "react-native";
 import { KeyboardAvoidingView } from "./styles";
 import ServiceButton from "../../../components/service-button";
 import { StyledText, StyledTextInput } from "../../../components/text";
+import { NavHeader } from "../../../components/nav-header";
 
 class CreatePasswordScreen extends Component {
   render() {
+    const { goBack, navigate } = this.props.navigation;
     return (
-      <KeyboardAvoidingView
-        behavior="padding"
-        enabled={true}
-        keyboardVerticalOffset={64}
-      >
+      <KeyboardAvoidingView behavior="padding" enabled={true}>
         <View>
-          <StyledText textAlign="left" style={{ marginBottom: 24 }}>
+          <NavHeader
+            hasBackButton={true}
+            size="small"
+            onPressBackButton={() => goBack()}
+          />
+          <StyledText
+            textAlign="left"
+            style={{ marginTop: 24, marginBottom: 24 }}
+          >
             Choose a password
           </StyledText>
           <View>
@@ -33,7 +39,7 @@ class CreatePasswordScreen extends Component {
           <ServiceButton
             title="Next"
             style={{ marginBottom: 20 }}
-            onPress={() => this.props.navigation.navigate("PhoneNumber")}
+            onPress={() => navigate("PhoneNumber")}
           />
         </View>
       </KeyboardAvoidingView>

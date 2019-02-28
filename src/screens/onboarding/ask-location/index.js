@@ -3,17 +3,19 @@ import { Image, View } from "react-native";
 import { KeyboardAvoidingView } from "./styles";
 import ServiceButton from "../../../components/service-button";
 import { StyledText, StyledTextInput } from "../../../components/text";
+import { NavHeader } from "../../../components/nav-header";
 
 class AskLocationScreen extends Component {
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <KeyboardAvoidingView
         behavior="padding"
         enabled={true}
-        keyboardVerticalOffset={64}
       >
         <View>
-          <StyledText textAlign="left" style={{ marginBottom: 24 }}>
+          <NavHeader title="Welcome to opear" hasBackButton={false} size="small" />
+          <StyledText textAlign="left" style={{ marginTop: 24, marginBottom: 24 }}>
             Let's make sure opear is in your area:
           </StyledText>
           <View
@@ -28,9 +30,7 @@ class AskLocationScreen extends Component {
               autoFocus={true}
               placeholder="Zip code"
             />
-            <Image
-              source={require("@images/Location.png")}
-            />
+            <Image source={require("@images/Location.png")} />
           </View>
         </View>
         <View>
@@ -41,7 +41,7 @@ class AskLocationScreen extends Component {
           <ServiceButton
             title="Check Availability"
             style={{ marginBottom: 20 }}
-            onPress={() => this.props.navigation.navigate("NameCapture")}
+            onPress={() => navigate("NameCapture")}
           />
         </View>
       </KeyboardAvoidingView>

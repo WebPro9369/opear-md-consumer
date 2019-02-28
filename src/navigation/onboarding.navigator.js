@@ -14,6 +14,7 @@ const OnboardingNavigator = createStackNavigator(
       screen: AskLocationScreen,
       navigationOptions: {
         title: "Welcome to opear"
+        
       }
     },
     NameCapture: {
@@ -31,12 +32,9 @@ const OnboardingNavigator = createStackNavigator(
   },
   {
     initialRouteName: "AskLocation",
+    headerMode: 'none',
     defaultNavigationOptions: {
-      headerBackTitle: null,
-      headerBackImage: <Image source={require("../../assets/images/Back.png")} style={{marginLeft: 16}} />,
-      headerTitleStyle: {
-        textAlign: "left"
-      }
+      headerBackTitle: null
     }
   }
 );
