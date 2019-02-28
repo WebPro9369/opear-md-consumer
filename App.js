@@ -1,9 +1,10 @@
 import React from 'react';
+import { Text } from 'react-native';
 import styled from 'styled-components/native';
 import ApplicationState from '@store/app/';
 import RootContainer from './src/root-container'
 
-import { AppLoading, SplashScreen } from 'expo';
+import { AppLoading, SplashScreen, Font } from 'expo';
 import { Provider, observer } from 'mobx-react';
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from '@utils/constants';
 
@@ -29,7 +30,12 @@ export default class App extends React.Component {
 		}
 	}
 
-	componentDidMount(){}
+	componentDidMount(){
+		Font.loadAsync({
+			'Flama-Light': require('@fonts/FlamaLight_Regular.otf'),
+			'Flama-Medium': require('@fonts/FlamaMedium_Regular.otf'),
+		});
+	}
 	componentWillMount(){}
 	componentWillUnmount(){}
 	componentWillReceiveProps(){}
