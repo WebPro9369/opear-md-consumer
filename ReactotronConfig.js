@@ -1,11 +1,10 @@
-import Reactotron from 'reactotron-react-native';
-import debugConfig from '@config/debug-config';
+import Reactotron from "reactotron-react-native";
+import debugConfig from "./config/debug-config";
 
 if (debugConfig.useReactotron) {
-    Reactotron
-    .configure({host:'192.168.1.143'})
+  Reactotron.configure({ host: "localhost" })
     .useReactNative()
     .connect();
 
-    console.tron = Reactotron;
+  console.tron = Reactotron;
 }

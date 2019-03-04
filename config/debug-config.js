@@ -1,3 +1,3 @@
 export default debugConfig = {
-    useReactotron: false
+    useReactotron: true
 };
