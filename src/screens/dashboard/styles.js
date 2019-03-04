@@ -1,8 +1,5 @@
 import styled from 'styled-components/native';
-import ServiceButton from '../../components/service-button';
-
-import { StyleSheet } from 'react-native';
-import { colors } from '../../utils/constants';
+import { colors } from "../../utils/constants";
 
 export const ContainerView = styled.View`
 	flex: 1;

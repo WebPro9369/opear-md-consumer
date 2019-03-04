@@ -1,10 +1,5 @@
-import {
-  createStackNavigator,
-  createSwitchNavigator,
-  createAppContainer
-} from "react-navigation";
+import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import AuthLoadingScreen from "../screens/authLoading";
-// import DashboardNavigator from "./dashboard.navigator";
 import TabNavigator from "./tab.navigator";
 import OnboardingNavigator from "./onboarding.navigator";
 
@@ -12,13 +7,13 @@ const MainNavigator = createSwitchNavigator(
   {
     AuthLoading: {
       screen: AuthLoadingScreen
-		},
-		Tabs: {
-			screen: TabNavigator
-		},
+    },
+    Tabs: {
+      screen: TabNavigator
+    },
     Onboarding: {
       screen: OnboardingNavigator
-		},
+    }
     // Dashboard: {
     //   screen: DashboardNavigator
     // }
@@ -30,4 +25,4 @@ const MainNavigator = createSwitchNavigator(
 
 const AppNavigationContainer = createAppContainer(MainNavigator);
 
-export { AppNavigationContainer };
+export default AppNavigationContainer;

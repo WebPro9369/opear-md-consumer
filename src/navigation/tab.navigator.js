@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { createBottomTabNavigator } from "react-navigation";
-import { Entypo, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import AccountNavigator from "./account.navigator";
 import DashboardScreen from "../screens/dashboard";
 import VisitsScreen from "../screens/visits";
@@ -11,28 +12,28 @@ const TabNavigator = createBottomTabNavigator(
   {
     Dashboard: {
       screen: DashboardScreen,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: () => ({
         title: "Dashboard",
         tabBarLabel: "Dashboard"
       })
     },
     Visits: {
       screen: VisitsScreen,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: () => ({
         title: "Visits",
         tabBarLabel: "Visits"
       })
     },
     Children: {
       screen: ChildrenScreen,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: () => ({
         title: "Children",
         tabBarLabel: "Children"
       })
     },
     Account: {
       screen: AccountNavigator,
-      navigationOptions: ({ navigation }) => ({
+      navigationOptions: () => ({
         title: "Account",
         tabBarLabel: "Account"
       })
@@ -40,14 +41,13 @@ const TabNavigator = createBottomTabNavigator(
   },
   {
     initialRouteName: "Account",
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+    defaultNavigationOptions: ({ navigation }) => {
+      const TabBarIcon = ({ tintColor }) => {
         const { routeName } = navigation.state;
         let IconComponent = MaterialCommunityIcons;
         let iconName;
         switch (routeName) {
           case "Dashboard":
-            // IconComponent = Entypo;
             iconName = "home";
             break;
           case "Visits":
@@ -63,10 +63,18 @@ const TabNavigator = createBottomTabNavigator(
           default:
             break;
         }
-
+        IconComponent.propTypes = {
+          tintColor: PropTypes.string
+        };
         return <IconComponent name={iconName} size={24} color={tintColor} />;
-      }
-    }),
+      };
+      TabBarIcon.propTypes = {
+        tintColor: PropTypes.string.isRequired
+      };
+      return {
+        tabBarIcon: TabBarIcon
+      };
+    },
     tabBarOptions: {
       activeTintColor: colors.LIGHTGREEN,
       inactiveTintColor: colors.MIDGREY

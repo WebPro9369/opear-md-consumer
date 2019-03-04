@@ -1,12 +1,9 @@
-import React from "react";
-import { Image } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import AskLocationScreen from "../screens/onboarding/ask-location";
 import NameCaptureScreen from "../screens/onboarding/name-capture";
 import EmailCaptureScreen from "../screens/onboarding/email-capture";
 import CreatePasswordScreen from "../screens/onboarding/create-password";
 import PhoneNumberScreen from "../screens/onboarding/phone-number";
-import { colors } from "@utils/constants";
 
 const OnboardingNavigator = createStackNavigator(
   {

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colors } from '@utils/constants';
+import { colors } from '../../utils/constants';
 
 export const Wrapper = styled.View`
     width: auto;

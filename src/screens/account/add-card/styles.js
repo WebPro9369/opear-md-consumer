@@ -1,15 +1,13 @@
 import styled from "styled-components/native";
-import { StyleSheet } from "react-native";
-import { colors } from "../../../utils/constants";
 
 export const KeyboardAvoidingView = styled.KeyboardAvoidingView`
-	flex: 1;
+  flex: 1;
 	justifyContent: space-between;
 	padding: 16px;
 `;
 
 export const View = styled.View`
-	paddingTop: 24px;
+  padding-top: 24px;
 	paddingBottom: 24px;
 `;
 

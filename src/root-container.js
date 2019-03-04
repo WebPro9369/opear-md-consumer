@@ -2,7 +2,7 @@ import React from "react";
 import { StatusBar } from "react-native";
 import { ThemeProvider } from "styled-components";
 import styled from "styled-components/native";
-import { AppNavigationContainer } from "./navigation/main.navigator";
+import AppNavigationContainer from "./navigation/main.navigator";
 import { colors } from "./utils/constants";
 
 const Root = styled.View`
@@ -10,15 +10,13 @@ const Root = styled.View`
   background-color: ${props => props.theme.WHITE};
 `;
 
-export default class RootContainer extends React.Component {
-  render() {
-    return (
-      <ThemeProvider theme={colors}>
-        <Root>
-          <StatusBar />
-          <AppNavigationContainer />
-        </Root>
-      </ThemeProvider>
-    );
-  }
-}
+const RootContainer = () => (
+  <ThemeProvider theme={colors}>
+    <Root>
+      <StatusBar />
+      <AppNavigationContainer />
+    </Root>
+  </ThemeProvider>
+);
+
+export default RootContainer;

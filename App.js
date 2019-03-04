@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text } from 'react-native';
 import styled from 'styled-components/native';
-import ApplicationState from '@store/app/';
+import ApplicationState from './src/store/app';
 import RootContainer from './src/root-container'
 
 import { AppLoading, SplashScreen, Font } from 'expo';
 import { Provider, observer } from 'mobx-react';
-import { DEVICE_WIDTH, DEVICE_HEIGHT } from '@utils/constants';
+import { DEVICE_WIDTH, DEVICE_HEIGHT } from './src/utils/constants';
 
 const AppSplashWrapper = styled.View`
 	flex: 1;
