@@ -4,7 +4,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "lint": "eslint src"
   },
   "dependencies": {
     "expo": "^32.0.0",
@@ -29,7 +30,15 @@
     "@babel/plugin-proposal-decorators": "^7.1.6",
     "babel-plugin-functional-hmr": "^1.0.24",
     "babel-preset-expo": "^5.0.0",
-    "babel-preset-react-native-stage-0": "^1.0.1"
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "eslint": "^5.15.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "prettier": "^1.16.4"
   },
   "private": true
 }
