@@ -1,21 +1,37 @@
 import React, { Component } from "react";
 import { Image, View } from "react-native";
-import { KeyboardAvoidingView } from "./styles";
+import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
 import ServiceButton from "../../../components/service-button";
 import { StyledText, StyledTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 
+const imgProgressbar = require("../../../../assets/images/ProgressBar2.png");
+
 class NameCaptureScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: null
+    };
+  }
+
+  handleInputChange = event => {
+    this.setState({
+      name: event.target.value
+    });
+  };
+
   render() {
-    const { goBack, navigate } = this.props.navigation;
+    const {
+      navigation: { navigate, goBack }
+    } = this.props;
+    const { name } = this.state;
+
     return (
-      <KeyboardAvoidingView
-        behavior="padding"
-        enabled={true}
-      >
+      <KeyboardAvoidingView behavior="padding" enabled>
         <View>
           <NavHeader
-            hasBackButton={true}
+            hasBackButton
             size="small"
             onPressBackButton={() => goBack()}
           />
@@ -28,16 +44,15 @@ class NameCaptureScreen extends Component {
           <View>
             <StyledTextInput
               fontSize={28}
-              autoFocus={true}
+              autoFocus
               placeholder="Full name"
+              value={name}
+              onChange={this.handleInputChange}
             />
           </View>
         </View>
         <View>
-          <Image
-            source={require("@images/ProgressBar2.png")}
-            style={{ marginBottom: 16 }}
-          />
+          <Image source={imgProgressbar} style={{ marginBottom: 16 }} />
           <ServiceButton
             title="Next"
             style={{ marginBottom: 20 }}

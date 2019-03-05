@@ -1,22 +1,41 @@
 import React, { Component } from "react";
 import { Image, View } from "react-native";
-import { KeyboardAvoidingView } from "./styles";
 import ServiceButton from "../../../components/service-button";
 import { StyledText, StyledTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
+import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
+
+const imgLocation = require("../../../../assets/images/Location.png");
+const imgProgressbar = require("../../../../assets/images/ProgressBar1.png");
 
 class AskLocationScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      zipcode: null
+    };
+  }
+
+  handleInputChange = event => {
+    this.setState({
+      zipcode: event.target.value
+    });
+  };
+
   render() {
-    const { navigate } = this.props.navigation;
+    const {
+      navigation: { navigate }
+    } = this.props;
+    const { zipcode } = this.state;
     return (
-      <KeyboardAvoidingView
-        behavior="padding"
-        enabled={true}
-      >
+      <KeyboardAvoidingView behavior="padding" enabled>
         <View>
-          <NavHeader title="Welcome to opear" hasBackButton={false} size="small" />
-          <StyledText textAlign="left" style={{ marginTop: 24, marginBottom: 24 }}>
-            Let's make sure opear is in your area:
+          <NavHeader title="Welcome to opear" hasBackButton size="small" />
+          <StyledText
+            textAlign="left"
+            style={{ marginTop: 24, marginBottom: 24 }}
+          >
+            Let&apos;s make sure opear is in your area:
           </StyledText>
           <View
             style={{
@@ -27,17 +46,16 @@ class AskLocationScreen extends Component {
           >
             <StyledTextInput
               fontSize={28}
-              autoFocus={true}
+              autoFocus
               placeholder="Zip code"
+              value={zipcode}
+              onChange={this.handleInputChange}
             />
-            <Image source={require("@images/Location.png")} />
+            <Image source={imgLocation} />
           </View>
         </View>
         <View>
-          <Image
-            source={require("@images/ProgressBar1.png")}
-            style={{ marginBottom: 16 }}
-          />
+          <Image source={imgProgressbar} style={{ marginBottom: 16 }} />
           <ServiceButton
             title="Check Availability"
             style={{ marginBottom: 20 }}

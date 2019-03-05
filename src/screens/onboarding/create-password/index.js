@@ -1,18 +1,36 @@
 import React, { Component } from "react";
 import { Image, View } from "react-native";
-import { KeyboardAvoidingView } from "./styles";
+import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
 import ServiceButton from "../../../components/service-button";
 import { StyledText, StyledTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 
+const imgProgressbar = require("../../../../assets/images/ProgressBar4.png");
+
 class CreatePasswordScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: null
+    };
+  }
+
+  handleInputChange = event => {
+    this.setState({
+      password: event.target.value
+    });
+  };
+
   render() {
-    const { goBack, navigate } = this.props.navigation;
+    const {
+      navigation: { navigate, goBack }
+    } = this.props;
+    const { password } = this.state;
     return (
-      <KeyboardAvoidingView behavior="padding" enabled={true}>
+      <KeyboardAvoidingView behavior="padding" enabled>
         <View>
           <NavHeader
-            hasBackButton={true}
+            hasBackButton
             size="small"
             onPressBackButton={() => goBack()}
           />
@@ -25,17 +43,16 @@ class CreatePasswordScreen extends Component {
           <View>
             <StyledTextInput
               fontSize={28}
-              autoFocus={true}
+              autoFocus
               placeholder="Enter password"
-              secureTextEntry={true}
+              secureTextEntry
+              value={password}
+              onChange={this.handleInputChange}
             />
           </View>
         </View>
         <View>
-          <Image
-            source={require("@images/ProgressBar4.png")}
-            style={{ marginBottom: 16 }}
-          />
+          <Image source={imgProgressbar} style={{ marginBottom: 16 }} />
           <ServiceButton
             title="Next"
             style={{ marginBottom: 20 }}
