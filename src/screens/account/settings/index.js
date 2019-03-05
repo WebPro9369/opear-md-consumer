@@ -4,27 +4,45 @@ import { FontAwesome } from "@expo/vector-icons";
 import { StyledText } from "../../../components/text";
 import { InputButton } from "../../../components/input-button";
 import { NavHeader } from "../../../components/nav-header";
+import { ContentButton } from "./styles";
 import {
   ContainerView,
   HeaderWrapper,
   ViewCentered,
   View,
   ScrollView,
-  FlexView,
-  ContentButton
-} from "./styles";
+  FlexView
+} from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
 
+const { GREEN, MIDGREY } = colors;
+const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
+const imgDoctor = require("../../../../assets/images/Doctor.png");
+
 class SettingsScreen extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: "Michael Brown",
+      address: "22341 Justice Ave APT 725",
+      email: "michaelbrown@gmail.com",
+      phone: "(415) 123 - 4567"
+    };
+  }
+
   render() {
-    const { goBack, navigate } = this.props.navigation;
+    const {
+      navigation: { navigate }
+    } = this.props;
+    const { name, address, email, phone } = this.state;
     return (
       <ContainerView>
         <HeaderWrapper>
           <NavHeader
             title="Settings"
             size="medium"
-            hasBackButton={true}
+            hasBackButton
             onPressBackButton={() => navigate("Account")}
           />
         </HeaderWrapper>
@@ -33,11 +51,11 @@ class SettingsScreen extends React.Component {
             <Avatar
               rounded
               size={120}
-              source={require("../../../../assets/images/Doctor.png")}
+              source={imgDoctor}
               showEditButton
               editButton={{
                 containerStyle: {
-                  backgroundColor: colors.GREEN,
+                  backgroundColor: GREEN,
                   borderRadius: 12
                 },
                 size: 24
@@ -49,26 +67,18 @@ class SettingsScreen extends React.Component {
             <View style={{ padding: 16 }}>
               <InputButton
                 label="Name"
-                value="Michael Brown"
+                value={name}
                 icon={
-                  <FontAwesome
-                    name="angle-right"
-                    size={24}
-                    color={colors.MIDGREY}
-                  />
+                  <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }
               />
             </View>
             <View style={{ padding: 16 }}>
               <InputButton
                 label="Address"
-                value="22341 Justice Ave APT 725"
+                value={address}
                 icon={
-                  <FontAwesome
-                    name="angle-right"
-                    size={24}
-                    color={colors.MIDGREY}
-                  />
+                  <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }
                 onPress={() => navigate("EditAdress")}
               />
@@ -76,13 +86,9 @@ class SettingsScreen extends React.Component {
             <View style={{ padding: 16 }}>
               <InputButton
                 label="Email"
-                value="michaelbrown@gmail.com"
+                value={email}
                 icon={
-                  <FontAwesome
-                    name="angle-right"
-                    size={24}
-                    color={colors.MIDGREY}
-                  />
+                  <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }
                 onPress={() => navigate("EditEmail")}
               />
@@ -90,13 +96,9 @@ class SettingsScreen extends React.Component {
             <View style={{ padding: 16 }}>
               <InputButton
                 label="Phone Number"
-                value="(415) 123 - 4567"
+                value={phone}
                 icon={
-                  <FontAwesome
-                    name="angle-right"
-                    size={24}
-                    color={colors.MIDGREY}
-                  />
+                  <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }
                 onPress={() => navigate("EditPhoneNumber")}
               />
@@ -112,11 +114,7 @@ class SettingsScreen extends React.Component {
             </StyledText>
             <ContentButton>
               <FlexView>
-                <Avatar
-                  rounded
-                  size={40}
-                  source={require("../../../../assets/images/FoxLarge.png")}
-                />
+                <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
                   fontFamily="Flama-Basic"
                   fontSize={16}
@@ -131,11 +129,7 @@ class SettingsScreen extends React.Component {
             </ContentButton>
             <ContentButton>
               <FlexView>
-                <Avatar
-                  rounded
-                  size={40}
-                  source={require("../../../../assets/images/FoxLarge.png")}
-                />
+                <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
                   fontFamily="Flama-Basic"
                   fontSize={16}
@@ -150,11 +144,7 @@ class SettingsScreen extends React.Component {
             </ContentButton>
             <ContentButton onPress={() => navigate("EditChild")}>
               <FlexView>
-                <Avatar
-                  rounded
-                  size={40}
-                  source={require("../../../../assets/images/FoxLarge.png")}
-                />
+                <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
                   fontFamily="Flama-Basic"
                   fontSize={16}

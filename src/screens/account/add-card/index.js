@@ -3,10 +3,14 @@ import { FontAwesome } from "@expo/vector-icons";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
-import { KeyboardAvoidingView, View, FlexView, FormWrapper } from "./styles";
+import {
+  KeyboardAvoidingView,
+  View,
+  FlexView,
+  FormWrapper
+} from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
 
-// class AddCardScreen extends React.Component {
 const AddCardScreen = ({ navigation: { goBack } }) => (
   <KeyboardAvoidingView behavior="padding" enabled>
     <NavHeader

@@ -1,80 +1,88 @@
 import React from "react";
-import { Avatar, Badge } from "react-native-elements";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
-import { StyledText, StyledTextInput } from "../../../components/text";
-import { InputButton } from "../../../components/input-button";
+import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import {
-  ContainerView,
-  View,
-  FlexView,
   TouchableWrapper,
   ListTouchableButtonWrapper,
   ListButtonText
 } from "./styles";
+import { ContainerView, View, FlexView } from "../../../components/views";
 import { colors } from "../../../utils/constants";
 
 class PaymentScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      paymentMethods: [
+        { type: "Paypal" },
+        { type: "Card", number: "****4985" },
+        { type: "Card", number: "****5827" }
+      ]
+    };
+  }
+
   render() {
-    const { goBack, navigate } = this.props.navigation;
+    const {
+      navigation: { navigate }
+    } = this.props;
+    const { paymentMethods } = this.state;
     return (
       <ContainerView>
         <NavHeader
           title="Payment settings"
           size="medium"
-          hasBackButton={true}
+          hasBackButton
           onPressBackButton={() => navigate("Account")}
         />
         <View>
           <View style={{ paddingTop: 16, paddingBottom: 16 }}>
-            <ListTouchableButtonWrapper>
-              <FlexView>
-                <FontAwesome
-                  name="paypal"
-                  size={30}
-                  color={colors.BLUE}
-                  style={{ marginRight: 16 }}
-                />
-                <ListButtonText>Paypal</ListButtonText>
-              </FlexView>
-              <FontAwesome
-                name="angle-right"
-                color={colors.MIDGREY}
-                size={24}
-              />
-            </ListTouchableButtonWrapper>
-            <ListTouchableButtonWrapper onPress={() => navigate("EditCard")}>
-              <FlexView>
-                <FontAwesome
-                  name="cc-visa"
-                  size={30}
-                  color={colors.BLUE}
-                  style={{ marginRight: 16 }}
-                />
-                <ListButtonText>****4985</ListButtonText>
-              </FlexView>
-              <FontAwesome
-                name="angle-right"
-                color={colors.MIDGREY}
-                size={24}
-              />
-            </ListTouchableButtonWrapper>
-            <ListTouchableButtonWrapper>
-              <FlexView>
-                <FontAwesome
-                  name="cc-visa"
-                  size={30}
-                  color={colors.BLUE}
-                  style={{ marginRight: 16 }}
-                />
-                <ListButtonText>****5827</ListButtonText>
-              </FlexView>
-              <FontAwesome
-                name="angle-right"
-                color={colors.MIDGREY}
-                size={24}
-              />
-            </ListTouchableButtonWrapper>
+            {paymentMethods.map(pm => {
+              if (pm.type === "Card") {
+                return (
+                  <ListTouchableButtonWrapper
+                    onPress={() => navigate("EditCard")}
+                  >
+                    <FlexView>
+                      <FontAwesome
+                        name="cc-visa"
+                        size={30}
+                        color={colors.BLUE}
+                        style={{ marginRight: 16 }}
+                      />
+                      <ListButtonText>{pm.number}</ListButtonText>
+                    </FlexView>
+                    <FontAwesome
+                      name="angle-right"
+                      color={colors.MIDGREY}
+                      size={24}
+                    />
+                  </ListTouchableButtonWrapper>
+                );
+              }
+              if (pm.type === "Paypal") {
+                return (
+                  <ListTouchableButtonWrapper>
+                    <FlexView>
+                      <FontAwesome
+                        name="paypal"
+                        size={30}
+                        color={colors.BLUE}
+                        style={{ marginRight: 16 }}
+                      />
+                      <ListButtonText>Paypal</ListButtonText>
+                    </FlexView>
+                    <FontAwesome
+                      name="angle-right"
+                      color={colors.MIDGREY}
+                      size={24}
+                    />
+                  </ListTouchableButtonWrapper>
+                );
+              }
+
+              return null;
+            })}
           </View>
           <View style={{ marginTop: 16, marginLeft: 28 }}>
             <TouchableWrapper onPress={() => navigate("AddCard")}>

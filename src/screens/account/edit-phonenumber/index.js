@@ -1,26 +1,35 @@
 import React from "react";
 import PhoneInput from "react-native-phone-input";
-import { FormTextInput, StyledText } from "../../../components/text";
+import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
-import { KeyboardAvoidingView, View, FormView, FormWrapper } from "./styles";
-import { colors } from "../../../utils/constants";
+import { View, FormView } from "./styles";
+import {
+  KeyboardAvoidingView,
+  FormWrapper
+} from "../../../components/views/keyboard-view";
 
 class EditPhoneNumberScreen extends React.Component {
   render() {
-    const { goBack, navigate } = this.props.navigation;
+    const {
+      navigation: { goBack }
+    } = this.props;
     return (
-      <KeyboardAvoidingView behavior="padding" enabled={true}>
+      <KeyboardAvoidingView behavior="padding" enabled>
         <NavHeader
           title="Edit email"
           size="medium"
-          hasBackButton={true}
+          hasBackButton
           onPressBackButton={() => goBack()}
         />
         <FormWrapper>
           <StyledText fontSize={14}>Phone number</StyledText>
           <FormView>
-            <PhoneInput ref="phone" />
+            <PhoneInput
+              ref={phone => {
+                this.phone = phone;
+              }}
+            />
           </FormView>
         </FormWrapper>
         <View>

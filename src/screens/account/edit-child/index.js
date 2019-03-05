@@ -1,6 +1,5 @@
 import React from "react";
 import { Avatar, ButtonGroup } from "react-native-elements";
-import { FontAwesome } from "@expo/vector-icons";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
@@ -11,14 +10,25 @@ import {
   FormWrapper,
   ScrollView,
   ViewCentered
-} from "./styles";
+} from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
 
+const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
+
 class EditCardScreen extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      selectedIndex: 0
+      selectedIndex: 0,
+      firstName: "Henry",
+      lastName: "Smith",
+      birthDate: "05 / 19 / 2003",
+      birthHistory: "Birth History",
+      surgicalHistory: "Surgical History",
+      currentMedications: "Current Medications",
+      hospitalizations: "Hospitalizations",
+      currentMedicalConditions: "Current Medical Conditions",
+      allergies: "Allergies"
     };
     this.updateIndex = this.updateIndex.bind(this);
   }
@@ -28,16 +38,29 @@ class EditCardScreen extends React.Component {
   }
 
   render() {
-    const { goBack, navigate } = this.props.navigation;
+    const {
+      navigation: { goBack }
+    } = this.props;
     const buttons = ["Male", "Female", "Non-Binary"];
-    const { selectedIndex } = this.state;
+    const {
+      selectedIndex,
+      firstName,
+      lastName,
+      birthDate,
+      birthHistory,
+      surgicalHistory,
+      currentMedications,
+      hospitalizations,
+      currentMedicalConditions,
+      allergies
+    } = this.state;
     return (
-      <ContainerView behavior="padding" enabled={true}>
+      <ContainerView behavior="padding" enabled>
         <HeaderWrapper>
           <NavHeader
             title="Edit Child"
             size="medium"
-            hasBackButton={true}
+            hasBackButton
             onPressBackButton={() => goBack()}
           />
         </HeaderWrapper>
@@ -46,7 +69,7 @@ class EditCardScreen extends React.Component {
             <Avatar
               rounded
               size={120}
-              source={require("../../../../assets/images/FoxLarge.png")}
+              source={imgFoxLarge}
               showEditButton
               editButton={{
                 iconStyle: {
@@ -58,23 +81,10 @@ class EditCardScreen extends React.Component {
           </ViewCentered>
           <FormWrapper>
             <View>
-              <FormTextInput
-                label="First Name"
-                // leftIcon={
-                //   <FontAwesome name="cc-visa" size={30} color={colors.BLUE} />
-                // }
-                // rightIcon={
-                //   <FontAwesome
-                //     name="camera"
-                //     size={30}
-                //     color={colors.LIGHTGREEN}
-                //   />
-                // }
-                value="Henry"
-              />
+              <FormTextInput label="First Name" value={firstName} />
             </View>
             <View>
-              <FormTextInput label="Last Name" value="Smith" />
+              <FormTextInput label="Last Name" value={lastName} />
             </View>
             <View>
               <ButtonGroup
@@ -85,36 +95,33 @@ class EditCardScreen extends React.Component {
               />
             </View>
             <View>
-              <FormTextInput label="Birth Date" value="05 / 19 / 2003" />
+              <FormTextInput label="Birth Date" value={birthDate} />
             </View>
             <View>
-              <FormTextInput label="Birth History" value="Birth History" />
+              <FormTextInput label="Birth History" value={birthHistory} />
             </View>
             <View>
-              <FormTextInput
-                label="Surgical History"
-                value="Surgical History"
-              />
+              <FormTextInput label="Surgical History" value={surgicalHistory} />
             </View>
             <View>
               <FormTextInput
                 label="Current Medications"
-                value="Current Medications"
+                value={currentMedications}
               />
             </View>
             <View>
               <FormTextInput
                 label="Hospitalizations"
-                value="Hospitalizations"
+                value={hospitalizations}
               />
             </View>
             <View>
-              <FormTextInput label="Allergies" value="Allergies" />
+              <FormTextInput label="Allergies" value={allergies} />
             </View>
             <View>
               <FormTextInput
                 label="Current Medical Conditions"
-                value="Current Medical Conditions"
+                value={currentMedicalConditions}
               />
             </View>
           </FormWrapper>

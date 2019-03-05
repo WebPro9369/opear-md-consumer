@@ -1,25 +1,37 @@
 import React from "react";
-import { FontAwesome } from "@expo/vector-icons";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
-import { KeyboardAvoidingView, View, FlexView, FormWrapper } from "./styles";
-import { colors } from "../../../utils/constants";
+import {
+  KeyboardAvoidingView,
+  View,
+  FormWrapper
+} from "../../../components/views/keyboard-view";
 
 class EditEmailScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "michaelbrown@gmail.com"
+    };
+  }
+
   render() {
-    const { goBack, navigate } = this.props.navigation;
+    const {
+      navigation: { goBack }
+    } = this.props;
+    const { email } = this.state;
     return (
-      <KeyboardAvoidingView behavior="padding" enabled={true}>
+      <KeyboardAvoidingView behavior="padding" enabled>
         <NavHeader
           title="Edit email"
           size="medium"
-          hasBackButton={true}
+          hasBackButton
           onPressBackButton={() => goBack()}
         />
         <FormWrapper>
           <View>
-            <FormTextInput label="Email" value="michaelbrown@gmail.com" />
+            <FormTextInput label="Email" value={email} />
           </View>
         </FormWrapper>
         <View>
