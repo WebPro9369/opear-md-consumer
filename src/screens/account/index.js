@@ -44,6 +44,7 @@ class AccountScreen extends React.Component {
           <FlexViewSpread style={{ paddingTop: 30 }}>
             {badges.map(badge => (
               <Badge
+                key={badge}
                 value={badge}
                 textStyle={styles.badgeText}
                 badgeStyle={styles.badge}

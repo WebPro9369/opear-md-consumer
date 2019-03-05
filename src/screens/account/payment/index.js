@@ -15,9 +15,9 @@ class PaymentScreen extends React.Component {
     super(props);
     this.state = {
       paymentMethods: [
-        { type: "Paypal" },
-        { type: "Card", number: "****4985" },
-        { type: "Card", number: "****5827" }
+        { id: 1, type: "Paypal" },
+        { id: 2, type: "Card", number: "****4985" },
+        { id: 3, type: "Card", number: "****5827" }
       ]
     };
   }
@@ -41,6 +41,7 @@ class PaymentScreen extends React.Component {
               if (pm.type === "Card") {
                 return (
                   <ListTouchableButtonWrapper
+                    key={pm.id}
                     onPress={() => navigate("EditCard")}
                   >
                     <FlexView>
@@ -62,7 +63,7 @@ class PaymentScreen extends React.Component {
               }
               if (pm.type === "Paypal") {
                 return (
-                  <ListTouchableButtonWrapper>
+                  <ListTouchableButtonWrapper key={pm.id}>
                     <FlexView>
                       <FontAwesome
                         name="paypal"
