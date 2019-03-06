@@ -5,6 +5,7 @@ import PickChildScreen from "../screens/dashboard/pick-child";
 import AddChildScreen from "../screens/dashboard/add-child";
 import PickVisitAddressScreen from "../screens/dashboard/pick-visit-address";
 import AddAddressScreen from "../screens/dashboard/add-address";
+import SelectDateTimeScreen from "../screens/dashboard/select-date-time";
 
 const DashboardNavigator = createStackNavigator(
   {
@@ -25,6 +26,9 @@ const DashboardNavigator = createStackNavigator(
     },
     AddAddress: {
       screen: AddAddressScreen
+    },
+    SelectDateTime: {
+      screen: SelectDateTimeScreen
     }
   },
   {
