@@ -24,6 +24,7 @@ const colors = {
   CYAN: "#01BAEF",
   DARKBLUE: "#01295F",
   LIGHTBLUE: "#74D9F6",
+  DARKSKYBLUE: "#238ce5",
   VIVIDORANGE: "#FC4214",
   DULLORANGE: "#D01217",
   GREEN: "#40be65",
