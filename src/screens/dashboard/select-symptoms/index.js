@@ -17,7 +17,7 @@ class SelectSymptomsScreen extends React.Component {
     super(props);
 
     this.state = {
-      hasAppointment: true,
+      hasAppointment: false,
       checkListData: [
         { key: "1", string: "Fever", checked: true },
         { key: "2", string: "Headache", checked: false },

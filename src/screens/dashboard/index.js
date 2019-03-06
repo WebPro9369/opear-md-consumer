@@ -11,7 +11,7 @@ class DashboardScreen extends React.Component {
     super(props);
 
     this.state = {
-      hasAppointment: true,
+      hasAppointment: false,
       // selectedIllness: null,
       user: {
         name: "Michael"
