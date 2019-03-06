@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { createBottomTabNavigator } from "react-navigation";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import AccountNavigator from "./account.navigator";
-import DashboardScreen from "../screens/dashboard";
+import DashboardNavigator from "./dashboard.navigator";
 import VisitsScreen from "../screens/visits";
 import ChildrenScreen from "../screens/children";
 import { colors } from "../utils/constants";
@@ -11,7 +11,7 @@ import { colors } from "../utils/constants";
 const TabNavigator = createBottomTabNavigator(
   {
     Dashboard: {
-      screen: DashboardScreen,
+      screen: DashboardNavigator,
       navigationOptions: () => ({
         title: "Dashboard",
         tabBarLabel: "Dashboard"
@@ -40,7 +40,7 @@ const TabNavigator = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "Account",
+    initialRouteName: "Dashboard",
     defaultNavigationOptions: ({ navigation }) => {
       const TabBarIcon = ({ tintColor }) => {
         const { routeName } = navigation.state;

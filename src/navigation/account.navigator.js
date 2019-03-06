@@ -1,4 +1,3 @@
-import React from "react";
 import { createStackNavigator } from "react-navigation";
 import AccountScreen from "../screens/account";
 import SettingsScreen from "../screens/account/settings";
