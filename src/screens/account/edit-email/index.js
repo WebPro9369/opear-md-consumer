@@ -4,7 +4,7 @@ import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
 import {
   KeyboardAvoidingView,
-  View,
+  FormInputView,
   FormWrapper
 } from "../../../components/views/keyboard-view";
 
@@ -30,13 +30,13 @@ class EditEmailScreen extends React.Component {
           onPressBackButton={() => goBack()}
         />
         <FormWrapper>
-          <View>
+          <FormInputView>
             <FormTextInput label="Email" value={email} />
-          </View>
+          </FormInputView>
         </FormWrapper>
-        <View>
+        <FormInputView>
           <ServiceButton title="Update Email" onPress={() => goBack()} />
-        </View>
+        </FormInputView>
       </KeyboardAvoidingView>
     );
   }

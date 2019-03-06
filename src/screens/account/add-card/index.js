@@ -5,7 +5,7 @@ import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
 import {
   KeyboardAvoidingView,
-  View,
+  FormInputView,
   FlexView,
   FormWrapper
 } from "../../../components/views/keyboard-view";
@@ -20,7 +20,7 @@ const AddCardScreen = ({ navigation: { goBack } }) => (
       hasBackButton
     />
     <FormWrapper>
-      <View>
+      <FormInputView>
         <FormTextInput
           label="Card Number"
           placeholder="1234 5678 3456 2456"
@@ -31,8 +31,8 @@ const AddCardScreen = ({ navigation: { goBack } }) => (
             <FontAwesome name="camera" size={30} color={colors.LIGHTGREEN} />
           }
         />
-      </View>
-      <View>
+      </FormInputView>
+      <FormInputView>
         <FlexView>
           <FormTextInput
             label="Exp. Date"
@@ -50,10 +50,10 @@ const AddCardScreen = ({ navigation: { goBack } }) => (
             }}
           />
         </FlexView>
-      </View>
-      <View>
+      </FormInputView>
+      <FormInputView>
         <FormTextInput label="Full Name" placeholder="Full Name" />
-      </View>
+      </FormInputView>
     </FormWrapper>
     <ServiceButton title="Add Card" onPress={() => goBack()} />
   </KeyboardAvoidingView>

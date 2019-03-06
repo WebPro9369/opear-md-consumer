@@ -5,7 +5,7 @@ import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
 import {
   KeyboardAvoidingView,
-  View,
+  FormInputView,
   FlexView,
   FormWrapper
 } from "../../../components/views/keyboard-view";
@@ -39,7 +39,7 @@ class EditCardScreen extends React.Component {
           onPressBackButton={() => goBack()}
         />
         <FormWrapper>
-          <View>
+          <FormInputView>
             <FormTextInput
               label="Card Number"
               leftIcon={<FontAwesome name="cc-visa" size={30} color={BLUE} />}
@@ -48,8 +48,8 @@ class EditCardScreen extends React.Component {
               }
               value={cardNumber}
             />
-          </View>
-          <View>
+          </FormInputView>
+          <FormInputView>
             <FlexView>
               <FormTextInput
                 label="Exp. Date"
@@ -67,10 +67,10 @@ class EditCardScreen extends React.Component {
                 value={cvv}
               />
             </FlexView>
-          </View>
-          <View>
+          </FormInputView>
+          <FormInputView>
             <FormTextInput label="Full Name" value={fullName} />
-          </View>
+          </FormInputView>
         </FormWrapper>
         <ServiceButton title="Save Card" onPress={() => goBack()} />
       </KeyboardAvoidingView>

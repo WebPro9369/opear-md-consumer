@@ -5,7 +5,7 @@ import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
 import {
   KeyboardAvoidingView,
-  View,
+  FormInputView,
   FlexView,
   FormWrapper
 } from "../../../components/views/keyboard-view";
@@ -38,7 +38,7 @@ class EditAddressScreen extends React.Component {
           onPressBackButton={() => goBack()}
         />
         <FormWrapper>
-          <View>
+          <FormInputView>
             <FormTextInput
               label="Address"
               value={address}
@@ -46,8 +46,8 @@ class EditAddressScreen extends React.Component {
                 <FontAwesome name="map-marker" size={30} color={LIGHTGREEN} />
               }
             />
-          </View>
-          <View>
+          </FormInputView>
+          <FormInputView>
             <FlexView>
               <FormTextInput
                 label="City"
@@ -65,10 +65,10 @@ class EditAddressScreen extends React.Component {
                 value={zip}
               />
             </FlexView>
-          </View>
-          <View>
+          </FormInputView>
+          <FormInputView>
             <FormTextInput label="Location Name" value={locationName} />
-          </View>
+          </FormInputView>
         </FormWrapper>
         <ServiceButton title="Update Address" onPress={() => goBack()} />
       </KeyboardAvoidingView>
