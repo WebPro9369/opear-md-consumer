@@ -1,26 +1,36 @@
 import styled from "styled-components/native";
-import { colors } from "../../utils/constants";
 
-export const ContainerView = styled.View`
-  flex: 1;
+export const IllnessCard = styled.TouchableOpacity`
+  display: flex;
+  justify-content: flex-end;
+  width: 124px;
+  height: 72px;
+  border-radius: 8px;
+  background-color: ${props => props.bgColor};
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 4px;
+  margin-right: 8px;
 `;
 
-export const TitleText = styled.Text`
-  color: ${colors.CYAN};
-  flex: 1;
-  padding: 20px;
-  font-weight: bold;
-  font-size: 20;
+export const MatchingMessageWrapper = styled.View`
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: #b2eac2;
 `;
 
-export const MoreServicesButtonWrapper = styled.TouchableOpacity`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  border-width: 1;
-  border-radius: 5;
-  border-color: ${colors.CYAN};
-  margin: 20px;
-  bottom: 0px;
-  height: 30px;
+export const ContentWrapper = styled.View`
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-top: ${props => props.marginTop};
+  margin-bottom: ${props => props.marginBottom};
 `;
+
+ContentWrapper.defaultProps = {
+  marginTop: 0,
+  marginBottom: 0
+};
