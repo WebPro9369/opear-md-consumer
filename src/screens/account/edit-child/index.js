@@ -125,7 +125,9 @@ class EditCardScreen extends React.Component {
               />
             </View>
           </FormWrapper>
-          <ServiceButton title="Save Changes" onPress={() => goBack()} />
+          <View style={{ marginBottom: 20 }}>
+            <ServiceButton title="Save Changes" onPress={() => goBack()} />
+          </View>
         </ScrollView>
       </ContainerView>
     );

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-wrap-multilines */
 import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { FormTextInput } from "../../../components/text";
@@ -11,6 +10,8 @@ import {
   FormWrapper
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
+
+const { LIGHTGREEN } = colors;
 
 class EditAddressScreen extends React.Component {
   constructor(props) {
@@ -42,11 +43,7 @@ class EditAddressScreen extends React.Component {
               label="Address"
               value={address}
               rightIcon={
-                <FontAwesome
-                  name="map-marker"
-                  size={30}
-                  color={colors.LIGHTGREEN}
-                />
+                <FontAwesome name="map-marker" size={30} color={LIGHTGREEN} />
               }
             />
           </View>
