@@ -15,7 +15,7 @@ import { colors } from "../../../utils/constants";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
-class EditCardScreen extends React.Component {
+class EditChildScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -134,4 +134,4 @@ class EditCardScreen extends React.Component {
   }
 }
 
-export default EditCardScreen;
+export default EditChildScreen;
