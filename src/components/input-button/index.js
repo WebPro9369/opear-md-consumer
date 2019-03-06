@@ -1,8 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import { Text } from "react-native";
-import { pure } from "recompose";
 import { Wrapper, TouchableButtonWrapper, ServiceText, Label } from "./styles";
 
 const InputButton = ({ label, value, icon, onPress, ...rest }) => (
@@ -15,6 +12,15 @@ const InputButton = ({ label, value, icon, onPress, ...rest }) => (
   </Wrapper>
 );
 
-InputButton.propTypes = {};
+InputButton.propTypes = {
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  icon: PropTypes.element,
+  onPress: PropTypes.func.isRequired
+};
+
+InputButton.defaultProps = {
+  icon: null
+};
 
 export { InputButton };

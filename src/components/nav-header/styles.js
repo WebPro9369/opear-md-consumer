@@ -1,38 +1,39 @@
 import styled from "styled-components/native";
-
 import { colors } from "../../utils/constants";
+
+const imgBackIcon = require("../../../assets/images/Back.png");
 
 export const Wrapper = styled.View`
   width: auto;
   height: auto;
   display: flex;
-  flexDirection: row;
-  alignItems: center;
-  paddingTop: ${props => props.size === "small" ? "12px" : "24px"};
-  paddingBottom: ${props => props.size === "small" ? "12px" : "24px"};
+  flex-direction: row;
+  align-items: center;
+  padding-top: ${props => (props.size === "small" ? "12px" : "24px")};
+  padding-bottom: ${props => (props.size === "small" ? "12px" : "24px")};
 `;
 
 export const StyledTouchableButtonWrapper = styled.TouchableOpacity`
-  backgroundColor: ${colors.WHITE};
+  background-color: ${colors.WHITE};
   height: 24px;
-  paddingTop: 4px;
-  paddingBottom: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 `;
 
 export const ServiceText = styled.Text`
   color: ${colors.BLACK};
-  fontFamily: "Flama-Medium";
-  textAlign: left;
-  fontSize: ${props => props.size === "small" ? "20px" : "28px"};
-  lineHeight: ${props => props.size === "large" ? "40px" : "30px"};
+  font-family: "Flama-Medium";
+  text-align: left;
+  font-size: ${props => (props.size === "small" ? "20px" : "28px")};
+  line-height: ${props => (props.size === "large" ? "40px" : "30px")};
 `;
 
 export const StyledBackButtonIcon = styled.Image`
   width: 25px;
   height: 16px;
-  marginRight: 12px;
+  margin-right: 12px;
 `;
 
 StyledBackButtonIcon.defaultProps = {
-  source: require("../../../assets/images/Back.png")
+  source: imgBackIcon
 };

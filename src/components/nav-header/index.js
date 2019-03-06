@@ -19,12 +19,28 @@ const NavHeader = ({
   <Wrapper size={size} {...rest}>
     {hasBackButton ? (
       <StyledTouchableButtonWrapper onPress={onPressBackButton}>
-        <StyledBackButtonIcon/>
+        <StyledBackButtonIcon />
       </StyledTouchableButtonWrapper>
     ) : null}
     <ServiceText size={size}>{title}</ServiceText>
   </Wrapper>
 );
+
+NavHeader.propTypes = {
+  title: PropTypes.string,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  hasBackButton: PropTypes.bool,
+  backButtonIcon: PropTypes.element,
+  onPressBackButton: PropTypes.func
+};
+
+NavHeader.defaultProps = {
+  title: "",
+  size: "small",
+  hasBackButton: false,
+  backButtonIcon: null,
+  onPressBackButton: null
+};
 
 NavHeader.propTypes = {};
 

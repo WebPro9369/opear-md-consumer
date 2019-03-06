@@ -8,7 +8,14 @@ import {
   LeftFlexView
 } from "./styles";
 
-const FormTextInput = ({ label, value, leftIcon, rightIcon, placeholder, ...rest }) => (
+const FormTextInput = ({
+  label,
+  value,
+  leftIcon,
+  rightIcon,
+  placeholder,
+  ...rest
+}) => (
   <Wrapper {...rest}>
     <StyledText fontSize={14} lineHeight={18}>
       {label}
@@ -18,11 +25,32 @@ const FormTextInput = ({ label, value, leftIcon, rightIcon, placeholder, ...rest
         {leftIcon ? (
           <Wrapper style={{ marginRight: 16 }}>{leftIcon}</Wrapper>
         ) : null}
-        <StyledTextInput placeholder={placeholder} fontSize={20} lineHeight={24} value={value} />
+        <StyledTextInput
+          placeholder={placeholder}
+          fontSize={20}
+          lineHeight={24}
+          value={value}
+        />
       </LeftFlexView>
       {rightIcon}
     </FlexView>
   </Wrapper>
 );
+
+FormTextInput.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  leftIcon: PropTypes.element,
+  rightIcon: PropTypes.element,
+  placeholder: PropTypes.string
+};
+
+FormTextInput.defaultProps = {
+  label: "",
+  value: null,
+  leftIcon: null,
+  rightIcon: null,
+  placeholder: ""
+};
 
 export { StyledText, StyledTextInput, FormTextInput };

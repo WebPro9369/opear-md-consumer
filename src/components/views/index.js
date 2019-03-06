@@ -17,12 +17,6 @@ export const FlexView = styled.View`
   align-items: center;
 `;
 
-export const KeyboardAvoidingView = styled.KeyboardAvoidingView`
-  flex: 1;
-  justify-content: space-between;
-  padding: 16px;
-`;
-
 export const FormWrapper = styled.View`
   display: flex;
   flex: 1;
@@ -32,11 +26,6 @@ export const FormWrapper = styled.View`
 `;
 
 export const HeaderWrapper = styled.View`
-  padding: 16px;
-`;
-
-export const ScrollView = styled.ScrollView`
-  flex: 1;
   padding: 16px;
 `;
 

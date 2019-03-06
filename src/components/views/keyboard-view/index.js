@@ -4,6 +4,7 @@ export const KeyboardAvoidingView = styled.KeyboardAvoidingView`
   flex: 1;
   justify-content: space-between;
   padding: 16px;
+  margin-bottom: 30px;
 `;
 
 export const View = styled.View`
