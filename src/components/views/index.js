@@ -3,8 +3,12 @@ import styled from "styled-components/native";
 export const ContainerView = styled.View`
   flex: 1;
   justify-content: flex-start;
-  padding: 16px;
+  padding: ${props => `${props.padding}px`};
 `;
+
+ContainerView.defaultProps = {
+  padding: 16
+};
 
 export const View = styled.View`
   justify-content: flex-start;
