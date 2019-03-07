@@ -6,6 +6,9 @@ import AddChildScreen from "../screens/dashboard/add-child";
 import PickVisitAddressScreen from "../screens/dashboard/pick-visit-address";
 import AddAddressScreen from "../screens/dashboard/add-address";
 import SelectDateTimeScreen from "../screens/dashboard/select-date-time";
+import BookingReviewScreen from "../screens/dashboard/booking-review";
+import SelectProviderScreen from "../screens/dashboard/select-provider";
+import VisitBookedScreen from "../screens/dashboard/visit-booked";
 
 const DashboardNavigator = createStackNavigator(
   {
@@ -29,6 +32,15 @@ const DashboardNavigator = createStackNavigator(
     },
     SelectDateTime: {
       screen: SelectDateTimeScreen
+    },
+    BookingReview: {
+      screen: BookingReviewScreen
+    },
+    SelectProvider: {
+      screen: SelectProviderScreen
+    },
+    VisitBooked: {
+      screen: VisitBookedScreen
     }
   },
   {
