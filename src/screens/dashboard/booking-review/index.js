@@ -160,7 +160,10 @@ class BookingReviewScreen extends React.Component {
             </View>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 24, marginBottom: 24 }}>
-            <ServiceButton title="Find a provider" />
+            <ServiceButton
+              title="Find a provider"
+              onPress={() => push("Dashboard", { hasAppointment: true })}
+            />
           </ContentWrapper>
         </ScrollView>
       </ContainerView>
