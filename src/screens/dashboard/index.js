@@ -12,7 +12,7 @@ class DashboardScreen extends React.Component {
 
     this.state = {
       hasAppointment: false,
-      doctorsReady: true,
+      doctorsReady: false,
       // selectedIllness: null,
       user: {
         name: "Michael"
@@ -24,6 +24,15 @@ class DashboardScreen extends React.Component {
     const {
       navigation: { navigate }
     } = this.props;
+    const { navigation } = this.props;
+    const paramHasAppointed = navigation.getParam("hasAppointment");
+    if (paramHasAppointed) {
+      setTimeout(() => {
+        this.setState({
+          doctorsReady: true
+        });
+      }, 3000);
+    }
     const { hasAppointment, doctorsReady, user } = this.state;
 
     return (
@@ -38,7 +47,7 @@ class DashboardScreen extends React.Component {
             {"!"}
           </StyledText>
         </ContentWrapper>
-        {hasAppointment ? (
+        {!doctorsReady && paramHasAppointed ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
               We are currently matching you with your doctor, be in touch soon!
