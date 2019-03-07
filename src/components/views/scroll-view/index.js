@@ -8,7 +8,12 @@ export const View = styled.View`
 export const FlexView = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: ${props => {
+    if (props.justifyContent === "center") return "center";
+    if (props.justifyContent === "start") return "flex-start";
+    if (props.justifyContent === "end") return "flex-end";
+    return "space-between";
+  }};
   align-items: center;
 `;
 
