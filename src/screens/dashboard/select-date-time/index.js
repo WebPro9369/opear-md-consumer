@@ -63,7 +63,7 @@ class SelectDateTimeScreen extends React.Component {
             onPressBackButton={() => goBack()}
           />
         </View>
-        <View>
+        <View style={{ flex: 1 }}>
           <View style={{ paddingLeft: 16, paddingRight: 16 }}>
             <StyledText
               fontFamily="Flama-Medium"
@@ -116,6 +116,7 @@ class SelectDateTimeScreen extends React.Component {
           </View>
           <View
             style={{
+              flex: 1,
               marginTop: 0,
               marginBottom: 0,
               paddingLeft: 0,

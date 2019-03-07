@@ -44,7 +44,7 @@ class PaymentScreen extends React.Component {
                     key={pm.id}
                     onPress={() => navigate("EditCard")}
                   >
-                    <FlexView>
+                    <FlexView justifyContent="start">
                       <FontAwesome
                         name="cc-visa"
                         size={30}
@@ -64,7 +64,7 @@ class PaymentScreen extends React.Component {
               if (pm.type === "Paypal") {
                 return (
                   <ListTouchableButtonWrapper key={pm.id}>
-                    <FlexView>
+                    <FlexView justifyContent="start">
                       <FontAwesome
                         name="paypal"
                         size={30}
@@ -87,7 +87,7 @@ class PaymentScreen extends React.Component {
           </View>
           <View style={{ marginTop: 16, marginLeft: 28 }}>
             <TouchableWrapper onPress={() => navigate("AddCard")}>
-              <FlexView>
+              <FlexView justifyContent="start">
                 <AntDesign
                   name="pluscircleo"
                   size={24}

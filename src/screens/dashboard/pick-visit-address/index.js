@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { AntDesign, Feather } from "@expo/vector-icons";
+import { AntDesign, EvilIcons } from "@expo/vector-icons";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View, FlexView } from "../../../components/views";
@@ -65,10 +65,10 @@ class PickVisitAddressScreen extends React.Component {
                 key={address.id}
                 onPress={() => navigate("SelectDateTime")}
               >
-                <FlexView>
-                  <Feather
+                <FlexView justifyContent="start">
+                  <EvilIcons
                     size={40}
-                    name="map-pin"
+                    name="location"
                     style={{ marginLeft: 6, marginRight: 24 }}
                   />
                   <View style={{ padding: 6 }}>
@@ -92,7 +92,7 @@ class PickVisitAddressScreen extends React.Component {
             ))}
             <View style={{ marginTop: 16, marginLeft: 28 }}>
               <TouchableOpacity onPress={() => navigate("AddAddress")}>
-                <FlexView>
+                <FlexView justifyContent="start">
                   <AntDesign
                     name="pluscircle"
                     size={24}

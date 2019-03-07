@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import { StyledText } from "../../components/text";
 import { NavHeader } from "../../components/nav-header";
 import { ContainerView, View, HeaderWrapper } from "../../components/views";
@@ -12,6 +12,7 @@ class DashboardScreen extends React.Component {
 
     this.state = {
       hasAppointment: false,
+      doctorsReady: true,
       // selectedIllness: null,
       user: {
         name: "Michael"
@@ -23,7 +24,7 @@ class DashboardScreen extends React.Component {
     const {
       navigation: { navigate }
     } = this.props;
-    const { hasAppointment, user } = this.state;
+    const { hasAppointment, doctorsReady, user } = this.state;
 
     return (
       <ContainerView padding={0}>
@@ -43,6 +44,15 @@ class DashboardScreen extends React.Component {
               We are currently matching you with your doctor, be in touch soon!
             </StyledText>
           </MatchingMessageWrapper>
+        ) : null}
+        {doctorsReady ? (
+          <TouchableOpacity onPress={() => navigate("SelectProvider")}>
+            <MatchingMessageWrapper>
+              <StyledText fontSize={16} lineHeight={24}>
+                Your doctor recommendations are ready!
+              </StyledText>
+            </MatchingMessageWrapper>
+          </TouchableOpacity>
         ) : null}
         <View style={{ marginTop: hasAppointment ? 16 : 48, marginBottom: 40 }}>
           <ContentWrapper>

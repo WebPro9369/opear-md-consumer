@@ -32,7 +32,7 @@ class AccountScreen extends React.Component {
       <ContainerView>
         <NavHeader title="Account" size="medium" hasBackButton={false} />
         <View style={{ padding: 16 }}>
-          <FlexView>
+          <FlexView justifyContent="start">
             <Avatar rounded size={80} source={imgDoctor} />
             <View style={{ paddingLeft: 20 }}>
               <StyledText fontSize={16}>Michael Brown</StyledText>

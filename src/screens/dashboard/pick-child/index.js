@@ -90,7 +90,7 @@ class PickChildScreen extends React.Component {
                   });
                 }}
               >
-                <FlexView>
+                <FlexView justifyContent="start">
                   <Avatar rounded size={40} source={imgFoxLarge} />
                   <StyledText
                     fontFamily="Flama-Basic"
@@ -108,7 +108,7 @@ class PickChildScreen extends React.Component {
             ))}
             <View style={{ marginTop: 16, marginLeft: 28 }}>
               <TouchableOpacity onPress={() => navigate("AddChild")}>
-                <FlexView>
+                <FlexView justifyContent="start">
                   <AntDesign
                     name="pluscircle"
                     size={24}
