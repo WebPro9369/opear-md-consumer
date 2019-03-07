@@ -14,6 +14,7 @@ const colors = {
 
   BLACK: "#000000",
   BLACK87: "rgba(0, 0, 0, 0.87)",
+  BLACK38: "rgba(0, 0, 0, 0.38)",
   BLUE: "#2699fb",
   CARBON: "#1E1E1E",
   MIDGREY: "#6F6F6F",
@@ -29,6 +30,7 @@ const colors = {
   DULLORANGE: "#D01217",
   GREEN: "#40be65",
   LIGHTGREEN: "rgb(118, 219, 148)",
+  DARKYELLOW: "#ffbd49",
   BADGE_TEXT_GREY: "rgba(0,0,0,0.6)",
   BADGE_BACKGROUND: "#efeff4",
   TEXT_GREY: "rgba(0,0,0,0.6)",
