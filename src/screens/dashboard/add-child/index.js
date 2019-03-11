@@ -5,7 +5,7 @@ import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
 import {
   ContainerView,
-  View,
+  FormInputWrapper,
   HeaderWrapper,
   FormWrapper,
   ViewCentered
@@ -80,81 +80,81 @@ class AddChildScreen extends React.Component {
             />
           </ViewCentered>
           <FormWrapper>
-            <View>
+            <FormInputWrapper>
               <FormTextInput
                 label="First Name"
                 value={firstName}
                 placeholder="First Name"
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Last Name"
                 value={lastName}
                 placeholder="Last Name"
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <ButtonGroup
                 onPress={this.updateIndex}
                 selectedIndex={selectedIndex}
                 buttons={buttons}
                 containerStyle={{ height: 40 }}
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Birth Date"
                 value={birthDate}
                 placeholder="xx / xx / xxxx"
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Birth History"
                 value={birthHistory}
                 placeholder="Birth History"
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Surgical History"
                 value={surgicalHistory}
                 placeholder="Surgical History"
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Current Medications"
                 value={currentMedications}
                 placeholder="Current Medications"
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Hospitalizations"
                 value={hospitalizations}
                 placeholder="Hospitalizations"
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Allergies"
                 value={allergies}
                 placeholder="Allergies"
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Current Medical Conditions"
                 value={currentMedicalConditions}
                 placeholder="Current Medical Conditions"
               />
-            </View>
+            </FormInputWrapper>
           </FormWrapper>
-          <View style={{ marginBottom: 20 }}>
+          <FormInputWrapper style={{ marginBottom: 20 }}>
             <ServiceButton title="Add Child" onPress={() => goBack()} />
-          </View>
+          </FormInputWrapper>
         </ScrollView>
       </ContainerView>
     );

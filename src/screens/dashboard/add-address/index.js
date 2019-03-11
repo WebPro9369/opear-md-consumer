@@ -6,7 +6,7 @@ import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
 import {
   ContainerView,
-  View as FormInputView,
+  FormInputWrapper,
   FormWrapper
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
@@ -34,7 +34,7 @@ class AddAddressScreen extends React.Component {
     } = this.props;
     const { locationName, street, city, zip, map } = this.state;
     return (
-      <ContainerView behavior="padding" enabled>
+      <ContainerView>
         <View
           style={{
             paddingTop: 16,
@@ -56,32 +56,32 @@ class AddAddressScreen extends React.Component {
             initialRegion={map}
           />
           <FormWrapper padding={32}>
-            <FormInputView>
+            <FormInputWrapper>
               <FormTextInput
                 label="Location Name"
                 value={locationName}
                 placeholder="Location Name"
               />
-            </FormInputView>
-            <FormInputView>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Street"
                 value={street}
                 placeholder="Street"
               />
-            </FormInputView>
-            <FormInputView>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput label="City" value={city} placeholder="City" />
-            </FormInputView>
-            <FormInputView>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput label="Zip" value={zip} placeholder="Zip" />
-            </FormInputView>
+            </FormInputWrapper>
           </FormWrapper>
-          <FormInputView style={{ marginBottom: 20 }}>
+          <FormInputWrapper style={{ marginBottom: 20 }}>
             <View style={{ paddingLeft: 16, paddingRight: 16 }}>
               <ServiceButton title="Add Address" onPress={() => goBack()} />
             </View>
-          </FormInputView>
+          </FormInputWrapper>
         </ScrollView>
       </ContainerView>
     );

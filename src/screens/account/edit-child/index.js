@@ -5,7 +5,7 @@ import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
 import {
   ContainerView,
-  View,
+  FormInputWrapper,
   HeaderWrapper,
   FormWrapper,
   ViewCentered
@@ -80,50 +80,50 @@ class EditChildScreen extends React.Component {
             />
           </ViewCentered>
           <FormWrapper>
-            <View>
+            <FormInputWrapper>
               <FormTextInput label="First Name" value={firstName} />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput label="Last Name" value={lastName} />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <ButtonGroup
                 onPress={this.updateIndex}
                 selectedIndex={selectedIndex}
                 buttons={buttons}
                 containerStyle={{ height: 40 }}
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput label="Birth Date" value={birthDate} />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput label="Birth History" value={birthHistory} />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput label="Surgical History" value={surgicalHistory} />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Current Medications"
                 value={currentMedications}
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Hospitalizations"
                 value={hospitalizations}
               />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput label="Allergies" value={allergies} />
-            </View>
-            <View>
+            </FormInputWrapper>
+            <FormInputWrapper>
               <FormTextInput
                 label="Current Medical Conditions"
                 value={currentMedicalConditions}
               />
-            </View>
+            </FormInputWrapper>
           </FormWrapper>
           <View style={{ marginBottom: 20 }}>
             <ServiceButton title="Save Changes" onPress={() => goBack()} />
