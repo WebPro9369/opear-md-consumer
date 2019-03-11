@@ -3,11 +3,10 @@ import { FontAwesome } from "@expo/vector-icons";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import ServiceButton from "../../../components/service-button";
+import { FlexView, FormWrapper } from "../../../components/views";
 import {
   KeyboardAvoidingView,
-  FormInputView,
-  FlexView,
-  FormWrapper
+  FormInputView
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
 
