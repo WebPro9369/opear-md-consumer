@@ -18,22 +18,7 @@ export const FormInputView = styled.View`
   padding-bottom: 24px;
 `;
 
-export const FlexView = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const FormWrapper = styled.View`
-  display: flex;
-  flex: 1;
-  justify-content: flex-start;
-  padding: 16px;
-  padding-bottom: 40px;
-`;
-
-export const ContainerView = styled.View`
+export const ContainerView1 = styled.View`
   flex: 1;
   justify-content: flex-start;
   padding: 0px;

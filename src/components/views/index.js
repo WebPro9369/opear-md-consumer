@@ -7,7 +7,7 @@ export const ContainerView = styled.View`
 `;
 
 ContainerView.defaultProps = {
-  padding: 16
+  padding: 0
 };
 
 export const View = styled.View`
@@ -30,9 +30,13 @@ export const FormWrapper = styled.View`
   display: flex;
   flex: 1;
   justify-content: flex-start;
-  padding: 16px;
+  padding: ${props => `${props.padding}px`};
   padding-bottom: 40px;
 `;
+
+FormWrapper.defaultProps = {
+  padding: 16
+};
 
 export const HeaderWrapper = styled.View`
   padding: 16px;
