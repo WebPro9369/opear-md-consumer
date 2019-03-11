@@ -16,7 +16,13 @@ class DashboardScreen extends React.Component {
       // selectedIllness: null,
       user: {
         name: "Michael"
-      }
+      },
+      illnessList: [
+        { key: "1", string: "General", color: "#f9b44d" },
+        { key: "2", string: "Respiratory", color: "#0e7092" },
+        { key: "3", string: "Abdominal", color: "#d7707d" },
+        { key: "4", string: "Ear Nose Throat", color: "#6b82a3" }
+      ]
     };
   }
 
@@ -33,7 +39,7 @@ class DashboardScreen extends React.Component {
         });
       }, 3000);
     }
-    const { hasAppointment, doctorsReady, user } = this.state;
+    const { hasAppointment, doctorsReady, user, illnessList } = this.state;
 
     return (
       <ContainerView padding={0}>
@@ -68,12 +74,7 @@ class DashboardScreen extends React.Component {
             <StyledText>What&apos;s affecting your child?</StyledText>
             <View>
               <FlatList
-                data={[
-                  { key: "1", string: "General", color: "#f9b44d" },
-                  { key: "2", string: "Respiratory", color: "#0e7092" },
-                  { key: "3", string: "Abdominal", color: "#d7707d" },
-                  { key: "4", string: "Ear Nose Throat", color: "#6b82a3" }
-                ]}
+                data={illnessList}
                 renderItem={({ item }) => (
                   <IllnessCard
                     bgColor={item.color}
