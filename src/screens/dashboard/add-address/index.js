@@ -3,7 +3,7 @@ import { MapView } from "expo";
 import { View } from "react-native";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
-import ServiceButton from "../../../components/service-button";
+import { ServiceButton } from "../../../components/service-button";
 import {
   ContainerView,
   FormInputWrapper,

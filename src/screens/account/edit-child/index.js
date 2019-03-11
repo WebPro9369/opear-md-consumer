@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar, ButtonGroup } from "react-native-elements";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
-import ServiceButton from "../../../components/service-button";
+import { ServiceButton } from "../../../components/service-button";
 import {
   ContainerView,
   FormInputWrapper,

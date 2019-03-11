@@ -2,7 +2,7 @@ import React from "react";
 import PhoneInput from "react-native-phone-input";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
-import ServiceButton from "../../../components/service-button";
+import { ServiceButton } from "../../../components/service-button";
 import { View, FormView } from "./styles";
 import { FormWrapper } from "../../../components/views";
 import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";

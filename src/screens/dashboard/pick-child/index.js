@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View, FlexView } from "../../../components/views";
-import ServiceButton from "../../../components/service-button";
+import { ServiceButton } from "../../../components/service-button";
 import { ContentButton } from "./styles";
 import { colors } from "../../../utils/constants";
 

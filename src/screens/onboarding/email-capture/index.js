@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Image, View } from "react-native";
 import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
-import ServiceButton from "../../../components/service-button";
+import { ServiceButton } from "../../../components/service-button";
 import { StyledText, StyledTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 

@@ -6,7 +6,7 @@ import { ContainerView } from "../../../components/views";
 import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
 
 import { CustomCheckBox } from "../../../components/checkbox";
-import ServiceButton from "../../../components/service-button";
+import { ServiceButton } from "../../../components/service-button";
 import { ContentWrapper, CustomInput } from "./styles";
 import { MatchingMessageWrapper } from "../styles";
 import { colors } from "../../../utils/constants";

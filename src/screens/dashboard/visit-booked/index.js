@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar } from "react-native-elements";
 import { EvilIcons, FontAwesome } from "@expo/vector-icons";
 import { StyledText } from "../../../components/text";
-import ServiceButton from "../../../components/service-button";
+import { ServiceButton } from "../../../components/service-button";
 // import { NavHeader } from "../../../components/nav-header";
 import { View } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";

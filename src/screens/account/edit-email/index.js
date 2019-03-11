@@ -1,7 +1,7 @@
 import React from "react";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
-import ServiceButton from "../../../components/service-button";
+import { ServiceButton } from "../../../components/service-button";
 import { FormWrapper } from "../../../components/views";
 import {
   KeyboardAvoidingView,
