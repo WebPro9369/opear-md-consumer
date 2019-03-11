@@ -28,7 +28,7 @@ class PaymentScreen extends React.Component {
     } = this.props;
     const { paymentMethods } = this.state;
     return (
-      <ContainerView>
+      <ContainerView padding={16}>
         <NavHeader
           title="Payment settings"
           size="medium"

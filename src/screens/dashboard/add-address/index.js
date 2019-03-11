@@ -7,9 +7,9 @@ import ServiceButton from "../../../components/service-button";
 import {
   ContainerView,
   View as FormInputView,
-  FormWrapper,
-  ScrollView
-} from "../../../components/views/scroll-view";
+  FormWrapper
+} from "../../../components/views";
+import { ScrollView } from "../../../components/views/scroll-view";
 
 class AddAddressScreen extends React.Component {
   constructor(props) {

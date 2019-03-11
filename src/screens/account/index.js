@@ -29,7 +29,7 @@ class AccountScreen extends React.Component {
     } = this.props;
     const { email, badges } = this.state;
     return (
-      <ContainerView>
+      <ContainerView padding={16}>
         <NavHeader title="Account" size="medium" hasBackButton={false} />
         <View style={{ padding: 16 }}>
           <FlexView justifyContent="start">

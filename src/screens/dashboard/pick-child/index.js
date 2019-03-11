@@ -30,7 +30,7 @@ class PickChildScreen extends React.Component {
     } = this.props;
     const { pickedChild, children } = this.state;
     return (
-      <ContainerView padding={0}>
+      <ContainerView>
         <View
           style={{
             paddingLeft: 16,

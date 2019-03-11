@@ -10,9 +10,9 @@ import {
   HeaderWrapper,
   ViewCentered,
   View,
-  ScrollView,
   FlexView
-} from "../../../components/views/scroll-view";
+} from "../../../components/views";
+import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
 
 const { GREEN, MIDGREY } = colors;

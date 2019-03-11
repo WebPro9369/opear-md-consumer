@@ -47,7 +47,7 @@ class SelectDateTimeScreen extends React.Component {
     }
 
     return (
-      <ContainerView padding={0}>
+      <ContainerView>
         <View
           style={{
             paddingLeft: 16,

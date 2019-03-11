@@ -9,11 +9,8 @@ import {
 import { View } from "react-native";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
-import {
-  ContainerView,
-  FlexView,
-  ScrollView
-} from "../../../components/views/scroll-view";
+import { ContainerView, FlexView } from "../../../components/views";
+import { ScrollView } from "../../../components/views/scroll-view";
 import ServiceButton from "../../../components/service-button";
 import { ContentButton } from "../../account/settings/styles";
 import { ContentWrapper, AdditionalInput } from "./styles";

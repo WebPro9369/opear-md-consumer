@@ -52,7 +52,7 @@ class SelectProviderScreen extends React.Component {
     const { providers } = this.state;
 
     return (
-      <ContainerView padding={0} behavior="padding" startFromTop enabled>
+      <ContainerView>
         <View
           style={{
             paddingLeft: 16,

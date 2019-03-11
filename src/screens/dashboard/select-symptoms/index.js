@@ -2,10 +2,9 @@ import React from "react";
 import { FlatList, View } from "react-native";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
-import {
-  ContainerView,
-  KeyboardAvoidingView
-} from "../../../components/views/keyboard-view";
+import { ContainerView } from "../../../components/views";
+import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
+
 import { CustomCheckBox } from "../../../components/checkbox";
 import ServiceButton from "../../../components/service-button";
 import { ContentWrapper, CustomInput } from "./styles";

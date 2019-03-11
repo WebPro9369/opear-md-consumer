@@ -42,7 +42,7 @@ class DashboardScreen extends React.Component {
     const { hasAppointment, doctorsReady, user, illnessList } = this.state;
 
     return (
-      <ContainerView padding={0}>
+      <ContainerView>
         <HeaderWrapper>
           <NavHeader title="" size="medium" hasBackButton={false} />
         </HeaderWrapper>

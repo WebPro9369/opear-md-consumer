@@ -25,7 +25,7 @@ class PickVisitAddressScreen extends React.Component {
     } = this.props;
     const { visitAddresses } = this.state;
     return (
-      <ContainerView padding={0}>
+      <ContainerView>
         <View
           style={{
             paddingLeft: 16,

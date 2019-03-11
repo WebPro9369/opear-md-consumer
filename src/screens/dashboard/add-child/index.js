@@ -8,9 +8,9 @@ import {
   View,
   HeaderWrapper,
   FormWrapper,
-  ScrollView,
   ViewCentered
-} from "../../../components/views/scroll-view";
+} from "../../../components/views";
+import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
