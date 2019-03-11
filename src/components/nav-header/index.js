@@ -8,7 +8,7 @@ import {
   ServiceText
 } from "./styles";
 
-const NavHeader = ({
+export const NavHeader = ({
   title,
   size,
   hasBackButton,
@@ -43,5 +43,3 @@ NavHeader.defaultProps = {
 };
 
 NavHeader.propTypes = {};
-
-export { NavHeader };

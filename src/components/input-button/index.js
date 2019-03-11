@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Wrapper, TouchableButtonWrapper, ServiceText, Label } from "./styles";
 
-const InputButton = ({ label, value, icon, onPress, ...rest }) => (
+export const InputButton = ({ label, value, icon, onPress, ...rest }) => (
   <Wrapper {...rest}>
     <Label>{label}</Label>
     <TouchableButtonWrapper onPress={onPress}>
@@ -22,5 +22,3 @@ InputButton.propTypes = {
 InputButton.defaultProps = {
   icon: null
 };
-
-export { InputButton };
