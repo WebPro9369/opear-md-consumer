@@ -38,6 +38,20 @@ FormWrapper.defaultProps = {
   padding: 16
 };
 
+export const FormInputWrapper = styled.View`
+  padding-top: ${props => `${props.paddingTop}px`};
+  padding-bottom: ${props => `${props.paddingBottom}px`};
+  padding-left: ${props => `${props.paddingLeft}px`};
+  padding-right: ${props => `${props.paddingRight}px`};
+`;
+
+FormInputWrapper.defaultProps = {
+  paddingTop: 24,
+  paddingBottom: 24,
+  paddingLeft: 0,
+  paddingRight: 0
+};
+
 export const HeaderWrapper = styled.View`
   padding: 16px;
 `;
