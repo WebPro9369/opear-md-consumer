@@ -119,11 +119,12 @@ class SelectSymptomsScreen extends React.Component {
                 }
                 if (item.type === "button") {
                   return (
-                    <ServiceButton
-                      title={item.string}
-                      style={{ marginTop: 50 }}
-                      onPress={() => navigation.navigate("PickChild")}
-                    />
+                    <View style={{ marginTop: 36, padding: 16 }}>
+                      <ServiceButton
+                        title={item.string}
+                        onPress={() => navigation.navigate("PickChild")}
+                      />
+                    </View>
                   );
                 }
                 return null;
