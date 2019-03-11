@@ -17,9 +17,3 @@ export const FormInputView = styled.View`
   padding-top: 24px;
   padding-bottom: 24px;
 `;
-
-export const ContainerView1 = styled.View`
-  flex: 1;
-  justify-content: flex-start;
-  padding: 0px;
-`;
