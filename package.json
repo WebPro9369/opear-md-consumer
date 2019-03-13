@@ -15,6 +15,7 @@
     "mobx": "^5.8.0",
     "mobx-persist": "^0.4.1",
     "mobx-react": "^5.4.3",
+    "mobx-state-tree": "^3.11.0",
     "mobx-utils": "^5.1.0",
     "object-path-immutable": "^3.0.0",
     "prop-types": "^15.6.2",
@@ -23,7 +24,6 @@
     "react-native-elements": "^1.1.0",
     "react-native-phone-input": "^0.2.1",
     "react-navigation": "^3.0.9",
-    "reactotron-react-native": "^2.1.4",
     "recompose": "^0.30.0",
     "styled-components": "^4.1.3",
     "url": "^0.11.0"
@@ -41,7 +41,9 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "reactotron-mst": "^3.1.0",
+    "reactotron-react-native": "^2.1.4"
   },
   "private": true
 }
