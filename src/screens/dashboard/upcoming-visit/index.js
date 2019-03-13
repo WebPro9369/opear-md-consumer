@@ -39,6 +39,15 @@ class VisitBookedScreen extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    setTimeout(() => {
+      navigate("BookingReceipt");
+    }, 5000);
+  }
+
   render() {
     const {
       navigation: { goBack }
