@@ -5,6 +5,7 @@ import { AsyncStorage } from "react-native";
 class ApplicationState {
   constructor() {
     // TODO: make constructor valid
+    // eslint-disable-next-line no-console
     console.log("Constructor");
   }
 
@@ -32,5 +33,6 @@ const singleton = new ApplicationState();
 export default singleton;
 
 hydrate("persistedUserData", singleton).then(() => {
+  // eslint-disable-next-line no-console
   console.log("Hydrated: persistedUserData");
 });
