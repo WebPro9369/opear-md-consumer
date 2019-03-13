@@ -12,7 +12,7 @@ class SelectDateTimeScreen extends React.Component {
     super(props);
     let luxonDate = DateTime.local();
     const dates = [];
-    for (let i = 0; i < 10; i += 1) {
+    for (let i = 0; i < 14; i += 1) {
       dates.push({
         key: `${i + 1}`,
         day: luxonDate.weekdayShort,
@@ -35,6 +35,7 @@ class SelectDateTimeScreen extends React.Component {
       navigation: { goBack, navigate }
     } = this.props;
     const {
+      // eslint-disable-next-line no-unused-vars
       selectedDate,
       selectedTime,
       dates,
