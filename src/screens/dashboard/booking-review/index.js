@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Avatar } from "react-native-elements";
 import {
   AntDesign,
@@ -7,6 +8,7 @@ import {
   FontAwesome
 } from "@expo/vector-icons";
 import { View } from "react-native";
+import { inject, observer } from "mobx-react";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, FlexView } from "../../../components/views";
@@ -18,7 +20,13 @@ import { colors } from "../../../utils/constants";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
+@inject("ProviderState")
+@observer
 class BookingReviewScreen extends React.Component {
+  static propTypes = {
+    ProviderState: PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -31,6 +39,16 @@ class BookingReviewScreen extends React.Component {
       price: 150
     };
   }
+
+  goToDashboard = () => {
+    const {
+      navigation: { push },
+      ProviderState
+    } = this.props;
+
+    ProviderState.setAppointment(true);
+    push("Dashboard");
+  };
 
   render() {
     const {
@@ -159,7 +177,7 @@ class BookingReviewScreen extends React.Component {
           <ContentWrapper style={{ marginTop: 24, marginBottom: 24 }}>
             <ServiceButton
               title="Find a provider"
-              onPress={() => push("Dashboard", { hasAppointment: true })}
+              onPress={this.goToDashboard}
             />
           </ContentWrapper>
         </ScrollView>

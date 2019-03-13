@@ -1,18 +1,31 @@
 import React from "react";
-import { FlatList, TouchableOpacity } from "react-native";
+import { FlatList, Image, TouchableOpacity } from "react-native";
+import { inject, observer, PropTypes } from "mobx-react";
+
 import { StyledText } from "../../components/text";
 import { NavHeader } from "../../components/nav-header";
-import { ContainerView, View, HeaderWrapper } from "../../components/views";
+import {
+  ContainerView,
+  View,
+  HeaderWrapper,
+  FlexView
+} from "../../components/views";
 import { IllnessCard, ContentWrapper, MatchingMessageWrapper } from "./styles";
 import { colors } from "../../utils/constants";
 
+const imgRightArrow = require("../../../assets/images/Right_arrow.png");
+
+@inject("ProviderState")
+@observer
 class DashboardScreen extends React.Component {
+  static propTypes = {
+    ProviderState: PropTypes.observableObject.isRequired
+  };
+
   constructor(props) {
     super(props);
 
     this.state = {
-      hasAppointment: false,
-      doctorsReady: false,
       // selectedIllness: null,
       user: {
         name: "Michael"
@@ -28,18 +41,22 @@ class DashboardScreen extends React.Component {
 
   render() {
     const {
-      navigation: { navigate }
+      navigation: { navigate },
+      ProviderState
     } = this.props;
-    const { navigation } = this.props;
-    const paramHasAppointed = navigation.getParam("hasAppointment");
-    if (paramHasAppointed) {
-      setTimeout(() => {
-        this.setState({
-          doctorsReady: true
-        });
-      }, 3000);
-    }
-    const { hasAppointment, doctorsReady, user, illnessList } = this.state;
+    const { providerData } = ProviderState;
+    const {
+      appointment,
+      readyProviders,
+      outstandingAppointment
+    } = providerData;
+
+    // if (appointment) {
+    //   setTimeout(() => {
+    //     ProviderState.setOutstandingAppointment(true);
+    //   }, 3000);
+    // }
+    const { user, illnessList } = this.state;
 
     return (
       <ContainerView>
@@ -53,23 +70,38 @@ class DashboardScreen extends React.Component {
             {"!"}
           </StyledText>
         </ContentWrapper>
-        {!doctorsReady && paramHasAppointed ? (
+        {!outstandingAppointment && !readyProviders && appointment ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
               We are currently matching you with your doctor, be in touch soon!
             </StyledText>
           </MatchingMessageWrapper>
         ) : null}
-        {doctorsReady ? (
+        {!outstandingAppointment && readyProviders ? (
           <TouchableOpacity onPress={() => navigate("SelectProvider")}>
             <MatchingMessageWrapper>
-              <StyledText fontSize={16} lineHeight={24}>
-                Your doctor recommendations are ready!
-              </StyledText>
+              <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
+                <StyledText fontSize={16} lineHeight={24}>
+                  Your doctor recommendations are ready!
+                </StyledText>
+                <Image source={imgRightArrow} width={25} />
+              </FlexView>
             </MatchingMessageWrapper>
           </TouchableOpacity>
         ) : null}
-        <View style={{ marginTop: hasAppointment ? 16 : 48, marginBottom: 40 }}>
+        {outstandingAppointment ? (
+          <TouchableOpacity onPress={() => navigate("UpcomingVisit")}>
+            <MatchingMessageWrapper>
+              <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
+                <StyledText fontSize={16} lineHeight={24}>
+                  Your doctor is on the way! Review details
+                </StyledText>
+                <Image source={imgRightArrow} width={25} />
+              </FlexView>
+            </MatchingMessageWrapper>
+          </TouchableOpacity>
+        ) : null}
+        <View style={{ marginTop: appointment ? 16 : 48, marginBottom: 40 }}>
           <ContentWrapper>
             <StyledText>What&apos;s affecting your child?</StyledText>
             <View>
