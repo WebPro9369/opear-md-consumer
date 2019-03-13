@@ -10,6 +10,7 @@ import BookingReviewScreen from "../screens/dashboard/booking-review";
 import SelectProviderScreen from "../screens/dashboard/select-provider";
 import VisitBookedScreen from "../screens/dashboard/visit-booked";
 import UpcomingVisitScreen from "../screens/dashboard/upcoming-visit";
+import BookingReceiptScreen from "../screens/dashboard/booking-receipt";
 
 const DashboardNavigator = createStackNavigator(
   {
@@ -45,6 +46,9 @@ const DashboardNavigator = createStackNavigator(
     },
     UpcomingVisit: {
       screen: UpcomingVisitScreen
+    },
+    BookingReceipt: {
+      screen: BookingReceiptScreen
     }
   },
   {
