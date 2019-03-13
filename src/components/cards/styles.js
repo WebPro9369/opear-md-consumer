@@ -27,6 +27,14 @@ export const CardContentContainer = styled.View`
   align-items: center;
 `;
 
+export const ProviderStarsCardWrapper = styled.View`
+  padding: 16px;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: ${colors.BLACK38};
+  border-radius: 12px;
+`;
+
 export const styles = StyleSheet.create({
   badge: {
     backgroundColor: colors.BADGE_BACKGROUND,
