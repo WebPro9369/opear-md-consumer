@@ -62,3 +62,15 @@ export const ViewCentered = styled.View`
   padding-top: 12px;
   padding-bottom: 50px;
 `;
+
+export const TouchableView = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: column;
+  justify-content: ${props => {
+    if (props.justifyContent === "center") return "center";
+    if (props.justifyContent === "start") return "flex-start";
+    if (props.justifyContent === "end") return "flex-end";
+    return "space-between";
+  }};
+  align-items: ${props => props.alignItems || "center"};
+`;
