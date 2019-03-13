@@ -37,4 +37,6 @@ const colors = {
   TEXT_GREEN: "#54c374"
 };
 
-export { DEVICE_WIDTH, DEVICE_HEIGHT, colors };
+const MAX_STARS = 5;
+
+export { DEVICE_WIDTH, DEVICE_HEIGHT, MAX_STARS, colors };
