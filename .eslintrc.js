@@ -21,6 +21,15 @@ module.exports = {
   rules: {
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
     "import/prefer-default-export": "off",
-    "react/prop-types": ["error", { ignore: ["navigation"] }]
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: true,
+        optionalDependencies: true,
+        peerDependencies: true
+      }
+    ],
+    "react/prop-types": ["error", { ignore: ["navigation"] }],
+    "react/forbid-prop-types": [2, { forbid: ["any"] }]
   }
 };
