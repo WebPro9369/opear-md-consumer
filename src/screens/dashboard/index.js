@@ -31,7 +31,7 @@ class DashboardScreen extends React.Component {
         name: "Michael"
       },
       illnessList: [
-        { key: "1", string: "General", color: "#f9b44d" },
+        { key: "1", string: "General", color: "#49AF67" },
         { key: "2", string: "Respiratory", color: "#0e7092" },
         { key: "3", string: "Abdominal", color: "#d7707d" },
         { key: "4", string: "Ear Nose Throat", color: "#6b82a3" }
