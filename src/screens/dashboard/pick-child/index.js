@@ -1,12 +1,11 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { Avatar } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View, FlexView } from "../../../components/views";
 import { ServiceButton } from "../../../components/service-button";
-import { ContentButton } from "./styles";
+import { ChildCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
@@ -66,8 +65,11 @@ class PickChildScreen extends React.Component {
             }}
           >
             {children.map(child => (
-              <ContentButton
+              <ChildCard
                 key={child.id}
+                name={child.name}
+                age={child.age}
+                avatarImg={imgFoxLarge}
                 selected={child.selected}
                 onPress={() => {
                   let selectedChild = null;
@@ -89,22 +91,7 @@ class PickChildScreen extends React.Component {
                     children: newChildren
                   });
                 }}
-              >
-                <FlexView justifyContent="start">
-                  <Avatar rounded size={40} source={imgFoxLarge} />
-                  <StyledText
-                    fontFamily="Flama-Basic"
-                    fontSize={16}
-                    style={{ marginLeft: 12 }}
-                  >
-                    {child.name}
-                  </StyledText>
-                </FlexView>
-                <StyledText fontFamily="Flama-Basic" fontSize={16}>
-                  {child.age}
-                  {" yrs"}
-                </StyledText>
-              </ContentButton>
+              />
             ))}
             <View style={{ marginTop: 16, marginLeft: 28 }}>
               <TouchableOpacity onPress={() => navigate("AddChild")}>
