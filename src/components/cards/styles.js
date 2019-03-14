@@ -35,6 +35,22 @@ export const ProviderStarsCardWrapper = styled.View`
   border-radius: 12px;
 `;
 
+export const ChildCardWrapper = styled.TouchableOpacity`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-top: 6px;
+  border-style: solid;
+  border-width: ${props => (props.selected ? "2px" : "1px")};
+  border-color: ${props => (props.selected ? colors.BLUE : colors.MIDGREY)};
+  border-radius: 5px;
+`;
+
 export const styles = StyleSheet.create({
   badge: {
     backgroundColor: colors.BADGE_BACKGROUND,

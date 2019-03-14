@@ -9,6 +9,7 @@ import {
   ProviderStarsCardWrapper,
   BookedDetailCardWrapper,
   CardContentContainer,
+  ChildCardWrapper,
   styles
 } from "./styles";
 import { MAX_STARS, colors } from "../../utils/constants";
@@ -217,4 +218,34 @@ BookedDetailCard.propTypes = {
 
 BookedDetailCard.defaultProps = {
   icon: null
+};
+
+export const ChildCard = ({ name, age, selected, avatarImg, ...rest }) => (
+  <ChildCardWrapper selected={selected} {...rest}>
+    <FlexView justifyContent="start">
+      <Avatar rounded size={40} source={avatarImg} />
+      <StyledText
+        fontFamily="Flama-Basic"
+        fontSize={16}
+        style={{ marginLeft: 12 }}
+      >
+        {name}
+      </StyledText>
+    </FlexView>
+    <StyledText fontFamily="Flama-Basic" fontSize={16}>
+      {age}
+      {" yrs"}
+    </StyledText>
+  </ChildCardWrapper>
+);
+
+ChildCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired,
+  selected: PropTypes.bool,
+  avatarImg: PropTypes.number.isRequired
+};
+
+ChildCard.defaultProps = {
+  selected: false
 };
