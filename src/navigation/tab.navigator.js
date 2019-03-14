@@ -5,7 +5,7 @@ import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import AccountNavigator from "./account.navigator";
 import DashboardNavigator from "./dashboard.navigator";
 import VisitsScreen from "../screens/visits";
-import ChildrenScreen from "../screens/children";
+import ChildrenNavigator from "./children.navigator";
 import { colors } from "../utils/constants";
 
 const TabNavigator = createBottomTabNavigator(
@@ -25,7 +25,7 @@ const TabNavigator = createBottomTabNavigator(
       })
     },
     Children: {
-      screen: ChildrenScreen,
+      screen: ChildrenNavigator,
       navigationOptions: () => ({
         title: "Children",
         tabBarLabel: "Children"
