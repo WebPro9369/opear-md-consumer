@@ -51,6 +51,20 @@ export const ChildCardWrapper = styled.TouchableOpacity`
   border-radius: 5px;
 `;
 
+export const VisitDetailCardWrapper = styled.TouchableOpacity`
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: ${colors.MIDGREY};
+  border-radius: 8px;
+`;
+
 export const styles = StyleSheet.create({
   badge: {
     backgroundColor: colors.BADGE_BACKGROUND,

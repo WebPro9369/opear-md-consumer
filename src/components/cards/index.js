@@ -10,6 +10,7 @@ import {
   BookedDetailCardWrapper,
   CardContentContainer,
   ChildCardWrapper,
+  VisitDetailCardWrapper,
   styles
 } from "./styles";
 import { MAX_STARS, colors } from "../../utils/constants";
@@ -248,4 +249,53 @@ ChildCard.propTypes = {
 
 ChildCard.defaultProps = {
   selected: false
+};
+
+export const VisitDetailCard = ({
+  avatarImg,
+  name,
+  illness,
+  time,
+  address,
+  ...rest
+}) => (
+  <VisitDetailCardWrapper {...rest}>
+    <FlexView justifyContent="start" alignItems="center">
+      <Avatar rounded size={40} source={avatarImg} />
+      <View style={{ marginLeft: 20 }}>
+        <StyledText
+          fontSize={14}
+          fontFamily="Flama-Medium"
+          lineHeight={18}
+          color={colors.BLACK87}
+        >
+          {name}
+        </StyledText>
+        <StyledText fontSize={14} lineHeight={18} color={colors.TEXT_GREY}>
+          {illness}
+        </StyledText>
+      </View>
+    </FlexView>
+    <View style={{ display: "flex", alignItems: "center" }}>
+      <StyledText
+        fontSize={16}
+        fontFamily="Flama-Medium"
+        lineHeight={24}
+        color={colors.TEXT_GREY}
+      >
+        {time}
+      </StyledText>
+      <StyledText fontSize={12} lineHeight={24} color={colors.TEXT_GREY}>
+        {address}
+      </StyledText>
+    </View>
+  </VisitDetailCardWrapper>
+);
+
+VisitDetailCard.propTypes = {
+  avatarImg: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  illness: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired
 };
