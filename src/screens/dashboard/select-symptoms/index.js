@@ -122,7 +122,9 @@ class SelectSymptomsScreen extends React.Component {
                     <View style={{ marginTop: 36, padding: 16 }}>
                       <ServiceButton
                         title={item.string}
-                        onPress={() => navigation.navigate("PickChild")}
+                        onPress={() =>
+                          navigation.navigate("DashboardPickChild")
+                        }
                       />
                     </View>
                   );

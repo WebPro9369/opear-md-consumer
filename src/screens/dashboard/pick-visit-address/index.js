@@ -63,7 +63,7 @@ class PickVisitAddressScreen extends React.Component {
             {visitAddresses.map(address => (
               <ContentButton
                 key={address.id}
-                onPress={() => navigate("SelectDateTime")}
+                onPress={() => navigate("DashboardSelectDateTime")}
               >
                 <FlexView justifyContent="start">
                   <EvilIcons
@@ -91,7 +91,7 @@ class PickVisitAddressScreen extends React.Component {
               </ContentButton>
             ))}
             <View style={{ marginTop: 16, marginLeft: 28 }}>
-              <TouchableOpacity onPress={() => navigate("AddAddress")}>
+              <TouchableOpacity onPress={() => navigate("DashboardAddAddress")}>
                 <FlexView justifyContent="start">
                   <AntDesign
                     name="pluscircle"

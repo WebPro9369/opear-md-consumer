@@ -44,7 +44,7 @@ class VisitBookedScreen extends React.Component {
       navigation: { navigate }
     } = this.props;
     setTimeout(() => {
-      navigate("BookingReceipt");
+      navigate("DashboardBookingReceipt");
     }, 5000);
   }
 

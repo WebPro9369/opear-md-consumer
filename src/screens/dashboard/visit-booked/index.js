@@ -105,7 +105,7 @@ class VisitBookedScreen extends React.Component {
           <ContentWrapper style={{ marginTop: 24 }}>
             <ServiceButton
               title="Back to dashboard"
-              onPress={() => navigate("Dashboard")}
+              onPress={() => navigate("DashboardDefault")}
             />
           </ContentWrapper>
         </View>

@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "react-navigation";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import AccountNavigator from "./account.navigator";
 import DashboardNavigator from "./dashboard.navigator";
-import VisitsScreen from "../screens/visits";
+import VisitsNavigator from "./visits.navigator";
 import ChildrenNavigator from "./children.navigator";
 import { colors } from "../utils/constants";
 
@@ -18,7 +18,7 @@ const TabNavigator = createBottomTabNavigator(
       })
     },
     Visits: {
-      screen: VisitsScreen,
+      screen: VisitsNavigator,
       navigationOptions: () => ({
         title: "Visits",
         tabBarLabel: "Visits"

@@ -53,11 +53,15 @@ class AccountScreen extends React.Component {
           </FlexViewSpread>
         </View>
         <View style={{ paddingTop: 16, paddingBottom: 16 }}>
-          <ListTouchableButtonWrapper onPress={() => navigate("Settings")}>
+          <ListTouchableButtonWrapper
+            onPress={() => navigate("AccountSettings")}
+          >
             <ListButtonText>Settings</ListButtonText>
             <FontAwesome name="angle-right" color={colors.MIDGREY} size={24} />
           </ListTouchableButtonWrapper>
-          <ListTouchableButtonWrapper onPress={() => navigate("Payment")}>
+          <ListTouchableButtonWrapper
+            onPress={() => navigate("AccountPayment")}
+          >
             <ListButtonText>Payment</ListButtonText>
             <FontAwesome name="angle-right" color={colors.MIDGREY} size={24} />
           </ListTouchableButtonWrapper>

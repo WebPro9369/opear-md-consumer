@@ -42,12 +42,12 @@ class BookingReviewScreen extends React.Component {
 
   goToDashboard = () => {
     const {
-      navigation: { push },
+      navigation: { navigate },
       ProviderState
     } = this.props;
 
     ProviderState.setAppointment(true);
-    push("Dashboard");
+    navigate("DashboardDefault");
   };
 
   render() {
@@ -87,7 +87,7 @@ class BookingReviewScreen extends React.Component {
             </StyledText>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 32 }}>
-            <ContentButton onPress={() => push("PickChild")}>
+            <ContentButton onPress={() => push("DashboardPickChild")}>
               <FlexView>
                 <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
@@ -100,7 +100,7 @@ class BookingReviewScreen extends React.Component {
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
             </ContentButton>
-            <ContentButton onPress={() => push("PickVisitAddress")}>
+            <ContentButton onPress={() => push("DashboardPickVisitAddress")}>
               <FlexView>
                 <EvilIcons
                   name="location"
@@ -117,7 +117,7 @@ class BookingReviewScreen extends React.Component {
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
             </ContentButton>
-            <ContentButton onPress={() => push("SelectDateTime")}>
+            <ContentButton onPress={() => push("DashboardSelectDateTime")}>
               <FlexView>
                 <FontAwesome
                   name="calendar-check-o"
@@ -138,7 +138,7 @@ class BookingReviewScreen extends React.Component {
             </ContentButton>
             <FlexView>
               <View style={{ flex: 1, marginRight: 4 }}>
-                <ContentButton onPress={() => push("AddCard")}>
+                <ContentButton onPress={() => push("DashboardAddCard")}>
                   <FlexView justifyContent="center">
                     <AntDesign
                       name="pluscircle"

@@ -85,7 +85,7 @@ class SelectProviderScreen extends React.Component {
                   history={item.history}
                   rating={item.rating}
                   badges={item.badges}
-                  onPress={() => navigate("VisitBooked")}
+                  onPress={() => navigate("DashboardVisitBooked")}
                 />
               </View>
             )}

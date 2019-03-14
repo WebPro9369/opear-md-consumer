@@ -43,7 +43,7 @@ class SettingsScreen extends React.Component {
             title="Settings"
             size="medium"
             hasBackButton
-            onPressBackButton={() => navigate("Account")}
+            onPressBackButton={() => navigate("AccountDefault")}
           />
         </HeaderWrapper>
         <ScrollView>
@@ -81,7 +81,7 @@ class SettingsScreen extends React.Component {
                 icon={
                   <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }
-                onPress={() => navigate("EditAdress")}
+                onPress={() => navigate("SettingsEditAdress")}
               />
             </View>
             <View style={{ padding: 16 }}>
@@ -91,7 +91,7 @@ class SettingsScreen extends React.Component {
                 icon={
                   <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }
-                onPress={() => navigate("EditEmail")}
+                onPress={() => navigate("SettingsEditEmail")}
               />
             </View>
             <View style={{ padding: 16 }}>
@@ -101,7 +101,7 @@ class SettingsScreen extends React.Component {
                 icon={
                   <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }
-                onPress={() => navigate("EditPhoneNumber")}
+                onPress={() => navigate("SettingsEditPhoneNumber")}
               />
             </View>
           </View>
@@ -143,7 +143,7 @@ class SettingsScreen extends React.Component {
                 8 yrs
               </StyledText>
             </ContentButton>
-            <ContentButton onPress={() => navigate("EditChild")}>
+            <ContentButton onPress={() => navigate("SettingsEditChild")}>
               <FlexView>
                 <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText

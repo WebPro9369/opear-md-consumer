@@ -94,7 +94,7 @@ class PickChildScreen extends React.Component {
               />
             ))}
             <View style={{ marginTop: 16, marginLeft: 28 }}>
-              <TouchableOpacity onPress={() => navigate("AddChild")}>
+              <TouchableOpacity onPress={() => navigate("DashboardAddChild")}>
                 <FlexView justifyContent="start">
                   <AntDesign
                     name="pluscircle"
@@ -115,7 +115,7 @@ class PickChildScreen extends React.Component {
             <View style={{ paddingLeft: 16, paddingRight: 16 }}>
               <ServiceButton
                 title="Select Children"
-                onPress={() => navigate("PickVisitAddress")}
+                onPress={() => navigate("DashboardPickVisitAddress")}
               />
             </View>
           ) : null}

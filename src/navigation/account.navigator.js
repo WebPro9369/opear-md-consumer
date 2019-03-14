@@ -7,28 +7,28 @@ import EditEmailScreen from "../screens/account/edit-email";
 import EditPhoneNumberScreen from "../screens/account/edit-phonenumber";
 import EditCardScreen from "../screens/account/edit-card";
 import AddCardScreen from "../screens/account/add-card";
-import EditChildScreen from "../screens/account/edit-child";
+import EditChildScreen from "../screens/children/edit-child";
 
 const SettingsNavigator = createStackNavigator(
   {
-    Default: {
+    SettingsDefault: {
       screen: SettingsScreen
     },
-    EditAdress: {
+    SettingsEditAdress: {
       screen: EditAddressScreen
     },
-    EditEmail: {
+    SettingsEditEmail: {
       screen: EditEmailScreen
     },
-    EditPhoneNumber: {
+    SettingsEditPhoneNumber: {
       screen: EditPhoneNumberScreen
     },
-    EditChild: {
+    SettingsEditChild: {
       screen: EditChildScreen
     }
   },
   {
-    initialRouteName: "Default",
+    initialRouteName: "SettingsDefault",
     headerMode: "none",
     defaultNavigationOptions: {
       headerBackTitle: null
@@ -38,18 +38,18 @@ const SettingsNavigator = createStackNavigator(
 
 const PaymentNavigator = createStackNavigator(
   {
-    Default: {
+    PaymentDefault: {
       screen: PaymentScreen
     },
-    EditCard: {
+    PaymentEditCard: {
       screen: EditCardScreen
     },
-    AddCard: {
+    PaymentAddCard: {
       screen: AddCardScreen
     }
   },
   {
-    initialRouteName: "Default",
+    initialRouteName: "PaymentDefault",
     headerMode: "none",
     defaultNavigationOptions: {
       headerBackTitle: null
@@ -59,18 +59,18 @@ const PaymentNavigator = createStackNavigator(
 
 const AccountNavigator = createStackNavigator(
   {
-    Account: {
+    AccountDefault: {
       screen: AccountScreen
     },
-    Settings: {
+    AccountSettings: {
       screen: SettingsNavigator
     },
-    Payment: {
+    AccountPayment: {
       screen: PaymentNavigator
     }
   },
   {
-    initialRouteName: "Account",
+    initialRouteName: "AccountDefault",
     headerMode: "none",
     defaultNavigationOptions: {
       headerBackTitle: null

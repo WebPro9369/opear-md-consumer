@@ -2,7 +2,7 @@ import { createStackNavigator } from "react-navigation";
 import DashboardScreen from "../screens/dashboard";
 import SelectSymptomsScreen from "../screens/dashboard/select-symptoms";
 import PickChildScreen from "../screens/dashboard/pick-child";
-import AddChildScreen from "../screens/dashboard/add-child";
+import AddChildScreen from "../screens/children/add-child";
 import PickVisitAddressScreen from "../screens/dashboard/pick-visit-address";
 import AddAddressScreen from "../screens/dashboard/add-address";
 import SelectDateTimeScreen from "../screens/dashboard/select-date-time";
@@ -11,48 +11,52 @@ import SelectProviderScreen from "../screens/dashboard/select-provider";
 import VisitBookedScreen from "../screens/dashboard/visit-booked";
 import UpcomingVisitScreen from "../screens/dashboard/upcoming-visit";
 import BookingReceiptScreen from "../screens/dashboard/booking-receipt";
+import AddCardScreen from "../screens/account/add-card";
 
 const DashboardNavigator = createStackNavigator(
   {
-    Dashboard: {
+    DashboardDefault: {
       screen: DashboardScreen
     },
-    SelectSymptoms: {
+    DashboardSelectSymptoms: {
       screen: SelectSymptomsScreen
     },
-    PickChild: {
+    DashboardPickChild: {
       screen: PickChildScreen
     },
-    AddChild: {
+    DashboardAddChild: {
       screen: AddChildScreen
     },
-    PickVisitAddress: {
+    DashboardPickVisitAddress: {
       screen: PickVisitAddressScreen
     },
-    AddAddress: {
+    DashboardAddAddress: {
       screen: AddAddressScreen
     },
-    SelectDateTime: {
+    DashboardSelectDateTime: {
       screen: SelectDateTimeScreen
     },
-    BookingReview: {
+    DashboardBookingReview: {
       screen: BookingReviewScreen
     },
-    SelectProvider: {
+    DashboardSelectProvider: {
       screen: SelectProviderScreen
     },
-    VisitBooked: {
+    DashboardVisitBooked: {
       screen: VisitBookedScreen
     },
-    UpcomingVisit: {
+    DashboardUpcomingVisit: {
       screen: UpcomingVisitScreen
     },
-    BookingReceipt: {
+    DashboardBookingReceipt: {
       screen: BookingReceiptScreen
+    },
+    DashboardAddCard: {
+      screen: AddCardScreen
     }
   },
   {
-    initialRouteName: "Dashboard",
+    initialRouteName: "DashboardDefault",
     headerMode: "none",
     defaultNavigationOptions: {
       headerBackTitle: null

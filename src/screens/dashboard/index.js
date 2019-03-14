@@ -78,7 +78,7 @@ class DashboardScreen extends React.Component {
           </MatchingMessageWrapper>
         ) : null}
         {!outstandingAppointment && readyProviders ? (
-          <TouchableOpacity onPress={() => navigate("SelectProvider")}>
+          <TouchableOpacity onPress={() => navigate("DashboardSelectProvider")}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
                 <StyledText fontSize={16} lineHeight={24}>
@@ -90,7 +90,7 @@ class DashboardScreen extends React.Component {
           </TouchableOpacity>
         ) : null}
         {outstandingAppointment ? (
-          <TouchableOpacity onPress={() => navigate("UpcomingVisit")}>
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit")}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>
@@ -111,7 +111,9 @@ class DashboardScreen extends React.Component {
                   <IllnessCard
                     bgColor={item.color}
                     onPress={() =>
-                      navigate("SelectSymptoms", { illness: item.string })
+                      navigate("DashboardSelectSymptoms", {
+                        illness: item.string
+                      })
                     }
                   >
                     <StyledText

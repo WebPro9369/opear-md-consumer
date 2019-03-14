@@ -137,7 +137,7 @@ class SelectDateTimeScreen extends React.Component {
                       selectedTime: item.value
                     });
                   }}
-                  onConfirm={() => navigate("BookingReview")}
+                  onConfirm={() => navigate("DashboardBookingReview")}
                 />
               )}
               style={{ paddingLeft: 16, paddingRight: 16 }}

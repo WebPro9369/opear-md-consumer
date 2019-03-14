@@ -33,7 +33,7 @@ class PaymentScreen extends React.Component {
           title="Payment settings"
           size="medium"
           hasBackButton
-          onPressBackButton={() => navigate("Account")}
+          onPressBackButton={() => navigate("AccountDefault")}
         />
         <View>
           <View style={{ paddingTop: 16, paddingBottom: 16 }}>
@@ -42,7 +42,7 @@ class PaymentScreen extends React.Component {
                 return (
                   <ListTouchableButtonWrapper
                     key={pm.id}
-                    onPress={() => navigate("EditCard")}
+                    onPress={() => navigate("PaymentEditCard")}
                   >
                     <FlexView justifyContent="start">
                       <FontAwesome
@@ -86,7 +86,7 @@ class PaymentScreen extends React.Component {
             })}
           </View>
           <View style={{ marginTop: 16, marginLeft: 28 }}>
-            <TouchableWrapper onPress={() => navigate("AddCard")}>
+            <TouchableWrapper onPress={() => navigate("PaymentAddCard")}>
               <FlexView justifyContent="start">
                 <AntDesign
                   name="pluscircleo"
