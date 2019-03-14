@@ -140,7 +140,7 @@ class DashboardScreen extends React.Component {
               style={{
                 paddingTop: 12,
                 paddingBottom: 12,
-                color: colors.TEXT_GREY
+                color: colors.BLACK60
               }}
             >
               1.&nbsp;&nbsp;&nbsp;&nbsp;Let us know what is affecting your child
@@ -151,7 +151,7 @@ class DashboardScreen extends React.Component {
               style={{
                 paddingTop: 12,
                 paddingBottom: 12,
-                color: colors.TEXT_GREY
+                color: colors.BLACK60
               }}
             >
               2.&nbsp;&nbsp;&nbsp;&nbsp;Select a date and location to meet
@@ -162,7 +162,7 @@ class DashboardScreen extends React.Component {
               style={{
                 paddingTop: 12,
                 paddingBottom: 12,
-                color: colors.TEXT_GREY
+                color: colors.BLACK60
               }}
             >
               3.&nbsp;&nbsp;&nbsp;&nbsp;Choose a pediatrician!

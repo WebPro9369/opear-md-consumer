@@ -48,7 +48,7 @@ export const DateCircle = ({ day, date, selected, ...rest }) => (
     <StyledText
       fontSize={14}
       lineHeight={24}
-      color={selected ? colors.WHITE : colors.BADGE_TEXT_GREY}
+      color={selected ? colors.WHITE : colors.BLACK60}
     >
       {date}
     </StyledText>

@@ -10,7 +10,7 @@ import { BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
 
-const { BADGE_TEXT_GREY } = colors;
+const { BLACK60 } = colors;
 
 const doctorImg = require("../../../../assets/images/Doctor.png");
 const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
@@ -144,9 +144,7 @@ class VisitBookedScreen extends React.Component {
             <BookedDetailCard
               type="Address"
               text={address}
-              icon={
-                <EvilIcons name="location" size={30} color={BADGE_TEXT_GREY} />
-              }
+              icon={<EvilIcons name="location" size={30} color={BLACK60} />}
             />
             <BookedDetailCard
               type="Date &amp; Time"
@@ -156,7 +154,7 @@ class VisitBookedScreen extends React.Component {
                 <FontAwesome
                   name="calendar-check-o"
                   size={30}
-                  color={BADGE_TEXT_GREY}
+                  color={BLACK60}
                 />
               }
             />

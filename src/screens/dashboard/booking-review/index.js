@@ -102,11 +102,7 @@ class BookingReviewScreen extends React.Component {
             </ContentButton>
             <ContentButton onPress={() => push("DashboardPickVisitAddress")}>
               <FlexView>
-                <EvilIcons
-                  name="location"
-                  size={40}
-                  color={colors.BADGE_TEXT_GREY}
-                />
+                <EvilIcons name="location" size={40} color={colors.BLACK60} />
                 <StyledText
                   fontFamily="Flama-Basic"
                   fontSize={16}
@@ -122,7 +118,7 @@ class BookingReviewScreen extends React.Component {
                 <FontAwesome
                   name="calendar-check-o"
                   size={40}
-                  color={colors.BADGE_TEXT_GREY}
+                  color={colors.BLACK60}
                 />
                 <StyledText
                   fontFamily="Flama-Basic"

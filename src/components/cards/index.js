@@ -147,7 +147,7 @@ export const ProviderStarsCard = ({
           >
             {name}
           </StyledText>
-          <StyledText fontSize={20} color={colors.TEXT_GREY}>
+          <StyledText fontSize={20} color={colors.BLACK60}>
             {bio}
           </StyledText>
         </View>
@@ -199,7 +199,7 @@ ProviderStarsCard.defaultProps = {
 
 export const BookedDetailCard = ({ type, text, icon, ...rest }) => (
   <BookedDetailCardWrapper {...rest}>
-    <StyledText fontSize={14} color={colors.BADGE_TEXT_GREY} lineHeight={18}>
+    <StyledText fontSize={14} color={colors.BLACK60} lineHeight={18}>
       {type}
     </StyledText>
     <CardContentContainer>
@@ -271,7 +271,7 @@ export const VisitDetailCard = ({
         >
           {name}
         </StyledText>
-        <StyledText fontSize={14} lineHeight={18} color={colors.TEXT_GREY}>
+        <StyledText fontSize={14} lineHeight={18} color={colors.BLACK60}>
           {illness}
         </StyledText>
       </View>
@@ -281,11 +281,11 @@ export const VisitDetailCard = ({
         fontSize={16}
         fontFamily="Flama-Medium"
         lineHeight={24}
-        color={colors.TEXT_GREY}
+        color={colors.BLACK60}
       >
         {time}
       </StyledText>
-      <StyledText fontSize={12} lineHeight={24} color={colors.TEXT_GREY}>
+      <StyledText fontSize={12} lineHeight={24} color={colors.BLACK60}>
         {address}
       </StyledText>
     </View>

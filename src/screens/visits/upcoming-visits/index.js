@@ -54,7 +54,7 @@ class UpcomingVisitsScreen extends React.Component {
         <ScrollView padding={0}>
           <View style={{ paddingTop: 24 }}>
             <ContentWrapper>
-              <StyledText fontSize={16} color={colors.TEXT_GREY}>
+              <StyledText fontSize={16} color={colors.BLACK60}>
                 Today
               </StyledText>
               <View style={{ paddingTop: 16, paddingBottom: 16 }}>
