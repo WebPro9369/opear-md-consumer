@@ -14,6 +14,20 @@ export const View = styled.View`
   justify-content: flex-start;
 `;
 
+export const ContentWrapper = styled.View`
+  padding-left: ${props => props.paddingLeft};
+  padding-right: ${props => props.paddingRight};
+  margin-top: ${props => props.marginTop};
+  margin-bottom: ${props => props.marginBottom};
+`;
+
+ContentWrapper.defaultProps = {
+  paddingLeft: 16,
+  paddingRight: 16,
+  marginTop: 0,
+  marginBottom: 0
+};
+
 export const FlexView = styled.View`
   display: flex;
   flex-direction: row;
