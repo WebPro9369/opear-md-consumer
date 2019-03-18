@@ -1,42 +1,61 @@
-import { observable, action } from "mobx";
-import { create, persist } from "mobx-persist";
-import { AsyncStorage } from "react-native";
+/* eslint-disable no-param-reassign */
+import { types } from "mobx-state-tree";
 
-class ProviderState {
-  @persist("object") @observable providerData = {
-    appointment: null,
-    readyProviders: null,
-    outstandingAppointment: null
-  };
+export const ProviderStore = types
+  .model("ProviderStore", {
+    appointment: types.boolean,
+    readyProviders: types.boolean,
+    outstandingAppointment: types.boolean
+  })
+  .actions(self => ({
+    setAppointment(value) {
+      self.appointment = value;
+    },
+    setReadyProviders(value) {
+      self.readyProviders = value;
+    },
+    setOutstandingAppointment(value) {
+      self.outstandingAppointment = value;
+    }
+  }));
 
-  @action setAppointment(value) {
-    this.providerData.appointment = value;
-  }
+// export default ProviderStore;
 
-  @action setReadyProviders(value) {
-    this.providerData.readyProviders = value;
-  }
+// class ProviderState {
+//   @persist("object") @observable providerData = {
+//     appointment: null,
+//     readyProviders: null,
+//     outstandingAppointment: null
+//   };
 
-  @action setOutstandingAppointment(value) {
-    this.providerData.outstandingAppointment = value;
-  }
-}
+//   @action setAppointment(value) {
+//     this.providerData.appointment = value;
+//   }
 
-const hydrate = create({
-  storage: AsyncStorage,
-  jsonify: true
-});
+//   @action setReadyProviders(value) {
+//     this.providerData.readyProviders = value;
+//   }
 
-const providerSingleton = new ProviderState();
-export default providerSingleton;
+//   @action setOutstandingAppointment(value) {
+//     this.providerData.outstandingAppointment = value;
+//   }
+// }
 
-hydrate("providerData", providerSingleton, {
-  providerData: {
-    appointment: null,
-    readyProviders: null,
-    outstandingAppointment: true
-  }
-}).then(() => {
-  // eslint-disable-next-line no-console
-  console.log("Hydrated: providerData");
-});
+// const hydrate = create({
+//   storage: AsyncStorage,
+//   jsonify: true
+// });
+
+// const providerSingleton = new ProviderState();
+// export default providerSingleton;
+
+// hydrate("providerData", providerSingleton, {
+//   providerData: {
+//     appointment: null,
+//     readyProviders: null,
+//     outstandingAppointment: true
+//   }
+// }).then(() => {
+//   // eslint-disable-next-line no-console
+//   console.log("Hydrated: providerData");
+// });
