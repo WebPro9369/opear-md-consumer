@@ -20,11 +20,11 @@ import { colors } from "../../../utils/constants";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
-@inject("ProviderState")
+@inject("store")
 @observer
 class BookingReviewScreen extends React.Component {
   static propTypes = {
-    ProviderState: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired
   };
 
   constructor(props) {
@@ -43,10 +43,10 @@ class BookingReviewScreen extends React.Component {
   goToDashboard = () => {
     const {
       navigation: { navigate },
-      ProviderState
+      store
     } = this.props;
 
-    ProviderState.setAppointment(true);
+    store.providerStore.setAppointment(true);
     navigate("DashboardDefault");
   };
 

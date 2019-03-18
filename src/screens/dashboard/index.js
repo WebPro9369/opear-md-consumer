@@ -15,11 +15,11 @@ import { colors } from "../../utils/constants";
 
 const imgRightArrow = require("../../../assets/images/Right_arrow.png");
 
-@inject("ProviderState")
+@inject("store")
 @observer
 class DashboardScreen extends React.Component {
   static propTypes = {
-    ProviderState: PropTypes.observableObject.isRequired
+    store: PropTypes.observableObject.isRequired
   };
 
   constructor(props) {
@@ -42,14 +42,16 @@ class DashboardScreen extends React.Component {
   render() {
     const {
       navigation: { navigate },
-      ProviderState
+      store
     } = this.props;
-    const { providerData } = ProviderState;
+    const { providerStore } = store;
     const {
       appointment,
       readyProviders,
       outstandingAppointment
-    } = providerData;
+    } = providerStore;
+
+    console.tron.log("DashboardStore: ", store, providerStore);
 
     // if (appointment) {
     //   setTimeout(() => {
