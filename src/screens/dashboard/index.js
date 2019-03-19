@@ -51,13 +51,6 @@ class DashboardScreen extends React.Component {
       outstandingAppointment
     } = providerStore;
 
-    console.tron.log("DashboardStore: ", store, providerStore);
-
-    // if (appointment) {
-    //   setTimeout(() => {
-    //     ProviderState.setOutstandingAppointment(true);
-    //   }, 3000);
-    // }
     const { user, illnessList } = this.state;
 
     return (
