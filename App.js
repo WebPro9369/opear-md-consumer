@@ -2,20 +2,11 @@ import React from "react";
 import styled from "styled-components/native";
 import { AppLoading, SplashScreen, Font } from "expo";
 import { Provider, observer } from "mobx-react";
-
-// import ApplicationState from "./src/store/app";
-// import ProviderState from "./src/store/provider";
 import { mainStore } from "./src/store";
 import RootContainer from "./src/root-container";
 import { DEVICE_WIDTH, DEVICE_HEIGHT } from "./src/utils/constants";
 
-// const store = {
-//   ApplicationState,
-//   ProviderState
-// };
-
 const imgSplash = require("./assets/splash.png");
-
 const fontFlamaLight = require("./assets/fonts/FlamaLight_Regular.otf");
 const fontFlamaBasic = require("./assets/fonts/Flama_Regular.otf");
 const fontFlamaMedium = require("./assets/fonts/FlamaMedium_Regular.otf");
