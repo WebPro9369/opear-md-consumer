@@ -3,14 +3,18 @@ import { FontAwesome } from "@expo/vector-icons";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
-import { FlexView, FormWrapper } from "../../../components/views";
+import {
+  FlexView,
+  FormWrapper,
+  TouchableView
+} from "../../../components/views";
 import {
   KeyboardAvoidingView,
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
 
-const AddCardScreen = ({ navigation: { goBack } }) => (
+const AddCardScreen = ({ navigation: { goBack, navigate } }) => (
   <KeyboardAvoidingView behavior="padding" enabled>
     <NavHeader
       title="Add Card"
@@ -27,7 +31,10 @@ const AddCardScreen = ({ navigation: { goBack } }) => (
             <FontAwesome name="cc-visa" size={30} color={colors.BLUE} />
           }
           rightIcon={
-            <FontAwesome name="camera" size={30} color={colors.LIGHTGREEN} />
+            // eslint-disable-next-line react/jsx-wrap-multilines
+            <TouchableView onPress={() => navigate("PaymentScanCard")}>
+              <FontAwesome name="camera" size={30} color={colors.LIGHTGREEN} />
+            </TouchableView>
           }
         />
       </FormInputView>

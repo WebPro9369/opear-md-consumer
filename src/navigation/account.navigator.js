@@ -8,6 +8,7 @@ import EditPhoneNumberScreen from "../screens/account/edit-phonenumber";
 import EditCardScreen from "../screens/account/edit-card";
 import AddCardScreen from "../screens/account/add-card";
 import EditChildScreen from "../screens/children/edit-child";
+import ScanCardScreen from "../screens/account/scan-card";
 
 const SettingsNavigator = createStackNavigator(
   {
@@ -46,6 +47,9 @@ const PaymentNavigator = createStackNavigator(
     },
     PaymentAddCard: {
       screen: AddCardScreen
+    },
+    PaymentScanCard: {
+      screen: ScanCardScreen
     }
   },
   {
