@@ -73,7 +73,7 @@ class VisitBookedScreen extends React.Component {
         </View>
         <View style={{ marginTop: 0 }}>
           <ContentWrapper>
-            <StyledText fontFamily="Flama-Medium" fontSize={28} lineHeight={40}>
+            <StyledText fontFamily="FlamaMedium" fontSize={28} lineHeight={40}>
               Upcoming visit
             </StyledText>
           </ContentWrapper>
@@ -88,7 +88,7 @@ class VisitBookedScreen extends React.Component {
               <Avatar rounded size={150} source={doctorImg} />
               <View style={{ marginTop: 16, maxWidth: 240 }}>
                 <StyledText
-                  fontFamily="Flama-Medium"
+                  fontFamily="FlamaMedium"
                   fontSize={20}
                   lineHeight={24}
                   color={colors.BLACK87}
@@ -100,7 +100,7 @@ class VisitBookedScreen extends React.Component {
               <View style={{ marginTop: 40, marginBottom: 60 }}>
                 <FlexView justifyContent="center">
                   <StyledText
-                    fontFamily="Flama-Medium"
+                    fontFamily="FlamaMedium"
                     fontSize={20}
                     lineHeight={24}
                     color={colors.BLACK87}
@@ -109,7 +109,7 @@ class VisitBookedScreen extends React.Component {
                     {": "}
                   </StyledText>
                   <StyledText
-                    fontFamily="Flama-Medium"
+                    fontFamily="FlamaMedium"
                     fontSize={20}
                     lineHeight={24}
                     color={colors.TEXT_GREEN}

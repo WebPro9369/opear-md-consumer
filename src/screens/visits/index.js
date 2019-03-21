@@ -28,7 +28,7 @@ class ManageVisitsScreen extends React.Component {
     return (
       <View style={tabViewStyles.tabBar}>
         <View style={{ paddingTop: 24, paddingBottom: 16, paddingLeft: 16 }}>
-          <StyledText fontSize={28} fontFamily="Flama-Medium" lineHeight={36}>
+          <StyledText fontSize={28} fontFamily="FlamaMedium" lineHeight={36}>
             Manage Visits
           </StyledText>
         </View>
@@ -60,7 +60,7 @@ class ManageVisitsScreen extends React.Component {
                   style={{
                     color: active ? color : colors.MIDGREY,
                     fontSize: 14,
-                    fontFamily: active ? "Flama-Medium" : "Flama-Basic"
+                    fontFamily: active ? "FlamaMedium" : "Flama"
                   }}
                 >
                   {route.title}

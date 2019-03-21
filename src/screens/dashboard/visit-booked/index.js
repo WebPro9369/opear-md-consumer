@@ -58,7 +58,7 @@ class VisitBookedScreen extends React.Component {
         </View> */}
         <View style={{ marginTop: 44 }}>
           <ContentWrapper>
-            <StyledText fontFamily="Flama-Medium" fontSize={28} lineHeight={40}>
+            <StyledText fontFamily="FlamaMedium" fontSize={28} lineHeight={40}>
               {username}
               {", your visit has been booked!"}
             </StyledText>

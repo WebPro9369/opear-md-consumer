@@ -68,7 +68,7 @@ class SelectProviderScreen extends React.Component {
           />
         </View>
         <ContentWrapper>
-          <StyledText fontFamily="Flama-Medium" fontSize={28} lineHeight={40}>
+          <StyledText fontFamily="FlamaMedium" fontSize={28} lineHeight={40}>
             Select provider
           </StyledText>
         </ContentWrapper>

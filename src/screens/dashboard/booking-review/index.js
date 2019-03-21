@@ -72,11 +72,11 @@ class BookingReviewScreen extends React.Component {
         </View>
         <ScrollView padding={0}>
           <ContentWrapper>
-            <StyledText fontFamily="Flama-Medium" fontSize={28} lineHeight={40}>
+            <StyledText fontFamily="FlamaMedium" fontSize={28} lineHeight={40}>
               Visit review:
             </StyledText>
             <StyledText
-              fontFamily="Flama-Medium"
+              fontFamily="FlamaMedium"
               fontSize={28}
               color={colors.TEXT_GREEN}
               lineHeight={40}
@@ -89,7 +89,7 @@ class BookingReviewScreen extends React.Component {
               <FlexView>
                 <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
-                  fontFamily="Flama-Basic"
+                  fontFamily="Flama"
                   fontSize={16}
                   style={{ marginLeft: 12 }}
                 >
@@ -102,7 +102,7 @@ class BookingReviewScreen extends React.Component {
               <FlexView>
                 <EvilIcons name="location" size={40} color={colors.BLACK60} />
                 <StyledText
-                  fontFamily="Flama-Basic"
+                  fontFamily="Flama"
                   fontSize={16}
                   style={{ marginLeft: 12 }}
                 >
@@ -119,7 +119,7 @@ class BookingReviewScreen extends React.Component {
                   color={colors.BLACK60}
                 />
                 <StyledText
-                  fontFamily="Flama-Basic"
+                  fontFamily="Flama"
                   fontSize={16}
                   style={{ marginLeft: 12 }}
                 >
@@ -149,7 +149,7 @@ class BookingReviewScreen extends React.Component {
               <View style={{ flex: 1, marginLeft: 4 }}>
                 <ContentButton>
                   <StyledText
-                    fontFamily="Flama-Medium"
+                    fontFamily="FlamaMedium"
                     fontSize={20}
                     color={colors.MIDGREY}
                   >

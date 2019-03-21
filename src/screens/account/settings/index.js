@@ -107,7 +107,7 @@ class SettingsScreen extends React.Component {
           </View>
           <View>
             <StyledText
-              fontFamily="Flama-Medium"
+              fontFamily="FlamaMedium"
               fontSize={24}
               style={{ paddingTop: 24, paddingBottom: 16 }}
             >
@@ -117,14 +117,14 @@ class SettingsScreen extends React.Component {
               <FlexView>
                 <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
-                  fontFamily="Flama-Basic"
+                  fontFamily="Flama"
                   fontSize={16}
                   style={{ marginLeft: 12 }}
                 >
                   Benjamin
                 </StyledText>
               </FlexView>
-              <StyledText fontFamily="Flama-Basic" fontSize={16}>
+              <StyledText fontFamily="Flama" fontSize={16}>
                 6 yrs
               </StyledText>
             </ContentButton>
@@ -132,14 +132,14 @@ class SettingsScreen extends React.Component {
               <FlexView>
                 <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
-                  fontFamily="Flama-Basic"
+                  fontFamily="Flama"
                   fontSize={16}
                   style={{ marginLeft: 12 }}
                 >
                   Audrey
                 </StyledText>
               </FlexView>
-              <StyledText fontFamily="Flama-Basic" fontSize={16}>
+              <StyledText fontFamily="Flama" fontSize={16}>
                 8 yrs
               </StyledText>
             </ContentButton>
@@ -147,14 +147,14 @@ class SettingsScreen extends React.Component {
               <FlexView>
                 <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
-                  fontFamily="Flama-Basic"
+                  fontFamily="Flama"
                   fontSize={16}
                   style={{ marginLeft: 12 }}
                 >
                   Tara
                 </StyledText>
               </FlexView>
-              <StyledText fontFamily="Flama-Basic" fontSize={16}>
+              <StyledText fontFamily="Flama" fontSize={16}>
                 12 yrs
               </StyledText>
             </ContentButton>

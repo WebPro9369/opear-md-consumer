@@ -40,7 +40,7 @@ export const DateCircle = ({ day, date, selected, ...rest }) => (
     <StyledText
       fontSize={14}
       lineHeight={24}
-      fontFamily="Flama-Medium"
+      fontFamily="FlamaMedium"
       color={selected ? colors.WHITE : colors.BLACK87}
     >
       {day}
@@ -96,7 +96,7 @@ export const TimeSelector = ({ start, end, selected, onConfirm, ...rest }) => (
     <StyledText
       fontSize={16}
       color={selected ? colors.WHITE : colors.BLACK87}
-      fontFamily={selected ? "Flama-Medium" : "Flama-Basic"}
+      fontFamily={selected ? "FlamaMedium" : "Flama"}
     >
       {start >= 12 ? `${start - 12 || 12}pm` : `${start || 12}am`}
       {" - "}
@@ -104,11 +104,7 @@ export const TimeSelector = ({ start, end, selected, onConfirm, ...rest }) => (
     </StyledText>
     {selected ? (
       <ConfirmButton onPress={onConfirm}>
-        <StyledText
-          fontSize={16}
-          fontFamily="Flama-Medium"
-          color={colors.WHITE}
-        >
+        <StyledText fontSize={16} fontFamily="FlamaMedium" color={colors.WHITE}>
           CONFIRM
         </StyledText>
       </ConfirmButton>

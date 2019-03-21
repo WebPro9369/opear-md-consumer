@@ -97,7 +97,7 @@ class PaymentScreen extends React.Component {
                     marginRight: 24
                   }}
                 />
-                <StyledText fontFamily="Flama-Medium" fontSize={16}>
+                <StyledText fontFamily="FlamaMedium" fontSize={16}>
                   Add payment method
                 </StyledText>
               </FlexView>

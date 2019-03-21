@@ -59,7 +59,7 @@ class DashboardScreen extends React.Component {
           <NavHeader title="" size="medium" hasBackButton={false} />
         </HeaderWrapper>
         <ContentWrapper>
-          <StyledText fontSize={28} fontFamily="Flama-Medium">
+          <StyledText fontSize={28} fontFamily="FlamaMedium">
             {"Hi, "}
             {user.name}
             {"!"}

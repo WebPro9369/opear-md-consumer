@@ -48,7 +48,7 @@ class PickChildScreen extends React.Component {
         <View>
           <View style={{ paddingLeft: 16, paddingRight: 16 }}>
             <StyledText
-              fontFamily="Flama-Medium"
+              fontFamily="FlamaMedium"
               fontSize={28}
               color={colors.BLACK87}
               lineHeight={30}
@@ -104,7 +104,7 @@ class PickChildScreen extends React.Component {
                       marginRight: 24
                     }}
                   />
-                  <StyledText fontFamily="Flama-Medium" fontSize={16}>
+                  <StyledText fontFamily="FlamaMedium" fontSize={16}>
                     Add child
                   </StyledText>
                 </FlexView>

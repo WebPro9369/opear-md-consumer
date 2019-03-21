@@ -89,7 +89,7 @@ class BookingReceiptScreen extends React.Component {
           <ContentWrapper>
             <FlexView justifyContent="center">
               <StyledText
-                fontFamily="Flama-Medium"
+                fontFamily="FlamaMedium"
                 fontSize={28}
                 lineHeight={40}
                 color={colors.BLACK87}
@@ -97,7 +97,7 @@ class BookingReceiptScreen extends React.Component {
                 {"Visit receipt: "}
               </StyledText>
               <StyledText
-                fontFamily="Flama-Medium"
+                fontFamily="FlamaMedium"
                 fontSize={28}
                 lineHeight={40}
                 color={colors.TEXT_GREEN}
@@ -190,7 +190,7 @@ class BookingReceiptScreen extends React.Component {
               </FlexView>
               <FlexView>
                 <StyledText
-                  fontFamily="Flama-Medium"
+                  fontFamily="FlamaMedium"
                   style={{ marginRight: 20 }}
                 >
                   {price}

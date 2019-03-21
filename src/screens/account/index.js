@@ -36,7 +36,7 @@ class AccountScreen extends React.Component {
             <Avatar rounded size={80} source={imgDoctor} />
             <View style={{ paddingLeft: 20 }}>
               <StyledText fontSize={16}>Michael Brown</StyledText>
-              <StyledText fontSize={16} fontFamily="Flama-Light">
+              <StyledText fontSize={16} fontFamily="FlamaLight">
                 {email}
               </StyledText>
             </View>
