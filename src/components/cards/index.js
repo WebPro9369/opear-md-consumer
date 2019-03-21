@@ -31,7 +31,7 @@ export const ProviderCard = ({
         <View style={{ paddingLeft: 20 }}>
           <StyledText
             fontSize={16}
-            fontFamily="Flama-Medium"
+            fontFamily="FlamaMedium"
             color={colors.BLACK87}
           >
             {name}
@@ -59,7 +59,7 @@ export const ProviderCard = ({
       >
         <AntDesign name="star" color={colors.DARKYELLOW} size={12} />
         <StyledText
-          fontFamily="Flama-Medium"
+          fontFamily="FlamaMedium"
           fontSize={11}
           color={colors.DARKYELLOW}
           lineHeight={12}
@@ -142,7 +142,7 @@ export const ProviderStarsCard = ({
         <View style={{ paddingLeft: 20 }}>
           <StyledText
             fontSize={20}
-            fontFamily="Flama-Medium"
+            fontFamily="FlamaMedium"
             color={colors.BLACK87}
           >
             {name}
@@ -162,7 +162,7 @@ export const ProviderStarsCard = ({
       >
         <AntDesign name="star" color={colors.DARKYELLOW} size={12} />
         <StyledText
-          fontFamily="Flama-Medium"
+          fontFamily="FlamaMedium"
           fontSize={11}
           color={colors.DARKYELLOW}
           lineHeight={12}
@@ -225,15 +225,11 @@ export const ChildCard = ({ name, age, selected, avatarImg, ...rest }) => (
   <ChildCardWrapper selected={selected} {...rest}>
     <FlexView justifyContent="start">
       <Avatar rounded size={40} source={avatarImg} />
-      <StyledText
-        fontFamily="Flama-Basic"
-        fontSize={16}
-        style={{ marginLeft: 12 }}
-      >
+      <StyledText fontFamily="Flama" fontSize={16} style={{ marginLeft: 12 }}>
         {name}
       </StyledText>
     </FlexView>
-    <StyledText fontFamily="Flama-Basic" fontSize={16}>
+    <StyledText fontFamily="Flama" fontSize={16}>
       {age}
       {" yrs"}
     </StyledText>
@@ -265,7 +261,7 @@ export const VisitDetailCard = ({
       <View style={{ marginLeft: 20 }}>
         <StyledText
           fontSize={14}
-          fontFamily="Flama-Medium"
+          fontFamily="FlamaMedium"
           lineHeight={18}
           color={colors.BLACK87}
         >
@@ -279,7 +275,7 @@ export const VisitDetailCard = ({
     <View style={{ display: "flex", alignItems: "center" }}>
       <StyledText
         fontSize={16}
-        fontFamily="Flama-Medium"
+        fontFamily="FlamaMedium"
         lineHeight={24}
         color={colors.BLACK60}
       >

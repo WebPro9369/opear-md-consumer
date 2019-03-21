@@ -20,14 +20,14 @@ export const TouchableButtonWrapper = styled.TouchableOpacity`
 `;
 
 export const Label = styled.Text`
-  font-family: "Flama-Medium";
+  font-family: "FlamaMedium";
   font-size: 14px;
   color: rgba(0, 0, 0, 0.6);
 `;
 
 export const ServiceText = styled.Text`
   color: ${colors.BLACK};
-  font-family: "Flama-Basic";
+  font-family: "Flama";
   font-size: 20px;
   line-height: 24px;
   text-align: left;
