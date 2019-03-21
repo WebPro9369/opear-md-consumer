@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar } from "react-native-elements";
-import { FontAwesome } from "@expo/vector-icons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { StyledText } from "../../../components/text";
 import { InputButton } from "../../../components/input-button";
 import { NavHeader } from "../../../components/nav-header";

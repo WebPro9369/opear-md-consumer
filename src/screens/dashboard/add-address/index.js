@@ -1,5 +1,5 @@
 import React from "react";
-import { MapView } from "expo";
+import MapView from "react-native-maps";
 import { View } from "react-native";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";

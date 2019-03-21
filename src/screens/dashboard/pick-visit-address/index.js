@@ -1,6 +1,7 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { AntDesign, EvilIcons } from "@expo/vector-icons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View, FlexView } from "../../../components/views";

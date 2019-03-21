@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Avatar } from "react-native-elements";
-import {
-  AntDesign,
-  MaterialIcons,
-  EvilIcons,
-  FontAwesome
-} from "@expo/vector-icons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { View } from "react-native";
 import { inject, observer } from "mobx-react";
 import { StyledText } from "../../../components/text";
