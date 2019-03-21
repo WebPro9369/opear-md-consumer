@@ -1,27 +1,27 @@
 import React from "react";
-import styled from "styled-components/native";
-import { AppLoading, SplashScreen, Font } from "expo";
+// import styled from "styled-components/native";
+// import { AppLoading, SplashScreen, Font } from "expo";
 import { Provider, observer } from "mobx-react";
 import { mainStore } from "./src/store";
 import RootContainer from "./src/root-container";
-import { DEVICE_WIDTH, DEVICE_HEIGHT } from "./src/utils/constants";
+// import { DEVICE_WIDTH, DEVICE_HEIGHT } from "./src/utils/constants";
 
-const imgSplash = require("./assets/splash.png");
-const fontFlamaLight = require("./assets/fonts/FlamaLight_Regular.otf");
-const fontFlamaBasic = require("./assets/fonts/Flama_Regular.otf");
-const fontFlamaMedium = require("./assets/fonts/FlamaMedium_Regular.otf");
+// const imgSplash = require("./assets/splash.png");
+// const fontFlamaLight = require("./assets/fonts/FlamaLight_Regular.otf");
+// const fontFlamaBasic = require("./assets/fonts/Flama_Regular.otf");
+// const fontFlamaMedium = require("./assets/fonts/FlamaMedium_Regular.otf");
 
-const AppSplashWrapper = styled.View`
-  flex: 1;
-  width: ${DEVICE_WIDTH};
-  height: ${DEVICE_HEIGHT};
-`;
+// const AppSplashWrapper = styled.View`
+//   flex: 1;
+//   width: ${DEVICE_WIDTH};
+//   height: ${DEVICE_HEIGHT};
+// `;
 
-const SplashImage = styled.Image`
-  flex: 1;
-  width: ${DEVICE_WIDTH};
-  height: ${DEVICE_HEIGHT};
-`;
+// const SplashImage = styled.Image`
+//   flex: 1;
+//   width: ${DEVICE_WIDTH};
+//   height: ${DEVICE_HEIGHT};
+// `;
 
 @observer
 export default class App extends React.Component {
@@ -40,11 +40,11 @@ export default class App extends React.Component {
   componentWillMount() {}
 
   componentDidMount() {
-    Font.loadAsync({
-      "Flama-Light": fontFlamaLight,
-      "Flama-Basic": fontFlamaBasic,
-      "Flama-Medium": fontFlamaMedium
-    });
+    // Font.loadAsync({
+    //   "Flama-Light": fontFlamaLight,
+    //   "Flama-Basic": fontFlamaBasic,
+    //   "Flama-Medium": fontFlamaMedium
+    // });
   }
 
   componentWillReceiveProps() {}
@@ -65,26 +65,26 @@ export default class App extends React.Component {
 
   // eslint-disable-next-line class-methods-use-this
   onFinish() {
-    SplashScreen.hide();
+    // SplashScreen.hide();
   }
 
   render() {
-    if (mainStore.applicationStore.getSplashShowing() === false) {
-      return (
-        <Provider store={mainStore}>
-          <RootContainer />
-        </Provider>
-      );
-    }
+    // if (mainStore.applicationStore.getSplashShowing() === false) {
     return (
-      <AppSplashWrapper>
-        <AppLoading
-          startAsync={this.onStartAsync}
-          onError={this.onError}
-          onFinish={this.onFinish}
-        />
-        <SplashImage resizeMode="cover" source={imgSplash} />
-      </AppSplashWrapper>
+      <Provider store={mainStore}>
+        <RootContainer />
+      </Provider>
     );
+    // }
+    // return (
+    //   <AppSplashWrapper>
+    //     <AppLoading
+    //       startAsync={this.onStartAsync}
+    //       onError={this.onError}
+    //       onFinish={this.onFinish}
+    //     />
+    //     <SplashImage resizeMode="cover" source={imgSplash} />
+    //   </AppSplashWrapper>
+    // );
   }
 }
