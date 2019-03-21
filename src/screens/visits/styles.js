@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { StyleSheet } from "react-native";
-import { Constants } from "expo";
+// import { Constants } from "expo";
 import { colors } from "../../utils/constants";
 
 export const tabViewStyles = StyleSheet.create({
@@ -9,7 +9,7 @@ export const tabViewStyles = StyleSheet.create({
   },
   tabBar: {
     // flexDirection: "row",
-    paddingTop: Constants.statusBarHeight
+    paddingTop: 24
   },
   tabItem: {
     flex: 1,
