@@ -26,7 +26,6 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1975A1F00072494698293A3E /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B2D0B1E12F04DC8856AAAA3 /* Entypo.ttf */; };
-		2262C1A7CD5F4E0EBE343811 /* Flama-Basic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 06DB89B627D34F0BB2D2F0CB /* Flama-Basic.otf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -41,6 +40,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* opearTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* opearTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		34DFA998FB9B44DCB7B14FC6 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 941809608CD94F6ABD85F0FE /* Octicons.ttf */; };
+		3FD72F5A713F46E7850943DA /* Flama.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6A676253C7754668A8398222 /* Flama.otf */; };
+		41E9734C28CD49B69390B680 /* FlamaLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 06C051C73697429992900251 /* FlamaLight.otf */; };
 		44CC5538AB264ABCAC8B61AC /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7C41D5FF5B4447598297A69 /* libAirMaps.a */; };
 		44D054A0505948D793A3D9A4 /* libRNCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5AB5AD7329453481FA65EB /* libRNCardIO.a */; };
 		473956575F69468DAE7B0990 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 636A6A1BD6A9495D8478694F /* Foundation.ttf */; };
@@ -51,9 +52,7 @@
 		A094C1E24FA548C794CB5A26 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596643FEE0594CC2883BCF9F /* EvilIcons.ttf */; };
 		A0BE3E02A1B744B7B2A25A00 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22E49B16C8614B41849081E8 /* Ionicons.ttf */; };
 		A2814FBC130744D18FF6492D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C38F3AF522A4CC3856A8223 /* FontAwesome.ttf */; };
-		A341B80A0BE44C82AB880C1F /* Flama-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2C3B50B69504A69A2EAF51C /* Flama-Light.otf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		B34D2792E179429F88DAF913 /* Flama-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4BAF1199E9204745B1F2FF4E /* Flama-Medium.otf */; };
 		CF5FBA9AE3B84916AFE8E220 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7D9008CE91648F8BFB9F0A2 /* MaterialIcons.ttf */; };
 		D9BBAC7D15F64D71B787B776 /* libRNReanimated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57EAA8351C2F471BA89C8512 /* libRNReanimated.a */; };
 		DFC15C4984634E8FA272984F /* libRNVectorIcons-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289EE1B5FEDB45AF8CBE0F68 /* libRNVectorIcons-tvOS.a */; };
@@ -63,6 +62,7 @@
 		EA23B987944243D3BC31D455 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E59944011FF4BF89BCB0C41 /* Feather.ttf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
+		F35FECFF81AF4305B9D3C201 /* FlamaMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9A7A323A2034A4B8419A806 /* FlamaMedium.otf */; };
 		F96FBB1275974A4DA91D5168 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8615C17EB81A4F609BB99927 /* libRNGestureHandler.a */; };
 /* End PBXBuildFile section */
 
@@ -394,6 +394,7 @@
 		00E356EE1AD99517003FC87E /* opearTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = opearTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* opearTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = opearTests.m; sourceTree = "<group>"; };
+		06C051C73697429992900251 /* FlamaLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FlamaLight.otf; path = ../assets/fonts/FlamaLight.otf; sourceTree = "<group>"; };
 		06DB89B627D34F0BB2D2F0CB /* Flama-Basic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Flama-Basic.otf"; path = "../assets/fonts/Flama-Basic.otf"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		13941AB592D44CCFA9F58932 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -423,6 +424,7 @@
 		596643FEE0594CC2883BCF9F /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		636A6A1BD6A9495D8478694F /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		6A676253C7754668A8398222 /* Flama.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Flama.otf; path = ../assets/fonts/Flama.otf; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8615C17EB81A4F609BB99927 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 		E0E6273AFCFA48959E6678EF /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		E17BD4049EF2402CBB9D17BB /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		E7D9008CE91648F8BFB9F0A2 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		E9A7A323A2034A4B8419A806 /* FlamaMedium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FlamaMedium.otf; path = ../assets/fonts/FlamaMedium.otf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F2C3B50B69504A69A2EAF51C /* Flama-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Flama-Light.otf"; path = "../assets/fonts/Flama-Light.otf"; sourceTree = "<group>"; };
@@ -785,6 +788,9 @@
 				941809608CD94F6ABD85F0FE /* Octicons.ttf */,
 				5494BDCE521B499DB5443179 /* SimpleLineIcons.ttf */,
 				DB0C100AA7F54078983A29EB /* Zocial.ttf */,
+				6A676253C7754668A8398222 /* Flama.otf */,
+				06C051C73697429992900251 /* FlamaLight.otf */,
+				E9A7A323A2034A4B8419A806 /* FlamaMedium.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -884,7 +890,11 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = J6J45A6PA8;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = J6J45A6PA8;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1306,9 +1316,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				2262C1A7CD5F4E0EBE343811 /* Flama-Basic.otf in Resources */,
-				A341B80A0BE44C82AB880C1F /* Flama-Light.otf in Resources */,
-				B34D2792E179429F88DAF913 /* Flama-Medium.otf in Resources */,
 				E6116284BCE44C47A17DC1F2 /* AntDesign.ttf in Resources */,
 				1975A1F00072494698293A3E /* Entypo.ttf in Resources */,
 				A094C1E24FA548C794CB5A26 /* EvilIcons.ttf in Resources */,
@@ -1324,6 +1331,9 @@
 				34DFA998FB9B44DCB7B14FC6 /* Octicons.ttf in Resources */,
 				75B980BB8A1C4677902D9165 /* SimpleLineIcons.ttf in Resources */,
 				E7B7108554FA4EB0A3D1154B /* Zocial.ttf in Resources */,
+				3FD72F5A713F46E7850943DA /* Flama.otf in Resources */,
+				41E9734C28CD49B69390B680 /* FlamaLight.otf in Resources */,
+				F35FECFF81AF4305B9D3C201 /* FlamaMedium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1347,7 +1357,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -1357,11 +1367,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -1369,9 +1379,9 @@
 			name = "Bundle React Native Code And Images";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1442,6 +1452,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = J6J45A6PA8;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1481,6 +1492,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = J6J45A6PA8;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-awesome-card-io/ios/**",
@@ -1517,6 +1529,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = J6J45A6PA8;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-awesome-card-io/ios/**",
@@ -1543,6 +1556,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J6J45A6PA8;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-awesome-card-io/ios/**",
