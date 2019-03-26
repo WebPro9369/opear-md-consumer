@@ -1,42 +1,30 @@
 import React, { Component } from "react";
-import {
-  CardIOView,
-  CardIOModule,
-  CardIOUtilities
-} from "react-native-awesome-card-io";
-import { ContainerView, View, HeaderWrapper } from "../../../components/views";
-import { StyledText } from "../../../components/text";
+import { inject, observer, PropTypes } from "mobx-react";
+import { CardIOView, CardIOUtilities } from "react-native-awesome-card-io";
+import { ContainerView, HeaderWrapper } from "../../../components/views";
 import { NavHeader } from "../../../components/nav-header";
 
+@inject("store")
+@observer
 class ScanCardComponent extends Component {
+  static propTypes = {
+    store: PropTypes.observableObject.isRequired
+  };
+
   constructor(props) {
     super(props);
     CardIOUtilities.preload();
-    console.tron.log("CardIOUtilities preloaded");
   }
-
-  componentWillMount() {
-    // CardIOUtilities.preload();
-  }
-
-  scanCard = () => {
-    CardIOModule.scanCard()
-      .then(card => {
-        // the scanned card
-      })
-      .catch(() => {
-        // the user cancelled
-      });
-  };
 
   didScanCard = card => {
-    const {
-      navigation: { goBack }
-    } = this.props;
-
     // the scanned card
     console.tron.log("Card scanned: ", card);
-    goBack();
+    const {
+      navigation,
+      store: { userStore }
+    } = this.props;
+    userStore.setCardInfo(card);
+    navigation.goBack();
   };
 
   render() {
