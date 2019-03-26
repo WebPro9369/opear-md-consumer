@@ -1,6 +1,7 @@
 import { types } from "mobx-state-tree";
 import { ApplicationStore } from "./app";
 import { ProviderStore } from "./provider";
+import { UserStore } from "./user";
 
 const MainStore = types.model("MainStore", {
   applicationStore: types.optional(ApplicationStore, {
@@ -10,6 +11,19 @@ const MainStore = types.model("MainStore", {
     appointment: false,
     readyProviders: false,
     outstandingAppointment: true
+  }),
+  userStore: types.optional(UserStore, {
+    name: "Michael Brown",
+    email: "michaelbrown@gmail.com",
+    birthday: new Date("1970-01-01"),
+    cardInfo: {
+      cardNumber: "",
+      expiryYear: 0,
+      expiryMonth: 0,
+      cvv: "",
+      cardType: "",
+      fullName: ""
+    }
   })
 });
 
