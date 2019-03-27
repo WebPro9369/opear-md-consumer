@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { types } from "mobx-state-tree";
-import { TreeNode } from "../common";
 import { formatCardInfo } from "../../utils";
 
 export const UserStore = types
