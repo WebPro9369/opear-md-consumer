@@ -1,9 +1,10 @@
 import React from "react";
-// import styled from "styled-components/native";
-// import { AppLoading, SplashScreen, Font } from "expo";
+import { AppState, Platform } from "react-native";
 import { Provider, observer } from "mobx-react";
+import PushNotification from "react-native-push-notification";
 import { mainStore } from "./src/store";
 import RootContainer from "./src/root-container";
+import { TwilioService } from "./src/services";
 // import { DEVICE_WIDTH, DEVICE_HEIGHT } from "./src/utils/constants";
 
 // const imgSplash = require("./assets/splash.png");
@@ -40,18 +41,16 @@ export default class App extends React.Component {
   componentWillMount() {}
 
   componentDidMount() {
-    // Font.loadAsync({
-    //   "Flama-Light": fontFlamaLight,
-    //   "Flama-Basic": fontFlamaBasic,
-    //   "Flama-Medium": fontFlamaMedium
-    // });
+    AppState.addEventListener("change", this.handleAppStateChange);
   }
 
   componentWillReceiveProps() {}
 
   componentWillUpdate() {}
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    AppState.removeEventListener("change", this.handleAppStateChange);
+  }
 
   // eslint-disable-next-line class-methods-use-this
   onStartAsync() {
@@ -66,6 +65,33 @@ export default class App extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   onFinish() {
     // SplashScreen.hide();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  handleAppStateChange(appState) {
+    if (appState === "background") {
+      console.tron.log("Appstate changed: ", appState);
+      // let date = new Date(Date.now() + 10 * 1000);
+
+      TwilioService.sendNotification(
+        "Test Notification",
+        "This is a notification from my device!!!",
+        null,
+        "reo"
+      );
+
+      TwilioService.sendSMS("SMS Boby", null, "+19085008863");
+      TwilioService.makeCall(null, null, "+19085008863");
+
+      // if (Platform.OS === "ios") {
+      //   date = date.toISOString();
+      // }
+
+      // PushNotification.localNotificationSchedule({
+      //   message: "My Notification Message",
+      //   date
+      // });
+    }
   }
 
   render() {
