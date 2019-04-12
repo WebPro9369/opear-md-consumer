@@ -15,7 +15,7 @@ class EditPhoneNumberScreen extends React.Component {
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <NavHeader
-          title="Edit email"
+          title="Edit phone number"
           size="medium"
           hasBackButton
           onPressBackButton={() => goBack()}
