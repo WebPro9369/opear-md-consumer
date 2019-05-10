@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Image, View } from "react-native";
+import { Alert, Image, View } from "react-native";
+import TouchID from "react-native-touch-id";
 import { ServiceButton } from "../../../components/service-button";
 import { StyledText, StyledTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
@@ -22,10 +23,34 @@ class AskLocationScreen extends Component {
     });
   };
 
-  render() {
+  onSubmit = () => {
     const {
       navigation: { navigate }
     } = this.props;
+    return TouchID.isSupported()
+      .then(biometryType => {
+        console.tron.log("BiometryType: ", biometryType);
+        TouchID.authenticate()
+          .then(success => {
+            console.tron.log("TouchID Auth successful: ", success);
+            Alert.alert("Authenticated Successfully!");
+            navigate("NameCapture");
+          })
+          .catch(error => {
+            console.tron.log("TouchID auth failed: ", error);
+            if (error.name === "LAErrorTouchIDNotAvailable") {
+              return Alert.alert("TouchID is not supported.");
+            }
+            Alert.alert("Authentication failed.");
+          });
+      })
+      .catch(error => {
+        console.tron.log("TouchID not supported: ", error);
+        Alert.alert("TouchID is not supported.");
+      });
+  };
+
+  render() {
     const { zipcode } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
@@ -59,7 +84,7 @@ class AskLocationScreen extends Component {
           <ServiceButton
             title="Check Availability"
             style={{ marginBottom: 20 }}
-            onPress={() => navigate("NameCapture")}
+            onPress={this.onSubmit}
           />
         </View>
       </KeyboardAvoidingView>
