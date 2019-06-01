@@ -17,3 +17,9 @@ This project is based on [Expo](https://expo.io/) and uses [MobX](https://github
 * In the project root directory, run `yarn start` to start the local development server.
 * Then, you can either open a new terminal window and run `react-native run-ios` or you can open XCode and build the app.
 
+
+
+### Deploying
+1. Ensure you have Xcode's Workspace Settings set to "Legacy Build"
+2. Create archive…etc
+

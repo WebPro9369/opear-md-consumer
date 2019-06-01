@@ -27,27 +27,36 @@ class AskLocationScreen extends Component {
     const {
       navigation: { navigate }
     } = this.props;
-    return TouchID.isSupported()
-      .then(biometryType => {
-        console.tron.log("BiometryType: ", biometryType);
-        TouchID.authenticate()
-          .then(success => {
-            console.tron.log("TouchID Auth successful: ", success);
-            Alert.alert("Authenticated Successfully!");
-            navigate("NameCapture");
-          })
-          .catch(error => {
-            console.tron.log("TouchID auth failed: ", error);
-            if (error.name === "LAErrorTouchIDNotAvailable") {
-              return Alert.alert("TouchID is not supported.");
-            }
-            Alert.alert("Authentication failed.");
-          });
-      })
-      .catch(error => {
-        console.tron.log("TouchID not supported: ", error);
-        Alert.alert("TouchID is not supported.");
-      });
+
+    const optionalConfigObject = {
+      fallbackLabel: "Show Passcode", // iOS (if empty, then label is hidden)
+      unifiedErrors: false, // use unified error messages (default false)
+      passcodeFallback: true // iOS - allows the device to fall back to using the passcode, if faceid/touch is not available. this does not mean that if touchid/faceid fails the first few times it will revert to passcode, rather that if the former are not enrolled, then it will use the passcode.
+    };
+
+    navigate("NameCapture");
+    // TODO: Get TouchID working
+  //   return TouchID.isSupported(optionalConfigObject)
+  //     .then(biometryType => {
+  //       console.tron.log("BiometryType: ", biometryType);
+  //       TouchID.authenticate()
+  //         .then(success => {
+  //           console.tron.log("TouchID Auth successful: ", success);
+  //           Alert.alert("Authenticated Successfully!");
+  //           navigate("NameCapture");
+  //         })
+  //         .catch(error => {
+  //           console.tron.log("TouchID auth failed: ", error);
+  //           if (error.name === "LAErrorTouchIDNotAvailable") {
+  //             return Alert.alert("TouchID is not supported.");
+  //           }
+  //           Alert.alert("Authentication failed.");
+  //         });
+  //     })
+  //     .catch(error => {
+  //       console.tron.log("TouchID not supported: ", error);
+  //       Alert.alert("TouchID is not supported.");
+  //     });
   };
 
   render() {
