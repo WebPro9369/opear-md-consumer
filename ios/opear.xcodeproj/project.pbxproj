@@ -47,6 +47,7 @@
 		44D054A0505948D793A3D9A4 /* libRNCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5AB5AD7329453481FA65EB /* libRNCardIO.a */; };
 		473956575F69468DAE7B0990 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 636A6A1BD6A9495D8478694F /* Foundation.ttf */; };
 		4D80D47B71F346ECB9D4AAB5 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE423E204B5D41A18078659C /* FontAwesome5_Brands.ttf */; };
+		537402AB22A2EE8D00D5D49C /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 537402AA22A2EE8C00D5D49C /* main.jsbundle */; };
 		75B980BB8A1C4677902D9165 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5494BDCE521B499DB5443179 /* SimpleLineIcons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		840733CC228578A100A9535B /* libTouchID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 840733CB2285788D00A9535B /* libTouchID.a */; };
@@ -451,6 +452,7 @@
 		3C38F3AF522A4CC3856A8223 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		4AB706B5BD054DFBAF5F901A /* RNReanimated.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReanimated.xcodeproj; path = "../node_modules/react-native-reanimated/ios/RNReanimated.xcodeproj"; sourceTree = "<group>"; };
 		4BAF1199E9204745B1F2FF4E /* Flama-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Flama-Medium.otf"; path = "../assets/fonts/Flama-Medium.otf"; sourceTree = "<group>"; };
+		537402AA22A2EE8C00D5D49C /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		5494BDCE521B499DB5443179 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		57EAA8351C2F471BA89C8512 /* libRNReanimated.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNReanimated.a; sourceTree = "<group>"; };
 		596643FEE0594CC2883BCF9F /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				537402AA22A2EE8C00D5D49C /* main.jsbundle */,
 				13B07FAE1A68108700A75B9A /* opear */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* opearTests */,
@@ -963,7 +966,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = U524V9D5T3;
+						DevelopmentTeam = 9YPJMYZZXT;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1445,6 +1448,7 @@
 				07FE306A3802493BAD7269A4 /* FontAwesome5_Solid.ttf in Resources */,
 				473956575F69468DAE7B0990 /* Foundation.ttf in Resources */,
 				A0BE3E02A1B744B7B2A25A00 /* Ionicons.ttf in Resources */,
+				537402AB22A2EE8D00D5D49C /* main.jsbundle in Resources */,
 				993ADD9ACF3E4C5DA6B8D21F /* MaterialCommunityIcons.ttf in Resources */,
 				CF5FBA9AE3B84916AFE8E220 /* MaterialIcons.ttf in Resources */,
 				34DFA998FB9B44DCB7B14FC6 /* Octicons.ttf in Resources */,
@@ -1655,7 +1659,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = U524V9D5T3;
+				DEVELOPMENT_TEAM = 9YPJMYZZXT;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-awesome-card-io/ios/**",
@@ -1673,7 +1677,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.matter.opear-md-consumer";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.matter.opear-md-parent";
 				PRODUCT_NAME = opear;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1688,7 +1692,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = U524V9D5T3;
+				DEVELOPMENT_TEAM = 9YPJMYZZXT;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-awesome-card-io/ios/**",
@@ -1706,7 +1710,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.matter.opear-md-consumer";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.matter.opear-md-parent";
 				PRODUCT_NAME = opear;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
