@@ -4,19 +4,16 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { StyledText } from "../../../components/text";
 import { InputButton } from "../../../components/input-button";
 import { NavHeader } from "../../../components/nav-header";
-import { ContentButton } from "./styles";
 import {
   ContainerView,
   HeaderWrapper,
   ViewCentered,
-  View,
-  FlexView
+  View
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
 
 const { GREEN, MIDGREY } = colors;
-const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 const imgDoctor = require("../../../../assets/images/Doctor.png");
 
 class SettingsScreen extends React.Component {
@@ -104,60 +101,6 @@ class SettingsScreen extends React.Component {
                 onPress={() => navigate("SettingsEditPhoneNumber")}
               />
             </View>
-          </View>
-          <View>
-            <StyledText
-              fontFamily="FlamaMedium"
-              fontSize={24}
-              style={{ paddingTop: 24, paddingBottom: 16 }}
-            >
-              Edit Children
-            </StyledText>
-            <ContentButton>
-              <FlexView>
-                <Avatar rounded size={40} source={imgFoxLarge} />
-                <StyledText
-                  fontFamily="Flama"
-                  fontSize={16}
-                  style={{ marginLeft: 12 }}
-                >
-                  Benjamin
-                </StyledText>
-              </FlexView>
-              <StyledText fontFamily="Flama" fontSize={16}>
-                6 yrs
-              </StyledText>
-            </ContentButton>
-            <ContentButton>
-              <FlexView>
-                <Avatar rounded size={40} source={imgFoxLarge} />
-                <StyledText
-                  fontFamily="Flama"
-                  fontSize={16}
-                  style={{ marginLeft: 12 }}
-                >
-                  Audrey
-                </StyledText>
-              </FlexView>
-              <StyledText fontFamily="Flama" fontSize={16}>
-                8 yrs
-              </StyledText>
-            </ContentButton>
-            <ContentButton onPress={() => navigate("SettingsEditChild")}>
-              <FlexView>
-                <Avatar rounded size={40} source={imgFoxLarge} />
-                <StyledText
-                  fontFamily="Flama"
-                  fontSize={16}
-                  style={{ marginLeft: 12 }}
-                >
-                  Tara
-                </StyledText>
-              </FlexView>
-              <StyledText fontFamily="Flama" fontSize={16}>
-                12 yrs
-              </StyledText>
-            </ContentButton>
           </View>
         </ScrollView>
       </ContainerView>
