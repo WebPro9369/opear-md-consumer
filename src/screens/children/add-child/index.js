@@ -10,7 +10,7 @@ import {
   FormWrapper,
   ViewCentered
 } from "../../../components/views";
-import { ScrollView } from "../../../components/views/scroll-view";
+import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
@@ -64,7 +64,7 @@ class AddChildScreen extends React.Component {
             onPressBackButton={() => goBack()}
           />
         </HeaderWrapper>
-        <ScrollView>
+        <KeyboardScrollView>
           <ViewCentered>
             <Avatar
               rounded
@@ -155,7 +155,7 @@ class AddChildScreen extends React.Component {
           <FormInputWrapper style={{ marginBottom: 20 }}>
             <ServiceButton title="Add Child" onPress={() => goBack()} />
           </FormInputWrapper>
-        </ScrollView>
+        </KeyboardScrollView>
       </ContainerView>
     );
   }
