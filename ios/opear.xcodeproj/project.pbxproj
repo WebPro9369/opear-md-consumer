@@ -52,6 +52,7 @@
 		75B980BB8A1C4677902D9165 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5494BDCE521B499DB5443179 /* SimpleLineIcons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		840733CC228578A100A9535B /* libTouchID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 840733CB2285788D00A9535B /* libTouchID.a */; };
+		848B44EB22B6B7A500E9288C /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 848B44C222B6B79800E9288C /* libRCTLinking.a */; };
 		84B32AEE225B57D500F27AE0 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B32AEB225B57B800F27AE0 /* libRCTPushNotification.a */; };
 		993ADD9ACF3E4C5DA6B8D21F /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E17BD4049EF2402CBB9D17BB /* MaterialCommunityIcons.ttf */; };
 		A094C1E24FA548C794CB5A26 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596643FEE0594CC2883BCF9F /* EvilIcons.ttf */; };
@@ -324,6 +325,20 @@
 			remoteGlobalIDString = 134814201AA4EA6300B7C361;
 			remoteInfo = TouchID;
 		};
+		848B44C122B6B79800E9288C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 848B44B322B6B79800E9288C /* RCTLinking.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTLinking;
+		};
+		848B44C322B6B79800E9288C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 848B44B322B6B79800E9288C /* RCTLinking.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28471D9B043800D4039D;
+			remoteInfo = "RCTLinking-tvOS";
+		};
 		84B32AEA225B57B800F27AE0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 84B32AE5225B57B800F27AE0 /* RCTPushNotification.xcodeproj */;
@@ -464,6 +479,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		840733C62285788D00A9535B /* TouchID.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TouchID.xcodeproj; path = "../node_modules/react-native-touch-id/TouchID.xcodeproj"; sourceTree = "<group>"; };
+		848B44B322B6B79800E9288C /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		84B32AE5225B57B800F27AE0 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		84E2D906225E388A00DFD84D /* opear.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = opear.entitlements; path = opear/opear.entitlements; sourceTree = "<group>"; };
 		8615C17EB81A4F609BB99927 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
@@ -506,6 +522,7 @@
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
+				848B44EB22B6B7A500E9288C /* libRCTLinking.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
@@ -700,6 +717,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				848B44B322B6B79800E9288C /* RCTLinking.xcodeproj */,
 				840733C62285788D00A9535B /* TouchID.xcodeproj */,
 				84B32AE5225B57B800F27AE0 /* RCTPushNotification.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -774,6 +792,15 @@
 			isa = PBXGroup;
 			children = (
 				840733CB2285788D00A9535B /* libTouchID.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		848B44B422B6B79800E9288C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				848B44C222B6B79800E9288C /* libRCTLinking.a */,
+				848B44C422B6B79800E9288C /* libRCTLinking-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -965,7 +992,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = U524V9D5T3;
+						DevelopmentTeam = 9YPJMYZZXT;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -1027,6 +1054,10 @@
 				{
 					ProductGroup = 00C302BC1ABCB91800DB3ED1 /* Products */;
 					ProjectRef = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
+				},
+				{
+					ProductGroup = 848B44B422B6B79800E9288C /* Products */;
+					ProjectRef = 848B44B322B6B79800E9288C /* RCTLinking.xcodeproj */;
 				},
 				{
 					ProductGroup = 78C398B11ACF4ADC00677621 /* Products */;
@@ -1334,6 +1365,20 @@
 			remoteRef = 840733CA2285788D00A9535B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		848B44C222B6B79800E9288C /* libRCTLinking.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTLinking.a;
+			remoteRef = 848B44C122B6B79800E9288C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		848B44C422B6B79800E9288C /* libRCTLinking-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTLinking-tvOS.a";
+			remoteRef = 848B44C322B6B79800E9288C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		84B32AEB225B57B800F27AE0 /* libRCTPushNotification.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1579,7 +1624,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = U524V9D5T3;
+				DEVELOPMENT_TEAM = 9YPJMYZZXT;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1621,7 +1666,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = U524V9D5T3;
+				DEVELOPMENT_TEAM = 9YPJMYZZXT;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-awesome-card-io/ios/**",

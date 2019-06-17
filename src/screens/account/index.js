@@ -1,4 +1,5 @@
 import React from "react";
+import { Linking } from "react-native";
 import { Avatar, Badge } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { StyledText } from "../../components/text";
@@ -22,6 +23,10 @@ class AccountScreen extends React.Component {
       badges: ["Benjamin", "Tommy", "Audrey"]
     };
   }
+
+  openURL = url => {
+    return Linking.openURL(url);
+  };
 
   render() {
     const {
@@ -65,7 +70,9 @@ class AccountScreen extends React.Component {
             <ListButtonText>Payment</ListButtonText>
             <FontAwesome name="angle-right" color={colors.MIDGREY} size={24} />
           </ListTouchableButtonWrapper>
-          <ListTouchableButtonWrapper>
+          <ListTouchableButtonWrapper
+            onPress={() => this.openURL("mailto:help@opear.com")}
+          >
             <ListButtonText>Support</ListButtonText>
             <FontAwesome name="angle-right" color={colors.MIDGREY} size={24} />
           </ListTouchableButtonWrapper>
