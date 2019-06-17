@@ -44,9 +44,13 @@
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) scan card use</string>
 	<key>NSHumanReadableCopyright</key>
-	<string></string>
+  <string></string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>To get your current location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>To get your current location</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To set your user photo</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
