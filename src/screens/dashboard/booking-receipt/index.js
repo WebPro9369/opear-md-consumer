@@ -5,7 +5,6 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { ServiceButton } from "../../../components/service-button";
 import { StyledText, StyledTextInput } from "../../../components/text";
-// import { NavHeader } from "../../../components/nav-header";
 import { View, FlexView } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard, ProviderStarsCard } from "../../../components/cards";
@@ -71,20 +70,6 @@ class BookingReceiptScreen extends React.Component {
 
     return (
       <ScrollView padding={0} marginTop={24}>
-        {/* <View
-          style={{
-            paddingLeft: 16,
-            paddingRight: 16,
-            paddingTop: 0,
-            paddingBottom: 6
-          }}
-        >
-          <NavHeader
-            size="small"
-            hasBackButton
-            onPressBackButton={() => goBack()}
-          />
-        </View> */}
         <View style={{ marginTop: 16 }}>
           <ContentWrapper>
             <FlexView justifyContent="center">
@@ -121,9 +106,11 @@ class BookingReceiptScreen extends React.Component {
           </ContentWrapper>
           {starsEditable ? (
             <ContentWrapper style={{ paddingTop: 16, paddingBottom: 16 }}>
-              <StyledText fontSize={14}>
-                Why was your review unsatisfactory?
-              </StyledText>
+              {stars <= 3 && (
+                <StyledText fontSize={14}>
+                  Why was your review unsatisfactory?
+                </StyledText>
+              )}
               <StyledTextInput
                 fontSize={16}
                 lineHeight={20}
