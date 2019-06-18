@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { Alert, Image, View } from "react-native";
+import { inject, observer, PropTypes } from "mobx-react";
 import TouchID from "react-native-touch-id";
 import { ServiceButton } from "@components/service-button";
 import { StyledText, StyledTextInput } from "@components/text";
 import { NavHeader } from "@components/nav-header";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 
-const imgLocation = require("@assets/images/Location.png");
-const imgProgressbar = require("@assets/images/ProgressBar1.png");
+const imgLocation = require("../../../../assets/images/Location.png");
+const imgProgressbar = require("../../../../assets/images/ProgressBar1.png");
 
+@inject("store")
+@observer
 class AskLocationScreen extends Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,9 +24,9 @@ class AskLocationScreen extends Component {
     };
   }
 
-  handleInputChange = event => {
+  handleInputChange = text => {
     this.setState({
-      zipcode: event.target.value
+      zipcode: text
     });
   };
 
@@ -27,7 +34,7 @@ class AskLocationScreen extends Component {
     const {
       navigation: { navigate },
       store: {
-        UserStore: { address }
+        userStore: { address }
       }
     } = this.props;
     const { zipcode } = this.state;
@@ -88,7 +95,7 @@ class AskLocationScreen extends Component {
               autoFocus
               placeholder="Zip code"
               value={zipcode}
-              onChange={this.handleInputChange}
+              onChangeText={this.handleInputChange}
             />
             <Image source={imgLocation} />
           </View>

@@ -16,6 +16,7 @@ const MainStore = types.model("MainStore", {
     name: "Michael Brown",
     email: "michaelbrown@gmail.com",
     birthday: new Date("1970-01-01"),
+    phone: "7177776666",
     cardInfo: {
       cardNumber: "",
       expiryYear: 0,

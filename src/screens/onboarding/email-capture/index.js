@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import { Image, View } from "react-native";
-import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
-import { ServiceButton } from "../../../components/service-button";
-import { StyledText, StyledTextInput } from "../../../components/text";
-import { NavHeader } from "../../../components/nav-header";
+import { inject, observer, PropTypes } from "mobx-react";
+import { KeyboardAvoidingView } from "@components/views/keyboard-view";
+import { ServiceButton } from "@components/service-button";
+import { StyledText, StyledTextInput } from "@components/text";
+import { NavHeader } from "@components/nav-header";
 
 const imgProgressbar = require("../../../../assets/images/ProgressBar3.png");
 
+@inject("store")
+@observer
 class EmailCaptureScreen extends Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -15,10 +22,24 @@ class EmailCaptureScreen extends Component {
     };
   }
 
-  handleInputChange = event => {
+  handleInputChange = text => {
     this.setState({
-      email: event.target.value
+      email: text
     });
+  };
+
+  onSubmit = () => {
+    const {
+      navigation: { navigate },
+      store: {
+        userStore
+      }
+    } = this.props;
+    const { email } = this.state;
+
+    if (email) userStore.setEmail(email);
+    navigate("CreatePassword");
+
   };
 
   render() {
@@ -47,7 +68,7 @@ class EmailCaptureScreen extends Component {
               placeholder="Email"
               textContentType="emailAddress"
               value={email}
-              onChange={this.handleInputChange}
+              onChangeText={this.handleInputChange}
             />
           </View>
         </View>
@@ -56,7 +77,7 @@ class EmailCaptureScreen extends Component {
           <ServiceButton
             title="Next"
             style={{ marginBottom: 20 }}
-            onPress={() => navigate("CreatePassword")}
+            onPress={this.onSubmit}
           />
         </View>
       </KeyboardAvoidingView>

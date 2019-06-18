@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import { Image, View } from "react-native";
-import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
-import { ServiceButton } from "../../../components/service-button";
-import { StyledText, StyledTextInput } from "../../../components/text";
-import { NavHeader } from "../../../components/nav-header";
+import { inject, observer, PropTypes } from "mobx-react";
+import { KeyboardAvoidingView } from "@components/views/keyboard-view";
+import { ServiceButton } from "@components/service-button";
+import { StyledText, StyledTextInput } from "@components/text";
+import { NavHeader } from "@components/nav-header";
 
 const imgProgressbar = require("../../../../assets/images/ProgressBar2.png");
 
+@inject("store")
+@observer
 class NameCaptureScreen extends Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -15,10 +22,25 @@ class NameCaptureScreen extends Component {
     };
   }
 
-  handleInputChange = event => {
+  handleInputChange = text => {
     this.setState({
-      name: event.target.value
+      name: text
     });
+  };
+
+  onSubmit = () => {
+    const {
+      navigation: { navigate },
+      store: {
+        userStore
+      }
+    } = this.props;
+    const { name } = this.state;
+    console.tron.log(name);
+    userStore.setName(name);
+
+    navigate("EmailCapture");
+
   };
 
   render() {
@@ -47,7 +69,7 @@ class NameCaptureScreen extends Component {
               autoFocus
               placeholder="Full name"
               value={name}
-              onChange={this.handleInputChange}
+              onChangeText={this.handleInputChange}
             />
           </View>
         </View>
@@ -56,7 +78,7 @@ class NameCaptureScreen extends Component {
           <ServiceButton
             title="Next"
             style={{ marginBottom: 20 }}
-            onPress={() => navigate("EmailCapture")}
+            onPress={this.onSubmit}
           />
         </View>
       </KeyboardAvoidingView>
