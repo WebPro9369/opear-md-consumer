@@ -44,7 +44,8 @@ FormTextInput.propTypes = {
   value: PropTypes.string,
   leftIcon: PropTypes.element,
   rightIcon: PropTypes.element,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  onChangeText: PropTypes.func
 };
 
 FormTextInput.defaultProps = {
@@ -52,7 +53,8 @@ FormTextInput.defaultProps = {
   value: null,
   leftIcon: null,
   rightIcon: null,
-  placeholder: ""
+  placeholder: "",
+  onChangeText: () => {}
 };
 
 export { StyledText, StyledTextInput, FormTextInput };
