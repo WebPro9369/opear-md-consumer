@@ -5,6 +5,8 @@ import AddressStore from "@store/address";
 
 export const UserStore = types
   .model("UserStore", {
+    id: types.number,
+    apiKey: types.string,
     name: types.string,
     email: types.string,
     password: types.optional(types.string, ''),
@@ -31,10 +33,17 @@ export const UserStore = types
     })
   })
   .actions(self => ({
+    setID(value) {
+      self.id = value;
+    },
+    setAPIKey(value) {
+      sel.apiKey = value;
+    },
+    setAuthentication({ id, apiKey}) {
+      self.setID(id).setAPIKey(apiKey);
+    },
     setName(value) {
-      console.tron.log(value);
       self.name = value;
-      console.tron.log(self.name);
     },
     setEmail(value) {
       self.email = value;

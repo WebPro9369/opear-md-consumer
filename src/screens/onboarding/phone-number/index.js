@@ -5,6 +5,7 @@ import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 import { ServiceButton } from "@components/service-button";
 import { StyledText, StyledTextInput } from "@components/text";
 import { NavHeader } from "@components/nav-header";
+import { registerParent } from "@services/opear-api";
 
 const imgProgressbar = require("../../../../assets/images/ProgressBar5.png");
 
@@ -39,9 +40,34 @@ class PhoneNumberScreen extends Component {
 
     if (phone) userStore.setPhone(phone);
 
-    //TODO: register user here?
+    const {
+      name,
+      email,
+      password,
+      address: {zip_code}
+    } = userStore;
 
-    console.tron.log(userStore);
+    const data = {
+      parent: {
+        name,
+        email,
+        password,
+        phone,
+        zip: zip_code
+      }
+    };
+
+    const successHandler = response => {
+      const { id, api_key: apiKey } = response.data;
+
+      userStore.setAuthentication({ id, apiKey });
+
+    };
+
+    // eslint-disable-next-line prettier/prettier
+    const errorHandler = () => Alert.alert("Registration failed. Please ensure your information is correct, or contact help@opear.com.");
+
+    registerParent(data, { successHandler, errorHandler });
 
     navigate("Tabs");
 

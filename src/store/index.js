@@ -13,6 +13,8 @@ const MainStore = types.model("MainStore", {
     outstandingAppointment: true
   }),
   userStore: types.optional(UserStore, {
+    id: 0,
+    apiKey: "",
     name: "Michael Brown",
     email: "michaelbrown@gmail.com",
     birthday: new Date("1970-01-01"),

@@ -36,7 +36,6 @@ class NameCaptureScreen extends Component {
       }
     } = this.props;
     const { name } = this.state;
-    console.tron.log(name);
     userStore.setName(name);
 
     navigate("EmailCapture");

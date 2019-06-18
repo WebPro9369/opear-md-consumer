@@ -14,6 +14,7 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
+import { updateParent } from "@services/opear-api"
 
 const AddCardScreen = ({
   navigation: { goBack, navigate },
@@ -22,6 +23,26 @@ const AddCardScreen = ({
   const {
     cardInfo: { cardNumber, expiryYear, expiryMonth, cvv, fullName }
   } = userStore;
+
+  const data = {
+    parent: {
+      cardInfo: userStore.cardInfo
+    }
+  }
+
+  console.tron.log(data);
+
+  onSubmit = () => {
+
+    const successHandler = () => {
+      userStore.setCardInfo(cardInfo);
+      goBack();
+    };
+
+    updateParent(userStore.id,data,{ successHandler});
+
+  }
+
   return (
     <KeyboardAvoidingView behavior="padding" enabled>
       <NavHeader
@@ -84,7 +105,7 @@ const AddCardScreen = ({
           />
         </FormInputView>
       </FormWrapper>
-      <ServiceButton title="Add Card" onPress={() => goBack()} />
+      <ServiceButton title="Add Card" onPress={() => onSubmit()} />
     </KeyboardAvoidingView>
   );
 };
