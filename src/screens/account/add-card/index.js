@@ -27,10 +27,16 @@ class AddCardScreen extends React.Component {
   constructor(props) {
     super(props);
     
+    const {
+      navigation: { 
+        state: { params }
+      }
+    } = this.props;
+
     this.state = {
       loading: false,
-      isEditing: this.props.navigation.state.params.last4,
-      last4: this.props.navigation.state.params.last4
+      isEditing: params && params.last4 && params.last4.length == 4,
+      last4: params && params.last4
     };
   }
 
@@ -89,8 +95,10 @@ class AddCardScreen extends React.Component {
     } = this.props;
 
     const {
-      cardInfo: { cardNumber, expiryYear, expiryMonth, cvv, fullName }
+      cardInfo
     } = cardStore;
+
+    const { cardNumber, expiryYear, expiryMonth, cvv, fullName } = cardInfo;
 
     const { loading, isEditing, last4 } = this.state;
     return (
@@ -120,7 +128,7 @@ class AddCardScreen extends React.Component {
                   : "1234 5678 3456 2456"
               }
               onChangeText={value =>
-                cardStore.setCardInfo({ cardNumber: value })
+                cardStore.setCardInfo({ ...cardInfo, cardNumber: value })
               }
               leftIcon={
                 <FontAwesome name="cc-visa" size={30} color={colors.BLUE} />
@@ -143,7 +151,7 @@ class AddCardScreen extends React.Component {
                 label="Exp. Month"
                 value={expiryMonth}
                 onChangeText={value =>
-                  cardStore.setCardInfo({ expiryMonth: value })
+                  cardStore.setCardInfo({ ...cardInfo, expiryMonth: value })
                 }
                 placeholder="##"
                 style={{
@@ -155,7 +163,7 @@ class AddCardScreen extends React.Component {
                 label="Exp. Year"
                 value={expiryYear}
                 onChangeText={value =>
-                  cardStore.setCardInfo({ expiryYear: value })
+                  cardStore.setCardInfo({ ...cardInfo, expiryYear: value })
                 }
                 placeholder="##"
                 style={{
@@ -167,7 +175,7 @@ class AddCardScreen extends React.Component {
                 label="CVV"
                 value={cvv}
                 placeholder="###"
-                onChangeText={value => cardStore.setCardInfo({ cvv: value })}
+                onChangeText={value => cardStore.setCardInfo({ ...cardInfo, cvv: value })}
                 style={{
                   width: 120
                 }}
@@ -178,13 +186,13 @@ class AddCardScreen extends React.Component {
             <FormTextInput
               label="Full Name"
               value={fullName}
-              onChangeText={value => cardStore.setCardInfo({ fullName: value })}
+              onChangeText={value => cardStore.setCardInfo({ ...cardInfo, fullName: value })}
               placeholder="Full Name"
             />
           </FormInputView>
         </FormWrapper>
         <ServiceButton
-          title={isEditing ? "Save Card" :  "Edit Card"}
+          title={!isEditing ? "Save Card" : "Edit Card"}
           onPress={async () => {
             await this.saveCardHandler();
           }}

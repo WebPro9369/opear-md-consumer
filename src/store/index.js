@@ -26,7 +26,9 @@ const MainStore = types.model("MainStore", {
   currentUserStore: types.optional(UserStore, {
     id: 0,
     apiKey: "",
-    name: "",
+    firstName: "",
+    lastName: "",
+    zip: "",
     email: "",
     phone: "",
     birthday: new Date("1970-01-01"),

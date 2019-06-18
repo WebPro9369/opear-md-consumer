@@ -51,7 +51,7 @@ export const UserStore = types
       return self;
     },
     setZip(value) {
-      self.zip = zip;
+      self.zip = value;
       return self;
     },
     setEmail(value) {

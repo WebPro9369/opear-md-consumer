@@ -79,7 +79,7 @@ class PaymentScreen extends React.Component {
           {loading && (
             <ActivityIndicator size="small" color={colors.SEAFOAMBLUE} />
           )}
-          {!loading && payment_accounts.length && (
+          {!loading && payment_accounts && payment_accounts.length > 0 && (
             <View style={{ paddingTop: 16, paddingBottom: 16 }}>
               {payment_accounts.map(pm => {
                 return (

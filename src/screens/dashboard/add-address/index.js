@@ -6,10 +6,12 @@ import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
 import {
   ContainerView,
+  HeaderWrapper,
   FormInputWrapper,
   FormWrapper
 } from "../../../components/views";
-import { ScrollView } from "../../../components/views/scroll-view";
+
+import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 
 class AddAddressScreen extends React.Component {
   constructor(props) {
@@ -35,22 +37,15 @@ class AddAddressScreen extends React.Component {
     const { locationName, street, city, zip, map } = this.state;
     return (
       <ContainerView>
-        <View
-          style={{
-            paddingTop: 16,
-            paddingLeft: 16,
-            paddingRight: 16,
-            paddingBottom: 6
-          }}
-        >
+        <HeaderWrapper>
           <NavHeader
             title="Add address"
             size="medium"
             hasBackButton
             onPressBackButton={() => goBack()}
           />
-        </View>
-        <ScrollView padding={0}>
+        </HeaderWrapper>
+        <KeyboardScrollView padding={0}>
           <MapView
             style={{ alignSelf: "stretch", height: 200 }}
             initialRegion={map}
@@ -82,7 +77,7 @@ class AddAddressScreen extends React.Component {
               <ServiceButton title="Add Address" onPress={() => goBack()} />
             </View>
           </FormInputWrapper>
-        </ScrollView>
+        </KeyboardScrollView>
       </ContainerView>
     );
   }

@@ -14,6 +14,7 @@ const FormTextInput = ({
   leftIcon,
   rightIcon,
   placeholder,
+  onChangeText,
   ...rest
 }) => (
   <Wrapper {...rest}>
@@ -29,6 +30,7 @@ const FormTextInput = ({
           placeholder={placeholder}
           fontSize={20}
           lineHeight={24}
+          onChangeText={onChangeText}
           value={value}
         />
       </LeftFlexView>

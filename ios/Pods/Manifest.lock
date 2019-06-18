@@ -1,16 +1,37 @@
 PODS:
+  - React (0.59.1):
+    - React/Core (= 0.59.1)
+  - React/Core (0.59.1):
+    - yoga (= 0.59.1.React)
+  - RNKeychain (3.1.3):
+    - React
   - Stripe (14.0.0)
+  - yoga (0.59.1.React)
 
 DEPENDENCIES:
+  - React (from `../node_modules/react-native`)
+  - RNKeychain (from `../node_modules/react-native-keychain`)
   - Stripe (~> 14.0.0)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Stripe
 
-SPEC CHECKSUMS:
-  Stripe: db29ad197c74aca6fb981e4e8355cf7ebd0fca5a
+EXTERNAL SOURCES:
+  React:
+    :path: "../node_modules/react-native"
+  RNKeychain:
+    :path: "../node_modules/react-native-keychain"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga"
 
-PODFILE CHECKSUM: a0548bfefe1bbbb58ecd70841ed8dbaa9f5d3782
+SPEC CHECKSUMS:
+  React: 1d605e098d69bdf08960787f3446f0a9dc2e2ccf
+  RNKeychain: 5381e340056c23de103d73ae59cbddc6ffc21d97
+  Stripe: db29ad197c74aca6fb981e4e8355cf7ebd0fca5a
+  yoga: 128daf064cacaede0c3bb27424b6b4c71052e6cd
+
+PODFILE CHECKSUM: 402018bc08cd4d8a283158f34bffdf4dccb9742e
 
 COCOAPODS: 1.5.3
