@@ -136,10 +136,6 @@ class AddChildScreen extends React.Component {
         }
       }
 
-      const parentData = {
-        parent: userStore.children
-      }
-
       updateParent(userStore.id, parentData);
       goBack();
     };
