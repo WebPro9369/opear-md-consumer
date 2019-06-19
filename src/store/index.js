@@ -29,9 +29,15 @@ const MainStore = types.model("MainStore", {
       { id: 2, name: "Audrey", age: 8, avatarImg: "imgFox"},
       { id: 3, name: "Tara", age: 12, avatarImg: "imgTiger"}
     ],
+    visitAddresses:[
+      { id: 1, name: "Place", address: "123 street"},
+      { id: 2, name: "My House", address: "123 road"},
+      { id: 3, name: "Mom's House", address: "123 avenue"}
+    ],
     visitRequest: {
       symptoms: [""],
-      pickedChild: 0
+      pickedChild: 0,
+      pickedAddress: 0
     },
     cardInfo: {
       cardNumber: "",

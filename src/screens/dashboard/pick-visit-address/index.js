@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
@@ -8,17 +9,49 @@ import { ContainerView, View, FlexView } from "../../../components/views";
 import { ContentButton } from "./styles";
 import { colors } from "../../../utils/constants";
 
+@inject("store")
+@observer
 class PickVisitAddressScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
+
+    const {
+      store: {
+        userStore: {
+          visitAddresses,
+          visitRequest: {
+            pickedAddress
+          }
+        }
+      }
+    } = props;
+
     this.state = {
-      visitAddresses: [
-        { id: "1", name: "Home", address: "22341 Prospect Ave #23" },
-        { id: "2", name: "Work", address: "18 Mission St" },
-        { id: "3", name: "Dad's", address: "23 Santa St Apt 730" }
-      ]
+      pickedAddress: null,
+      visitAddresses
     };
   }
+
+  onSubmit = addressID => {
+    const {
+      navigation: { navigate },
+      store: {
+        userStore
+      }
+    } = this.props;
+
+      const { pickedAddress } = this.state;
+
+      userStore.setVisitRequestPickedAddress(addressID);
+
+      console.tron.log(userStore);
+
+      navigate("DashboardSelectDateTime")
+  };
 
   render() {
     const {
@@ -64,7 +97,7 @@ class PickVisitAddressScreen extends React.Component {
             {visitAddresses.map(address => (
               <ContentButton
                 key={address.id}
-                onPress={() => navigate("DashboardSelectDateTime")}
+                onPress={this.onSubmit(address.id)}
               >
                 <FlexView justifyContent="start">
                   <EvilIcons
