@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, Badge } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { StyledText } from "../../components/text";
@@ -14,20 +15,39 @@ import { colors } from "../../utils/constants";
 
 const imgDoctor = require("../../../assets/images/Doctor.png");
 
+@inject("store")
+@observer
 class AccountScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "michaelbrown@gmail.com",
-      badges: ["Benjamin", "Tommy", "Audrey"]
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
     };
+
+    constructor(props) {
+      super(props);
+
+      const {
+        store: {
+          userStore: {
+            name,
+            email,
+            children
+          }
+        }
+      } = props;
+
+      this.state = {
+        name,
+        email,
+        badges: children.map(value => value.name)
+      };
+
   }
 
   render() {
     const {
       navigation: { navigate }
     } = this.props;
-    const { email, badges } = this.state;
+    const { name, email, badges } = this.state;
     return (
       <ContainerView padding={16}>
         <NavHeader title="Account" size="medium" hasBackButton={false} />
@@ -35,7 +55,7 @@ class AccountScreen extends React.Component {
           <FlexView justifyContent="start">
             <Avatar rounded size={80} source={imgDoctor} />
             <View style={{ paddingLeft: 20 }}>
-              <StyledText fontSize={16}>Michael Brown</StyledText>
+              <StyledText fontSize={16}>{name}</StyledText>
               <StyledText fontSize={16} fontFamily="FlamaLight">
                 {email}
               </StyledText>

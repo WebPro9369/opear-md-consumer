@@ -12,6 +12,27 @@ export const UserStore = types
     password: types.optional(types.string, ''),
     birthday: types.Date,
     phone: types.string,
+    paymentMethods: types.array (
+      types.model({
+        id: types.number,
+        type: types.string,
+        paypalEmail: types.optional(types.string, ''),
+        cardNumber: types.optional(types.number, 0),
+        expiryYear: types.optional(types.number, 0),
+        expiryMonth: types.optional(types.number, 0),
+        cvv: types.optional(types.number, 0),
+        cardType: types.optional(types.string, ''),
+        fullName: types.optional(types.string, '')
+      })
+    ),
+    children: types.array (
+      types.model({
+        id: types.number,
+        name: types.string,
+        age: types.number,
+        avatarImg: types.string
+      })
+    ),
     cardInfo: types.model({
       cardNumber: types.string,
       expiryYear: types.number,
@@ -29,7 +50,6 @@ export const UserStore = types
       apartment_number: '',
       latitude: '',
       longitude: ''
-
     })
   })
   .actions(self => ({
@@ -57,10 +77,16 @@ export const UserStore = types
     setPhone(value) {
       self.phone = value;
     },
+    setPaymentTypes(value) {
+      self.paymentTypes = value;
+    },
     setCardInfo(value) {
       self.cardInfo = {
         ...self.cardInfo,
         ...formatCardInfo(value)
       };
+    },
+    addPaymentType(value) {
+      self.paymentType.push(value);
     }
   }));

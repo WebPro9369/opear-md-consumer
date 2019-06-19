@@ -1,8 +1,8 @@
 import Axios from "axios";
 
 export const API_SETTINGS = {
-  apiKey: null,
-  endpoint: 'http://api.opear.com/' //'http://localhost:3000/' 
+  apiKey: "EHzFacI31rswn6yRGxQImQtt",
+  endpoint: 'http://ec2-18-191-228-16.us-east-2.compute.amazonaws.com/' //'http://localhost:3000/' //'http://ec2-18-191-228-16.us-east-2.compute.amazonaws.com/' //'http://api.opear.com/'
 };
 
 const axios = Axios.create({
