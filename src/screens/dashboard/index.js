@@ -25,11 +25,17 @@ class DashboardScreen extends React.Component {
   constructor(props) {
     super(props);
 
+    const {
+      store: {
+        userStore: {
+          name
+        }
+      }
+    } = props;
+
     this.state = {
       // selectedIllness: null,
-      user: {
-        name: "Michael"
-      },
+      name,
       illnessList: [
         { key: "1", string: "General", color: "#49AF67" },
         { key: "2", string: "Respiratory", color: "#0e7092" },
@@ -51,7 +57,7 @@ class DashboardScreen extends React.Component {
       outstandingAppointment
     } = providerStore;
 
-    const { user, illnessList } = this.state;
+    const { name, illnessList } = this.state;
 
     return (
       <ContainerView>
@@ -61,7 +67,7 @@ class DashboardScreen extends React.Component {
         <ContentWrapper>
           <StyledText fontSize={28} fontFamily="FlamaMedium">
             {"Hi, "}
-            {user.name}
+            {name}
             {"!"}
           </StyledText>
         </ContentWrapper>
