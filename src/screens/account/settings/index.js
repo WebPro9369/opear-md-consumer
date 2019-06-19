@@ -1,10 +1,12 @@
 import React from "react";
+
+import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { StyledText } from "../../../components/text";
 import { InputButton } from "../../../components/input-button";
 import { NavHeader } from "../../../components/nav-header";
-import { ContentButton } from "./styles";
+import { ChildCard } from "@components/cards";
 import {
   ContainerView,
   HeaderWrapper,
@@ -16,18 +18,39 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
 
 const { GREEN, MIDGREY } = colors;
-const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
+const imgFox = require("../../../../assets/images/Fox.png");
+const imgDog = require("../../../../assets/images/Dog.png");
+const imgTiger = require("../../../../assets/images/Tiger.png");
 const imgDoctor = require("../../../../assets/images/Doctor.png");
 
+@inject("store")
+@observer
 class SettingsScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
 
+    const {
+      store: {
+        userStore: {
+          name,
+          address : { street },
+          email,
+          phone,
+          children
+        }
+      }
+    } = props;
+
     this.state = {
-      name: "Michael Brown",
-      address: "22341 Justice Ave APT 725",
-      email: "michaelbrown@gmail.com",
-      phone: "(415) 123 - 4567"
+      name,
+      street,
+      email,
+      phone,
+      children
     };
   }
 
@@ -35,7 +58,7 @@ class SettingsScreen extends React.Component {
     const {
       navigation: { navigate }
     } = this.props;
-    const { name, address, email, phone } = this.state;
+    const { name, street, email, phone, children } = this.state;
     return (
       <ContainerView>
         <HeaderWrapper>
@@ -77,7 +100,7 @@ class SettingsScreen extends React.Component {
             <View style={{ padding: 16 }}>
               <InputButton
                 label="Address"
-                value={address}
+                value={street}
                 icon={
                   <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }
@@ -113,51 +136,15 @@ class SettingsScreen extends React.Component {
             >
               Edit Children
             </StyledText>
-            <ContentButton>
-              <FlexView>
-                <Avatar rounded size={40} source={imgFoxLarge} />
-                <StyledText
-                  fontFamily="Flama"
-                  fontSize={16}
-                  style={{ marginLeft: 12 }}
-                >
-                  Benjamin
-                </StyledText>
-              </FlexView>
-              <StyledText fontFamily="Flama" fontSize={16}>
-                6 yrs
-              </StyledText>
-            </ContentButton>
-            <ContentButton>
-              <FlexView>
-                <Avatar rounded size={40} source={imgFoxLarge} />
-                <StyledText
-                  fontFamily="Flama"
-                  fontSize={16}
-                  style={{ marginLeft: 12 }}
-                >
-                  Audrey
-                </StyledText>
-              </FlexView>
-              <StyledText fontFamily="Flama" fontSize={16}>
-                8 yrs
-              </StyledText>
-            </ContentButton>
-            <ContentButton onPress={() => navigate("SettingsEditChild")}>
-              <FlexView>
-                <Avatar rounded size={40} source={imgFoxLarge} />
-                <StyledText
-                  fontFamily="Flama"
-                  fontSize={16}
-                  style={{ marginLeft: 12 }}
-                >
-                  Tara
-                </StyledText>
-              </FlexView>
-              <StyledText fontFamily="Flama" fontSize={16}>
-                12 yrs
-              </StyledText>
-            </ContentButton>
+            {children.map(child => (
+              <ChildCard
+                key={child.id}
+                name={child.name}
+                age={child.age}
+                avatarImg={eval(child.avatarImg)}
+                onPress={() => push("ChildrenEditChild",{childID:child.id})}
+              />
+            ))}
           </View>
         </ScrollView>
       </ContainerView>
