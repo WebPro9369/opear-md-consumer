@@ -13,7 +13,11 @@ import {
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
 
-const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
+const avatarImages = [];
+avatarImages[0] = require("../../../../assets/images/Fox.png");
+avatarImages[1] = require("../../../../assets/images/chicken.png");
+avatarImages[2] = require("../../../../assets/images/Dog.png");
+avatarImages[3] = require("../../../../assets/images/Tiger.png");
 
 class AddChildScreen extends React.Component {
   constructor(props) {
@@ -28,7 +32,8 @@ class AddChildScreen extends React.Component {
       currentMedications: null,
       hospitalizations: null,
       currentMedicalConditions: null,
-      allergies: null
+      allergies: null,
+      avatarNumber: Math.floor(Math.random() * 4)
     };
     this.updateIndex = this.updateIndex.bind(this);
   }
@@ -52,8 +57,10 @@ class AddChildScreen extends React.Component {
       currentMedications,
       hospitalizations,
       currentMedicalConditions,
-      allergies
+      allergies,
+      avatarNumber
     } = this.state;
+
     return (
       <ContainerView behavior="padding" enabled>
         <HeaderWrapper>
@@ -69,7 +76,7 @@ class AddChildScreen extends React.Component {
             <Avatar
               rounded
               size={120}
-              source={imgFoxLarge}
+              source={avatarImages[avatarNumber]}
               showEditButton
               editButton={{
                 iconStyle: {
