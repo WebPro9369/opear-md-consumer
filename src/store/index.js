@@ -36,10 +36,11 @@ const MainStore = types.model("MainStore", {
     ],
     visitRequest: {
       symptoms: [""],
-      pickedChild: 0,
-      pickedAddress: 0,
+      pickedChild: 1,
+      pickedAddress: 1,
       date: "",
-      time: 0
+      time: 0,
+      cost: 0
     },
     cardInfo: {
       cardNumber: "",

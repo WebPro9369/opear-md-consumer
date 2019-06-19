@@ -28,13 +28,26 @@ class BookingReviewScreen extends React.Component {
   constructor(props) {
     super(props);
 
+    const {
+      store: {
+        userStore: {
+          children,
+          visitAddresses,
+          visitRequest
+        }
+      }
+    } = props;
+
+    const childName = children[children.findIndex(p => p.id == visitRequest.pickedChild)].name;
+    const addressStreet = visitAddresses[visitAddresses.findIndex(p => p.id == visitRequest.pickedAddress)].address;
+
     this.state = {
-      name: "Benjamin",
-      address: "18 Mission St",
-      date: "Sun Dec 31",
-      time: "8am - 9am",
+      name: childName,
+      address: addressStreet,
+      date: visitRequest.date,
+      time: visitRequest.time,
       // card: null,
-      price: 150
+      price: visitRequest.cost
     };
   }
 

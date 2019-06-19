@@ -25,6 +25,13 @@ export const UserStore = types
         fullName: types.optional(types.string, '')
       })
     ),
+    visitAddresses: types.array (
+      types.model({
+        id: types.number,
+        name: types.string,
+        address: types.string
+      })
+    ),
     children: types.array (
       types.model({
         id: types.number,
@@ -33,6 +40,14 @@ export const UserStore = types
         avatarImg: types.optional(types.string,'')
       })
     ),
+    visitRequest: types.model ({
+      symptoms: types.array (types.string,''),
+      pickedChild: types.number,
+      pickedAddress: types.number,
+      date: types.string,
+      time: types.number,
+      cost: types.number
+    }),
     cardInfo: types.model({
       cardNumber: types.string,
       expiryYear: types.number,
@@ -77,9 +92,6 @@ export const UserStore = types
     setPhone(value) {
       self.phone = value;
     },
-    setPaymentTypes(value) {
-      self.paymentTypes = value;
-    },
     setCardInfo(value) {
       self.cardInfo = {
         ...self.cardInfo,
@@ -97,5 +109,21 @@ export const UserStore = types
     },
     addChild(value) {
       self.children.push(value);
+    },
+    setVisitRequest(value) {
+      self.visitRequest = value;
+    },
+    setVisitRequestSymptoms(value) {
+      self.visitRequest.symptoms.replace(value);
+    },
+    setVisitRequestPickedChild(value) {
+      self.visitRequest.pickedChild = value;
+    },
+    setVisitRequestPickedAddress(value) {
+      self.visitRequest.pickedAddress = value;
+    },
+    setVisitRequestDateTime(date, time) {
+      self.visitRequest.date = date;
+      self.visitRequest.time = time;
     }
   }));
