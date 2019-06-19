@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import MapView from "react-native-maps";
 import { View } from "react-native";
 import { FormTextInput } from "../../../components/text";
@@ -10,15 +11,29 @@ import {
   FormWrapper
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
+import { registerAddress } from "@services/opear-api";
 
+@inject("store")
+@observer
 class AddAddressScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
+
+    const {
+      store: {
+        userStore
+      }
+    } = props;
+
     this.state = {
-      locationName: null,
-      street: null,
-      city: null,
-      zip: null,
+      locationName: "",
+      street: "",
+      city: "",
+      zip: "",
       map: {
         latitude: 37.78825,
         longitude: -122.4324,
@@ -26,6 +41,58 @@ class AddAddressScreen extends React.Component {
         longitudeDelta: 0.0421
       }
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+
+  }
+
+  handleInputChange = name => value => {
+    return this.setState({
+      [name]: value
+    });
+  };
+
+  onSubmit = () => {
+
+    const {
+      navigation: { goBack },
+      store: {
+        userStore
+      }
+    } = this.props;
+
+    const {
+      locationName,
+      street,
+      city,
+      zip
+    } = this.state;
+
+    const data =
+    {
+      address:
+      {
+        name: locationName,
+        street: street,
+        city: city,
+        zip: zip
+      }
+    }
+
+    const successHandler = () => {
+      const { id } = response.data;
+
+      userStore.addVisitAddress({
+        id,
+        name: locationName,
+        address: street
+      });
+
+      goBack();
+    };
+
+    registerAddress(data, { successHandler });
+
   }
 
   render() {
@@ -60,6 +127,7 @@ class AddAddressScreen extends React.Component {
               <FormTextInput
                 label="Location Name"
                 value={locationName}
+                onChangeText={this.handleInputChange("locationName")}
                 placeholder="Location Name"
               />
             </FormInputWrapper>
@@ -67,19 +135,22 @@ class AddAddressScreen extends React.Component {
               <FormTextInput
                 label="Street"
                 value={street}
+                onChangeText={this.handleInputChange("street")}
                 placeholder="Street"
               />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput label="City" value={city} placeholder="City" />
+              <FormTextInput label="City" value={city} placeholder="City"
+              onChangeText={this.handleInputChange("city")} />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput label="Zip" value={zip} placeholder="Zip" />
+              <FormTextInput label="Zip" value={zip} placeholder="Zip"
+              onChangeText={this.handleInputChange("zip")} />
             </FormInputWrapper>
           </FormWrapper>
           <FormInputWrapper style={{ marginBottom: 20 }}>
             <View style={{ paddingLeft: 16, paddingRight: 16 }}>
-              <ServiceButton title="Add Address" onPress={() => goBack()} />
+              <ServiceButton title="Add Address" onPress={this.onSubmit} />
             </View>
           </FormInputWrapper>
         </ScrollView>

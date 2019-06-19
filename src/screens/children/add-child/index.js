@@ -14,7 +14,7 @@ import {
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
 
-import { registerChild, updateParent } from "@services/opear-api";
+import { registerChild } from "@services/opear-api";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -98,8 +98,6 @@ class AddChildScreen extends React.Component {
 
     var allergiesArray = allergies;
 
-    const newChildID = 0;
-
     if (allergies.indexOf(",") != -1) {
       allergiesArray = allergies.split(", ");
     }
@@ -130,13 +128,6 @@ class AddChildScreen extends React.Component {
         age
       });
 
-      const parentData = {
-        parent: {
-          children: userStore.children
-        }
-      }
-
-      updateParent(userStore.id, parentData);
       goBack();
     };
 
