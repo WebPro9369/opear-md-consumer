@@ -16,102 +16,143 @@ import {
 import { colors } from "../../../utils/constants";
 import { updateParent } from "@services/opear-api"
 
-const AddCardScreen = ({
-  navigation: { goBack, navigate },
-  store: { userStore }
-}) => {
-  const {
-    cardInfo: { cardNumber, expiryYear, expiryMonth, cvv, fullName }
-  } = userStore;
+@inject("store")
+@observer
+class AddCardScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
 
-  const data = {
-    parent: {
-      cardInfo: userStore.cardInfo
-    }
-  }
+    constructor(props) {
+      super(props);
 
-  console.tron.log(data);
+      const {
+        cardNumber, expiryDate, cvv, fullName
+      } = this.props;
+
+      this.state = {
+        cardNumber, expiryDate, cvv, fullName
+      };
+
+      this.handleInputChange = this.handleInputChange.bind(this);
+  };
+
+  handleInputChange = name => value => {
+    return this.setState({
+      [name]: value
+    });
+  };
 
   onSubmit = () => {
+    const {
+      navigation: { goBack },
+      store: {
+        userStore
+      }
+    } = this.props;
+
+    const { cardNumber, expiryDate, cvv, fullName } = this.state;
+
+    var expiryArray = expiryDate.split("/")
+
+    var expiryYear = expiryArray[0];
+    var expiryMonth = expiryArray[1];
+
+    userStore.addPaymentMethod({
+      id: userStore.paymentMethods.length,
+      type: "Card",
+      cardNumber: parseInt(cardNumber),
+      expiryYear: parseInt(expiryYear),
+      expiryMonth: parseInt(expiryMonth),
+      cvv: parseInt(cvv),
+      fullName
+    });
+
+    const data = {
+      paymentMethods: userStore.paymentMethods
+    }
 
     const successHandler = () => {
-      userStore.setCardInfo(cardInfo);
+
       goBack();
     };
 
     updateParent(userStore.id,data,{ successHandler});
-
   }
 
-  return (
-    <KeyboardAvoidingView behavior="padding" enabled>
-      <NavHeader
-        title="Add Card"
-        size="medium"
-        onPressBackButton={() => goBack()}
-        hasBackButton
-      />
-      <FormWrapper>
-        <FormInputView>
-          <FormTextInput
-            label="Card Number"
-            value={cardNumber}
-            placeholder="1234 5678 3456 2456"
-            leftIcon={
-              <FontAwesome name="cc-visa" size={30} color={colors.BLUE} />
-            }
-            rightIcon={
-              // eslint-disable-next-line react/jsx-wrap-multilines
-              <TouchableView onPress={() => navigate("PaymentScanCard")}>
-                <FontAwesome
-                  name="camera"
-                  size={30}
-                  color={colors.LIGHTGREEN}
-                />
-              </TouchableView>
-            }
-          />
-        </FormInputView>
-        <FormInputView>
-          <FlexView>
+
+  render() {
+    const {
+      navigation: { goBack }
+    } = this.props;
+    const { cardNumber, expiryDate, cvv, fullName } = this.state;
+    return (
+      <KeyboardAvoidingView behavior="padding" enabled>
+        <NavHeader
+          title="Add Card"
+          size="medium"
+          onPressBackButton={() => goBack()}
+          hasBackButton
+        />
+        <FormWrapper>
+          <FormInputView>
             <FormTextInput
-              label="Exp. Date"
-              value={
-                expiryYear && expiryMonth
-                  ? `${expiryYear} / ${expiryMonth}`
-                  : null
+              label="Card Number"
+              value={cardNumber}
+              placeholder="1234 5678 3456 2456"
+              onChangeText={this.handleInputChange("cardNumber")}
+              leftIcon={
+                <FontAwesome name="cc-visa" size={30} color={colors.BLUE} />
               }
-              placeholder="## / ##"
-              style={{
-                width: 120,
-                marginRight: 40
-              }}
+              rightIcon={
+                // eslint-disable-next-line react/jsx-wrap-multilines
+                <TouchableView onPress={() => navigate("PaymentScanCard")}>
+                  <FontAwesome
+                    name="camera"
+                    size={30}
+                    color={colors.LIGHTGREEN}
+                  />
+                </TouchableView>
+              }
             />
+          </FormInputView>
+          <FormInputView>
+            <FlexView>
+              <FormTextInput
+                label="Exp. Date"
+                value={ expiryDate }
+                onChangeText={this.handleInputChange("expiryDate")}
+                placeholder="## / ##"
+                style={{
+                  width: 120,
+                  marginRight: 40
+                }}
+              />
+              <FormTextInput
+                label="CVV"
+                value={cvv}
+                placeholder="###"
+                onChangeText={this.handleInputChange("cvv")}
+                style={{
+                  width: 120
+                }}
+              />
+            </FlexView>
+          </FormInputView>
+          <FormInputView>
             <FormTextInput
-              label="CVV"
-              value={cvv}
-              placeholder="###"
-              style={{
-                width: 120
-              }}
+              label="Full Name"
+              value={fullName}
+              placeholder="Full Name"
+              onChangeText={this.handleInputChange("fullName")}
             />
-          </FlexView>
-        </FormInputView>
-        <FormInputView>
-          <FormTextInput
-            label="Full Name"
-            value={fullName}
-            placeholder="Full Name"
-          />
-        </FormInputView>
-      </FormWrapper>
-      <ServiceButton title="Add Card" onPress={() => onSubmit()} />
-    </KeyboardAvoidingView>
-  );
-};
+          </FormInputView>
+        </FormWrapper>
+        <ServiceButton title="Add Card" onPress={this.onSubmit} />
+      </KeyboardAvoidingView>
+    );
+  };
+}
 
-AddCardScreen.propTypes = {
-  store: PropTypes.observableObject.isRequired
-};
 
-export default inject("store")(observer(AddCardScreen));
+export default AddCardScreen;

@@ -86,7 +86,10 @@ export const UserStore = types
         ...formatCardInfo(value)
       };
     },
-    addPaymentType(value) {
-      self.paymentType.push(value);
+    addPaymentMethod(value) {
+      self.paymentMethods.push(value);
+    },
+    setPaymentMethods(value) {
+      self.paymentMethods.replace(value);
     }
   }));
