@@ -26,11 +26,12 @@ const MainStore = types.model("MainStore", {
     }],
     children:[
       { id: 1, name: "Benjamin", age: 6, avatarImg: "imgDog"},
-      { id: 2, name: "Audrey", age: 8, avatarImg: "imgFox" },
-      { id: 3, name: "Tara", age: 12, avatarImg: "imgTiger" }
+      { id: 2, name: "Audrey", age: 8, avatarImg: "imgFox"},
+      { id: 3, name: "Tara", age: 12, avatarImg: "imgTiger"}
     ],
     visitRequest: {
-      symptoms: [""]
+      symptoms: [""],
+      pickedChild: 0
     },
     cardInfo: {
       cardNumber: "",

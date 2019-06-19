@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { StyledText } from "../../../components/text";
@@ -10,18 +11,47 @@ import { colors } from "../../../utils/constants";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
+@inject("store")
+@observer
 class PickChildScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
+
+    const {
+      store: {
+        userStore: {
+          children,
+          visitRequest: {
+            pickedChild
+          }
+        }
+      }
+    } = props;
+
     this.state = {
       pickedChild: null,
-      children: [
-        { id: "1", name: "Benjamin", age: 6, selected: false },
-        { id: "2", name: "Audrey", age: 8, selected: false },
-        { id: "3", name: "Tara", age: 12, selected: false }
-      ]
+      children
     };
   }
+
+  onSubmit = () => {
+    const {
+      navigation: { navigate },
+      store: {
+        userStore
+      }
+    } = this.props;
+
+      const { pickedChild } = this.state;
+
+      userStore.setVisitRequestPickedChild(userStore.children[pickedChild-1].id);
+
+      navigate("DashboardPickVisitAddress")
+  };
 
   render() {
     const {
@@ -115,7 +145,7 @@ class PickChildScreen extends React.Component {
             <View style={{ paddingLeft: 16, paddingRight: 16 }}>
               <ServiceButton
                 title="Select Children"
-                onPress={() => navigate("DashboardPickVisitAddress")}
+                onPress={this.onSubmit}
               />
             </View>
           ) : null}
