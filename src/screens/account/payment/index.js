@@ -40,8 +40,6 @@ class PaymentScreen extends React.Component {
     } = this.props;
     const { paymentMethods } = this.state;
 
-    console.tron.log(paymentMethods);
-
     return (
       <ContainerView padding={16}>
         <NavHeader
@@ -57,7 +55,7 @@ class PaymentScreen extends React.Component {
                 return (
                   <ListTouchableButtonWrapper
                     key={pm.id}
-                    onPress={() => navigate("PaymentEditCard")}
+                    onPress={() => navigate("PaymentEditCard",{cardID: pm.id})}
                   >
                     <FlexView justifyContent="start">
                       <FontAwesome

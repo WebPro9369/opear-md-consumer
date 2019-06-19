@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
@@ -9,26 +10,95 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
+import { updateParent, getParent } from "@services/opear-api"
 
 const { BLUE, LIGHTGREEN } = colors;
 
+@inject("store")
+@observer
 class EditCardScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
 
+    const {
+      navigation,
+      store: {
+        userStore: {
+          paymentMethods
+        }
+      },
+      expiryDate
+    } = props;
+
+    const cardID = navigation.getParam('cardID',0);
+
     this.state = {
-      cardNumber: "1234 5678 3456 2456",
-      expDate: "05 / 2020",
-      cvv: "698",
-      fullName: "Michael Brown"
+      paymentMethods,
+      cardNumber: paymentMethods[cardID].cardNumber,
+      expiryYear: paymentMethods[cardID].expiryYear,
+      expiryMonth: paymentMethods[cardID].expiryMonth,
+      cvv: paymentMethods[cardID].cvv,
+      fullName: paymentMethods[cardID].fullName,
+      expiryDate: paymentMethods[cardID].expiryYear & "/" & paymentMethods[cardID].expiryMonth
     };
+
+    console.tron.log(this.state);
+  }
+
+  handleInputChange = name => value => {
+    return this.setState({
+      [name]: value
+    });
+  };
+
+  onSubmit = () => {
+    const {
+      navigation,
+      store: {
+        userStore
+      }
+    } = this.props;
+
+    const { cardNumber, expiryDate, cvv, fullName } = this.state;
+
+    const cardID = navigation.getParam('cardID',0);
+
+    var expiryArray = expiryDate.split("/")
+
+    var expiryYear = expiryArray[0];
+    var expiryMonth = expiryArray[1];
+
+    userStore.setPaymentMethod(cardID,{
+      id: userStore.paymentMethods.length,
+      type: "Card",
+      cardNumber: parseInt(cardNumber),
+      expiryYear: parseInt(expiryYear),
+      expiryMonth: parseInt(expiryMonth),
+      cvv: parseInt(cvv),
+      fullName
+    });
+
+    const data = {
+      paymentMethods: userStore.paymentMethods
+    }
+
+    const successHandler = () => {
+      navigation.goBack();
+    };
+
+    updateParent(userStore.id,data,{ successHandler});
   }
 
   render() {
     const {
       navigation: { goBack }
     } = this.props;
-    const { cardNumber, expDate, cvv, fullName } = this.state;
+    const { cardNumber, expiryDate, cvv, fullName } = this.state;
+    console.tron.log(cardNumber);
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <NavHeader
@@ -46,6 +116,7 @@ class EditCardScreen extends React.Component {
                 <FontAwesome name="camera" size={30} color={LIGHTGREEN} />
               }
               value={cardNumber}
+              onChangeText={this.handleInputChange("cardNumber")}
             />
           </FormInputView>
           <FormInputView>
@@ -56,7 +127,8 @@ class EditCardScreen extends React.Component {
                   width: 120,
                   marginRight: 40
                 }}
-                value={expDate}
+                value={expiryDate}
+                onChangeText={this.handleInputChange("expiryDate")}
               />
               <FormTextInput
                 label="CVV"
@@ -64,14 +136,16 @@ class EditCardScreen extends React.Component {
                   width: 120
                 }}
                 value={cvv}
+                onChangeText={this.handleInputChange("cvv")}
               />
             </FlexView>
           </FormInputView>
           <FormInputView>
-            <FormTextInput label="Full Name" value={fullName} />
+            <FormTextInput label="Full Name" value={fullName}
+            onChangeText={this.handleInputChange("fullName")} />
           </FormInputView>
         </FormWrapper>
-        <ServiceButton title="Save Card" onPress={() => goBack()} />
+        <ServiceButton title="Save Card" onPress={this.onSubmit} />
       </KeyboardAvoidingView>
     );
   }

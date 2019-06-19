@@ -6,7 +6,7 @@ import { ContainerView, View, ContentWrapper } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { VisitDetailCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
-import { getVisits, getChildren } from "@services/opear-api";
+import { getVisits } from "@services/opear-api";
 
 const imgFox = require("../../../../assets/images/Fox.png");
 const imgDog = require("../../../../assets/images/Dog.png");
@@ -44,8 +44,34 @@ class PastVisitsScreen extends React.Component {
       this.state = {
         children,
         visitAddresses,
-        visitList: []
+        visitList: [
+          {
+            id: 1,
+            child_id: 1,
+            address_id: 1,
+            reason: "fever",
+            appointment_time: 6,
+            payment_amount: 75
+          },
+          {
+            id: 2,
+            child_id: 2,
+            address_id: 1,
+            reason: "fever",
+            appointment_time: 6,
+            payment_amount: 175
+          },
+          {
+            id: 3,
+            child_id: 1,
+            address_id: 2,
+            reason: "fever",
+            appointment_time: 6,
+            payment_amount: 225
+          }
+        ]
       };
+      console.tron.log(this.state);
     }
 
   render() {
@@ -70,7 +96,10 @@ class PastVisitsScreen extends React.Component {
                       illness={item.reason}
                       time={item.appointment_time}
                       address={visitAddresses[visitAddresses.findIndex(p => p.id == item.address_id)].address}
-                      onPress={() => navigate("VisitsBookingReceipt")}
+                      onPress={() => navigate("VisitsBookingReceipt",{
+                        visitID: item.id,
+                        visits: visitList
+                      })}
                     />
                   </View>
                 ))}

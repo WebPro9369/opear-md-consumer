@@ -105,7 +105,7 @@ export const UserStore = types
       self.paymentMethods.replace(value);
     },
     setPaymentMethod(index,value) {
-      self.paymentMethods[index].replace(value);
+      self.paymentMethods[index] = value;
     },
     addChild(value) {
       self.children.push(value);
@@ -128,5 +128,8 @@ export const UserStore = types
     },
     setChild(index, value) {
       self.children[index].replace(value);
+    },
+    addVisitAddress(value) {
+      self.visitAddresses.push(value);
     }
   }));

@@ -22,7 +22,7 @@ const MainStore = types.model("MainStore", {
     birthday: new Date("1970-01-01"),
     phone: "7177776666",
     paymentMethods: [{
-      id:0, type:"Card", cardNumber:0, expiryYear:0, expiryMonth:0, cvv:0, fullName:""
+      id:0, type:"Card", cardNumber:19990, expiryYear:10, expiryMonth:11, cvv:320, fullName:"Card Name"
     }],
     children:[
       { id: 1, name: "Benjamin", age: 6, avatarImg: "imgDog"},
@@ -74,16 +74,41 @@ const MainStore = types.model("MainStore", {
     allergies: [""]
   }),
   visitsStore: types.optional(VisitsStore, {
-    visits: [{
-      id: 0,
-      childId: 0,
-      addressId: 0,
-      reason: "",
-      symptoms: [""],
-      appointmentTime: new Date("1970-01-01"),
-      parentNotes: "",
-      paymentAmount: 0
-    }]
+    visits: [
+      {
+        id: 1,
+        childId: 1,
+        addressId: 1,
+        reason: "reason",
+        symptoms: ['fever','stomachache'],
+        appointmentTime: new Date("1970-01-01"),
+        parentNotes: "note",
+        paymentAmount: 100,
+        avatarImg: "imgFox"
+      },
+      {
+        id: 1,
+        childId: 1,
+        addressId: 1,
+        reason: "alot of reasons",
+        symptoms: ['super fever','stomachache'],
+        appointmentTime: new Date("2020-01-01"),
+        parentNotes: "note",
+        paymentAmount: 100,
+        avatarImg: "imgFox"
+      },
+      {
+        id: 1,
+        childId: 2,
+        addressId: 1,
+        reason: "reason",
+        symptoms: ['fever','stomachache'],
+        appointmentTime: new Date("1970-01-01"),
+        parentNotes: "note",
+        paymentAmount: 100,
+        avatarImg: "imgDog"
+      }
+    ]
   })
 });
 

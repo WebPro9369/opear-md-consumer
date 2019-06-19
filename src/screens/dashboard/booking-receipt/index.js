@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -17,9 +18,31 @@ const { BLACK60 } = colors;
 const doctorImg = require("../../../../assets/images/Doctor.png");
 const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 
+@inject("store")
+@observer
 class BookingReceiptScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
+
+    const {
+      navigation,
+      store: {
+        userStore: {
+          id,
+          children,
+          visitAddresses
+        }
+      }
+    } = props;
+
+    const visitID = navigation.getParam('visitID', 0);
+    const visits = navigation.getParam('visits', 0);
+
+    const visit = visits[visitID-1];
 
     this.state = {
       providerData: {
@@ -30,11 +53,11 @@ class BookingReceiptScreen extends React.Component {
         symptom: "Respiratory",
         rating: "4.5"
       },
-      child: "Benjamin",
-      address: "18 Mission St",
-      time: "Sun Dec 31, 8am - 9am",
+      child: children[children.findIndex(p => p.id == visit.child_id)].name,
+      address: visitAddresses[visitAddresses.findIndex(p => p.id == visit.address_id)].address,
+      time: visit.appointment_time,
       card: "4985",
-      price: "$150.00",
+      price: visit.payment_amount,
       stars: 0,
       starsEditable: false
     };

@@ -51,8 +51,6 @@ class EditChildScreen extends React.Component {
         allergies
       } = res.data;
 
-      console.tron.log(allergies);
-
       childStore
         .setFirstName(first_name)
         .setLastName(last_name)

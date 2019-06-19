@@ -8,6 +8,7 @@ export const VisitsStore = types
         id: types.number,
         childId: types.number,
         addressId: types.number,
+        avatarImg: types.string,
         reason: types.string,
         symptoms: types.array (types.string),
         appointmentTime: types.Date,
@@ -28,6 +29,9 @@ export const VisitsStore = types
     setAddressID(value) {
       self.addressId = value;
       return self;
+    },
+    setAvatarImg(value) {
+      self.avatarImg = value;
     },
     setReason(value) {
       self.reason = value;
