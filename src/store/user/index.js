@@ -83,6 +83,9 @@ export const UserStore = types
     setEmail(value) {
       self.email = value;
     },
+    setZip(value) {
+      self.address.zip_code = value
+    },
     setPassword(value) {
       self.password = value;
     },
@@ -131,5 +134,11 @@ export const UserStore = types
     },
     addVisitAddress(value) {
       self.visitAddresses.push(value);
+    },
+    setVisitAddresses(value) {
+      self.visitAddresses.replace(value);
+    },
+    setChildren(value) {
+      self.children.replace(value);
     }
   }));
