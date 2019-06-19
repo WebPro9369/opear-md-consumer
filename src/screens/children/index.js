@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { StyledText } from "../../components/text";
@@ -10,21 +11,27 @@ const imgFox = require("../../../assets/images/Fox.png");
 const imgDog = require("../../../assets/images/Dog.png");
 const imgTiger = require("../../../assets/images/Tiger.png");
 
+@inject("store")
+@observer
 class ManageChildrenScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      children: [
-        {
-          id: "1",
-          name: "Benjamin",
-          age: 6,
-          avatarImg: imgDog
-        },
-        { id: "2", name: "Audrey", age: 8, avatarImg: imgFox },
-        { id: "3", name: "Tara", age: 12, avatarImg: imgTiger }
-      ]
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
     };
+
+    constructor(props) {
+      super(props);
+
+      const {
+        store: {
+          userStore: {
+            children
+          }
+        }
+      } = props;
+
+      this.state = {
+        children
+      };
   }
 
   render() {
@@ -58,8 +65,8 @@ class ManageChildrenScreen extends React.Component {
                 key={child.id}
                 name={child.name}
                 age={child.age}
-                avatarImg={child.avatarImg}
-                onPress={() => push("ChildrenEditChild")}
+                avatarImg={eval(child.avatarImg)}
+                onPress={() => push("ChildrenEditChild",{childID:child.id})}
               />
             ))}
             <View style={{ marginTop: 16, marginLeft: 28 }}>
