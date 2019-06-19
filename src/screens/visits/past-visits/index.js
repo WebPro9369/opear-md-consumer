@@ -1,54 +1,58 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { withNavigation } from "react-navigation";
 import { StyledText } from "../../../components/text";
 import { ContainerView, View, ContentWrapper } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { VisitDetailCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
+import { getVisits, getChildren } from "@services/opear-api";
 
 const imgFox = require("../../../../assets/images/Fox.png");
 const imgDog = require("../../../../assets/images/Dog.png");
 const imgTiger = require("../../../../assets/images/Tiger.png");
 
+@inject("store")
+@observer
 class PastVisitsScreen extends React.Component {
-  state = {
-    visitList: [
-      {
-        key: "1",
-        avatarImg: imgDog,
-        name: "Benjamin",
-        illness: "Flu Shot",
-        time: "$150",
-        address: "",
-        color: "#f9b44d"
-      },
-      {
-        key: "2",
-        avatarImg: imgFox,
-        name: "Audrey",
-        illness: "Coxsackie Virus",
-        time: "$150",
-        address: "",
-        color: "#f9b44d"
-      },
-      {
-        key: "3",
-        avatarImg: imgTiger,
-        name: "Tommy",
-        illness: "Vital Signs",
-        time: "$150",
-        address: "",
-        color: "#f9b44d"
-      }
-    ]
-  };
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
+    constructor(props) {
+      super(props);
+
+      const {
+        store: {
+          userStore: {
+            id,
+            children,
+            visitAddresses
+          }
+        }
+      } = props;
+
+      const successHandler = res => {
+
+        this.setState({
+          visitList: res.data
+        });
+      };
+
+      getVisits(id, { past: true, successHandler});
+
+      this.state = {
+        children,
+        visitAddresses,
+        visitList: []
+      };
+    }
 
   render() {
-    const { visitList } = this.state;
+    const { visitList, children, visitAddresses } = this.state;
     const {
       navigation: { navigate }
     } = this.props;
-
     return (
       <ContainerView style={{ marginTop: 0 }}>
         <ScrollView padding={0}>
@@ -59,32 +63,13 @@ class PastVisitsScreen extends React.Component {
               </StyledText>
               <View style={{ paddingTop: 16, paddingBottom: 16 }}>
                 {visitList.map(item => (
-                  <View key={item.key} style={{ marginBottom: 9 }}>
+                  <View style={{ marginBottom: 9 }}>
                     <VisitDetailCard
-                      avatarImg={item.avatarImg}
-                      name={item.name}
-                      illness={item.illness}
-                      time={item.time}
-                      address={item.address}
-                      onPress={() => navigate("VisitsBookingReceipt")}
-                    />
-                  </View>
-                ))}
-              </View>
-            </ContentWrapper>
-          </View>
-          <View>
-            <ContentWrapper>
-              <StyledText>Jan 10</StyledText>
-              <View style={{ paddingTop: 16, paddingBottom: 16 }}>
-                {visitList.map(item => (
-                  <View key={item.key} style={{ marginBottom: 9 }}>
-                    <VisitDetailCard
-                      avatarImg={item.avatarImg}
-                      name={item.name}
-                      illness={item.illness}
-                      time={item.time}
-                      address={item.address}
+                      avatarImg={imgFox}
+                      name={children[children.findIndex(p => p.id == item.child_id)].name}
+                      illness={item.reason}
+                      time={item.appointment_time}
+                      address={visitAddresses[visitAddresses.findIndex(p => p.id == item.address_id)].address}
                       onPress={() => navigate("VisitsBookingReceipt")}
                     />
                   </View>
