@@ -30,7 +30,7 @@ export const UserStore = types
         id: types.number,
         name: types.string,
         age: types.number,
-        avatarImg: types.string
+        avatarImg: types.optional(types.string,'')
       })
     ),
     cardInfo: types.model({
@@ -91,5 +91,11 @@ export const UserStore = types
     },
     setPaymentMethods(value) {
       self.paymentMethods.replace(value);
+    },
+    setPaymentMethod(index,value) {
+      self.paymentMethods[index].replace(value);
+    },
+    addChild(value) {
+      self.children.push(value);
     }
   }));
