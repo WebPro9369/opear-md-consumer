@@ -125,5 +125,8 @@ export const UserStore = types
     setVisitRequestDateTime(date, time) {
       self.visitRequest.date = date;
       self.visitRequest.time = time;
+    },
+    setChild(index, value) {
+      self.children[index].replace(value);
     }
   }));
