@@ -12,7 +12,7 @@ export const ChildStore = types
     currentMedications: types.string,
     hospitalizations: types.string,
     currentMedicalConditions: types.string,
-    allergies: types.string
+    allergies: types.array (types.string)
   })
   .actions(self => ({
     setGenderIndex(value) {
@@ -52,7 +52,7 @@ export const ChildStore = types
       return self;
     },
     setAllergies(value) {
-      self.allergies = value;
+      self.allergies.replace(value);
       return self;
     }
   }));

@@ -3,6 +3,7 @@ import { ApplicationStore } from "./app";
 import { ProviderStore } from "./provider";
 import { UserStore } from "./user";
 import { ChildStore } from "@store/child";
+import { VisitsStore } from "@store/visits";
 
 const MainStore = types.model("MainStore", {
   applicationStore: types.optional(ApplicationStore, {
@@ -57,7 +58,19 @@ const MainStore = types.model("MainStore", {
     currentMedications: "",
     hospitalizations: "",
     currentMedicalConditions: "",
-    allergies: ""
+    allergies: [""]
+  }),
+  visitsStore: types.optional(VisitsStore, {
+    visits: [{
+      id: 0,
+      childId: 0,
+      addressId: 0,
+      reason: "",
+      symptoms: [""],
+      appointmentTime: new Date("1970-01-01"),
+      parentNotes: "",
+      paymentAmount: 0
+    }]
   })
 });
 
