@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { StyledText } from "../../../components/text";
@@ -11,15 +12,25 @@ import {
 import { ContainerView, View, FlexView } from "../../../components/views";
 import { colors } from "../../../utils/constants";
 
+@inject("store")
+@observer
 class PaymentScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
+    const {
+      store: {
+        userStore: {
+          paymentMethods
+        }
+      }
+    } = props;
+
     this.state = {
-      paymentMethods: [
-        { id: 1, type: "Paypal" },
-        { id: 2, type: "Card", number: "****4985" },
-        { id: 3, type: "Card", number: "****5827" }
-      ]
+      paymentMethods
     };
   }
 
@@ -28,6 +39,9 @@ class PaymentScreen extends React.Component {
       navigation: { navigate }
     } = this.props;
     const { paymentMethods } = this.state;
+
+    console.tron.log(paymentMethods);
+
     return (
       <ContainerView padding={16}>
         <NavHeader
@@ -52,7 +66,7 @@ class PaymentScreen extends React.Component {
                         color={colors.BLUE}
                         style={{ marginRight: 16 }}
                       />
-                      <ListButtonText>{pm.number}</ListButtonText>
+                      <ListButtonText>{pm.cardNumber}</ListButtonText>
                     </FlexView>
                     <FontAwesome
                       name="angle-right"
