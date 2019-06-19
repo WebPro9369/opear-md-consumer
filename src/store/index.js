@@ -29,6 +29,9 @@ const MainStore = types.model("MainStore", {
       { id: 2, name: "Audrey", age: 8, avatarImg: "imgFox" },
       { id: 3, name: "Tara", age: 12, avatarImg: "imgTiger" }
     ],
+    visitRequest: {
+      symptoms: [""]
+    },
     cardInfo: {
       cardNumber: "",
       expiryYear: 0,

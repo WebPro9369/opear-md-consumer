@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { FlatList, View } from "react-native";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
@@ -11,7 +12,13 @@ import { ContentWrapper, CustomInput } from "./styles";
 import { MatchingMessageWrapper } from "../styles";
 import { colors } from "../../../utils/constants";
 
+@inject("store")
+@observer
 class SelectSymptomsScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
 
@@ -26,7 +33,7 @@ class SelectSymptomsScreen extends React.Component {
         { key: "6", string: "Cough", checked: false },
         { key: "7", string: "Congestion", checked: false },
         { key: "8", string: "Sore throat", checked: false },
-        { key: "9", string: "Stomachache", checked: false },
+        { key: "9", string: "Stomachache", checked: true },
         { key: "10", string: "Vomiting", checked: false },
         { key: "11", string: "Diarrhea", checked: false },
         { key: "12", string: "Eye pain/discharge", checked: false },
@@ -36,6 +43,38 @@ class SelectSymptomsScreen extends React.Component {
       ]
     };
   }
+
+  onSubmit = () => {
+    const {
+      navigation,
+      store: {
+        userStore
+      }
+     } = this.props;
+
+    const { checkListData } = this.state;
+
+    function removeBool(arr, boolState) {
+      return arr.filter(e => e.checked !== boolState);
+    }
+
+    function removeTypes(arr, type) {
+      return arr.filter(e => e.type !== type);
+    }
+
+    var symptoms = removeBool(checkListData,false);
+    symptoms = removeTypes(symptoms, "input");
+    symptoms = removeTypes(symptoms, "button");
+
+
+    symptoms = symptoms.map(value => value.string);
+
+    userStore.setVisitRequestSymptoms(symptoms);
+
+    console.tron.log(userStore);
+
+    navigation.navigate("DashboardPickChild")
+  };
 
   render() {
     const { navigation } = this.props;
@@ -122,9 +161,7 @@ class SelectSymptomsScreen extends React.Component {
                     <View style={{ marginTop: 36, padding: 16 }}>
                       <ServiceButton
                         title={item.string}
-                        onPress={() =>
-                          navigation.navigate("DashboardPickChild")
-                        }
+                        onPress={ this.onSubmit }
                       />
                     </View>
                   );
