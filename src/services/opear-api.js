@@ -162,7 +162,7 @@ export const updateChild = (childID, data, { successHandler, errorHandler } = {}
 
 export const registerAddress = (data, { successHandler, errorHandler } = {}) => {
   axios
-    .post("/v1/adresses", data)
+    .post("/v1/addresses", data)
     .then(res => {
       console.tron.log("Address registration done: ", res);
       if (successHandler) successHandler(res);

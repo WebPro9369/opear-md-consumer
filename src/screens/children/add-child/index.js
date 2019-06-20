@@ -56,7 +56,7 @@ class AddChildScreen extends React.Component {
       currentMedications: "",
       hospitalizations: "",
       currentMedicalConditions: "",
-      allergies: ""
+      allergies: []
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);

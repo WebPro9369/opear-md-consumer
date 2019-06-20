@@ -98,7 +98,7 @@ class EditCardScreen extends React.Component {
       navigation: { goBack }
     } = this.props;
     const { cardNumber, expiryDate, cvv, fullName } = this.state;
-    console.tron.log(cardNumber);
+    
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <NavHeader
