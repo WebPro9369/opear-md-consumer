@@ -21,9 +21,9 @@ class ScanCardComponent extends Component {
     console.tron.log("Card scanned: ", card);
     const {
       navigation,
-      store: { userStore }
+      store: { cardStore }
     } = this.props;
-    userStore.setCardInfo(card);
+    cardStore.setCardInfo(card);
     navigation.goBack();
   };
 

@@ -2,6 +2,7 @@ import { types } from "mobx-state-tree";
 import { ApplicationStore } from "./app";
 import { ProviderStore } from "./provider";
 import { UserStore } from "./user";
+import { CardStore } from "./card";
 
 const MainStore = types.model("MainStore", {
   applicationStore: types.optional(ApplicationStore, {
@@ -12,10 +13,7 @@ const MainStore = types.model("MainStore", {
     readyProviders: false,
     outstandingAppointment: true
   }),
-  userStore: types.optional(UserStore, {
-    name: "Michael Brown",
-    email: "michaelbrown@gmail.com",
-    birthday: new Date("1970-01-01"),
+  cardStore: types.optional(CardStore, {
     cardInfo: {
       cardNumber: "",
       expiryYear: 0,
@@ -24,6 +22,17 @@ const MainStore = types.model("MainStore", {
       cardType: "",
       fullName: ""
     }
+  }),
+  currentUserStore: types.optional(UserStore, {
+    id: 0,
+    apiKey: "",
+    firstName: "",
+    lastName: "",
+    zip: "",
+    email: "",
+    phone: "",
+    birthday: new Date("1970-01-01"),
+    payment_accounts: []
   })
 });
 
