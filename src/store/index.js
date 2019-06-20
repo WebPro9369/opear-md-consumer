@@ -21,6 +21,8 @@ const MainStore = types.model("MainStore", {
     email: "michaelbrown@gmail.com",
     birthday: new Date("1970-01-01"),
     phone: "7177776666",
+    acceptedTermsOfService: false,
+    acceptedPrivacy: false,
     paymentMethods: [{
       id:0, type:"Card", cardNumber:19990, expiryYear:10, expiryMonth:11, cvv:320, fullName:"Card Name"
     }],

@@ -8,12 +8,9 @@ export const formatCardInfo = data => ({
 });
 
 export const getAge = birthDate => {
-  console.tron.log(birthDate);
   var birthDateDate = new Date(birthDate);
-  console.tron.log(birthDateDate);
   var currentDate = new Date();
   var diffDate = currentDate-birthDateDate;
   var age = Math.floor(diffDate/31557600000);
-  console.tron.log(age);
   return age;
-});
+};

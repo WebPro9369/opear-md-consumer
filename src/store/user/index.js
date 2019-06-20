@@ -12,6 +12,8 @@ export const UserStore = types
     password: types.optional(types.string, ''),
     birthday: types.Date,
     phone: types.string,
+    acceptedPrivacy: types.boolean,
+    acceptedTermsOfService: types.boolean,
     paymentMethods: types.array (
       types.model({
         id: types.number,
@@ -128,6 +130,14 @@ export const UserStore = types
     setVisitRequestDateTime(date, time) {
       self.visitRequest.date = date;
       self.visitRequest.time = time;
+    },
+    setAcceptedPrivacy(value) {
+      self.acceptedPrivacy = value;
+      return self;
+    },
+    setAcceptedTermsOfService(value) {
+      self.acceptedTermsOfService = value;
+      return self;
     },
     setChild(index, value) {
       self.children[index].replace(value);
