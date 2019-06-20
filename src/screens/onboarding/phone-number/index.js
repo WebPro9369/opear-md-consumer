@@ -58,7 +58,7 @@ class PhoneNumberScreen extends Component {
     };
 
     const successHandler = response => {
-      const { id, api_key: apiKey } = response.data;
+      const { id, apiKey: api_key } = response.data;
 
       userStore.setAuthentication({ id, apiKey });
 
