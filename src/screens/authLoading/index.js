@@ -29,7 +29,8 @@ class AuthLoadingScreen extends Component {
          email,
          zip,
          phone,
-         addresses
+         addresses,
+         active
        } = res.data;
 
        userStore
@@ -37,6 +38,7 @@ class AuthLoadingScreen extends Component {
          .setEmail(email)
          .setZip(zip)
          .setPhone(phone)
+         .setActive(active)
          .setAddresses(addresses);
 
          navigate("Tabs");

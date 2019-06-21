@@ -5,7 +5,8 @@ export const ProviderStore = types
   .model("ProviderStore", {
     appointment: types.boolean,
     readyProviders: types.boolean,
-    outstandingAppointment: types.boolean
+    outstandingAppointment: types.boolean,
+    providerEnRoute: types.boolean
   })
   .actions(self => ({
     setAppointment(value) {
@@ -16,5 +17,8 @@ export const ProviderStore = types
     },
     setOutstandingAppointment(value) {
       self.outstandingAppointment = value;
+    },
+    setProviderEnRoute(value) {
+      self.providerEnRoute = value;
     }
   }));

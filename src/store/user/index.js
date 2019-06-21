@@ -8,6 +8,7 @@ export const UserStore = types
   .model("UserStore", {
     id: types.number,
     apiKey: types.string,
+    active: types.boolean,
     name: types.string,
     email: types.string,
     password: types.optional(types.string, ''),
@@ -84,7 +85,11 @@ export const UserStore = types
       return self;
     },
     setAPIKey(value) {
-      sel.apiKey = value;
+      self.apiKey = value;
+      return self;
+    },
+    setActive(value) {
+      self.apiKey = value;
       return self;
     },
     setAuthentication({ id, apiKey}) {

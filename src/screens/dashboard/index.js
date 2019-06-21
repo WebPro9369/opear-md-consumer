@@ -75,7 +75,8 @@ class DashboardScreen extends React.Component {
     const {
       appointment,
       readyProviders,
-      outstandingAppointment
+      outstandingAppointment,
+      providerEnRoute
     } = providerStore;
 
     const { userStore, illnessList } = this.state;
@@ -92,14 +93,15 @@ class DashboardScreen extends React.Component {
             {"!"}
           </StyledText>
         </ContentWrapper>
-        {!outstandingAppointment && !readyProviders && appointment ? (
+
+        {!outstandingAppointment && !readyProviders && appointment && userStore.active ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
               We are currently matching you with your doctor, be in touch soon!
             </StyledText>
           </MatchingMessageWrapper>
         ) : null}
-        {!outstandingAppointment && readyProviders ? (
+        {!outstandingAppointment && readyProviders && userStore.active ? (
           <TouchableOpacity onPress={() => navigate("DashboardSelectProvider")}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
@@ -111,8 +113,9 @@ class DashboardScreen extends React.Component {
             </MatchingMessageWrapper>
           </TouchableOpacity>
         ) : null}
-        {outstandingAppointment ? (
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit")}>
+        {outstandingAppointment && !providerEnRoute && userStore.active ? (
+          /*TODO: swap hardcoded visit id when logic is*/
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:3})}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>
@@ -123,6 +126,14 @@ class DashboardScreen extends React.Component {
             </MatchingMessageWrapper>
           </TouchableOpacity>
         ) : null}
+        {outstandingAppointment && providerEnRoute && userStore.active ? (
+          <MatchingMessageWrapper>
+            <StyledText fontSize={16} lineHeight={24}>
+              Your Care Provider is on their way!
+            </StyledText>
+          </MatchingMessageWrapper>
+        ) : null}
+
         <View style={{ marginTop: appointment ? 16 : 48, marginBottom: 40 }}>
           <ContentWrapper>
             <StyledText>What&apos;s affecting your child?</StyledText>
