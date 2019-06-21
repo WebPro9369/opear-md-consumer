@@ -43,7 +43,7 @@ class EditCardScreen extends React.Component {
       expiryMonth: paymentMethods[cardID].expiryMonth,
       cvv: paymentMethods[cardID].cvv,
       fullName: paymentMethods[cardID].fullName,
-      expiryDate: paymentMethods[cardID].expiryYear & "/" & paymentMethods[cardID].expiryMonth
+      expiryDate: paymentMethods[cardID].expiryYear+"/"+paymentMethods[cardID].expiryMonth
     };
 
     console.tron.log(this.state);
@@ -98,7 +98,6 @@ class EditCardScreen extends React.Component {
       navigation: { goBack }
     } = this.props;
     const { cardNumber, expiryDate, cvv, fullName } = this.state;
-    
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <NavHeader

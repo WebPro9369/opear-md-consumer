@@ -37,6 +37,8 @@ class CreatePasswordScreen extends Component {
     } = this.props;
     const { password } = this.state;
 
+    if (!password) return Alert.alert("Please enter your password");
+
     if (password) userStore.setPassword(password);
     navigate("PhoneNumber");
 

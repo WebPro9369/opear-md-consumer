@@ -15,6 +15,7 @@ import { ServiceButton } from "../../../components/service-button";
 import { ContentButton } from "../../account/settings/styles";
 import { ContentWrapper, AdditionalInput } from "./styles";
 import { colors } from "../../../utils/constants";
+import { getIndexByValue } from "@utils";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -38,8 +39,8 @@ class BookingReviewScreen extends React.Component {
       }
     } = props;
 
-    const childName = children[children.findIndex(p => p.id == visitRequest.pickedChild)].name;
-    const addressStreet = addresses[addresses.findIndex(p => p.id == visitRequest.pickedAddress)].street;
+    const childName = children[getIndexByValue(children,visitRequest.pickedChild)].name;
+    const addressStreet = addresses[getIndexByValue(addresses,visitRequest.pickedAddress)].street;
 
     this.state = {
       name: childName,

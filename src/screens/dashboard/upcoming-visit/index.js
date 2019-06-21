@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import MapView from "react-native-maps";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
@@ -10,19 +11,34 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
+import { getVisit } from "@services/opear-api";
 
 const { BLACK60 } = colors;
 
 const doctorImg = require("../../../../assets/images/Doctor.png");
 const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 
+@inject("store")
+@observer
 class VisitBookedScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
 
+    const {
+      store: {
+        userStore
+      }
+    } = props;
+
+    const visitID = 2;
+    //const visitID = navigation.getParam('visitID', 0);
+
     this.state = {
       providerData: {
-        key: "1",
         avartarImg: doctorImg,
         name: "Dr. John Smith",
         symptom: "Respiratory",
@@ -38,15 +54,39 @@ class VisitBookedScreen extends React.Component {
         longitudeDelta: 0.0421
       }
     };
+
+    const successHandler = res => {
+
+      const {
+        //care_provider,
+        child,
+        address,
+        appointment_time,
+        reasons
+      } = res.data;
+      console.tron.log("test");
+      this.setState({
+      /*  providerData: {
+          avartarImg: doctorImg,
+          name: care_provider.name,
+          symptom: reason,
+          eta: "8:30am - 8:40am"
+        },*/
+        child: child.first_name,
+        address: address.street,
+        time: appointment_time
+      });
+
+    };
+
+    getVisit(userStore.id, visitID, { successHandler });
+
   }
 
   componentDidMount() {
     const {
       navigation: { navigate }
     } = this.props;
-    setTimeout(() => {
-      navigate("DashboardBookingReceipt");
-    }, 5000);
   }
 
   render() {

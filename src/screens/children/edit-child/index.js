@@ -48,29 +48,6 @@ class EditChildScreen extends React.Component {
 
     const childID = navigation.getParam('childID', 0);
 
-    const successHandler = res => {
-      const {
-        id,
-        first_name,
-        last_name,
-        gender,
-        dob,
-        allergies
-      } = res.data;
-
-      this.setState({
-        id: id,
-        firstName: first_name,
-        lastName: last_name,
-        gender: gender,
-        birthDate: dob,
-        age: getAge(dob),
-        allergies: allergies.join(", ")
-      });
-    }
-
-    getChild(childID, { successHandler });
-
     this.state = {
       id,
       age,
@@ -85,6 +62,40 @@ class EditChildScreen extends React.Component {
       currentMedicalConditions,
       allergies
     };
+
+    const successHandler = res => {
+      const {
+        id,
+        first_name,
+        last_name,
+        gender,
+        dob,
+        allergies
+      } = res.data;
+
+      var genderMap = 0;
+
+      if(gender=="Male"){
+        genderMap = 0;
+      } else if (gender=="Female") {
+        genderMap = 1;
+      } else {
+        console.tr
+        genderMap = 2;
+      }
+
+      this.setState({
+        id: id,
+        firstName: first_name,
+        lastName: last_name,
+        gender: genderMap,
+        birthDate: dob,
+        age: getAge(dob),
+        allergies: allergies.join(", ")
+      });
+    }
+
+    getChild(childID, { successHandler });
 
     this.updateIndex = this.updateIndex.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -118,11 +129,21 @@ class EditChildScreen extends React.Component {
 
     const childID = navigation.getParam('childID', 0);
 
+    var genderMap = 0;
+
+    if(gender == 0) {
+      genderMap = "Male";
+    } else if(gender == 1){
+      genderMap = "Female";
+    } else {
+      genderMap = "Non-Binary";
+    }
+
     const data = {
       child: {
         first_name: firstName,
         last_name: lastName,
-        gender: gender,
+        gender: genderMap,
         dob: birthDate,
         allergies: allergies.split(", ")
         }

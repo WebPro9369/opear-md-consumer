@@ -104,13 +104,23 @@ class AddChildScreen extends React.Component {
       allergiesArray = allergies;
     }
 
+    var genderMap = 0;
+
+    if(gender == 0) {
+      genderMap = "Male";
+    } else if(gender == 1){
+      genderMap = "Female";
+    } else {
+      genderMap = "Non-Binary";
+    }
+
     const data =
     {
       child:
       {
         first_name: firstName,
         last_name: lastName,
-        gender: gender,
+        gender: genderMap,
         dob: birthDate,
         allergies: allergiesArray
       }

@@ -38,6 +38,8 @@ class PhoneNumberScreen extends Component {
     } = this.props;
     const { phone } = this.state;
 
+    if (!phone) Alert.alert("Please enter your phone number");
+
     if (phone) userStore.setPhone(phone);
 
     const {

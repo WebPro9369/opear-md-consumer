@@ -29,15 +29,6 @@ class PastVisitsScreen extends React.Component {
         }
       } = props;
 
-      const successHandler = res => {
-
-        /*this.setState({
-          visitList: res.data
-        });*/
-      };
-
-      getVisits(userStore.id, { past: true, successHandler});
-
       this.state = {
         userStore,
         visitList: [
@@ -61,6 +52,15 @@ class PastVisitsScreen extends React.Component {
           }
         ]
       };
+
+      const successHandler = res => {
+
+        /*this.setState({
+          visitList: res.data
+        });*/
+      };
+
+      getVisits(userStore.id, { past: true, successHandler});
     }
 
   render() {
