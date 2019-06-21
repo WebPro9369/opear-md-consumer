@@ -34,7 +34,7 @@ class BookingReceiptScreen extends React.Component {
         userStore: {
           id,
           children,
-          visitAddresses
+          addresses
         }
       }
     } = props;
@@ -54,7 +54,7 @@ class BookingReceiptScreen extends React.Component {
         rating: "4.5"
       },
       child: children[children.findIndex(p => p.id == visit.child_id)].name,
-      address: visitAddresses[visitAddresses.findIndex(p => p.id == visit.address_id)].address,
+      address: addresses[addresses.findIndex(p => p.id == visit.address_id)].street,
       time: visit.appointment_time,
       card: "4985",
       price: visit.payment_amount,

@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const API_SETTINGS = {
-  apiKey: null,
+  apiKey: 'heefKNdwQtX0OjxjXQyQKwtt',
   endpoint: 'https://api.opear.com' //'http://localhost:3000/' //'http://ec2-18-191-228-16.us-east-2.compute.amazonaws.com/' //'http://api.opear.com/'
 };
 

@@ -27,7 +27,7 @@ class PastVisitsScreen extends React.Component {
           userStore: {
             id,
             children,
-            visitAddresses
+            addresses
           }
         }
       } = props;
@@ -43,7 +43,7 @@ class PastVisitsScreen extends React.Component {
 
       this.state = {
         children,
-        visitAddresses,
+        addresses,
         visitList: [
           {
             id: 1,
@@ -75,7 +75,7 @@ class PastVisitsScreen extends React.Component {
     }
 
   render() {
-    const { visitList, children, visitAddresses } = this.state;
+    const { visitList, children, addresses } = this.state;
     const {
       navigation: { navigate }
     } = this.props;
@@ -95,7 +95,7 @@ class PastVisitsScreen extends React.Component {
                       name={children[children.findIndex(p => p.id == item.child_id)].name}
                       illness={item.reason}
                       time={item.appointment_time}
-                      address={visitAddresses[visitAddresses.findIndex(p => p.id == item.address_id)].address}
+                      address={addresses[addresses.findIndex(p => p.id == item.address_id)].street}
                       onPress={() => navigate("VisitsBookingReceipt",{
                         visitID: item.id,
                         visits: visitList

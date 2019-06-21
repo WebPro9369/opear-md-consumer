@@ -55,14 +55,14 @@ class EditChildScreen extends React.Component {
         .setFirstName(first_name)
         .setLastName(last_name)
         .setBirthDate(dob)
-        .setGenderIndex(parseInt(gender));
+        .setGender(parseInt(gender));
 
         if(allergies) {
           childStore.setAllergies(allergies);
         }
 
         this.setState({
-          genderIndex:parseInt(gender),
+          gender:gender,
           firstName: first_name,
           lastName: last_name,
           birthDate: dob,
@@ -77,7 +77,7 @@ class EditChildScreen extends React.Component {
     this.state = {
       children,
       childStore,
-      genderIndex: 0,
+      gender: 0,
       firstName: "Henry",
       lastName: "Smith",
       birthDate: "05 / 19 / 2003",
@@ -93,8 +93,8 @@ class EditChildScreen extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  updateIndex(genderIndex) {
-    this.setState({ genderIndex });
+  updateIndex(gender) {
+    this.setState({ gender });
   }
 
   handleInputChange = name => value => {
@@ -114,7 +114,7 @@ class EditChildScreen extends React.Component {
     const {
       firstName,
       lastName,
-      genderIndex,
+      gender,
       birthDate,
       allergies
     } = this.state;
@@ -125,7 +125,7 @@ class EditChildScreen extends React.Component {
       child: {
         first_name: firstName,
         last_name: lastName,
-        gender: genderIndex,
+        gender: gender,
         dob: birthDate,
         allergies: allergies.split(", ")
         }
@@ -136,7 +136,7 @@ class EditChildScreen extends React.Component {
         .setFirstName(first_name)
         .setLastName(last_name)
         .setBirthDate(dob)
-        .setGenderIndex(parseInt(gender));
+        .setGender(parseInt(gender));
 
         if(allergies) {
           childStore.setAllergies(allergies.split(", "));
@@ -154,7 +154,7 @@ class EditChildScreen extends React.Component {
     } = this.props;
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
-      genderIndex,
+      gender,
       firstName,
       lastName,
       birthDate,
@@ -206,7 +206,7 @@ class EditChildScreen extends React.Component {
             <FormInputWrapper>
               <ButtonGroup
                 onPress={this.updateIndex}
-                selectedIndex={genderIndex}
+                selectedIndex={gender}
                 buttons={buttons}
                 containerStyle={{ height: 40 }}
               />

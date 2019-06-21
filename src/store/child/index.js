@@ -3,28 +3,25 @@ import { types } from "mobx-state-tree";
 
 export const ChildStore = types
   .model("ChildStore", {
-    genderIndex: types.number,
-    firstName: types.string,
-    lastName: types.string,
-    birthDate: types.string,
-    birthHistory: types.string,
-    surgicalHistory: types.string,
-    currentMedications: types.string,
-    hospitalizations: types.string,
-    currentMedicalConditions: types.string,
-    allergies: types.array (types.string)
+    id: types.number,
+    age: types.number,
+    gender: types.string,
+    name: types.string,
+    birthDate: types.Date,
+    birthHistory: types.optional(types.string, ''),
+    surgicalHistory: types.optional(types.string, ''),
+    currentMedications: types.optional(types.string, ''),
+    hospitalizations: types.optional(types.string, ''),
+    currentMedicalConditions: types.optional(types.string, ''),
+    allergies: types.array(types.string,'')
   })
   .actions(self => ({
-    setGenderIndex(value) {
-      self.genderIndex = value;
+    setGender(value) {
+      self.gender = value;
       return self;
     },
-    setFirstName(value) {
-      self.firstName = value;
-      return self;
-    },
-    setLastName(value) {
-      self.lastName = value;
+    setName(value) {
+      self.name = value;
       return self;
     },
     setBirthDate(value) {

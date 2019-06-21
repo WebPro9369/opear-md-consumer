@@ -32,14 +32,14 @@ class BookingReviewScreen extends React.Component {
       store: {
         userStore: {
           children,
-          visitAddresses,
+          addresses,
           visitRequest
         }
       }
     } = props;
 
     const childName = children[children.findIndex(p => p.id == visitRequest.pickedChild)].name;
-    const addressStreet = visitAddresses[visitAddresses.findIndex(p => p.id == visitRequest.pickedAddress)].address;
+    const addressStreet = addresses[addresses.findIndex(p => p.id == visitRequest.pickedAddress)].street;
 
     this.state = {
       name: childName,

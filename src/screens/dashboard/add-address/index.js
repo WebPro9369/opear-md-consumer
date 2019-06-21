@@ -79,14 +79,19 @@ class AddAddressScreen extends React.Component {
       }
     }
 
-    const successHandler = () => {
-      const { id } = response.data;
+    const successHandler = response => {
+      const { id, name, street, city, state, zip } = response.data;
 
-      userStore.addVisitAddress({
+      const newAddress = {
         id,
-        name: locationName,
-        address: street
-      });
+        name,
+        street,
+        city,
+        //state,
+        zip
+      }
+      
+      userStore.addAddress(newAddress);
 
       goBack();
     };

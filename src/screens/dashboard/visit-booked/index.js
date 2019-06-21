@@ -33,7 +33,7 @@ class VisitBookedScreen extends React.Component {
         userStore: {
           id,
           children,
-          visitAddresses
+          addresses
         }
       }
     } = props;
@@ -46,7 +46,7 @@ class VisitBookedScreen extends React.Component {
     this.state = {
       username: "Michael",
       child: children[children.findIndex(p => p.id == visit.child_id)].name,
-      address: visitAddresses[visitAddresses.findIndex(p => p.id == visit.address_id)].address,
+      address: addresses[addresses.findIndex(p => p.id == visit.address_id)].street,
       time: visit.appointment_time,
       providerData: {
         key: "1",
