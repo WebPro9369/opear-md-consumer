@@ -89,7 +89,7 @@ class EditChildScreen extends React.Component {
         firstName: first_name,
         lastName: last_name,
         gender: genderMap,
-        birthDate: dob,
+        birthDate: new Date(dob).toLocaleDateString("en-US"),
         age: getAge(dob),
         allergies: allergies.join(", ")
       });

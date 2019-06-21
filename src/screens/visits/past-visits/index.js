@@ -37,7 +37,7 @@ class PastVisitsScreen extends React.Component {
             child_id: 20,
             address_id: 75,
             reason: "fever",
-            appointment_time: 6,
+            appointment_time: "6 pm",
             payment_amount: 75,
             care_provider_id: 101
           },
@@ -46,7 +46,7 @@ class PastVisitsScreen extends React.Component {
             child_id: 10,
             address_id: 76,
             reason: "fever",
-            appointment_time: 6,
+            appointment_time: "6 pm",
             payment_amount: 175,
             care_provider_id: 101
           }
@@ -54,6 +54,9 @@ class PastVisitsScreen extends React.Component {
       };
 
       const successHandler = res => {
+
+        //const dateOptions = { hour: 'numeric' };
+        //new Date().toLocaleDateString("en-US", dateOptions).toString()
 
         /*this.setState({
           visitList: res.data

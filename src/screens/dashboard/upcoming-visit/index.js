@@ -64,7 +64,10 @@ class VisitBookedScreen extends React.Component {
         appointment_time,
         reasons
       } = res.data;
-      console.tron.log("test");
+
+
+      var dateOptions = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric' };
+
       this.setState({
       /*  providerData: {
           avartarImg: doctorImg,
@@ -74,7 +77,7 @@ class VisitBookedScreen extends React.Component {
         },*/
         child: child.first_name,
         address: address.street,
-        time: appointment_time
+        time: new Date(appointment_time).toLocaleDateString("en-US", dateOptions)
       });
 
     };
