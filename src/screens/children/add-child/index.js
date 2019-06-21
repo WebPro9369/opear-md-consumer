@@ -130,11 +130,7 @@ class AddChildScreen extends React.Component {
         allergies
       };
 
-      console.tron.log(newChild);
-
       userStore.addChild(newChild);
-
-      console.tron.log(userStore);
 
       goBack();
     };

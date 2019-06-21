@@ -161,7 +161,7 @@ export const UserStore = types
       return self;
     },
     setChild(index, value) {
-      self.children[index].replace(value);
+      self.children[index] = value;
       return self;
     },
     addAddress(value) {

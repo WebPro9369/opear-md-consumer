@@ -14,6 +14,7 @@ import {
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
+import { getAge } from "@utils";
 
 import { getChild, updateChild } from "@services/opear-api";
 
@@ -31,12 +32,18 @@ class EditChildScreen extends React.Component {
 
     const {
       navigation,
-      store: {
-        userStore: {
-          children
-        },
-        childStore
-      }
+      id,
+      age,
+      gender,
+      firstName,
+      lastName,
+      birthDate,
+      birthHistory,
+      surgicalHistory,
+      currentMedications,
+      hospitalizations,
+      currentMedicalConditions,
+      allergies
     } = props;
 
     const childID = navigation.getParam('childID', 0);
@@ -51,42 +58,32 @@ class EditChildScreen extends React.Component {
         allergies
       } = res.data;
 
-      childStore
-        .setFirstName(first_name)
-        .setLastName(last_name)
-        .setBirthDate(dob)
-        .setGender(parseInt(gender));
-
-        if(allergies) {
-          childStore.setAllergies(allergies);
-        }
-
-        this.setState({
-          gender:gender,
-          firstName: first_name,
-          lastName: last_name,
-          birthDate: dob,
-          allergies: allergies.join(", ")
-        })
-
-        console.tron.log(childStore);
+      this.setState({
+        id: id,
+        firstName: first_name,
+        lastName: last_name,
+        gender: gender,
+        birthDate: dob,
+        age: getAge(dob),
+        allergies: allergies.join(", ")
+      });
     }
 
     getChild(childID, { successHandler });
 
     this.state = {
-      children,
-      childStore,
-      gender: 0,
-      firstName: "Henry",
-      lastName: "Smith",
-      birthDate: "05 / 19 / 2003",
-      birthHistory: "Birth History",
-      surgicalHistory: "Surgical History",
-      currentMedications: "Current Medications",
-      hospitalizations: "Hospitalizations",
-      currentMedicalConditions: "Current Medical Conditions",
-      allergies: "Allergies"
+      id,
+      age,
+      gender,
+      firstName,
+      lastName,
+      birthDate,
+      birthHistory,
+      surgicalHistory,
+      currentMedications,
+      hospitalizations,
+      currentMedicalConditions,
+      allergies
     };
 
     this.updateIndex = this.updateIndex.bind(this);
@@ -107,7 +104,7 @@ class EditChildScreen extends React.Component {
     const {
       navigation,
       store: {
-        childStore
+        userStore
       }
     } = this.props;
 
@@ -131,16 +128,28 @@ class EditChildScreen extends React.Component {
         }
       };
 
-    const successHandler = () => {
-      childStore
-        .setFirstName(first_name)
-        .setLastName(last_name)
-        .setBirthDate(dob)
-        .setGender(parseInt(gender));
+    const successHandler = res => {
+      const {
+        id,
+        first_name,
+        last_name,
+        gender,
+        dob,
+        allergies
+      } = res.data;
 
-        if(allergies) {
-          childStore.setAllergies(allergies.split(", "));
-        }
+      var editedChild = {
+        id,
+        name: first_name+" "+last_name,
+        gender,
+        birthDate: new Date(dob),
+        age: getAge(dob),
+        allergies: allergies
+      }
+
+      var index = userStore.children.map(function(o) { return o.id; }).indexOf(id);
+
+      userStore.setChild(index,editedChild);
 
       navigation.goBack();
     };
