@@ -14,3 +14,7 @@ export const getAge = birthDate => {
   var age = Math.floor(diffDate/31557600000);
   return age;
 };
+
+export const getIndexByValue = (toSearch,id) => {
+  return toSearch.map((o) => o.id).indexOf(id)
+};

@@ -7,6 +7,7 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { VisitDetailCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
 import { getVisits } from "@services/opear-api";
+import { getIndexByValue } from "@utils";
 
 const imgFox = require("../../../../assets/images/Fox.png");
 const imgDog = require("../../../../assets/images/Dog.png");
@@ -24,58 +25,46 @@ class PastVisitsScreen extends React.Component {
 
       const {
         store: {
-          userStore: {
-            id,
-            children,
-            addresses
-          }
+          userStore
         }
       } = props;
 
       const successHandler = res => {
 
-        this.setState({
+        /*this.setState({
           visitList: res.data
-        });
+        });*/
       };
 
-      getVisits(id, { past: true, successHandler});
+      getVisits(userStore.id, { past: true, successHandler});
 
       this.state = {
-        children,
-        addresses,
+        userStore,
         visitList: [
           {
             id: 1,
-            child_id: 1,
-            address_id: 1,
+            child_id: 20,
+            address_id: 75,
             reason: "fever",
             appointment_time: 6,
-            payment_amount: 75
+            payment_amount: 75,
+            care_provider_id: 101
           },
           {
             id: 2,
-            child_id: 2,
-            address_id: 1,
+            child_id: 10,
+            address_id: 76,
             reason: "fever",
             appointment_time: 6,
-            payment_amount: 175
-          },
-          {
-            id: 3,
-            child_id: 1,
-            address_id: 2,
-            reason: "fever",
-            appointment_time: 6,
-            payment_amount: 225
+            payment_amount: 175,
+            care_provider_id: 101
           }
         ]
       };
-      console.tron.log(this.state);
     }
 
   render() {
-    const { visitList, children, addresses } = this.state;
+    const { visitList, userStore } = this.state;
     const {
       navigation: { navigate }
     } = this.props;
@@ -92,10 +81,10 @@ class PastVisitsScreen extends React.Component {
                   <View style={{ marginBottom: 9 }}>
                     <VisitDetailCard
                       avatarImg={imgFox}
-                      name={children[children.findIndex(p => p.id == item.child_id)].name}
+                      name={userStore.children[getIndexByValue(userStore.children,item.child_id)].name}
                       illness={item.reason}
                       time={item.appointment_time}
-                      address={addresses[addresses.findIndex(p => p.id == item.address_id)].street}
+                      address={userStore.addresses[getIndexByValue(userStore.addresses,item.address_id)].street}
                       onPress={() => navigate("VisitsBookingReceipt",{
                         visitID: item.id,
                         visits: visitList

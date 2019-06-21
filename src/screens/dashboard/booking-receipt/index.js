@@ -12,6 +12,8 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard, ProviderStarsCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
+import { getIndexByValue } from "@utils";
+import { getCareProvider } from "@services/opear-api"
 
 const { BLACK60 } = colors;
 
@@ -31,11 +33,7 @@ class BookingReceiptScreen extends React.Component {
     const {
       navigation,
       store: {
-        userStore: {
-          id,
-          children,
-          addresses
-        }
+        userStore
       }
     } = props;
 
@@ -53,14 +51,38 @@ class BookingReceiptScreen extends React.Component {
         symptom: "Respiratory",
         rating: "4.5"
       },
-      child: children[children.findIndex(p => p.id == visit.child_id)].name,
-      address: addresses[addresses.findIndex(p => p.id == visit.address_id)].street,
+      child: userStore.children[getIndexByValue(userStore.children,visit.child_id)].name,
+      address: userStore.addresses[getIndexByValue(userStore.addresses,visit.address_id)].street,
       time: visit.appointment_time,
       card: "4985",
       price: visit.payment_amount,
       stars: 0,
       starsEditable: false
     };
+
+    const successHandler = res => {
+
+      const {
+        name,
+        biography,
+        work_history,
+        rating,
+        specialties
+      } = res.data;
+
+      this.setState({
+        providerData: {
+          name: name,
+          bio: biography,
+          history: work_history.join(", "),
+          rating: rating,
+          badges: specialties
+        }
+      });
+
+    };
+
+    getCareProvider(visit.care_provider_id, { successHandler });
   }
 
   setStarsEditable = (value = true) => {
