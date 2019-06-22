@@ -9,14 +9,14 @@ export const formatCardInfo = data => ({
   fullName: data.fullName || ""
 });
 
-export const userFromResult = (res, currentUserStore) => {
+export const userFromResult = (res, userStore) => {
   const { name, email, phone, payment_accounts, birthday, zip, active } = res.data;
 
   const dob = getFormattedDate(new Date(birthday));
 
   const [firstName, lastName] = name.split(" ");
 
-  currentUserStore
+  userStore
     .setFirstName(firstName)
     .setLastName(lastName)
     .setEmail(email)

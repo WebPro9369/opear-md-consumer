@@ -43,12 +43,12 @@ class PaymentScreen extends React.Component {
   getParentInfo() {
     this.setState({ loading: true });
     const {
-      store: { currentUserStore }
+      store: { userStore }
     } = this.props;
-    getParent(currentUserStore.id, {
+    getParent(userStore.id, {
       successHandler: res => {
         if (res.status === 200) {
-          userFromResult(res, currentUserStore);
+          userFromResult(res, userStore);
           this.setState({
             loading: false
           });
@@ -70,7 +70,7 @@ class PaymentScreen extends React.Component {
     const {
       navigation: { navigate },
       store: {
-        currentUserStore: { payment_accounts }
+        userStore: { payment_accounts }
       }
     } = this.props;
     const { loading } = this.state;

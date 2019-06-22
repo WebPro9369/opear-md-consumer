@@ -28,7 +28,7 @@ class SignInScreen extends React.Component {
     const { email, password } = this.state;
     const {
       navigation: { navigate },
-      store: { currentUserStore }
+      store: { userStore }
     } = this.props;
 
     const loginSuccessHandler = res => {
@@ -37,10 +37,10 @@ class SignInScreen extends React.Component {
       } 
       
       const { id, api_key: apiKey } = res.data;
-      currentUserStore.setAuthentication({ id, apiKey });
+      userStore.setAuthentication({ id, apiKey });
 
       const successHandler = res => {
-        userFromResult(res, currentUserStore);
+        userFromResult(res, userStore);
         navigate("Tabs");
       };
       getParent(id, { successHandler });

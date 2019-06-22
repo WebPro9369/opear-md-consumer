@@ -45,10 +45,10 @@ class AddCardScreen extends React.Component {
       navigation: { goBack },
       store: {
         cardStore,
-        currentUserStore
+        userStore
       }
     } = this.props;
-    const { id } = currentUserStore;
+    const { id } = userStore;
     const {
       cardInfo: { cardNumber, expiryYear, expiryMonth, cvv, fullName }
     } = cardStore;
@@ -72,7 +72,7 @@ class AddCardScreen extends React.Component {
           }
         }, {
           successHandler: res => {
-            currentUserStore.addPaymentAccount(res.data.paymentAccount);
+            userStore.addPaymentAccount(res.data.paymentAccount);
             this.setState({ loading: false });
 
             goBack();

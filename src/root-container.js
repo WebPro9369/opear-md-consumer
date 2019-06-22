@@ -39,7 +39,7 @@ class RootContainer extends React.Component {
   componentDidMount() {
     const {
       store: {
-        currentUserStore: { apiKey }
+        userStore: { apiKey }
       }
     } = this.props;
     if (apiKey) {
@@ -50,11 +50,11 @@ class RootContainer extends React.Component {
   componentWillReceiveProps(nextProps) {
     const {
       store: {
-        currentUserStore: { apiKey }
+        userStore: { apiKey }
       }
     } = this.props;
     const {
-      store: { currentUserStore: nextUserStore }
+      store: { userStore: nextUserStore }
     } = nextProps;
 
     if (apiKey !== nextUserStore.apiKey && nextUserStore.apiKey) {
@@ -92,7 +92,7 @@ class RootContainer extends React.Component {
   onAction = value => {
     const {
       store: {
-        currentUserStore: { apiKey }
+        userStore: { apiKey }
       }
     } = this.props;
     const { active } = this.state;

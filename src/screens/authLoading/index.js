@@ -35,12 +35,12 @@ class AuthLoadingScreen extends Component {
     if (!isAuthenticated) return navigate("Onboarding");
 
     const {
-      store: { currentUserStore }
+      store: { userStore }
     } = this.props;
-    currentUserStore.setAuthentication({ id, apiKey });
+    userStore.setAuthentication({ id, apiKey });
 
     const successHandler = res => {
-      userFromResult(res, currentUserStore);
+      userFromResult(res, userStore);
 
       navigate("Tabs");
     };
