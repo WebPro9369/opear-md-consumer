@@ -3,7 +3,6 @@ import { inject, observer, PropTypes } from "mobx-react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { ActivityIndicator } from "react-native";
-import { inject, observer, PropTypes } from "mobx-react";
 import { getParent } from "@services/opear-api";
 import { userFromResult } from "@utils";
 import { StyledText } from "../../../components/text";

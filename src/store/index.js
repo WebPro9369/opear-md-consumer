@@ -3,7 +3,7 @@ import { ApplicationStore } from "./app";
 import { ProviderStore } from "./provider";
 import { UserStore } from "./user";
 import { ChildStore } from "@store/child";
-import { VisitsStore } from "@store/visits
+import { VisitsStore } from "@store/visits";
 import { CardStore } from "./card";
 
 const MainStore = types.model("MainStore", {
@@ -43,7 +43,7 @@ const MainStore = types.model("MainStore", {
         cardType: "",
         fullName: ""
       }
-    },
+    }),
     cardInfo: {
       cardNumber: "",
       expiryYear: 0,
