@@ -15,7 +15,7 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
-import { createPaymentAccount } from "../../../services/opear-api";
+import { createPaymentAccount } from "@services/opear-api";
 
 @inject("store")
 @observer
@@ -26,9 +26,9 @@ class AddCardScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    
+
     const {
-      navigation: { 
+      navigation: {
         state: { params }
       }
     } = this.props;

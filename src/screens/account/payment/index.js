@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { ActivityIndicator } from "react-native";
@@ -18,12 +19,18 @@ import { colors } from "../../../utils/constants";
 @inject("store")
 @observer
 class PaymentScreen extends React.Component {
-  propTypes = {
-    store: PropTypes.observableObject.isRequired
-  };
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
 
   constructor(props) {
     super(props);
+    const {
+      store: {
+        userStore
+      }
+    } = props;
+
     this.state = {
       loading: false
     };

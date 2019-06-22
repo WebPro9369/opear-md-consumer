@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { Alert, Image, View } from "react-native";
+import { inject, observer, PropTypes } from "mobx-react";
 import TouchID from "react-native-touch-id";
-import { ServiceButton } from "../../../components/service-button";
-import { StyledText, StyledTextInput } from "../../../components/text";
-import { NavHeader } from "../../../components/nav-header";
-import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
+import { ServiceButton } from "@components/service-button";
+import { StyledText, StyledTextInput } from "@components/text";
+import { NavHeader } from "@components/nav-header";
+import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 
 const imgLocation = require("../../../../assets/images/Location.png");
 const imgProgressbar = require("../../../../assets/images/ProgressBar1.png");
 
+@inject("store")
+@observer
 class AskLocationScreen extends Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,16 +24,22 @@ class AskLocationScreen extends Component {
     };
   }
 
-  handleInputChange = event => {
+  handleInputChange = text => {
     this.setState({
-      zipcode: event.target.value
+      zipcode: text
     });
   };
 
   onSubmit = () => {
     const {
-      navigation: { navigate }
+      navigation: { navigate },
+      store: {
+        userStore: { address }
+      }
     } = this.props;
+    const { zipcode } = this.state;
+
+    if (!zipcode) return Alert.alert("Please enter your zip code");
 
     const optionalConfigObject = {
       fallbackLabel: "Show Passcode", // iOS (if empty, then label is hidden)
@@ -34,6 +47,7 @@ class AskLocationScreen extends Component {
       passcodeFallback: true // iOS - allows the device to fall back to using the passcode, if faceid/touch is not available. this does not mean that if touchid/faceid fails the first few times it will revert to passcode, rather that if the former are not enrolled, then it will use the passcode.
     };
 
+    if (zipcode) address.setZipCode(zipcode);
     navigate("NameCapture");
     // TODO: Get TouchID working
   //   return TouchID.isSupported(optionalConfigObject)
@@ -83,7 +97,7 @@ class AskLocationScreen extends Component {
               autoFocus
               placeholder="Zip code"
               value={zipcode}
-              onChange={this.handleInputChange}
+              onChangeText={this.handleInputChange}
             />
             <Image source={imgLocation} />
           </View>

@@ -10,7 +10,7 @@ export const formatCardInfo = data => ({
 });
 
 export const userFromResult = (res, currentUserStore) => {
-  const { name, email, phone, payment_accounts, birthday, zip } = res.data;
+  const { name, email, phone, payment_accounts, birthday, zip, active } = res.data;
 
   const dob = getFormattedDate(new Date(birthday));
 
@@ -23,5 +23,18 @@ export const userFromResult = (res, currentUserStore) => {
     .setPhone(phone)
     .setBirthday(dob)
     .setPaymentAccounts(payment_accounts)
-    .setZip(zip);
+    .setZip(zip)
+    .setActive(active);
+  };
+
+  export const getAge = birthDate => {
+    var birthDateDate = new Date(birthDate);
+    var currentDate = new Date();
+    var diffDate = currentDate-birthDateDate;
+    var age = Math.floor(diffDate/31557600000);
+    return age;
+  };
+
+  export const getIndexByValue = (toSearch,id) => {
+    return toSearch.map((o) => o.id).indexOf(id)
 };

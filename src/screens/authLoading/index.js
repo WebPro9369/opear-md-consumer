@@ -4,7 +4,7 @@ import { ActivityIndicator, View } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { getParent } from "@services/opear-api";
 import { getAuthentication } from "@services/authentication";
-import { userFromResult } from "@utils";
+import { userFromResult, getAge } from "@utils";
 
 @inject("store")
 @observer
@@ -20,6 +20,7 @@ class AuthLoadingScreen extends Component {
 
   bootstrapAsync = async () => {
     const {
+      store: { userStore },
       navigation: { navigate }
     } = this.props;
 
@@ -29,10 +30,10 @@ class AuthLoadingScreen extends Component {
       isAuthenticated,
       wasAuthenticated
     } = await getAuthentication();
-  
+
     if (!isAuthenticated && wasAuthenticated) return navigate("AccountSignIn");
     if (!isAuthenticated) return navigate("Onboarding");
-  
+
     const {
       store: { currentUserStore }
     } = this.props;

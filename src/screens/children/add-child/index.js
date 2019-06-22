@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, ButtonGroup } from "react-native-elements";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
@@ -12,38 +13,77 @@ import {
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
+import { getAge } from "@utils";
+
+import { registerChild } from "@services/opear-api";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
+@inject("store")
+@observer
 class AddChildScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
+
+    const {
+      store: {
+        userStore
+      },
+        gender,
+        firstName,
+        lastName,
+        birthDate,
+        birthHistory,
+        surgicalHistory,
+        currentMedications,
+        hospitalizations,
+        currentMedicalConditions,
+        allergies
+    } = props;
+
     this.state = {
-      selectedIndex: 0,
-      firstName: null,
-      lastName: null,
+      gender: 0,
+      firstName: "",
+      lastName: "",
       birthDate: null,
-      birthHistory: null,
-      surgicalHistory: null,
-      currentMedications: null,
-      hospitalizations: null,
-      currentMedicalConditions: null,
-      allergies: null
+      birthHistory: "",
+      surgicalHistory: "",
+      currentMedications: "",
+      hospitalizations: "",
+      currentMedicalConditions: "",
+      allergies: []
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.updateIndex = this.updateIndex.bind(this);
   }
 
-  updateIndex(selectedIndex) {
-    this.setState({ selectedIndex });
+  updateIndex(gender) {
+    this.setState({ gender });
   }
 
-  render() {
+  handleInputChange = name => value => {
+    return this.setState({
+      [name]: value
+    });
+  };
+
+  onSubmit = () => {
+
     const {
-      navigation: { goBack }
+      navigation: { goBack },
+      store: {
+        childStore,
+        userStore
+      }
     } = this.props;
-    const buttons = ["Male", "Female", "Non-Binary"];
+
     const {
-      selectedIndex,
+      gender,
       firstName,
       lastName,
       birthDate,
@@ -54,6 +94,79 @@ class AddChildScreen extends React.Component {
       currentMedicalConditions,
       allergies
     } = this.state;
+
+    var allergiesArray = [];
+
+    if (allergies.indexOf(",") != -1) {
+      allergiesArray = allergies.split(", ");
+    }
+    else {
+      allergiesArray = allergies;
+    }
+
+    var genderMap = 0;
+
+    if(gender == 0) {
+      genderMap = "Male";
+    } else if(gender == 1){
+      genderMap = "Female";
+    } else {
+      genderMap = "Non-Binary";
+    }
+
+    const data =
+    {
+      child:
+      {
+        first_name: firstName,
+        last_name: lastName,
+        gender: genderMap,
+        dob: birthDate,
+        allergies: allergiesArray
+      }
+    }
+
+    var age = getAge(birthDate);
+
+    const successHandler = response => {
+      const { id, first_name, last_name, gender, dob, allergies } = response.data;
+
+      const newChild = {
+        id,
+        age: getAge(dob),
+        gender,
+        name:first_name+" "+last_name,
+        birthDate: new Date(dob),
+        allergies
+      };
+
+      userStore.addChild(newChild);
+
+      goBack();
+    };
+
+    registerChild(data, { successHandler });
+
+  }
+
+  render() {
+    const {
+      navigation: { goBack }
+    } = this.props;
+    const buttons = ["Male", "Female", "Non-Binary"];
+    const {
+      gender,
+      firstName,
+      lastName,
+      birthDate,
+      birthHistory,
+      surgicalHistory,
+      currentMedications,
+      hospitalizations,
+      currentMedicalConditions,
+      allergies
+    } = this.state;
+
     return (
       <ContainerView behavior="padding" enabled>
         <HeaderWrapper>
@@ -84,6 +197,7 @@ class AddChildScreen extends React.Component {
               <FormTextInput
                 label="First Name"
                 value={firstName}
+                onChangeText={this.handleInputChange("firstName")}
                 placeholder="First Name"
               />
             </FormInputWrapper>
@@ -91,13 +205,14 @@ class AddChildScreen extends React.Component {
               <FormTextInput
                 label="Last Name"
                 value={lastName}
+                onChangeText={this.handleInputChange("lastName")}
                 placeholder="Last Name"
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <ButtonGroup
                 onPress={this.updateIndex}
-                selectedIndex={selectedIndex}
+                selectedIndex={gender}
                 buttons={buttons}
                 containerStyle={{ height: 40 }}
               />
@@ -107,6 +222,7 @@ class AddChildScreen extends React.Component {
                 label="Birth Date"
                 value={birthDate}
                 placeholder="xx / xx / xxxx"
+                onChangeText={this.handleInputChange("birthDate")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -114,6 +230,7 @@ class AddChildScreen extends React.Component {
                 label="Birth History"
                 value={birthHistory}
                 placeholder="Birth History"
+                onChangeText={this.handleInputChange("birthHistory")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -121,6 +238,7 @@ class AddChildScreen extends React.Component {
                 label="Surgical History"
                 value={surgicalHistory}
                 placeholder="Surgical History"
+                onChangeText={this.handleInputChange("surgicalHistory")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -128,6 +246,7 @@ class AddChildScreen extends React.Component {
                 label="Current Medications"
                 value={currentMedications}
                 placeholder="Current Medications"
+                onChangeText={this.handleInputChange("currentMedications")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -135,6 +254,7 @@ class AddChildScreen extends React.Component {
                 label="Hospitalizations"
                 value={hospitalizations}
                 placeholder="Hospitalizations"
+                onChangeText={this.handleInputChange("hospitalizations")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -142,6 +262,7 @@ class AddChildScreen extends React.Component {
                 label="Allergies"
                 value={allergies}
                 placeholder="Allergies"
+                onChangeText={this.handleInputChange("allergies")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -149,11 +270,12 @@ class AddChildScreen extends React.Component {
                 label="Current Medical Conditions"
                 value={currentMedicalConditions}
                 placeholder="Current Medical Conditions"
+                onChangeText={this.handleInputChange("currentMedicalConditions")}
               />
             </FormInputWrapper>
           </FormWrapper>
           <FormInputWrapper style={{ marginBottom: 20 }}>
-            <ServiceButton title="Add Child" onPress={() => goBack()} />
+            <ServiceButton title="Add Child" onPress={this.onSubmit} />
           </FormInputWrapper>
         </KeyboardScrollView>
       </ContainerView>

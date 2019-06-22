@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -10,21 +11,43 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { ProviderCard, BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
+import { getIndexByValue } from "@utils";
+import { getCareProvider } from "@services/opear-api"
 
 const { BLACK60 } = colors;
 
 const doctorImg = require("../../../../assets/images/Doctor.png");
 const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 
+@inject("store")
+@observer
 class VisitBookedScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
 
+    const {
+      navigation,
+      store: {
+        userStore
+      }
+    } = props;
+
+    const visitID = navigation.getParam('visitID', 0);
+    const visits = navigation.getParam('visits', 0);
+
+    const visit = visits[visitID-1];
+
     this.state = {
-      username: "Michael",
+      username: userStore.name,
+      child: userStore.children[getIndexByValue(userStore.children,visit.child_id)].name,
+      address: userStore.addresses[getIndexByValue(userStore.addresses,visit.address_id)].street,
+      time: visit.appointment_time,
       providerData: {
-        key: "1",
-        avartarImg: doctorImg,
+        avatarImg: doctorImg,
         name: "Dr. John Smith",
         bio: "Hi, this is my bio",
         history: "Hi, this is my work history, line two of my work history",
@@ -32,13 +55,37 @@ class VisitBookedScreen extends React.Component {
         badges: ["Specialty", "Credentials", "Experience"]
       }
     };
+
+    const successHandler = res => {
+
+      const {
+        name,
+        biography,
+        work_history,
+        rating,
+        specialties
+      } = res.data;
+
+      this.setState({
+        providerData: {
+          name: name,
+          bio: biography,
+          history: work_history.join(", "),
+          rating: rating,
+          badges: specialties
+        }
+      });
+
+    };
+
+    getCareProvider(visit.care_provider_id, { successHandler });
   }
 
   render() {
     const {
       navigation: { navigate }
     } = this.props;
-    const { username, providerData } = this.state;
+    const { username, providerData, child, address, time } = this.state;
 
     return (
       <ScrollView padding={0}>
@@ -67,8 +114,7 @@ class VisitBookedScreen extends React.Component {
         <View style={{ marginTop: 32 }}>
           <ContentWrapper style={{ marginTop: 8, marginBottom: 8 }}>
             <ProviderCard
-              key={providerData.key}
-              avatarImg={providerData.avartarImg}
+              avatarImg={providerData.avatarImg}
               name={providerData.name}
               bio={providerData.bio}
               history={providerData.history}
@@ -80,17 +126,17 @@ class VisitBookedScreen extends React.Component {
           <ContentWrapper style={{ marginTop: 24 }}>
             <BookedDetailCard
               type="Child"
-              text="Benjamin"
+              text={child}
               icon={<Avatar rounded size={30} source={foxLargeImg} />}
             />
             <BookedDetailCard
               type="Address"
-              text="18 Mission St"
+              text={address}
               icon={<EvilIcons name="location" size={30} color={BLACK60} />}
             />
             <BookedDetailCard
               type="Date &amp; Time"
-              text="Sun Dec 31, 8am - 9am"
+              text={time}
               icon={
                 // eslint-disable-next-line react/jsx-wrap-multilines
                 <FontAwesome
