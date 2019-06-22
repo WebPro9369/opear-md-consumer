@@ -14,11 +14,8 @@ export const userFromResult = (res, userStore) => {
 
   const dob = getFormattedDate(new Date(birthday));
 
-  const [firstName, lastName] = name.split(" ");
-
   userStore
-    .setFirstName(firstName)
-    .setLastName(lastName)
+    .setName(name)
     .setEmail(email)
     .setPhone(phone)
     .setBirthday(dob)

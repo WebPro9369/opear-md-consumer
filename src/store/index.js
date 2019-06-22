@@ -19,6 +19,8 @@ const MainStore = types.model("MainStore", {
     id: 112,
     apiKey: "heefKNdwQtX0OjxjXQyQKwtt",
     name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     birthday: new Date("1970-01-01"),
     phone: "",

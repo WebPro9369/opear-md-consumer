@@ -26,8 +26,6 @@ export const UserStore = types
     id: types.number,
     apiKey: types.string,
     name: types.string,
-    firstName: types.string,
-    lastName: types.string,
     email: types.string,
     password: types.optional(types.string, ''),
     birthday: types.Date,
@@ -126,14 +124,6 @@ export const UserStore = types
     },
     setEmail(value) {
       self.email = value;
-      return self;
-    },
-    setFirstName(value) {
-      self.firstName = value;
-      return self;
-    },
-    setLastName(value) {
-      self.lastName = value;
       return self;
     },
     setPhone(value) {
