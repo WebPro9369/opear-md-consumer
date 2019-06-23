@@ -12,6 +12,8 @@ import {
 } from "../../components/views";
 import { IllnessCard, ContentWrapper, MatchingMessageWrapper } from "./styles";
 import { colors } from "../../utils/constants";
+import { getChildren } from "@services/opear-api";
+import { getAge } from "@utils"
 
 const imgRightArrow = require("../../../assets/images/Right_arrow.png");
 
@@ -27,15 +29,13 @@ class DashboardScreen extends React.Component {
 
     const {
       store: {
-        userStore: {
-          name
-        }
+        userStore
       }
     } = props;
 
     this.state = {
       // selectedIllness: null,
-      name,
+      userStore,
       illnessList: [
         { key: "1", string: "General", color: "#49AF67" },
         { key: "2", string: "Respiratory", color: "#0e7092" },
@@ -43,6 +43,27 @@ class DashboardScreen extends React.Component {
         { key: "4", string: "Ear Nose Throat", color: "#6b82a3" }
       ]
     };
+
+    const successHandler = res => {
+
+        var childAdjustedArray = res.data.map(
+          function(row)
+        {
+          return {
+          id: row.id,
+          age: getAge(row.dob),
+          gender: row.gender,
+          name: row.first_name+" "+row.last_name,
+          allergies: row.allergies,
+          birthDate: new Date(row.dob)};
+        });
+
+        userStore.setChildren(childAdjustedArray);
+
+      };
+
+      getChildren( { successHandler });
+
   }
 
   render() {
@@ -57,7 +78,7 @@ class DashboardScreen extends React.Component {
       outstandingAppointment
     } = providerStore;
 
-    const { name, illnessList } = this.state;
+    const { userStore, illnessList } = this.state;
 
     return (
       <ContainerView>
@@ -67,7 +88,7 @@ class DashboardScreen extends React.Component {
         <ContentWrapper>
           <StyledText fontSize={28} fontFamily="FlamaMedium">
             {"Hi, "}
-            {name}
+            {userStore.name}
             {"!"}
           </StyledText>
         </ContentWrapper>

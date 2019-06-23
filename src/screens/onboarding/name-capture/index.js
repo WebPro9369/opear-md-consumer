@@ -36,6 +36,9 @@ class NameCaptureScreen extends Component {
       }
     } = this.props;
     const { name } = this.state;
+
+    if (!name) Alert.alert("Please enter your name");
+
     userStore.setName(name);
 
     navigate("EmailCapture");

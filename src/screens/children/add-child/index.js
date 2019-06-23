@@ -11,12 +11,17 @@ import {
   FormWrapper,
   ViewCentered
 } from "../../../components/views";
-import { ScrollView } from "../../../components/views/scroll-view";
+import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
+import { getAge } from "@utils";
 
 import { registerChild } from "@services/opear-api";
 
-const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
+const avatarImages = [];
+avatarImages[0] = require("../../../../assets/images/Fox.png");
+avatarImages[1] = require("../../../../assets/images/chicken.png");
+avatarImages[2] = require("../../../../assets/images/Dog.png");
+avatarImages[3] = require("../../../../assets/images/Tiger.png");
 
 @inject("store")
 @observer
@@ -30,24 +35,22 @@ class AddChildScreen extends React.Component {
 
     const {
       store: {
-        childStore: {
-          genderIndex,
-          firstName,
-          lastName,
-          birthDate,
-          birthHistory,
-          surgicalHistory,
-          currentMedications,
-          hospitalizations,
-          currentMedicalConditions,
-          allergies
-        },
         userStore
-      }
+      },
+        gender,
+        firstName,
+        lastName,
+        birthDate,
+        birthHistory,
+        surgicalHistory,
+        currentMedications,
+        hospitalizations,
+        currentMedicalConditions,
+        allergies
     } = props;
 
     this.state = {
-      genderIndex: 0,
+      gender: 0,
       firstName: "",
       lastName: "",
       birthDate: null,
@@ -56,15 +59,16 @@ class AddChildScreen extends React.Component {
       currentMedications: "",
       hospitalizations: "",
       currentMedicalConditions: "",
-      allergies: ""
+      allergies: []
+      avatarNumber: Math.floor(Math.random() * 4)
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.updateIndex = this.updateIndex.bind(this);
   }
 
-  updateIndex(genderIndex) {
-    this.setState({ genderIndex });
+  updateIndex(gender) {
+    this.setState({ gender });
   }
 
   handleInputChange = name => value => {
@@ -84,7 +88,7 @@ class AddChildScreen extends React.Component {
     } = this.props;
 
     const {
-      genderIndex,
+      gender,
       firstName,
       lastName,
       birthDate,
@@ -96,10 +100,23 @@ class AddChildScreen extends React.Component {
       allergies
     } = this.state;
 
-    var allergiesArray = allergies;
+    var allergiesArray = [];
 
     if (allergies.indexOf(",") != -1) {
       allergiesArray = allergies.split(", ");
+    }
+    else {
+      allergiesArray = allergies;
+    }
+
+    var genderMap = 0;
+
+    if(gender == 0) {
+      genderMap = "Male";
+    } else if(gender == 1){
+      genderMap = "Female";
+    } else {
+      genderMap = "Non-Binary";
     }
 
     const data =
@@ -108,25 +125,27 @@ class AddChildScreen extends React.Component {
       {
         first_name: firstName,
         last_name: lastName,
-        gender: genderIndex,
+        gender: genderMap,
         dob: birthDate,
         allergies: allergiesArray
       }
     }
 
-    var birthDateDate = new Date(birthDate);
-    var currentDate = new Date();
-    var diffDate = currentDate-birthDateDate;
-    var age = Math.floor(diffDate/31557600000);
+    var age = getAge(birthDate);
 
-    const successHandler = () => {
-      const { id } = response.data;
+    const successHandler = response => {
+      const { id, first_name, last_name, gender, dob, allergies } = response.data;
 
-      userStore.addChild({
+      const newChild = {
         id,
-        name:firstName,
-        age
-      });
+        age: getAge(dob),
+        gender,
+        name:first_name+" "+last_name,
+        birthDate: new Date(dob),
+        allergies
+      };
+
+      userStore.addChild(newChild);
 
       goBack();
     };
@@ -141,7 +160,7 @@ class AddChildScreen extends React.Component {
     } = this.props;
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
-      genderIndex,
+      gender,
       firstName,
       lastName,
       birthDate,
@@ -150,7 +169,8 @@ class AddChildScreen extends React.Component {
       currentMedications,
       hospitalizations,
       currentMedicalConditions,
-      allergies
+      allergies,
+      avatarNumber
     } = this.state;
 
     return (
@@ -163,12 +183,12 @@ class AddChildScreen extends React.Component {
             onPressBackButton={() => goBack()}
           />
         </HeaderWrapper>
-        <ScrollView>
+        <KeyboardScrollView>
           <ViewCentered>
             <Avatar
               rounded
               size={120}
-              source={imgFoxLarge}
+              source={avatarImages[avatarNumber]}
               showEditButton
               editButton={{
                 iconStyle: {
@@ -198,7 +218,7 @@ class AddChildScreen extends React.Component {
             <FormInputWrapper>
               <ButtonGroup
                 onPress={this.updateIndex}
-                selectedIndex={genderIndex}
+                selectedIndex={gender}
                 buttons={buttons}
                 containerStyle={{ height: 40 }}
               />
@@ -263,7 +283,7 @@ class AddChildScreen extends React.Component {
           <FormInputWrapper style={{ marginBottom: 20 }}>
             <ServiceButton title="Add Child" onPress={this.onSubmit} />
           </FormInputWrapper>
-        </ScrollView>
+        </KeyboardScrollView>
       </ContainerView>
     );
   }

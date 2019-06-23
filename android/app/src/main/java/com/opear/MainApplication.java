@@ -3,6 +3,8 @@ package com.opear;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.keychain.KeychainPackage;
+import com.gettipsi.stripe.StripeReactPackage;
 import com.rnfingerprint.FingerprintAuthPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
@@ -30,6 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new KeychainPackage(),
+            new StripeReactPackage(),
             new FingerprintAuthPackage(),
             new ReactNativePushNotificationPackage(),
             new ReanimatedPackage(),

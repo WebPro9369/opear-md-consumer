@@ -11,6 +11,8 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { ProviderCard, BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
+import { getIndexByValue } from "@utils";
+import { getCareProvider } from "@services/opear-api"
 
 const { BLACK60 } = colors;
 
@@ -30,11 +32,7 @@ class VisitBookedScreen extends React.Component {
     const {
       navigation,
       store: {
-        userStore: {
-          id,
-          children,
-          visitAddresses
-        }
+        userStore
       }
     } = props;
 
@@ -44,13 +42,12 @@ class VisitBookedScreen extends React.Component {
     const visit = visits[visitID-1];
 
     this.state = {
-      username: "Michael",
-      child: children[children.findIndex(p => p.id == visit.child_id)].name,
-      address: visitAddresses[visitAddresses.findIndex(p => p.id == visit.address_id)].address,
+      username: userStore.name,
+      child: userStore.children[getIndexByValue(userStore.children,visit.child_id)].name,
+      address: userStore.addresses[getIndexByValue(userStore.addresses,visit.address_id)].street,
       time: visit.appointment_time,
       providerData: {
-        key: "1",
-        avartarImg: doctorImg,
+        avatarImg: doctorImg,
         name: "Dr. John Smith",
         bio: "Hi, this is my bio",
         history: "Hi, this is my work history, line two of my work history",
@@ -58,6 +55,30 @@ class VisitBookedScreen extends React.Component {
         badges: ["Specialty", "Credentials", "Experience"]
       }
     };
+
+    const successHandler = res => {
+
+      const {
+        name,
+        biography,
+        work_history,
+        rating,
+        specialties
+      } = res.data;
+
+      this.setState({
+        providerData: {
+          name: name,
+          bio: biography,
+          history: work_history.join(", "),
+          rating: rating,
+          badges: specialties
+        }
+      });
+
+    };
+
+    getCareProvider(visit.care_provider_id, { successHandler });
   }
 
   render() {
@@ -93,8 +114,7 @@ class VisitBookedScreen extends React.Component {
         <View style={{ marginTop: 32 }}>
           <ContentWrapper style={{ marginTop: 8, marginBottom: 8 }}>
             <ProviderCard
-              key={providerData.key}
-              avatarImg={providerData.avartarImg}
+              avatarImg={providerData.avatarImg}
               name={providerData.name}
               bio={providerData.bio}
               history={providerData.history}

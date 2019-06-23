@@ -49,6 +49,9 @@ class PhoneNumberScreen extends Component {
     if (!acceptedTermsOfService) {
       return Alert.alert("Please review our Terms of Service to continue");
     }
+    if (!phone) Alert.alert("Please enter your phone number");
+
+    if (phone) userStore.setPhone(phone);
 
     const {
       name,
@@ -72,7 +75,7 @@ class PhoneNumberScreen extends Component {
     console.tron.log(data);
 
     const successHandler = response => {
-      const { id, api_key: apiKey } = response.data;
+      const { id, apiKey: api_key } = response.data;
 
       userStore.setAuthentication({ id, apiKey });
 

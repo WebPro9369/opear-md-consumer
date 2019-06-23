@@ -4,11 +4,15 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
-import { FlexView, FormWrapper } from "../../../components/views";
 import {
-  KeyboardAvoidingView,
-  FormInputView
-} from "../../../components/views/keyboard-view";
+  ContainerView,
+  HeaderWrapper,
+  FlexView,
+  FormWrapper
+} from "../../../components/views";
+import { FormInputView } from "../../../components/views/keyboard-view";
+import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
+
 import { colors } from "../../../utils/constants";
 import { updateParent } from "@services/opear-api"
 

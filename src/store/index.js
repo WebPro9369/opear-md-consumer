@@ -4,6 +4,7 @@ import { ProviderStore } from "./provider";
 import { UserStore } from "./user";
 import { ChildStore } from "@store/child";
 import { VisitsStore } from "@store/visits";
+import { CardStore } from "./card";
 
 const MainStore = types.model("MainStore", {
   applicationStore: types.optional(ApplicationStore, {
@@ -15,27 +16,20 @@ const MainStore = types.model("MainStore", {
     outstandingAppointment: true
   }),
   userStore: types.optional(UserStore, {
-    id: 94,
-    apiKey: "EHzFacI31rswn6yRGxQImQtt",
-    name: "Michael Brown",
-    email: "michaelbrown@gmail.com",
+    id: 112,
+    apiKey: "heefKNdwQtX0OjxjXQyQKwtt",
+    name: "",
+    firstName: "",
+    lastName: "",
+    email: "",
     birthday: new Date("1970-01-01"),
-    phone: "7177776666",
     acceptedTermsOfService: false,
     acceptedPrivacy: false,
+    phone: "",
+    payment_accounts: [],
     paymentMethods: [{
       id:0, type:"Card", cardNumber:19990, expiryYear:10, expiryMonth:11, cvv:320, fullName:"Card Name"
     }],
-    children:[
-      { id: 1, name: "Benjamin", age: 6, avatarImg: "imgDog"},
-      { id: 2, name: "Audrey", age: 8, avatarImg: "imgFox"},
-      { id: 3, name: "Tara", age: 12, avatarImg: "imgTiger"}
-    ],
-    visitAddresses:[
-      { id: 1, name: "Place", address: "123 street"},
-      { id: 2, name: "My House", address: "123 road"},
-      { id: 3, name: "Mom's House", address: "123 avenue"}
-    ],
     visitRequest: {
       symptoms: [""],
       pickedChild: 1,
@@ -44,6 +38,16 @@ const MainStore = types.model("MainStore", {
       time: 0,
       cost: 0
     },
+    cardStore: types.optional(CardStore, {
+      cardInfo: {
+        cardNumber: "",
+        expiryYear: 0,
+        expiryMonth: 0,
+        cvv: "",
+        cardType: "",
+        fullName: ""
+      }
+    }),
     cardInfo: {
       cardNumber: "",
       expiryYear: 0,
@@ -62,18 +66,6 @@ const MainStore = types.model("MainStore", {
       latitude: "lat",
       longitude: "long"
     }
-  }),
-  childStore: types.optional(ChildStore, {
-    genderIndex: 0,
-    firstName: "",
-    lastName: "",
-    birthDate: "",
-    birthHistory: "",
-    surgicalHistory: "",
-    currentMedications: "",
-    hospitalizations: "",
-    currentMedicalConditions: "",
-    allergies: [""]
   }),
   visitsStore: types.optional(VisitsStore, {
     visits: [

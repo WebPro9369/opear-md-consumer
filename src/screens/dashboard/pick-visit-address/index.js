@@ -22,7 +22,7 @@ class PickVisitAddressScreen extends React.Component {
     const {
       store: {
         userStore: {
-          visitAddresses,
+          addresses,
           visitRequest: {
             pickedAddress
           }
@@ -32,7 +32,7 @@ class PickVisitAddressScreen extends React.Component {
 
     this.state = {
       pickedAddress: null,
-      visitAddresses
+      addresses
     };
   }
 
@@ -57,7 +57,7 @@ class PickVisitAddressScreen extends React.Component {
     const {
       navigation: { goBack, navigate }
     } = this.props;
-    const { visitAddresses } = this.state;
+    const { addresses } = this.state;
     return (
       <ContainerView>
         <View
@@ -94,7 +94,7 @@ class PickVisitAddressScreen extends React.Component {
               paddingRight: 16
             }}
           >
-            {visitAddresses.map(address => (
+            {addresses.map(address => (
               <ContentButton
                 key={address.id}
                 onPress={this.onSubmit(address.id)}
@@ -118,7 +118,7 @@ class PickVisitAddressScreen extends React.Component {
                       fontSize={14}
                       lineHeight={24}
                     >
-                      {address.address}
+                      {address.street}
                     </StyledText>
                   </View>
                 </FlexView>

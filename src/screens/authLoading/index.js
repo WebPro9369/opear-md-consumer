@@ -1,9 +1,18 @@
+/* eslint-disable import/no-unresolved */
 import React, { Component } from "react";
 import { ActivityIndicator, View } from "react-native";
-import { getParent, getChildren, getAddresses } from "@services/opear-api";
-import { getAge } from "@utils";
+import { inject, observer, PropTypes } from "mobx-react";
+import { getParent } from "@services/opear-api";
+import { getAuthentication } from "@services/authentication";
+import { userFromResult, getAge } from "@utils";
 
+@inject("store")
+@observer
 class AuthLoadingScreen extends Component {
+  static propTypes = {
+    store: PropTypes.observableObject.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.bootstrapAsync();
@@ -11,63 +20,27 @@ class AuthLoadingScreen extends Component {
 
   bootstrapAsync = async () => {
     const {
+      store: { userStore },
       navigation: { navigate }
     } = this.props;
-    const userAuthenticated = false;
 
-    /* for when authentication is available
+    const {
+      id,
+      apiKey,
+      isAuthenticated,
+      wasAuthenticated
+    } = await getAuthentication();
+
+    if (!isAuthenticated && wasAuthenticated) return navigate("AccountSignIn");
+    if (!isAuthenticated) return navigate("Onboarding");
 
     const successHandler = res => {
-      const {
-        name,
-        email,
-        zip,
-        phone,
-        password
-      } = res.data;
+      userFromResult(res, userStore);
 
-      userStore
-        .setName(name)
-        .setEmail(email)
-        .setZip(zip)
-        .setPhone(phone)
-        .setPassword(password);
-
-        const childSuccessHandler = res => {
-
-          var childAdjustedArray = res.data.map(row => [
-          {
-            id: row.id,
-            name: row.first_name+" "+row.last_name,
-            age: getAge(row.dob)
-          }]);
-
-          userStore.setChildren(childAdjustedArray);
-
-          const addressSuccessHandler = res => {
-            var addressAdjustedArray = res.data.map(row => [
-            {
-              id: row.id,
-              name: row.name,
-              address: row.address
-            }]);
-
-            userStore.setVisitAddresses(addressAdjustedArray);
-          };
-
-          getAddresses( { addressSuccessHandler });
-
-        };
-
-        getChildren( { childSuccessHandler });
+      navigate("Tabs");
     };
 
-
     getParent(id, { successHandler });
-
-    */
-
-    navigate(userAuthenticated ? "Tabs" : "Onboarding");
   };
 
   render() {

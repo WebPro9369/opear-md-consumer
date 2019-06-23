@@ -37,6 +37,8 @@ class EmailCaptureScreen extends Component {
     } = this.props;
     const { email } = this.state;
 
+    if (!email) Alert.alert("Please enter your email");
+
     if (email) userStore.setEmail(email);
     navigate("CreatePassword");
 

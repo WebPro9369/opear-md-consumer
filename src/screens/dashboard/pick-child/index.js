@@ -48,7 +48,7 @@ class PickChildScreen extends React.Component {
 
       const { pickedChild } = this.state;
 
-      userStore.setVisitRequestPickedChild(userStore.children[pickedChild-1].id);
+      userStore.setVisitRequestPickedChild(pickedChild);
 
       navigate("DashboardPickVisitAddress")
   };

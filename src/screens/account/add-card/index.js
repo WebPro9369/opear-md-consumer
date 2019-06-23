@@ -1,4 +1,5 @@
 import React from "react";
+import stripe from "tipsi-stripe";
 import { inject, observer, PropTypes } from "mobx-react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { FormTextInput } from "../../../components/text";
@@ -14,84 +15,106 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
-import { updateParent } from "@services/opear-api"
+import { createPaymentAccount } from "@services/opear-api";
 
 @inject("store")
 @observer
 class AddCardScreen extends React.Component {
-  static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
-
-    constructor(props) {
-      super(props);
-
-      const {
-        cardNumber, expiryDate, cvv, fullName
-      } = this.props;
-
-      this.state = {
-        cardNumber, expiryDate, cvv, fullName
-      };
-
-      this.handleInputChange = this.handleInputChange.bind(this);
+  propTypes = {
+    store: PropTypes.observableObject.isRequired
   };
 
-  handleInputChange = name => value => {
-    return this.setState({
-      [name]: value
-    });
-  };
+  constructor(props) {
+    super(props);
 
-  onSubmit = () => {
     const {
-      navigation: { goBack },
-      store: {
-        userStore
+      navigation: {
+        state: { params }
       }
     } = this.props;
 
-    const { cardNumber, expiryDate, cvv, fullName } = this.state;
-
-    var expiryArray = expiryDate.split("/")
-
-    var expiryYear = expiryArray[0];
-    var expiryMonth = expiryArray[1];
-
-    userStore.addPaymentMethod({
-      id: userStore.paymentMethods.length,
-      type: "Card",
-      cardNumber: parseInt(cardNumber),
-      expiryYear: parseInt(expiryYear),
-      expiryMonth: parseInt(expiryMonth),
-      cvv: parseInt(cvv),
-      fullName
-    });
-
-    const data = {
-      paymentMethods: userStore.paymentMethods
-    }
-
-    const successHandler = () => {
-
-      goBack();
+    this.state = {
+      loading: false,
+      isEditing: params && params.last4 && params.last4.length == 4,
+      last4: params && params.last4
     };
-
-    updateParent(userStore.id,data,{ successHandler});
   }
 
+  saveCardHandler = async () => {
+    const {
+      navigation: { goBack },
+      store: {
+        cardStore,
+        userStore
+      }
+    } = this.props;
+    const { id } = userStore;
+    const {
+      cardInfo: { cardNumber, expiryYear, expiryMonth, cvv, fullName }
+    } = cardStore;
+
+    const params = {
+      number: cardNumber,
+      expMonth: expiryMonth,
+      expYear: expiryYear,
+      cvc: cvv,
+      name: fullName
+    };
+    this.setState({ loading: true });
+    try {
+      const token = await stripe.createTokenWithCard(params);
+
+      createPaymentAccount(
+        id,
+        {
+          payment_account: {
+            token_id: token.tokenId
+          }
+        }, {
+          successHandler: res => {
+            userStore.addPaymentAccount(res.data.paymentAccount);
+            this.setState({ loading: false });
+
+            goBack();
+          },
+          errorHandler: () => {
+            this.setState({ loading: false });
+          }
+        }
+      );
+    } catch (e) {
+      console.log(e);
+      this.setState({ loading: false });
+    }
+  };
 
   render() {
     const {
-      navigation: { goBack }
+      navigation: { goBack, navigate },
+      store: { cardStore }
     } = this.props;
-    const { cardNumber, expiryDate, cvv, fullName } = this.state;
+
+    const {
+      cardInfo
+    } = cardStore;
+
+    const { cardNumber, expiryYear, expiryMonth, cvv, fullName } = cardInfo;
+
+    const { loading, isEditing, last4 } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <NavHeader
-          title="Add Card"
+          title={isEditing ? "Edit Card" : "Add Card"}
           size="medium"
-          onPressBackButton={() => goBack()}
+          onPressBackButton={() => {
+            cardStore.setCardInfo({
+              cardNumber: "",
+              expiryYear: "",
+              expiryMonth: "",
+              cvv: ""
+            });
+            goBack();
+          }}
           hasBackButton
         />
         <FormWrapper>
@@ -99,8 +122,14 @@ class AddCardScreen extends React.Component {
             <FormTextInput
               label="Card Number"
               value={cardNumber}
-              placeholder="1234 5678 3456 2456"
-              onChangeText={this.handleInputChange("cardNumber")}
+              placeholder={
+                isEditing
+                  ? `Current Card ending in ${last4}`
+                  : "1234 5678 3456 2456"
+              }
+              onChangeText={value =>
+                cardStore.setCardInfo({ ...cardInfo, cardNumber: value })
+              }
               leftIcon={
                 <FontAwesome name="cc-visa" size={30} color={colors.BLUE} />
               }
@@ -119,10 +148,24 @@ class AddCardScreen extends React.Component {
           <FormInputView>
             <FlexView>
               <FormTextInput
-                label="Exp. Date"
-                value={ expiryDate }
-                onChangeText={this.handleInputChange("expiryDate")}
-                placeholder="## / ##"
+                label="Exp. Month"
+                value={expiryMonth}
+                onChangeText={value =>
+                  cardStore.setCardInfo({ ...cardInfo, expiryMonth: value })
+                }
+                placeholder="##"
+                style={{
+                  width: 120,
+                  marginRight: 40
+                }}
+              />
+              <FormTextInput
+                label="Exp. Year"
+                value={expiryYear}
+                onChangeText={value =>
+                  cardStore.setCardInfo({ ...cardInfo, expiryYear: value })
+                }
+                placeholder="##"
                 style={{
                   width: 120,
                   marginRight: 40
@@ -132,7 +175,7 @@ class AddCardScreen extends React.Component {
                 label="CVV"
                 value={cvv}
                 placeholder="###"
-                onChangeText={this.handleInputChange("cvv")}
+                onChangeText={value => cardStore.setCardInfo({ ...cardInfo, cvv: value })}
                 style={{
                   width: 120
                 }}
@@ -143,16 +186,21 @@ class AddCardScreen extends React.Component {
             <FormTextInput
               label="Full Name"
               value={fullName}
+              onChangeText={value => cardStore.setCardInfo({ ...cardInfo, fullName: value })}
               placeholder="Full Name"
-              onChangeText={this.handleInputChange("fullName")}
             />
           </FormInputView>
         </FormWrapper>
-        <ServiceButton title="Add Card" onPress={this.onSubmit} />
+        <ServiceButton
+          title={!isEditing ? "Save Card" : "Edit Card"}
+          onPress={async () => {
+            await this.saveCardHandler();
+          }}
+          loading={loading}
+        />
       </KeyboardAvoidingView>
     );
-  };
+  }
 }
-
 
 export default AddCardScreen;

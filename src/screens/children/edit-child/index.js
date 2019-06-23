@@ -12,8 +12,9 @@ import {
   ViewCentered,
   View
 } from "../../../components/views";
-import { ScrollView } from "../../../components/views/scroll-view";
+import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
+import { getAge } from "@utils";
 
 import { getChild, updateChild } from "@services/opear-api";
 
@@ -31,15 +32,36 @@ class EditChildScreen extends React.Component {
 
     const {
       navigation,
-      store: {
-        userStore: {
-          children
-        },
-        childStore
-      }
+      id,
+      age,
+      gender,
+      firstName,
+      lastName,
+      birthDate,
+      birthHistory,
+      surgicalHistory,
+      currentMedications,
+      hospitalizations,
+      currentMedicalConditions,
+      allergies
     } = props;
 
     const childID = navigation.getParam('childID', 0);
+
+    this.state = {
+      id,
+      age,
+      gender,
+      firstName,
+      lastName,
+      birthDate,
+      birthHistory,
+      surgicalHistory,
+      currentMedications,
+      hospitalizations,
+      currentMedicalConditions,
+      allergies
+    };
 
     const successHandler = res => {
       const {
@@ -51,50 +73,36 @@ class EditChildScreen extends React.Component {
         allergies
       } = res.data;
 
-      childStore
-        .setFirstName(first_name)
-        .setLastName(last_name)
-        .setBirthDate(dob)
-        .setGenderIndex(parseInt(gender));
+      var genderMap = 0;
 
-        if(allergies) {
-          childStore.setAllergies(allergies);
-        }
+      if(gender=="Male"){
+        genderMap = 0;
+      } else if (gender=="Female") {
+        genderMap = 1;
+      } else {
+        console.tr
+        genderMap = 2;
+      }
 
-        this.setState({
-          genderIndex:parseInt(gender),
-          firstName: first_name,
-          lastName: last_name,
-          birthDate: dob,
-          allergies: allergies.join(", ")
-        })
-
-        console.tron.log(childStore);
+      this.setState({
+        id: id,
+        firstName: first_name,
+        lastName: last_name,
+        gender: genderMap,
+        birthDate: new Date(dob).toLocaleDateString("en-US"),
+        age: getAge(dob),
+        allergies: allergies.join(", ")
+      });
     }
 
     getChild(childID, { successHandler });
-
-    this.state = {
-      children,
-      childStore,
-      genderIndex: 0,
-      firstName: "Henry",
-      lastName: "Smith",
-      birthDate: "05 / 19 / 2003",
-      birthHistory: "Birth History",
-      surgicalHistory: "Surgical History",
-      currentMedications: "Current Medications",
-      hospitalizations: "Hospitalizations",
-      currentMedicalConditions: "Current Medical Conditions",
-      allergies: "Allergies"
-    };
 
     this.updateIndex = this.updateIndex.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  updateIndex(genderIndex) {
-    this.setState({ genderIndex });
+  updateIndex(gender) {
+    this.setState({ gender });
   }
 
   handleInputChange = name => value => {
@@ -107,40 +115,62 @@ class EditChildScreen extends React.Component {
     const {
       navigation,
       store: {
-        childStore
+        userStore
       }
     } = this.props;
 
     const {
       firstName,
       lastName,
-      genderIndex,
+      gender,
       birthDate,
       allergies
     } = this.state;
 
     const childID = navigation.getParam('childID', 0);
 
+    var genderMap = 0;
+
+    if(gender == 0) {
+      genderMap = "Male";
+    } else if(gender == 1){
+      genderMap = "Female";
+    } else {
+      genderMap = "Non-Binary";
+    }
+
     const data = {
       child: {
         first_name: firstName,
         last_name: lastName,
-        gender: genderIndex,
+        gender: genderMap,
         dob: birthDate,
         allergies: allergies.split(", ")
         }
       };
 
-    const successHandler = () => {
-      childStore
-        .setFirstName(first_name)
-        .setLastName(last_name)
-        .setBirthDate(dob)
-        .setGenderIndex(parseInt(gender));
+    const successHandler = res => {
+      const {
+        id,
+        first_name,
+        last_name,
+        gender,
+        dob,
+        allergies
+      } = res.data;
 
-        if(allergies) {
-          childStore.setAllergies(allergies.split(", "));
-        }
+      var editedChild = {
+        id,
+        name: first_name+" "+last_name,
+        gender,
+        birthDate: new Date(dob),
+        age: getAge(dob),
+        allergies: allergies
+      }
+
+      var index = userStore.children.map(function(o) { return o.id; }).indexOf(id);
+
+      userStore.setChild(index,editedChild);
 
       navigation.goBack();
     };
@@ -154,7 +184,7 @@ class EditChildScreen extends React.Component {
     } = this.props;
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
-      genderIndex,
+      gender,
       firstName,
       lastName,
       birthDate,
@@ -175,7 +205,7 @@ class EditChildScreen extends React.Component {
             onPressBackButton={() => navigation.goBack()}
           />
         </HeaderWrapper>
-        <ScrollView>
+        <KeyboardScrollView>
           <ViewCentered>
             <Avatar
               rounded
@@ -206,7 +236,7 @@ class EditChildScreen extends React.Component {
             <FormInputWrapper>
               <ButtonGroup
                 onPress={this.updateIndex}
-                selectedIndex={genderIndex}
+                selectedIndex={gender}
                 buttons={buttons}
                 containerStyle={{ height: 40 }}
               />
@@ -252,7 +282,7 @@ class EditChildScreen extends React.Component {
           <View style={{ marginBottom: 20 }}>
             <ServiceButton title="Save Changes" onPress={this.onSubmit} />
           </View>
-        </ScrollView>
+        </KeyboardScrollView>
       </ContainerView>
     );
   }
