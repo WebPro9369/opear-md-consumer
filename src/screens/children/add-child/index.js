@@ -59,7 +59,7 @@ class AddChildScreen extends React.Component {
       currentMedications: "",
       hospitalizations: "",
       currentMedicalConditions: "",
-      allergies: []
+      allergies: [],
       avatarNumber: Math.floor(Math.random() * 4)
     };
 
