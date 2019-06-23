@@ -460,7 +460,7 @@
 		08E2D467C0A933CE30905961BB5E2223 /* STPPaymentIntentSourceActionAuthorizeWithURL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPPaymentIntentSourceActionAuthorizeWithURL.h; path = Stripe/PublicHeaders/STPPaymentIntentSourceActionAuthorizeWithURL.h; sourceTree = "<group>"; };
 		08FCF01FAEDC1DD73210B823956D2A3F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		0997E5E8F8CA5087378516618F6642A4 /* RCTSourceCode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTSourceCode.h; sourceTree = "<group>"; };
-		09A7F426E8E37C2E1AD29D0C1E5D120B /* RCTSurfaceHostingView.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTSurfaceHostingView.mm; sourceTree = "<group>"; };
+		09A7F426E8E37C2E1AD29D0C1E5D120B /* RCTSurfaceHostingView.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTSurfaceHostingView.mm; sourceTree = "<group>"; };
 		09C99DA04D110576260393763EFE2843 /* RCTRootContentView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTRootContentView.m; sourceTree = "<group>"; };
 		09EC469D04AD772BCEB06D1B861BEBC1 /* RCTErrorInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTErrorInfo.m; sourceTree = "<group>"; };
 		09F81FE654CDCB5D4DE85FFBF661F5B9 /* STPFormEncoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPFormEncoder.m; path = Stripe/STPFormEncoder.m; sourceTree = "<group>"; };
@@ -468,10 +468,10 @@
 		0A6DAEE0F38C7F1B00C5DB34FF3D3833 /* STPUserInformation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPUserInformation.h; path = Stripe/PublicHeaders/STPUserInformation.h; sourceTree = "<group>"; };
 		0AD420808F5444721CF78920256A3C66 /* RCTErrorCustomizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTErrorCustomizer.h; sourceTree = "<group>"; };
 		0AD5DDC5E9BE9D830D3696C423138C42 /* RCTMaskedView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTMaskedView.h; sourceTree = "<group>"; };
-		0B6FCCFC9013999B88AA8B4B23961AC8 /* RNKeychain.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = RNKeychain.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0B6FCCFC9013999B88AA8B4B23961AC8 /* RNKeychain.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = RNKeychain.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0BF7543BDDCA2C6BFFD577A543DF028A /* RCTModalHostViewManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTModalHostViewManager.m; sourceTree = "<group>"; };
 		0C1385B72925A21AD298D3EB0A40EAD8 /* STPValidatedTextField.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPValidatedTextField.h; path = Stripe/STPValidatedTextField.h; sourceTree = "<group>"; };
-		0C4EA03BCE9A05F44B22A57137F55809 /* libPods-opear.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-opear.a"; path = "libPods-opear.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C4EA03BCE9A05F44B22A57137F55809 /* libPods-opear.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-opear.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C9203E8D041D08418A114830A61FC2D /* Pods-opear-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-opear-acknowledgements.plist"; sourceTree = "<group>"; };
 		0CE075129600FB5EB4A03A45B9139024 /* stp_card_diners_template.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_diners_template.png; path = Stripe/Resources/Images/stp_card_diners_template.png; sourceTree = "<group>"; };
 		0D1DAE733D00D4DBC9A3BB14EEB15227 /* RCTSafeAreaViewManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTSafeAreaViewManager.m; sourceTree = "<group>"; };
@@ -486,7 +486,7 @@
 		10AAE4C73E1DE3B9584BF4AF63F81221 /* instrumentation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = instrumentation.h; path = yoga/instrumentation.h; sourceTree = "<group>"; };
 		10D0DE9CC6EBED0274F939F54C2BD337 /* STPEphemeralKey.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPEphemeralKey.h; path = Stripe/STPEphemeralKey.h; sourceTree = "<group>"; };
 		10D5C0F8954F465EAB4908A535074576 /* stp_card_jcb.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_jcb.png; path = Stripe/Resources/Images/stp_card_jcb.png; sourceTree = "<group>"; };
-		1166DB1FC3808917CAF3ECE6B00BE860 /* RCTSurfaceView.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTSurfaceView.mm; sourceTree = "<group>"; };
+		1166DB1FC3808917CAF3ECE6B00BE860 /* RCTSurfaceView.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTSurfaceView.mm; sourceTree = "<group>"; };
 		11E57607F277E700493348CE7DADE515 /* stp_icon_checkmark@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_icon_checkmark@2x.png"; path = "Stripe/Resources/Images/stp_icon_checkmark@2x.png"; sourceTree = "<group>"; };
 		11E7E6D66D5E65E41A740E957C5394C4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		1293F5D9081EE660D92C84CE696B82AC /* RCTKeyboardObserver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTKeyboardObserver.h; sourceTree = "<group>"; };
@@ -535,15 +535,15 @@
 		22EEDA07B5DDEEB0F3FE8E86BF4D8C5D /* STPMultipartFormDataEncoder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPMultipartFormDataEncoder.m; path = Stripe/STPMultipartFormDataEncoder.m; sourceTree = "<group>"; };
 		23C809D0A4E63B0BB81216A9A8BF0EE5 /* RCTDeviceInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTDeviceInfo.h; sourceTree = "<group>"; };
 		24000A8C3C0DE710AD53271BBDD2B796 /* RCTParserUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTParserUtils.m; sourceTree = "<group>"; };
-		244FA7CF26E962B494E448F5CA141B83 /* Utils.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = Utils.cpp; path = yoga/Utils.cpp; sourceTree = "<group>"; };
-		24947B57C3873E6086D93359240FCB78 /* Localizations */ = {isa = PBXFileReference; includeInIndex = 1; name = Localizations; path = Stripe/Resources/Localizations; sourceTree = "<group>"; };
+		244FA7CF26E962B494E448F5CA141B83 /* Utils.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = Utils.cpp; path = yoga/Utils.cpp; sourceTree = "<group>"; };
+		24947B57C3873E6086D93359240FCB78 /* Localizations */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = Localizations; path = Stripe/Resources/Localizations; sourceTree = "<group>"; };
 		24F9229C153794D15698ABD57D1680BE /* STPPaymentConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPPaymentConfiguration.h; path = Stripe/PublicHeaders/STPPaymentConfiguration.h; sourceTree = "<group>"; };
 		2507B4493BABE8F3845EF9FFCA6FAB58 /* STPPaymentCardTextFieldViewModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPPaymentCardTextFieldViewModel.h; path = Stripe/STPPaymentCardTextFieldViewModel.h; sourceTree = "<group>"; };
 		254CC893D84FA293DCB3601F70882B68 /* STPSourceRedirect.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPSourceRedirect.m; path = Stripe/STPSourceRedirect.m; sourceTree = "<group>"; };
 		25AE9E1CC9B83C7699855F06011C463D /* PKPaymentAuthorizationViewController+Stripe_Blocks.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "PKPaymentAuthorizationViewController+Stripe_Blocks.m"; path = "Stripe/PKPaymentAuthorizationViewController+Stripe_Blocks.m"; sourceTree = "<group>"; };
 		2616C871B87B5B8EA141E64EADA63982 /* RCTWrapperViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTWrapperViewController.h; sourceTree = "<group>"; };
 		2760210B74DEF05A5B7B3276FD797F14 /* STPPaymentIntentParams.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPPaymentIntentParams.m; path = Stripe/STPPaymentIntentParams.m; sourceTree = "<group>"; };
-		27980C2A53F67FBD3A053B4C8F6799F5 /* RCTUIManagerObserverCoordinator.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTUIManagerObserverCoordinator.mm; sourceTree = "<group>"; };
+		27980C2A53F67FBD3A053B4C8F6799F5 /* RCTUIManagerObserverCoordinator.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTUIManagerObserverCoordinator.mm; sourceTree = "<group>"; };
 		27DED1253518E4C98EA22091AD37F57F /* STPAspects.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPAspects.m; path = Stripe/STPAspects.m; sourceTree = "<group>"; };
 		28A2ECBCEAF31294DC8539E3ED990BA2 /* RCTSwitchManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTSwitchManager.h; sourceTree = "<group>"; };
 		28CEE7443992208D70735AEECF0BAAA1 /* STPAPIClient+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPAPIClient+Private.h"; path = "Stripe/STPAPIClient+Private.h"; sourceTree = "<group>"; };
@@ -572,9 +572,9 @@
 		305D1BCDEF6202B4DA0F876FE250C81A /* RCTAsyncLocalStorage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTAsyncLocalStorage.h; sourceTree = "<group>"; };
 		30BD108E7D30E676C493992F876C802D /* yoga-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "yoga-dummy.m"; sourceTree = "<group>"; };
 		316B88EAB7B07DC04BC98B2E64F350CD /* STPPaymentMethodTableViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPPaymentMethodTableViewCell.h; path = Stripe/STPPaymentMethodTableViewCell.h; sourceTree = "<group>"; };
-		319DFBBD5B4B88E0D6485C8816C94C2B /* stp_test_upload_image.jpeg */ = {isa = PBXFileReference; includeInIndex = 1; name = stp_test_upload_image.jpeg; path = Stripe/Resources/Images/stp_test_upload_image.jpeg; sourceTree = "<group>"; };
+		319DFBBD5B4B88E0D6485C8816C94C2B /* stp_test_upload_image.jpeg */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.jpeg; name = stp_test_upload_image.jpeg; path = Stripe/Resources/Images/stp_test_upload_image.jpeg; sourceTree = "<group>"; };
 		32C0B2322E5C4447CB30551712A8A323 /* RCTMaskedViewManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTMaskedViewManager.h; sourceTree = "<group>"; };
-		32DF0F21CCBE452773FF15A94F2B2F63 /* YGNode.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = YGNode.cpp; path = yoga/YGNode.cpp; sourceTree = "<group>"; };
+		32DF0F21CCBE452773FF15A94F2B2F63 /* YGNode.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = YGNode.cpp; path = yoga/YGNode.cpp; sourceTree = "<group>"; };
 		3321892A8BEA240B742E88DF4FCE798B /* RCTTiming.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTTiming.h; sourceTree = "<group>"; };
 		338F793A27D965E05AD27C3C2F377AF2 /* STPDispatchFunctions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPDispatchFunctions.h; path = Stripe/STPDispatchFunctions.h; sourceTree = "<group>"; };
 		348AA7C81368BB6C4551809EFD43AAEA /* RCTBundleURLProvider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTBundleURLProvider.h; sourceTree = "<group>"; };
@@ -608,7 +608,7 @@
 		3F1F872AF5FBFB70983C9170B28D9666 /* STPPaymentCardTextFieldCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPPaymentCardTextFieldCell.m; path = Stripe/STPPaymentCardTextFieldCell.m; sourceTree = "<group>"; };
 		3F3C794B5C4ABEF58A2C52F00CCDE60E /* stp_card_error@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_error@3x.png"; path = "Stripe/Resources/Images/stp_card_error@3x.png"; sourceTree = "<group>"; };
 		401D6869F5591A07DDA004F5DA68D9E6 /* RCTDatePickerManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTDatePickerManager.h; sourceTree = "<group>"; };
-		4076AEB15E7A052C50A7B9566DFEA88C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		4076AEB15E7A052C50A7B9566DFEA88C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		409197106A4BE7F4342DE1A854A859A1 /* RCTShadowView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTShadowView.m; sourceTree = "<group>"; };
 		40D4D2E842E60D037D57BF41CEE9E52A /* RCTStatusBarManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTStatusBarManager.h; sourceTree = "<group>"; };
 		4110D6EBE230CAF8C1955B6CDF968680 /* YGStyle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YGStyle.h; path = yoga/YGStyle.h; sourceTree = "<group>"; };
@@ -618,7 +618,7 @@
 		41EDA7F187043709FE015CEA739DA98B /* NSURLComponents+Stripe.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSURLComponents+Stripe.h"; path = "Stripe/NSURLComponents+Stripe.h"; sourceTree = "<group>"; };
 		424DF8FE6E343E0DE6B61465D5E0DDAC /* RCTTouchEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTTouchEvent.m; sourceTree = "<group>"; };
 		42A008B8EB95543F9BF6247D7CDBA903 /* RCTBridge+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RCTBridge+Private.h"; sourceTree = "<group>"; };
-		4340A4A4AA2895FCB69D52BD9541AC4D /* YGNodePrint.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = YGNodePrint.cpp; path = yoga/YGNodePrint.cpp; sourceTree = "<group>"; };
+		4340A4A4AA2895FCB69D52BD9541AC4D /* YGNodePrint.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = YGNodePrint.cpp; path = yoga/YGNodePrint.cpp; sourceTree = "<group>"; };
 		4348BE3B2CD330215F2D0ECA5005049F /* Stripe-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Stripe-prefix.pch"; sourceTree = "<group>"; };
 		4353721EB71805804CD6F8884525A75A /* UIViewController+Stripe_NavigationItemProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Stripe_NavigationItemProxy.h"; path = "Stripe/UIViewController+Stripe_NavigationItemProxy.h"; sourceTree = "<group>"; };
 		43884AEFDFBA468741CC41EF4EDDF9DA /* RCTPerformanceLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTPerformanceLogger.m; sourceTree = "<group>"; };
@@ -635,18 +635,18 @@
 		47B6A3FC4DFA94A771AFA337671A1523 /* RCTScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTScrollView.m; sourceTree = "<group>"; };
 		484AC913578A40C0D4481B637FF425C5 /* UIView+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIView+Private.h"; sourceTree = "<group>"; };
 		48BA4C5A536D91CCCF1A8ECE1D360634 /* RCTImageSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTImageSource.h; sourceTree = "<group>"; };
-		49FA16B29ED975BF02EF363D03AEBD9F /* RCTProfileTrampoline-i386.S */ = {isa = PBXFileReference; includeInIndex = 1; path = "RCTProfileTrampoline-i386.S"; sourceTree = "<group>"; };
+		49FA16B29ED975BF02EF363D03AEBD9F /* RCTProfileTrampoline-i386.S */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.asm; path = "RCTProfileTrampoline-i386.S"; sourceTree = "<group>"; };
 		4A1899FBFF59D102F413161A6F724A23 /* RCTMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTMacros.h; sourceTree = "<group>"; };
 		4A2E60709FE60696DC04EAFE412E5C1D /* RCTVersion.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTVersion.m; sourceTree = "<group>"; };
 		4AB04EB272CD07188603303A16C04775 /* stp_card_visa@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_visa@2x.png"; path = "Stripe/Resources/Images/stp_card_visa@2x.png"; sourceTree = "<group>"; };
 		4AB498A939E33EA81047544C02120F91 /* stp_icon_checkmark.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_icon_checkmark.png; path = Stripe/Resources/Images/stp_icon_checkmark.png; sourceTree = "<group>"; };
 		4ADCF3267B0F78BEBF8E6BB3C2EBF0EC /* RCTUIManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTUIManager.m; sourceTree = "<group>"; };
-		4B93065AE114F6B2350CF6B30A91F0E5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		4B93065AE114F6B2350CF6B30A91F0E5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4C00F5935AA8E20AEF8D94DC9A9EC071 /* STPPaymentMethodTableViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPPaymentMethodTableViewCell.m; path = Stripe/STPPaymentMethodTableViewCell.m; sourceTree = "<group>"; };
 		4C0A1B2ABC4ED2A65556E64FD2A19376 /* RCTKeyCommands.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTKeyCommands.h; sourceTree = "<group>"; };
 		4C6A18258F51A8515921C47EA9A65EEA /* UITableViewCell+Stripe_Borders.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UITableViewCell+Stripe_Borders.m"; path = "Stripe/UITableViewCell+Stripe_Borders.m"; sourceTree = "<group>"; };
 		4CA263859BEA3897E6B5E1DAE3CF2697 /* STPRedirectContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPRedirectContext.m; path = Stripe/STPRedirectContext.m; sourceTree = "<group>"; };
-		4D019E0D1ED2B206ABEF6E3222A86FD8 /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libReact.a; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D019E0D1ED2B206ABEF6E3222A86FD8 /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D143052C383AEC46C7BEF225EF0C6C5 /* RCTClipboard.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTClipboard.h; sourceTree = "<group>"; };
 		4D1C3CA84435368E4CEF25650D5811E7 /* STPStringUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPStringUtils.m; path = Stripe/STPStringUtils.m; sourceTree = "<group>"; };
 		4DBAF2CED7507F256EAF3670FB1202E7 /* RCTTouchHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTTouchHandler.m; sourceTree = "<group>"; };
@@ -657,7 +657,7 @@
 		4F49497D86BAABED65572A07C128C4CF /* RCTAssert.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTAssert.m; sourceTree = "<group>"; };
 		4FD9AEC94EDAA64E8F41DB887800B914 /* RCTJavaScriptExecutor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTJavaScriptExecutor.h; sourceTree = "<group>"; };
 		4FDD874A8A4CE1338E8A529348D54C1B /* Localizable.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		502026A7B7F5106DBD84373CE99BA81E /* Stripe.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Stripe.bundle; path = "Stripe-Stripe.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		502026A7B7F5106DBD84373CE99BA81E /* Stripe.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Stripe.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		51343F3B6A8943A9FCB897A0FA76D23E /* YGLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YGLayout.h; path = yoga/YGLayout.h; sourceTree = "<group>"; };
 		518817B2D1D411FAA0F517CE009F02B0 /* STPBlocks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPBlocks.h; path = Stripe/PublicHeaders/STPBlocks.h; sourceTree = "<group>"; };
 		51EF1B0C13D74C1DFF0B69BBCB5A1C85 /* STPAPIClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPAPIClient.m; path = Stripe/STPAPIClient.m; sourceTree = "<group>"; };
@@ -686,7 +686,7 @@
 		5ABFC96F7B6AE45F4E34DA754DBA96A3 /* STPSourceOwner.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPSourceOwner.h; path = Stripe/PublicHeaders/STPSourceOwner.h; sourceTree = "<group>"; };
 		5AE52ED9DEA54CBC1770EEF02F773D9A /* stp_card_unionpay_template_en.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_unionpay_template_en.png; path = Stripe/Resources/Images/stp_card_unionpay_template_en.png; sourceTree = "<group>"; };
 		5B3DE46788F5D8F32E7436E23507D478 /* STPSourceProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPSourceProtocol.h; path = Stripe/PublicHeaders/STPSourceProtocol.h; sourceTree = "<group>"; };
-		5B4D373FE0BC86C2458A30AED532740F /* React.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = React.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		5B4D373FE0BC86C2458A30AED532740F /* React.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = React.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5C0D06AC4A5C160C7C661D498B860E31 /* RCTSurfaceRootShadowView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTSurfaceRootShadowView.m; sourceTree = "<group>"; };
 		5CF1D8221D1FEAF0DE6F684C2FB86092 /* STPPaymentIntent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPPaymentIntent.h; path = Stripe/PublicHeaders/STPPaymentIntent.h; sourceTree = "<group>"; };
 		5D3D0DF71915B224F9817EE10FF96DAC /* STPCardParams.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPCardParams.m; path = Stripe/STPCardParams.m; sourceTree = "<group>"; };
@@ -700,14 +700,14 @@
 		5F9D6D590E539AB8A89E2313F5DC581C /* STPCustomer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPCustomer.h; path = Stripe/PublicHeaders/STPCustomer.h; sourceTree = "<group>"; };
 		5FA5234FFD18377DC75C35E11D553786 /* RCTScrollContentViewManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTScrollContentViewManager.h; sourceTree = "<group>"; };
 		603BB8C8177C8C7508FE3005B4BA779A /* YGNodePrint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YGNodePrint.h; path = yoga/YGNodePrint.h; sourceTree = "<group>"; };
-		6191A4C779E50C5B2F6A3582081C0EA5 /* RCTManagedPointer.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTManagedPointer.mm; sourceTree = "<group>"; };
+		6191A4C779E50C5B2F6A3582081C0EA5 /* RCTManagedPointer.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTManagedPointer.mm; sourceTree = "<group>"; };
 		6199D3590D4D5FAAFF7BDF775A2759BF /* RCTRootShadowView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTRootShadowView.m; sourceTree = "<group>"; };
 		635B76F9C7C47E4EB2D7F3D1FB26A29C /* stp_card_mastercard_template@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_mastercard_template@2x.png"; path = "Stripe/Resources/Images/stp_card_mastercard_template@2x.png"; sourceTree = "<group>"; };
 		639206706F9D017777842F1759AEAE6D /* RCTEventEmitter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTEventEmitter.h; sourceTree = "<group>"; };
 		65260C9560D4A881AD76389E9E7A9652 /* STPPaymentCardTextField+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPPaymentCardTextField+Private.h"; path = "Stripe/STPPaymentCardTextField+Private.h"; sourceTree = "<group>"; };
 		6745ACC374E08E4EB960910469F814D5 /* STPBundleLocator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPBundleLocator.h; path = Stripe/STPBundleLocator.h; sourceTree = "<group>"; };
 		678FA9CCD1316657B302DD9252E1E980 /* STPLegalEntityParams.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPLegalEntityParams.m; path = Stripe/STPLegalEntityParams.m; sourceTree = "<group>"; };
-		681C93B3E5F9FB4028E2BB109442A4C8 /* RCTDevSettings.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTDevSettings.mm; sourceTree = "<group>"; };
+		681C93B3E5F9FB4028E2BB109442A4C8 /* RCTDevSettings.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTDevSettings.mm; sourceTree = "<group>"; };
 		688AEFB578D8CA9CE0B6B0CED6225C1E /* RCTPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTPicker.h; sourceTree = "<group>"; };
 		68900DFC2E21B2BA52CFBCD448D906A0 /* STPRedirectContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPRedirectContext.h; path = Stripe/PublicHeaders/STPRedirectContext.h; sourceTree = "<group>"; };
 		69350E982C16BDF4E50E0E0D23C074F0 /* RCTAutoInsetsProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTAutoInsetsProtocol.h; sourceTree = "<group>"; };
@@ -725,7 +725,7 @@
 		6F5306528A663BBD51816D06E064F9D2 /* stp_card_unknown@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_unknown@3x.png"; path = "Stripe/Resources/Images/stp_card_unknown@3x.png"; sourceTree = "<group>"; };
 		702F12F58F3B8348FE3E522CC796CFB5 /* STPSectionHeaderView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPSectionHeaderView.h; path = Stripe/STPSectionHeaderView.h; sourceTree = "<group>"; };
 		7054566F21D5E6F3D6A8BC33F3955C68 /* stp_card_amex_template.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_amex_template.png; path = Stripe/Resources/Images/stp_card_amex_template.png; sourceTree = "<group>"; };
-		70F64420C4837C4CE04520DF62E0375B /* YGValue.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = YGValue.cpp; path = yoga/YGValue.cpp; sourceTree = "<group>"; };
+		70F64420C4837C4CE04520DF62E0375B /* YGValue.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = YGValue.cpp; path = yoga/YGValue.cpp; sourceTree = "<group>"; };
 		71412C572FBAAA9EE6342C76D8F4BE5B /* RCTViewManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTViewManager.h; sourceTree = "<group>"; };
 		71D8A1AA6197F2D386D1591A9DEB2FA6 /* RCTWKWebViewManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTWKWebViewManager.m; sourceTree = "<group>"; };
 		730CFC598C94CD1D9ACA7A31332A1B58 /* RCTTextDecorationLineType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTTextDecorationLineType.h; sourceTree = "<group>"; };
@@ -737,7 +737,7 @@
 		752120D9081524ADA0939FE77AE0B71C /* stp_card_cvc_amex@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_cvc_amex@2x.png"; path = "Stripe/Resources/Images/stp_card_cvc_amex@2x.png"; sourceTree = "<group>"; };
 		756B9927DAABA8FFE7A55079B78F6D51 /* RCTRefreshControlManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTRefreshControlManager.h; sourceTree = "<group>"; };
 		75C5232A4F35BDB5AD29059920FA76DD /* STPPaymentContextAmountModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPPaymentContextAmountModel.m; path = Stripe/STPPaymentContextAmountModel.m; sourceTree = "<group>"; };
-		763ACC83455A4765AB2553EDE4F9EBEF /* RCTModuleData.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTModuleData.mm; sourceTree = "<group>"; };
+		763ACC83455A4765AB2553EDE4F9EBEF /* RCTModuleData.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTModuleData.mm; sourceTree = "<group>"; };
 		7668E5C1EC525052819930E650751571 /* STPApplePayPaymentMethod.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPApplePayPaymentMethod.m; path = Stripe/STPApplePayPaymentMethod.m; sourceTree = "<group>"; };
 		769B39365C776352F9BD27567ABE185F /* RCTSafeAreaViewManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTSafeAreaViewManager.h; sourceTree = "<group>"; };
 		76BE69EB88D13847FA82FBCFBFCCFEF2 /* STPCard.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPCard.m; path = Stripe/STPCard.m; sourceTree = "<group>"; };
@@ -753,7 +753,7 @@
 		7BD01C4DA2976A08B8F2E00A053EAC8F /* STPColorUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPColorUtils.m; path = Stripe/STPColorUtils.m; sourceTree = "<group>"; };
 		7C32FC40E01604103691BD2511F1846C /* RCTReloadCommand.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTReloadCommand.m; sourceTree = "<group>"; };
 		7C4CA750D954285A0052B5E42F5ED462 /* STPCard+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPCard+Private.h"; path = "Stripe/STPCard+Private.h"; sourceTree = "<group>"; };
-		7D755DC9AAD4CEBD1DC2F9637F929A23 /* libStripe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libStripe.a; path = libStripe.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D755DC9AAD4CEBD1DC2F9637F929A23 /* libStripe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStripe.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DB9509D18171900678842BDFB85C0FF /* YGFloatOptional.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YGFloatOptional.h; path = yoga/YGFloatOptional.h; sourceTree = "<group>"; };
 		7E6A8E634F87510919AACE9565EEC502 /* STPSource+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPSource+Private.h"; path = "Stripe/STPSource+Private.h"; sourceTree = "<group>"; };
 		7F2DB75FBBB8EFAC9BA8DEF2A936F36D /* STPPaymentActivityIndicatorView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPPaymentActivityIndicatorView.h; path = Stripe/PublicHeaders/STPPaymentActivityIndicatorView.h; sourceTree = "<group>"; };
@@ -766,22 +766,22 @@
 		80D789F7EEBB5C3E51491AB3ED6735D8 /* STPSourceVerification.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPSourceVerification.h; path = Stripe/PublicHeaders/STPSourceVerification.h; sourceTree = "<group>"; };
 		80EFC15B44CBC7272368ABF769518332 /* STPCoreViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPCoreViewController.h; path = Stripe/PublicHeaders/STPCoreViewController.h; sourceTree = "<group>"; };
 		811A1BEE2676A6E10AB680A377947A93 /* YGNode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YGNode.h; path = yoga/YGNode.h; sourceTree = "<group>"; };
-		81418E3B8B49FD2888061E1C41D7A8B6 /* YGLayout.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = YGLayout.cpp; path = yoga/YGLayout.cpp; sourceTree = "<group>"; };
+		81418E3B8B49FD2888061E1C41D7A8B6 /* YGLayout.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = YGLayout.cpp; path = yoga/YGLayout.cpp; sourceTree = "<group>"; };
 		81CF9F2BC8864EAD04B7261EE0D6E59D /* UIViewController+Stripe_NavigationItemProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Stripe_NavigationItemProxy.m"; path = "Stripe/UIViewController+Stripe_NavigationItemProxy.m"; sourceTree = "<group>"; };
 		8288DDCA12177A8D21D4A69A2438776F /* STPFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPFile.m; path = Stripe/STPFile.m; sourceTree = "<group>"; };
 		82DA7C6A008691848637F1B97975CE82 /* STPPaymentMethodsViewController+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPPaymentMethodsViewController+Private.h"; path = "Stripe/STPPaymentMethodsViewController+Private.h"; sourceTree = "<group>"; };
 		832DC051C7E4FDF85FD18A030F9F6CB6 /* RCTLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTLog.h; sourceTree = "<group>"; };
-		83EFF7BA68A5D28E21B7BD42F61BEC9E /* RCTProfileTrampoline-x86_64.S */ = {isa = PBXFileReference; includeInIndex = 1; path = "RCTProfileTrampoline-x86_64.S"; sourceTree = "<group>"; };
+		83EFF7BA68A5D28E21B7BD42F61BEC9E /* RCTProfileTrampoline-x86_64.S */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.asm; path = "RCTProfileTrampoline-x86_64.S"; sourceTree = "<group>"; };
 		83F370B63ECB4366E13AB6D2CB2EE6DE /* RCTShadowView+Layout.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RCTShadowView+Layout.m"; sourceTree = "<group>"; };
 		84348E901E951761D08D927DE0CECD86 /* RCTModalHostViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTModalHostViewController.h; sourceTree = "<group>"; };
 		846698624CBFFCC8B7BE29EE9A81814B /* UIViewController+Stripe_ParentViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Stripe_ParentViewController.m"; path = "Stripe/UIViewController+Stripe_ParentViewController.m"; sourceTree = "<group>"; };
 		848BA8D95A51204B0CF3E4DEB208ED30 /* stp_card_form_front@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_form_front@3x.png"; path = "Stripe/Resources/Images/stp_card_form_front@3x.png"; sourceTree = "<group>"; };
-		870835DF11DF54F5D094A5D3BA5F98BA /* RCTLog.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTLog.mm; sourceTree = "<group>"; };
+		870835DF11DF54F5D094A5D3BA5F98BA /* RCTLog.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTLog.mm; sourceTree = "<group>"; };
 		8783290927DBACFF2E3456FEC3C7C376 /* stp_card_unknown.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_unknown.png; path = Stripe/Resources/Images/stp_card_unknown.png; sourceTree = "<group>"; };
 		887C1AE92F2CBC65AA2366CC71D113D8 /* STPPhoneNumberValidator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPPhoneNumberValidator.h; path = Stripe/STPPhoneNumberValidator.h; sourceTree = "<group>"; };
 		88C4A1B638A84208116EB62589CB2E90 /* RNKeychainManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RNKeychainManager.h; path = RNKeychainManager/RNKeychainManager.h; sourceTree = "<group>"; };
 		88D5590F2E94F27B0DEF8CC16471B643 /* UIImage+Stripe.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Stripe.h"; path = "Stripe/UIImage+Stripe.h"; sourceTree = "<group>"; };
-		88D65B37E917E4D7DA6C242432C567B0 /* RCTSurfaceRootView.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTSurfaceRootView.mm; sourceTree = "<group>"; };
+		88D65B37E917E4D7DA6C242432C567B0 /* RCTSurfaceRootView.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTSurfaceRootView.mm; sourceTree = "<group>"; };
 		8A835FEB7BB3F6C2640999AB7BA7C43F /* NSURLComponents+Stripe.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSURLComponents+Stripe.m"; path = "Stripe/NSURLComponents+Stripe.m"; sourceTree = "<group>"; };
 		8ADC22F667333975641897DFA19772EC /* UIViewController+Stripe_KeyboardAvoiding.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Stripe_KeyboardAvoiding.h"; path = "Stripe/UIViewController+Stripe_KeyboardAvoiding.h"; sourceTree = "<group>"; };
 		8ADEBE7071F299A303BB2612DA548CED /* UIView+Stripe_FirstResponder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Stripe_FirstResponder.h"; path = "Stripe/UIView+Stripe_FirstResponder.h"; sourceTree = "<group>"; };
@@ -807,7 +807,7 @@
 		908BA5A9BDC45F44A941210CEF0B4E57 /* stp_card_form_front.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_form_front.png; path = Stripe/Resources/Images/stp_card_form_front.png; sourceTree = "<group>"; };
 		90BC9BA6525067C7199C4A09B08D2A81 /* RCTMultipartDataTask.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTMultipartDataTask.m; sourceTree = "<group>"; };
 		931BED312AE8EDCC6B21E9580C59C92D /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/PassKit.framework; sourceTree = DEVELOPER_DIR; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93D7B4EE4ACCEE6DD5A02CD2B3604C18 /* RCTModalManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTModalManager.m; sourceTree = "<group>"; };
 		9434C8D7993D8808A63C186D1BBA544A /* RCTBorderDrawing.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTBorderDrawing.m; sourceTree = "<group>"; };
 		94967D4C0BDD0F9C7EC21087BB9BFD54 /* STPSourceParams.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPSourceParams.h; path = Stripe/PublicHeaders/STPSourceParams.h; sourceTree = "<group>"; };
@@ -824,7 +824,7 @@
 		987DEA5F0EE53A8665D96DA8D44A0363 /* Pods-opear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-opear.release.xcconfig"; sourceTree = "<group>"; };
 		98B7E99CAF3952E243A72363F7CF06E4 /* RCTWebView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTWebView.h; sourceTree = "<group>"; };
 		99B288141098118DC290D3E3836E6DB0 /* STPBankAccount.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPBankAccount.m; path = Stripe/STPBankAccount.m; sourceTree = "<group>"; };
-		99FEDD9BF7D0565520FF5B3C1FCC2355 /* RCTProfileTrampoline-arm64.S */ = {isa = PBXFileReference; includeInIndex = 1; path = "RCTProfileTrampoline-arm64.S"; sourceTree = "<group>"; };
+		99FEDD9BF7D0565520FF5B3C1FCC2355 /* RCTProfileTrampoline-arm64.S */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.asm; path = "RCTProfileTrampoline-arm64.S"; sourceTree = "<group>"; };
 		9AC406A9DA1394C5E2E9A622BFB513D7 /* STPRedirectContext+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPRedirectContext+Private.h"; path = "Stripe/STPRedirectContext+Private.h"; sourceTree = "<group>"; };
 		9AD2DFD356C7970B78A768E3149DF041 /* STPPaymentContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPPaymentContext.h; path = Stripe/PublicHeaders/STPPaymentContext.h; sourceTree = "<group>"; };
 		9ADD670627F428665B1540063A3380E7 /* STPEphemeralKeyManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPEphemeralKeyManager.m; path = Stripe/STPEphemeralKeyManager.m; sourceTree = "<group>"; };
@@ -832,12 +832,12 @@
 		9BB84716F7240CC73CE1ECF9AC3F9726 /* RCTEventDispatcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTEventDispatcher.m; sourceTree = "<group>"; };
 		9C4D2BF7278F2031E3161F56FA30FD20 /* RCTDisplayLink.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTDisplayLink.m; sourceTree = "<group>"; };
 		9C994E1E88D227C4E7CFB4A731FB5D61 /* stp_card_discover@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_discover@2x.png"; path = "Stripe/Resources/Images/stp_card_discover@2x.png"; sourceTree = "<group>"; };
-		9CEEF90B0820E4FECF202E7EDD583211 /* YGStyle.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = YGStyle.cpp; path = yoga/YGStyle.cpp; sourceTree = "<group>"; };
+		9CEEF90B0820E4FECF202E7EDD583211 /* YGStyle.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = YGStyle.cpp; path = yoga/YGStyle.cpp; sourceTree = "<group>"; };
 		9D9D7086E6ADD6CBCF233F7C2A8CE32A /* STPCoreScrollViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPCoreScrollViewController.m; path = Stripe/STPCoreScrollViewController.m; sourceTree = "<group>"; };
 		9DA6FCAA87BA1F5C33CDC770A04197E5 /* STPPaymentIntentSourceActionAuthorizeWithURL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPPaymentIntentSourceActionAuthorizeWithURL.m; path = Stripe/STPPaymentIntentSourceActionAuthorizeWithURL.m; sourceTree = "<group>"; };
 		9E2662CD0D93DD4E743ACCB7D4C89B40 /* RCTSurfaceRootShadowViewDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTSurfaceRootShadowViewDelegate.h; sourceTree = "<group>"; };
 		9E425A1E1B827075B584EA4CCD788BFE /* STPURLCallbackHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPURLCallbackHandler.h; path = Stripe/STPURLCallbackHandler.h; sourceTree = "<group>"; };
-		9E4BD136C507B41F63A177C0B89AE6A2 /* RCTJavaScriptLoader.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTJavaScriptLoader.mm; sourceTree = "<group>"; };
+		9E4BD136C507B41F63A177C0B89AE6A2 /* RCTJavaScriptLoader.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTJavaScriptLoader.mm; sourceTree = "<group>"; };
 		9E6CAE4C5B272D0F1C4ABFF0EF0448FF /* STPBankAccountParams+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPBankAccountParams+Private.h"; path = "Stripe/STPBankAccountParams+Private.h"; sourceTree = "<group>"; };
 		9FE627517BD5E967E36B69DBD31553B2 /* stp_card_jcb@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_jcb@3x.png"; path = "Stripe/Resources/Images/stp_card_jcb@3x.png"; sourceTree = "<group>"; };
 		A0AA19E1CE1862CA73D6AC701E0E1EED /* STPAddCardViewController+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPAddCardViewController+Private.h"; path = "Stripe/STPAddCardViewController+Private.h"; sourceTree = "<group>"; };
@@ -872,7 +872,7 @@
 		AD7A1FFB8975E3D224C766844C281D23 /* stp_icon_checkmark@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_icon_checkmark@3x.png"; path = "Stripe/Resources/Images/stp_icon_checkmark@3x.png"; sourceTree = "<group>"; };
 		ADB11F6DEFB18DFC78F6F25942BD6C03 /* STPBackendAPIAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPBackendAPIAdapter.h; path = Stripe/PublicHeaders/STPBackendAPIAdapter.h; sourceTree = "<group>"; };
 		AEA0F5C4C5032BC4EB4A16E5B86AA6BB /* UIView+Stripe_FirstResponder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Stripe_FirstResponder.m"; path = "Stripe/UIView+Stripe_FirstResponder.m"; sourceTree = "<group>"; };
-		AF4F20F560167322378838D8523D6A66 /* RCTModuleMethod.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTModuleMethod.mm; sourceTree = "<group>"; };
+		AF4F20F560167322378838D8523D6A66 /* RCTModuleMethod.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTModuleMethod.mm; sourceTree = "<group>"; };
 		AF79CD5A165BF86BF0CFF9A02A596797 /* React-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "React-prefix.pch"; sourceTree = "<group>"; };
 		AFF4978141F7D76D0F11E650B18F0DAE /* STPTelemetryClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPTelemetryClient.m; path = Stripe/STPTelemetryClient.m; sourceTree = "<group>"; };
 		AFFEBBD69DAEACBF8C2020319EC45F17 /* STPCoreViewController+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPCoreViewController+Private.h"; path = "Stripe/STPCoreViewController+Private.h"; sourceTree = "<group>"; };
@@ -890,12 +890,12 @@
 		B33853CF075F12D1274716F522CB4C39 /* STPAPIResponseDecodable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPAPIResponseDecodable.h; path = Stripe/PublicHeaders/STPAPIResponseDecodable.h; sourceTree = "<group>"; };
 		B4665D77FE25E29E58109F1C6B93B971 /* STPSourceVerification+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPSourceVerification+Private.h"; path = "Stripe/STPSourceVerification+Private.h"; sourceTree = "<group>"; };
 		B4EC9BDAE49865ED2DCAC15805BDED44 /* STPCoreScrollViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPCoreScrollViewController.h; path = Stripe/PublicHeaders/STPCoreScrollViewController.h; sourceTree = "<group>"; };
-		B557F0B1580CA8023D12B82B8AED438E /* RCTSurfaceSizeMeasureMode.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTSurfaceSizeMeasureMode.mm; sourceTree = "<group>"; };
+		B557F0B1580CA8023D12B82B8AED438E /* RCTSurfaceSizeMeasureMode.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTSurfaceSizeMeasureMode.mm; sourceTree = "<group>"; };
 		B593B49A6CAAF56582840640D8613189 /* STPPaymentIntent+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "STPPaymentIntent+Private.h"; path = "Stripe/STPPaymentIntent+Private.h"; sourceTree = "<group>"; };
 		B595F3F26EFDEA10BCE6072405954674 /* stp_card_mastercard_template@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_mastercard_template@3x.png"; path = "Stripe/Resources/Images/stp_card_mastercard_template@3x.png"; sourceTree = "<group>"; };
 		B5E305A97F45A61CED4E9CC01EF962E3 /* STPBINRange.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPBINRange.m; path = Stripe/STPBINRange.m; sourceTree = "<group>"; };
-		B5E68A90E73A444C927A0DDA0D24FABE /* libRNKeychain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libRNKeychain.a; path = libRNKeychain.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B62E89D33C0810D2D338C541BEE060F1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		B5E68A90E73A444C927A0DDA0D24FABE /* libRNKeychain.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNKeychain.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B62E89D33C0810D2D338C541BEE060F1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		B65046DD37BD0F1A96448550DA185F89 /* stp_card_unionpay_template_zh@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_unionpay_template_zh@3x.png"; path = "Stripe/Resources/Images/stp_card_unionpay_template_zh@3x.png"; sourceTree = "<group>"; };
 		B6A5B09E3916C0081739FBAE7FC89315 /* STPSourceReceiver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPSourceReceiver.m; path = Stripe/STPSourceReceiver.m; sourceTree = "<group>"; };
 		B765059171B85AE053A143781D72A263 /* RCTScrollContentViewManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTScrollContentViewManager.m; sourceTree = "<group>"; };
@@ -927,7 +927,7 @@
 		C2CD4DC9DA2295741B49621E2A2E9BF3 /* RCTSurfaceStage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTSurfaceStage.m; sourceTree = "<group>"; };
 		C2FC6A5B7AECF68ADA50EA1FC64A6767 /* UIView+Stripe_SafeAreaBounds.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Stripe_SafeAreaBounds.h"; path = "Stripe/UIView+Stripe_SafeAreaBounds.h"; sourceTree = "<group>"; };
 		C319B29824C1DD8A42A06900804EB83D /* stp_card_applepay.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_applepay.png; path = Stripe/Resources/Images/stp_card_applepay.png; sourceTree = "<group>"; };
-		C334FD4B3A4C6DD397C33BD3EFD063AC /* yoga.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = yoga.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C334FD4B3A4C6DD397C33BD3EFD063AC /* yoga.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = yoga.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C378AB0B5E7A3400556D6EF66FB1F291 /* Localizable.strings */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C3BB1D29CEABF4E1BE7EB135A0A70A5E /* RCTModuleMethod.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTModuleMethod.h; sourceTree = "<group>"; };
 		C42B669CFCA046F8A7A079FE358DE08D /* RCTExceptionsManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTExceptionsManager.m; sourceTree = "<group>"; };
@@ -943,14 +943,14 @@
 		C688EC5BF2052291EFBE9C026ADFF4F0 /* STPCustomerContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPCustomerContext.m; path = Stripe/STPCustomerContext.m; sourceTree = "<group>"; };
 		C6D7A478D2AB1F7EF108100BC05BD7EE /* STPPromise.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPPromise.m; path = Stripe/STPPromise.m; sourceTree = "<group>"; };
 		C719DC52D6A52A00DFA9073912CC2C0A /* UIViewController+Stripe_ParentViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Stripe_ParentViewController.h"; path = "Stripe/UIViewController+Stripe_ParentViewController.h"; sourceTree = "<group>"; };
-		C71ACFBAED3236275C7C139BE8E62C2A /* RCTProfileTrampoline-arm.S */ = {isa = PBXFileReference; includeInIndex = 1; path = "RCTProfileTrampoline-arm.S"; sourceTree = "<group>"; };
+		C71ACFBAED3236275C7C139BE8E62C2A /* RCTProfileTrampoline-arm.S */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.asm; path = "RCTProfileTrampoline-arm.S"; sourceTree = "<group>"; };
 		C7AB733003A7E0CAFBE9740CE83977B4 /* UIBarButtonItem+Stripe.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+Stripe.h"; path = "Stripe/UIBarButtonItem+Stripe.h"; sourceTree = "<group>"; };
 		C87D8EA984464999E70FDBBAC19759DA /* Pods-opear-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-opear-resources.sh"; sourceTree = "<group>"; };
-		C8C1FA78040F064EDCD4B96E67BFB31D /* RCTSurface.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTSurface.mm; sourceTree = "<group>"; };
+		C8C1FA78040F064EDCD4B96E67BFB31D /* RCTSurface.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTSurface.mm; sourceTree = "<group>"; };
 		C8C41B2E54BB70B8C41117D352B3A149 /* stp_card_jcb_template.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_jcb_template.png; path = Stripe/Resources/Images/stp_card_jcb_template.png; sourceTree = "<group>"; };
 		C8D5A8F0062CE027EEC4275926E73C48 /* RCTWebViewManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTWebViewManager.m; sourceTree = "<group>"; };
 		C90085B88320366866D42D866CD46432 /* STPSourceSEPADebitDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPSourceSEPADebitDetails.h; path = Stripe/PublicHeaders/STPSourceSEPADebitDetails.h; sourceTree = "<group>"; };
-		C9D3CDD81363FE764F2C98CB8F216472 /* Yoga.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = Yoga.cpp; path = yoga/Yoga.cpp; sourceTree = "<group>"; };
+		C9D3CDD81363FE764F2C98CB8F216472 /* Yoga.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = Yoga.cpp; path = yoga/Yoga.cpp; sourceTree = "<group>"; };
 		C9FB71F80C28C6550BE4F7D866C42759 /* stp_card_discover@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_discover@3x.png"; path = "Stripe/Resources/Images/stp_card_discover@3x.png"; sourceTree = "<group>"; };
 		CA6ABB9B554DED3F9184AAE2E60AE1F3 /* STPTheme.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPTheme.h; path = Stripe/PublicHeaders/STPTheme.h; sourceTree = "<group>"; };
 		CAFCFC4B72084A212C556F4BC973B7F7 /* RCTComponentData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTComponentData.m; sourceTree = "<group>"; };
@@ -963,7 +963,7 @@
 		CDA0BD51650DB7F402D8B76F46E90522 /* RCTRootViewDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTRootViewDelegate.h; sourceTree = "<group>"; };
 		CDF0774481F7827F0A3C9612BF55A4CE /* STPAPIClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPAPIClient.h; path = Stripe/PublicHeaders/STPAPIClient.h; sourceTree = "<group>"; };
 		CE492C8EA6E432A9156BE6F23BF7FCC1 /* RCTUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTUtils.h; sourceTree = "<group>"; };
-		CE4E96D654F05424D7969FCBE9F07C30 /* YGConfig.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = YGConfig.cpp; path = yoga/YGConfig.cpp; sourceTree = "<group>"; };
+		CE4E96D654F05424D7969FCBE9F07C30 /* YGConfig.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = YGConfig.cpp; path = yoga/YGConfig.cpp; sourceTree = "<group>"; };
 		CE817E275648AAAAAE983E6F29390890 /* UIToolbar+Stripe_InputAccessory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIToolbar+Stripe_InputAccessory.h"; path = "Stripe/UIToolbar+Stripe_InputAccessory.h"; sourceTree = "<group>"; };
 		CEC4C6518D718EBE677751BB5663961B /* STPSourceSEPADebitDetails.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPSourceSEPADebitDetails.m; path = Stripe/STPSourceSEPADebitDetails.m; sourceTree = "<group>"; };
 		CF0DA64766EFF5E13C9ED3ACB6B9FAAD /* RCTPerformanceLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTPerformanceLogger.h; sourceTree = "<group>"; };
@@ -974,9 +974,9 @@
 		D2E22E464DA906778AF08340DAAAAAC3 /* stp_card_amex@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_amex@3x.png"; path = "Stripe/Resources/Images/stp_card_amex@3x.png"; sourceTree = "<group>"; };
 		D2E461F058D874178AC9C09F65875EFB /* STPAddressFieldTableViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPAddressFieldTableViewCell.h; path = Stripe/STPAddressFieldTableViewCell.h; sourceTree = "<group>"; };
 		D303ACF575E18FB8D163CCA43CC5E9FC /* stp_card_error.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_error.png; path = Stripe/Resources/Images/stp_card_error.png; sourceTree = "<group>"; };
-		D342C21DA3565813B83577DC588731E0 /* RCTFont.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTFont.mm; sourceTree = "<group>"; };
+		D342C21DA3565813B83577DC588731E0 /* RCTFont.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTFont.mm; sourceTree = "<group>"; };
 		D3B576B152B49BAB33D771651EBE5A7D /* RCTModalHostViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTModalHostViewController.m; sourceTree = "<group>"; };
-		D3E315F2DEDDC2374058081CE9ECC20E /* Images */ = {isa = PBXFileReference; includeInIndex = 1; name = Images; path = Stripe/Resources/Images; sourceTree = "<group>"; };
+		D3E315F2DEDDC2374058081CE9ECC20E /* Images */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = Images; path = Stripe/Resources/Images; sourceTree = "<group>"; };
 		D4469156706E127AD2645B41AE86CB0F /* Utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = yoga/Utils.h; sourceTree = "<group>"; };
 		D47FC2CD7510A94FFFE03F97ED36996F /* UIView+React.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIView+React.m"; sourceTree = "<group>"; };
 		D59AF9ED8066EE8CDF98167207CAAFB9 /* STPAddress.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPAddress.m; path = Stripe/STPAddress.m; sourceTree = "<group>"; };
@@ -1009,23 +1009,23 @@
 		DD7BCF19E82E49E752C110F3337C7B3A /* UIToolbar+Stripe_InputAccessory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIToolbar+Stripe_InputAccessory.m"; path = "Stripe/UIToolbar+Stripe_InputAccessory.m"; sourceTree = "<group>"; };
 		DD925A35A03BE1407FC81FBA79311B7F /* RCTSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTSlider.m; sourceTree = "<group>"; };
 		DDADDC4EA9CF3A346D6C82C53D043B18 /* RCTBorderDrawing.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTBorderDrawing.h; sourceTree = "<group>"; };
-		DDB9DC5A05A36FE3A05FCF92CDA5FAA6 /* libyoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libyoga.a; path = libyoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDB9DC5A05A36FE3A05FCF92CDA5FAA6 /* libyoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libyoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDCFFDDD5A62E73DD65574B5D0E566AB /* STPGenericStripeObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPGenericStripeObject.h; path = Stripe/STPGenericStripeObject.h; sourceTree = "<group>"; };
-		DDFD620400A08ABB3BF26FE544599331 /* YGEnums.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = YGEnums.cpp; path = yoga/YGEnums.cpp; sourceTree = "<group>"; };
+		DDFD620400A08ABB3BF26FE544599331 /* YGEnums.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = YGEnums.cpp; path = yoga/YGEnums.cpp; sourceTree = "<group>"; };
 		DE4F3270A9BAC4FD79EDAAEF8C4AE4F8 /* stp_icon_add.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_icon_add.png; path = Stripe/Resources/Images/stp_icon_add.png; sourceTree = "<group>"; };
 		DEB6B4D83CB303C4C24F09B6EB31DF06 /* STPUserInformation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPUserInformation.m; path = Stripe/STPUserInformation.m; sourceTree = "<group>"; };
 		DF070901CF1EB8D429F269C15C71574B /* Stripe.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Stripe.xcconfig; sourceTree = "<group>"; };
 		DF2E4DF9BF8437B2D4882B9B3CE4C4C6 /* Yoga-internal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Yoga-internal.h"; path = "yoga/Yoga-internal.h"; sourceTree = "<group>"; };
 		DFB0C5D4B4FDC7DB600A2657AB30954C /* YGMarker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YGMarker.h; path = yoga/YGMarker.h; sourceTree = "<group>"; };
 		E11E70287C11368FABFF90F539897E17 /* RCTSurfaceDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTSurfaceDelegate.h; sourceTree = "<group>"; };
-		E137C5F8EAEBFBF46F2F5230E886C37F /* RCTSurfaceHostingProxyRootView.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = RCTSurfaceHostingProxyRootView.mm; sourceTree = "<group>"; };
+		E137C5F8EAEBFBF46F2F5230E886C37F /* RCTSurfaceHostingProxyRootView.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; path = RCTSurfaceHostingProxyRootView.mm; sourceTree = "<group>"; };
 		E193C643D60DE0A7D2356F9DF650A48B /* RCTDatePickerManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTDatePickerManager.m; sourceTree = "<group>"; };
 		E264B2F1AFF6A5DD5640A60A090F0302 /* stp_card_amex.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_amex.png; path = Stripe/Resources/Images/stp_card_amex.png; sourceTree = "<group>"; };
 		E268675B55BBC5877F55163389A0A22A /* STPPaymentMethod.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPPaymentMethod.h; path = Stripe/PublicHeaders/STPPaymentMethod.h; sourceTree = "<group>"; };
 		E2B1AB761E9AC822D8BB1A46DB4EBCC0 /* stp_card_cvc@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "stp_card_cvc@2x.png"; path = "Stripe/Resources/Images/stp_card_cvc@2x.png"; sourceTree = "<group>"; };
 		E4E8B05EB688101A2C0D6F12D9CC6EA9 /* STPCardIOProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPCardIOProxy.m; path = Stripe/STPCardIOProxy.m; sourceTree = "<group>"; };
 		E58248CE1F26135290768E760DBDEA63 /* stp_card_unionpay_zh.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = stp_card_unionpay_zh.png; path = Stripe/Resources/Images/stp_card_unionpay_zh.png; sourceTree = "<group>"; };
-		E603BC8EB157C4420316E96FFB349272 /* YGMarker.cpp */ = {isa = PBXFileReference; includeInIndex = 1; name = YGMarker.cpp; path = yoga/YGMarker.cpp; sourceTree = "<group>"; };
+		E603BC8EB157C4420316E96FFB349272 /* YGMarker.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = YGMarker.cpp; path = yoga/YGMarker.cpp; sourceTree = "<group>"; };
 		E61AE78C08F431F805B49EC0EAF624E3 /* UIViewController+Stripe_Promises.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Stripe_Promises.m"; path = "Stripe/UIViewController+Stripe_Promises.m"; sourceTree = "<group>"; };
 		E69AB981A11106D30CD0A541E143FB2F /* RCTModuleData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTModuleData.h; sourceTree = "<group>"; };
 		E7D6B82C24B447FDD43066C95B47A843 /* RCTSegmentedControl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RCTSegmentedControl.m; sourceTree = "<group>"; };
@@ -1073,7 +1073,7 @@
 		F341C173F5B1206BFB7FA9B6700D08AE /* RCTRootContentView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTRootContentView.h; sourceTree = "<group>"; };
 		F49BDB047A404D2A841EBA757C87853E /* RCTSafeAreaViewLocalData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTSafeAreaViewLocalData.h; sourceTree = "<group>"; };
 		F529FC578063875A0D3F8DEBC4125D1B /* STPPaymentMethodsViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STPPaymentMethodsViewController.m; path = Stripe/STPPaymentMethodsViewController.m; sourceTree = "<group>"; };
-		F5487E86EC192601528C9D1CB45C91AD /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		F5487E86EC192601528C9D1CB45C91AD /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F5CBA17842CA5501D9C4C168B06DFEF6 /* STPPaymentContextAmountModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STPPaymentContextAmountModel.h; path = Stripe/STPPaymentContextAmountModel.h; sourceTree = "<group>"; };
 		F66CCA86728291A2930C2F69FEC403BB /* RCTRedBoxExtraDataViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTRedBoxExtraDataViewController.h; sourceTree = "<group>"; };
 		F6A5EF57EEBFB61C319F90F554A77830 /* RCTSurfaceSizeMeasureMode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RCTSurfaceSizeMeasureMode.h; sourceTree = "<group>"; };
@@ -1438,7 +1438,6 @@
 				F6A5EF57EEBFB61C319F90F554A77830 /* RCTSurfaceSizeMeasureMode.h */,
 				B557F0B1580CA8023D12B82B8AED438E /* RCTSurfaceSizeMeasureMode.mm */,
 			);
-			name = SurfaceHostingView;
 			path = SurfaceHostingView;
 			sourceTree = "<group>";
 		};
@@ -1740,7 +1739,6 @@
 				17F254338F4359678B541457103A88FD /* Resources */,
 				B0B872E7D55B4BD2BD2AC67BC080D72A /* Support Files */,
 			);
-			name = Stripe;
 			path = Stripe;
 			sourceTree = "<group>";
 		};
@@ -1788,7 +1786,6 @@
 				96EEA8B0FACD5B5154AEF1517CA28025 /* RCTSurfaceView+Internal.h */,
 				326C6C3DBAF75666984E293727B7C5DD /* SurfaceHostingView */,
 			);
-			name = Surface;
 			path = Surface;
 			sourceTree = "<group>";
 		};
@@ -1830,7 +1827,6 @@
 				08313FB2E45ABBCD64419FD15432A753 /* RCTScrollViewManager.h */,
 				E8E7ACE274107FB2DA9EB5DF5AF71ABB /* RCTScrollViewManager.m */,
 			);
-			name = ScrollView;
 			path = ScrollView;
 			sourceTree = "<group>";
 		};
@@ -2042,7 +2038,6 @@
 				769B39365C776352F9BD27567ABE185F /* RCTSafeAreaViewManager.h */,
 				0D1DAE733D00D4DBC9A3BB14EEB15227 /* RCTSafeAreaViewManager.m */,
 			);
-			name = SafeAreaView;
 			path = SafeAreaView;
 			sourceTree = "<group>";
 		};
@@ -2355,7 +2350,17 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
+				de,
+				es,
+				fi,
+				fr,
+				it,
+				ja,
+				nb,
+				nl,
+				"zh-Hans",
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
 			productRefGroup = 3BD248E811AE939F14C098005069A473 /* Products */;
@@ -2869,8 +2874,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};

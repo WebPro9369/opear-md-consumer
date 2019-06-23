@@ -13,11 +13,13 @@ const MainStore = types.model("MainStore", {
   providerStore: types.optional(ProviderStore, {
     appointment: false,
     readyProviders: false,
-    outstandingAppointment: true
+    outstandingAppointment: true,
+    providerEnRoute: false
   }),
   userStore: types.optional(UserStore, {
     id: 112,
-    apiKey: "heefKNdwQtX0OjxjXQyQKwtt",
+    apiKey: "",
+    active: false,
     name: "",
     firstName: "",
     lastName: "",
