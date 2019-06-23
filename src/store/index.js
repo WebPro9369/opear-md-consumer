@@ -23,6 +23,8 @@ const MainStore = types.model("MainStore", {
     lastName: "",
     email: "",
     birthday: new Date("1970-01-01"),
+    acceptedTermsOfService: false,
+    acceptedPrivacy: false,
     phone: "",
     payment_accounts: [],
     paymentMethods: [{

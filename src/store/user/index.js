@@ -30,6 +30,8 @@ export const UserStore = types
     password: types.optional(types.string, ''),
     birthday: types.Date,
     phone: types.string,
+    acceptedPrivacy: types.boolean,
+    acceptedTermsOfService: types.boolean,
     payment_accounts: types.array(PaymentAccountStore),
     paymentMethods: types.array (
       types.model({
@@ -185,6 +187,14 @@ export const UserStore = types
     setVisitRequestDateTime(date, time) {
       self.visitRequest.date = date;
       self.visitRequest.time = time;
+      return self;
+    },
+    setAcceptedPrivacy(value) {
+      self.acceptedPrivacy = value;
+      return self;
+    },
+    setAcceptedTermsOfService(value) {
+      self.acceptedTermsOfService = value;
       return self;
     },
     setChild(index, value) {
