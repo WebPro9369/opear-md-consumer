@@ -68,6 +68,7 @@ class EmailCaptureScreen extends Component {
               fontSize={28}
               autoFocus
               placeholder="Email"
+              keyboardType="email-address"
               textContentType="emailAddress"
               value={email}
               onChangeText={this.handleInputChange}
