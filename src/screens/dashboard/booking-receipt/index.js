@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -10,15 +11,35 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard, ProviderStarsCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
+import { getIndexByValue } from "@utils";
+import { getCareProvider } from "@services/opear-api"
 
 const { BLACK60 } = colors;
 
 const doctorImg = require("../../../../assets/images/Doctor.png");
 const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 
+@inject("store")
+@observer
 class BookingReceiptScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
+
+    const {
+      navigation,
+      store: {
+        userStore
+      }
+    } = props;
+
+    const visitID = navigation.getParam('visitID', 0);
+    const visits = navigation.getParam('visits', 0);
+
+    const visit = visits[visitID-1];
 
     this.state = {
       providerData: {
@@ -29,13 +50,38 @@ class BookingReceiptScreen extends React.Component {
         symptom: "Respiratory",
         rating: "4.5"
       },
-      child: "Benjamin",
-      address: "18 Mission St",
-      time: "Sun Dec 31, 8am - 9am",
+      child: userStore.children[getIndexByValue(userStore.children,visit.child_id)].name,
+      address: userStore.addresses[getIndexByValue(userStore.addresses,visit.address_id)].street,
+      time: visit.appointment_time,
       card: "4985",
-      price: "$150.00",
-      stars: 0
+      price: visit.payment_amount,
+      stars: 0,
+      starsEditable: false
     };
+
+    const successHandler = res => {
+
+      const {
+        name,
+        biography,
+        work_history,
+        rating,
+        specialties
+      } = res.data;
+
+      this.setState({
+        providerData: {
+          name: name,
+          bio: biography,
+          history: work_history.join(", "),
+          rating: rating,
+          badges: specialties
+        }
+      });
+
+    };
+
+    getCareProvider(visit.care_provider_id, { successHandler });
   }
 
   render() {

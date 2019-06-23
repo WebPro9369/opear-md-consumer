@@ -1,13 +1,21 @@
 import React, { Component } from "react";
 import { Image, View } from "react-native";
-import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
-import { ServiceButton } from "../../../components/service-button";
-import { StyledText, StyledTextInput } from "../../../components/text";
-import { NavHeader } from "../../../components/nav-header";
+import { inject, observer, PropTypes } from "mobx-react";
+import { KeyboardAvoidingView } from "@components/views/keyboard-view";
+import { ServiceButton } from "@components/service-button";
+import { StyledText, StyledTextInput } from "@components/text";
+import { NavHeader } from "@components/nav-header";
+import { registerParent } from "@services/opear-api";
 
 const imgProgressbar = require("../../../../assets/images/ProgressBar5.png");
 
+@inject("store")
+@observer
 class PhoneNumberScreen extends Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -15,10 +23,56 @@ class PhoneNumberScreen extends Component {
     };
   }
 
-  handleInputChange = event => {
+  handleInputChange = text => {
     this.setState({
-      phone: event.target.value
+      phone: text
     });
+  };
+
+  onSubmit = () => {
+    const {
+      navigation: { navigate },
+      store: {
+        userStore
+      }
+    } = this.props;
+    const { phone } = this.state;
+
+    if (!phone) Alert.alert("Please enter your phone number");
+
+    if (phone) userStore.setPhone(phone);
+
+    const {
+      name,
+      email,
+      password,
+      address: {zip_code}
+    } = userStore;
+
+    const data = {
+      parent: {
+        name,
+        email,
+        password,
+        phone,
+        zip: zip_code
+      }
+    };
+
+    const successHandler = response => {
+      const { id, apiKey: api_key } = response.data;
+
+      userStore.setAuthentication({ id, apiKey });
+
+    };
+
+    // eslint-disable-next-line prettier/prettier
+    const errorHandler = () => Alert.alert("Registration failed. Please ensure your information is correct, or contact help@opear.com.");
+
+    registerParent(data, { successHandler, errorHandler });
+
+    navigate("Tabs");
+
   };
 
   render() {
@@ -47,7 +101,7 @@ class PhoneNumberScreen extends Component {
               autoFocus
               placeholder="(123) 456 - 7890"
               value={phone}
-              onChange={this.handleInputChange}
+              onChangeText={this.handleInputChange}
             />
           </View>
         </View>
@@ -56,7 +110,7 @@ class PhoneNumberScreen extends Component {
           <ServiceButton
             title="Authenticate"
             style={{ marginBottom: 20 }}
-            onPress={() => navigate("Tabs")}
+            onPress={this.onSubmit}
           />
         </View>
       </KeyboardAvoidingView>

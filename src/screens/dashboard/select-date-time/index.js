@@ -1,4 +1,5 @@
 import React from "react";
+import { inject, observer, PropTypes } from "mobx-react";
 import { FlatList } from "react-native";
 import { DateTime } from "luxon";
 import { StyledText } from "../../../components/text";
@@ -7,7 +8,13 @@ import { ContainerView, View } from "../../../components/views";
 import { DateCircle, TimeSelector } from "./styles";
 import { colors } from "../../../utils/constants";
 
+@inject("store")
+@observer
 class SelectDateTimeScreen extends React.Component {
+  static propTypes = {
+      store: PropTypes.observableObject.isRequired
+    };
+
   constructor(props) {
     super(props);
     let luxonDate = DateTime.local();
@@ -29,6 +36,24 @@ class SelectDateTimeScreen extends React.Component {
       dates
     };
   }
+
+  onSubmit = () => {
+    const {
+      navigation: { navigate },
+      store: {
+        userStore
+      }
+    } = this.props;
+
+    const {
+      selectedDate,
+      selectedTime
+    } = this.state;
+
+    userStore.setVisitRequestDateTime(selectedDate,selectedTime);
+
+    navigate("DashboardBookingReview")
+  };
 
   render() {
     const {
@@ -137,7 +162,7 @@ class SelectDateTimeScreen extends React.Component {
                       selectedTime: item.value
                     });
                   }}
-                  onConfirm={() => navigate("DashboardBookingReview")}
+                  onConfirm={this.onSubmit}
                 />
               )}
               style={{ paddingLeft: 16, paddingRight: 16 }}

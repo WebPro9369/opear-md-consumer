@@ -5,7 +5,6 @@ import PaymentScreen from "../screens/account/payment";
 import EditAddressScreen from "../screens/account/edit-address";
 import EditEmailScreen from "../screens/account/edit-email";
 import EditPhoneNumberScreen from "../screens/account/edit-phonenumber";
-import EditCardScreen from "../screens/account/edit-card";
 import AddCardScreen from "../screens/account/add-card";
 import EditChildScreen from "../screens/children/edit-child";
 import ScanCardScreen from "../screens/account/scan-card";
@@ -41,9 +40,6 @@ const PaymentNavigator = createStackNavigator(
   {
     PaymentDefault: {
       screen: PaymentScreen
-    },
-    PaymentEditCard: {
-      screen: EditCardScreen
     },
     PaymentAddCard: {
       screen: AddCardScreen
