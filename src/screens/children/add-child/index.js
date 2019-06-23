@@ -11,13 +11,17 @@ import {
   FormWrapper,
   ViewCentered
 } from "../../../components/views";
-import { ScrollView } from "../../../components/views/scroll-view";
+import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
 import { getAge } from "@utils";
 
 import { registerChild } from "@services/opear-api";
 
-const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
+const avatarImages = [];
+avatarImages[0] = require("../../../../assets/images/Fox.png");
+avatarImages[1] = require("../../../../assets/images/chicken.png");
+avatarImages[2] = require("../../../../assets/images/Dog.png");
+avatarImages[3] = require("../../../../assets/images/Tiger.png");
 
 @inject("store")
 @observer
@@ -55,7 +59,8 @@ class AddChildScreen extends React.Component {
       currentMedications: "",
       hospitalizations: "",
       currentMedicalConditions: "",
-      allergies: []
+      allergies: [],
+      avatarNumber: Math.floor(Math.random() * 4)
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -164,7 +169,8 @@ class AddChildScreen extends React.Component {
       currentMedications,
       hospitalizations,
       currentMedicalConditions,
-      allergies
+      allergies,
+      avatarNumber
     } = this.state;
 
     return (
@@ -177,12 +183,12 @@ class AddChildScreen extends React.Component {
             onPressBackButton={() => goBack()}
           />
         </HeaderWrapper>
-        <ScrollView>
+        <KeyboardScrollView>
           <ViewCentered>
             <Avatar
               rounded
               size={120}
-              source={imgFoxLarge}
+              source={avatarImages[avatarNumber]}
               showEditButton
               editButton={{
                 iconStyle: {
@@ -277,7 +283,7 @@ class AddChildScreen extends React.Component {
           <FormInputWrapper style={{ marginBottom: 20 }}>
             <ServiceButton title="Add Child" onPress={this.onSubmit} />
           </FormInputWrapper>
-        </ScrollView>
+        </KeyboardScrollView>
       </ContainerView>
     );
   }

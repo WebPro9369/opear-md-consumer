@@ -1,8 +1,10 @@
+/* eslint-disable import/no-unresolved */
 import React, { Component } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
-import { getParent, getChildren, getAddresses } from "@services/opear-api";
-import { getAge } from "@utils";
+import { getParent } from "@services/opear-api";
+import { getAuthentication } from "@services/authentication";
+import { userFromResult, getAge } from "@utils";
 
 @inject("store")
 @observer
@@ -21,33 +23,24 @@ class AuthLoadingScreen extends Component {
       store: { userStore },
       navigation: { navigate }
     } = this.props;
-    const userAuthenticated = false;
+
+    const {
+      id,
+      apiKey,
+      isAuthenticated,
+      wasAuthenticated
+    } = await getAuthentication();
+
+    if (!isAuthenticated && wasAuthenticated) return navigate("AccountSignIn");
+    if (!isAuthenticated) return navigate("Onboarding");
 
     const successHandler = res => {
-       const {
-         name,
-         email,
-         zip,
-         phone,
-         addresses,
-         active
-       } = res.data;
+      userFromResult(res, userStore);
 
-       userStore
-         .setName(name)
-         .setEmail(email)
-         .setZip(zip)
-         .setPhone(phone)
-         .setActive(active)
-         .setAddresses(addresses);
+      navigate("Tabs");
+    };
 
-         navigate("Tabs");
-     };
-
-
-     getParent(userStore.id, { successHandler });
-
-    //navigate(userAuthenticated ? "Tabs" : "Onboarding");
+    getParent(id, { successHandler });
   };
 
   render() {

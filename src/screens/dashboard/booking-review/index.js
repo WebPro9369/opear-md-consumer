@@ -10,7 +10,7 @@ import { inject, observer } from "mobx-react";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, FlexView } from "../../../components/views";
-import { ScrollView } from "../../../components/views/scroll-view";
+import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { ServiceButton } from "../../../components/service-button";
 import { ContentButton } from "../../account/settings/styles";
 import { ContentWrapper, AdditionalInput } from "./styles";
@@ -84,7 +84,7 @@ class BookingReviewScreen extends React.Component {
             onPressBackButton={() => goBack()}
           />
         </View>
-        <ScrollView padding={0}>
+        <KeyboardScrollView padding={0}>
           <ContentWrapper>
             <StyledText fontFamily="FlamaMedium" fontSize={28} lineHeight={40}>
               Visit review:
@@ -188,7 +188,7 @@ class BookingReviewScreen extends React.Component {
               onPress={this.goToDashboard}
             />
           </ContentWrapper>
-        </ScrollView>
+        </KeyboardScrollView>
       </ContainerView>
     );
   }

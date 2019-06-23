@@ -4,6 +4,7 @@ import { ProviderStore } from "./provider";
 import { UserStore } from "./user";
 import { ChildStore } from "@store/child";
 import { VisitsStore } from "@store/visits";
+import { CardStore } from "./card";
 
 const MainStore = types.model("MainStore", {
   applicationStore: types.optional(ApplicationStore, {
@@ -20,9 +21,14 @@ const MainStore = types.model("MainStore", {
     apiKey: "",
     active: false,
     name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     birthday: new Date("1970-01-01"),
+    acceptedTermsOfService: false,
+    acceptedPrivacy: false,
     phone: "",
+    payment_accounts: [],
     paymentMethods: [{
       id:0, type:"Card", cardNumber:19990, expiryYear:10, expiryMonth:11, cvv:320, fullName:"Card Name"
     }],
@@ -34,6 +40,16 @@ const MainStore = types.model("MainStore", {
       time: 0,
       cost: 0
     },
+    cardStore: types.optional(CardStore, {
+      cardInfo: {
+        cardNumber: "",
+        expiryYear: 0,
+        expiryMonth: 0,
+        cvv: "",
+        cardType: "",
+        fullName: ""
+      }
+    }),
     cardInfo: {
       cardNumber: "",
       expiryYear: 0,

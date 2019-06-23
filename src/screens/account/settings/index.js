@@ -11,8 +11,7 @@ import {
   ContainerView,
   HeaderWrapper,
   ViewCentered,
-  View,
-  FlexView
+  View
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";

@@ -1,8 +1,8 @@
 import Axios from "axios";
 
 export const API_SETTINGS = {
-  apiKey: 'heefKNdwQtX0OjxjXQyQKwtt',
-  endpoint: 'https://api.opear.com' //'http://localhost:3000/' //'http://ec2-18-191-228-16.us-east-2.compute.amazonaws.com/' //'http://api.opear.com/'
+  apiKey: null,
+  endpoint: "https://api.opear.com" //'http://localhost:3000/' // 'http://ec2-18-191-228-16.us-east-2.compute.amazonaws.com',
 };
 
 const axios = Axios.create({
@@ -371,8 +371,12 @@ export const updateAvailabilities = (userID, data, { successHandler, errorHandle
 
 /* Payout Account */
 
-export const createBankAccountProvider = (userID, data, successHandler, errorHandler) => {
-  const url = `/v1/care_providers/${userID}/payout_account`;
+export const createPaymentAccount = (
+  userID,
+  data,
+  { successHandler, errorHandler } = {}
+) => {
+  const url = `/v1/parents/${userID}/payment_account`;
   axios
     .post(url, data)
     .then(res => {
@@ -389,9 +393,11 @@ export const createBankAccountProvider = (userID, data, successHandler, errorHan
     });
 };
 
-/* API Token */
-
-export const getApiToken = (email, password, { successHandler, errorHandler } = {}) => {
+export const getApiToken = (
+  email,
+  password,
+  { successHandler, errorHandler } = {}
+) => {
   const url = `/v1/authentications`;
 
   axios

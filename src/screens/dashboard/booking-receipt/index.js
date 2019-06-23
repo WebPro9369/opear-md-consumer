@@ -5,8 +5,7 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { ServiceButton } from "../../../components/service-button";
-import { StyledText, StyledTextInput } from "../../../components/text";
-// import { NavHeader } from "../../../components/nav-header";
+import { StyledText } from "../../../components/text";
 import { View, FlexView } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard, ProviderStarsCard } from "../../../components/cards";
@@ -85,18 +84,6 @@ class BookingReceiptScreen extends React.Component {
     getCareProvider(visit.care_provider_id, { successHandler });
   }
 
-  setStarsEditable = (value = true) => {
-    this.setState({
-      starsEditable: value
-    });
-  };
-
-  setStars = event => {
-    this.setState({
-      stars: event.key + 1
-    });
-  };
-
   render() {
     const {
       navigation: { navigate }
@@ -108,28 +95,11 @@ class BookingReceiptScreen extends React.Component {
       time,
       card,
       price,
-      starsEditable,
       stars
     } = this.state;
 
-    const onPressStar = starsEditable ? this.setStars : this.setStarsEditable;
-
     return (
       <ScrollView padding={0} marginTop={24}>
-        {/* <View
-          style={{
-            paddingLeft: 16,
-            paddingRight: 16,
-            paddingTop: 0,
-            paddingBottom: 6
-          }}
-        >
-          <NavHeader
-            size="small"
-            hasBackButton
-            onPressBackButton={() => goBack()}
-          />
-        </View> */}
         <View style={{ marginTop: 16 }}>
           <ContentWrapper>
             <FlexView justifyContent="center">
@@ -161,34 +131,9 @@ class BookingReceiptScreen extends React.Component {
               rating={providerData.rating}
               stars={stars}
               editable
-              onPressStar={onPressStar}
+              onPressStar={() => {}}
             />
           </ContentWrapper>
-          {starsEditable ? (
-            <ContentWrapper style={{ paddingTop: 16, paddingBottom: 16 }}>
-              <StyledText fontSize={14}>
-                Why was your review unsatisfactory?
-              </StyledText>
-              <StyledTextInput
-                fontSize={16}
-                lineHeight={20}
-                multiline
-                placeholder={
-                  stars <= 3
-                    ? "Enter review comments here"
-                    : "Enter review comments here (optional)"
-                }
-                style={{
-                  minHeight: 160,
-                  padding: 20,
-                  borderStyle: "solid",
-                  borderColor: colors.MIDGREY,
-                  borderWidth: 0.5,
-                  borderRadius: 8
-                }}
-              />
-            </ContentWrapper>
-          ) : null}
           <ContentWrapper
             style={{
               marginTop: 24,
@@ -246,8 +191,8 @@ class BookingReceiptScreen extends React.Component {
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 24 }}>
             <ServiceButton
-              title="Back to dashboard"
-              onPress={() => navigate("DashboardDefault")}
+              title="Leave review"
+              onPress={() => navigate("DashboardBookingReceiptComment")}
             />
           </ContentWrapper>
         </View>

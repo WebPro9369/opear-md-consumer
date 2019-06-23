@@ -12,7 +12,7 @@ import {
   ViewCentered,
   View
 } from "../../../components/views";
-import { ScrollView } from "../../../components/views/scroll-view";
+import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
 import { getAge } from "@utils";
 
@@ -205,7 +205,7 @@ class EditChildScreen extends React.Component {
             onPressBackButton={() => navigation.goBack()}
           />
         </HeaderWrapper>
-        <ScrollView>
+        <KeyboardScrollView>
           <ViewCentered>
             <Avatar
               rounded
@@ -282,7 +282,7 @@ class EditChildScreen extends React.Component {
           <View style={{ marginBottom: 20 }}>
             <ServiceButton title="Save Changes" onPress={this.onSubmit} />
           </View>
-        </ScrollView>
+        </KeyboardScrollView>
       </ContainerView>
     );
   }
