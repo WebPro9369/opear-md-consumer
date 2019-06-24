@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Image, View, Alert, Linking } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { inject, observer, PropTypes } from "mobx-react";
-import { KeyboardAvoidingView } from "@components/views/keyboard-view";
+// import { KeyboardAvoidingView } from "@components/views/keyboard-view";
+import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { ServiceButton } from "@components/service-button";
 import { StyledText, StyledTextInput } from "@components/text";
 import { NavHeader } from "@components/nav-header";
@@ -36,9 +37,7 @@ class PhoneNumberScreen extends Component {
   onSubmit = () => {
     const {
       navigation: { navigate },
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = this.props;
     const { phone, acceptedPrivacy, acceptedTermsOfService } = this.state;
 
@@ -102,7 +101,10 @@ class PhoneNumberScreen extends Component {
     const { phone, acceptedPrivacy, acceptedTermsOfService } = this.state;
 
     return (
-      <KeyboardAvoidingView behavior="padding" enabled>
+      <KeyboardScrollView
+        behavior="padding"
+        contentContainerStyle={{ flex: 1, justifyContent: "flex-end" }}
+      >
         <View>
           <NavHeader
             hasBackButton
@@ -122,6 +124,7 @@ class PhoneNumberScreen extends Component {
               placeholder="(123) 456 - 7890"
               value={phone}
               onChangeText={this.handleInputChange}
+              style={{ marginBottom: 45 }}
             />
           </View>
         </View>
@@ -221,7 +224,7 @@ class PhoneNumberScreen extends Component {
               checkedColor={colors.SEAFOAMBLUE}
             />
         </View>
-        <View>
+        <View style={{ flex: 1, justifyContent: "flex-end" }}>
           <Image source={imgProgressbar} style={{ marginBottom: 16 }} />
           <ServiceButton
             title="Authenticate"
@@ -229,7 +232,7 @@ class PhoneNumberScreen extends Component {
             onPress={this.onSubmit}
           />
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardScrollView>
     );
   }
 }
