@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Image, View, Alert, Linking } from "react-native";
 import { CheckBox } from "react-native-elements";
+import { TextInputMask } from "react-native-masked-text";
 import { inject, observer, PropTypes } from "mobx-react";
 // import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
@@ -118,15 +119,17 @@ class PhoneNumberScreen extends Component {
             What is your phone number?
           </StyledText>
           <View>
-            <StyledTextInput
-              fontSize={28}
-              autoFocus
-              placeholder="(123) 456 - 7890"
-              value={phone}
-              onChangeText={this.handleInputChange}
-              style={{ marginBottom: 45 }}
-            />
-          </View>
+              <TextInputMask
+                fontSize={28}
+                autoFocus
+                placeholder="(123) 456 - 7890"
+                value={phone}
+                keyboardType="number-pad"
+                type="custom"
+                options={{ mask: "(999) 999-9999" }}
+                onChangeText={this.handleInputChange}
+              />
+            </View>
         </View>
         <View>
           <StyledText
