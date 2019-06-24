@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, View } from "react-native";
+import { Alert, Image, View } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 import { ServiceButton } from "@components/service-button";
@@ -12,8 +12,8 @@ const imgProgressbar = require("../../../../assets/images/ProgressBar3.png");
 @observer
 class EmailCaptureScreen extends Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -31,13 +31,17 @@ class EmailCaptureScreen extends Component {
   onSubmit = () => {
     const {
       navigation: { navigate },
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = this.props;
     const { email } = this.state;
 
-    if (!email) Alert.alert("Please enter your email");
+    const regEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!email || !regEmail.test(email)) {
+      return Alert.alert(
+        "There was an issue",
+        "Please enter a valid email address."
+      );
+    }
 
     if (email) userStore.setEmail(email);
     navigate("CreatePassword");
