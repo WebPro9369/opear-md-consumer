@@ -105,6 +105,8 @@ class PhoneNumberScreen extends Component {
       <KeyboardScrollView
         behavior="padding"
         contentContainerStyle={{ flex: 1, justifyContent: "flex-end" }}
+        keyboardShouldPersistTaps="handled"
+        enableOnAndroid
       >
         <View>
           <NavHeader
@@ -119,17 +121,19 @@ class PhoneNumberScreen extends Component {
             What is your phone number?
           </StyledText>
           <View>
-              <TextInputMask
-                fontSize={28}
-                autoFocus
-                placeholder="(123) 456 - 7890"
-                value={phone}
-                keyboardType="number-pad"
-                type="custom"
-                options={{ mask: "(999) 999-9999" }}
-                onChangeText={this.handleInputChange}
-              />
-            </View>
+            <TextInputMask
+              fontSize={28}
+              autoFocus
+              placeholder="(123) 456 - 7890"
+              value={phone}
+              keyboardType="number-pad"
+              returnKeyType="done"
+              type="custom"
+              options={{ mask: "(999) 999-9999" }}
+              onChangeText={this.handleInputChange}
+              style={{ marginBottom: 30 }}
+            />
+          </View>
         </View>
         <View>
           <StyledText
@@ -152,7 +156,7 @@ class PhoneNumberScreen extends Component {
                 Linking.openURL("https://www.opear.com/terms-conditions/")
               }
             >
-            Terms of Use
+              Terms of Use
             </StyledText>
             {" "}
             and
@@ -206,26 +210,26 @@ class PhoneNumberScreen extends Component {
             all necessary malpractice and other insurance as required
             under applicable law.
             </StyledText>
-            <CheckBox
-              title="I have read and accept"
-              checked={this.state.acceptedTermsOfService}
-              onPress={() =>
-                this.setState({
-                  acceptedTermsOfService: !this.state.acceptedTermsOfService
-                })
-              }
-              size={36}
-              textStyle={{ fontSize: 18 }}
-              containerStyle={{
-                backgroundColor: colors.WHITE,
-                borderColor: colors.WHITE,
-                paddingLeft: 0,
-                marginLeft: 0
-              }}
-              checkedIcon="check-square"
-              uncheckedIcon="square-o"
-              checkedColor={colors.SEAFOAMBLUE}
-            />
+          <CheckBox
+            title="I have read and accept"
+            checked={this.state.acceptedTermsOfService}
+            onPress={() =>
+              this.setState({
+                acceptedTermsOfService: !this.state.acceptedTermsOfService
+              })
+            }
+            size={36}
+            textStyle={{ fontSize: 18 }}
+            containerStyle={{
+              backgroundColor: colors.WHITE,
+              borderColor: colors.WHITE,
+              paddingLeft: 0,
+              marginLeft: 0
+            }}
+            checkedIcon="check-square"
+            uncheckedIcon="square-o"
+            checkedColor={colors.SEAFOAMBLUE}
+          />
         </View>
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
           <Image

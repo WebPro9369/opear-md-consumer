@@ -26,9 +26,7 @@ class EditEmailScreen extends React.Component {
       }
     } = props;
 
-    this.state = {
-      email
-    };
+    this.state = { email };
 
     this.handleInputChange = this.handleInputChange.bind(this);
   }
