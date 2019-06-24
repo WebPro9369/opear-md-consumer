@@ -4,6 +4,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
+import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
 import {
   ContainerView,
   HeaderWrapper,
