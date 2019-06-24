@@ -7,7 +7,6 @@ import { StyledText, StyledTextInput } from "@components/text";
 import { NavHeader } from "@components/nav-header";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 
-const imgLocation = require("../../../../assets/images/Location.png");
 const imgProgressbar = require("../../../../assets/images/ProgressBar1.png");
 
 @inject("store")
@@ -99,7 +98,6 @@ class AskLocationScreen extends Component {
               value={zipcode}
               onChangeText={this.handleInputChange}
             />
-            <Image source={imgLocation} />
           </View>
         </View>
         <View>
