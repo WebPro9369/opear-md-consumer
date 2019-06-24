@@ -14,25 +14,23 @@ import { updateParent } from "@services/opear-api"
 @observer
 class EditEmailScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
+    store: PropTypes.observableObject.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    const {
+      store: {
+        userStore: { email }
+      }
+    } = props;
+
+    this.state = {
+      email
     };
 
-    constructor(props) {
-      super(props);
-
-      const {
-        store: {
-          userStore: {
-            email
-          }
-        }
-      } = props;
-
-      this.state = {
-        email
-      };
-
-      this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange = name => value => {
@@ -52,8 +50,8 @@ class EditEmailScreen extends React.Component {
     const data = {
       parent: {
         email
-        }
-      };
+      }
+    };
 
     const successHandler = () => {
       userStore.setEmail(email);
@@ -79,9 +77,10 @@ class EditEmailScreen extends React.Component {
         />
         <FormWrapper>
           <FormInputView>
-            <FormTextInput label="Email"
-            value={email} 
-            onChangeText={this.handleInputChange("email")}
+            <FormTextInput
+              label="Email"
+              value={email}
+              onChangeText={this.handleInputChange("email")}
             />
           </FormInputView>
         </FormWrapper>
