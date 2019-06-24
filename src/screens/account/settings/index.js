@@ -6,7 +6,6 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { StyledText } from "../../../components/text";
 import { InputButton } from "../../../components/input-button";
 import { NavHeader } from "../../../components/nav-header";
-import { ChildCard } from "@components/cards";
 import {
   ContainerView,
   HeaderWrapper,
@@ -17,17 +16,14 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
 
 const { GREEN, MIDGREY } = colors;
-const imgFox = require("../../../../assets/images/Fox.png");
-const imgDog = require("../../../../assets/images/Dog.png");
-const imgTiger = require("../../../../assets/images/Tiger.png");
 const imgDoctor = require("../../../../assets/images/Doctor.png");
 
 @inject("store")
 @observer
 class SettingsScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -36,10 +32,9 @@ class SettingsScreen extends React.Component {
       store: {
         userStore: {
           name,
-          address : { street },
+          address: { street },
           email,
-          phone,
-          children
+          phone
         }
       }
     } = props;
@@ -48,8 +43,7 @@ class SettingsScreen extends React.Component {
       name,
       street,
       email,
-      phone,
-      children
+      phone
     };
   }
 
@@ -57,7 +51,7 @@ class SettingsScreen extends React.Component {
     const {
       navigation: { navigate }
     } = this.props;
-    const { name, street, email, phone, children } = this.state;
+    const { name, street, email, phone } = this.state;
     return (
       <ContainerView>
         <HeaderWrapper>
@@ -126,24 +120,6 @@ class SettingsScreen extends React.Component {
                 onPress={() => navigate("SettingsEditPhoneNumber")}
               />
             </View>
-          </View>
-          <View>
-            <StyledText
-              fontFamily="FlamaMedium"
-              fontSize={24}
-              style={{ paddingTop: 24, paddingBottom: 16 }}
-            >
-              Edit Children
-            </StyledText>
-            {children.map(child => (
-              <ChildCard
-                key={child.id}
-                name={child.name}
-                age={child.age}
-                avatarImg={eval(child.avatarImg)}
-                onPress={() => push("ChildrenEditChild",{childID:child.id})}
-              />
-            ))}
           </View>
         </ScrollView>
       </ContainerView>
