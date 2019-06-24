@@ -14,6 +14,7 @@ import {
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
+import InactiveUserBanner from "@components/banner"
 
 const { GREEN, MIDGREY } = colors;
 const imgDoctor = require("../../../../assets/images/Doctor.png");
@@ -49,7 +50,8 @@ class SettingsScreen extends React.Component {
 
   render() {
     const {
-      navigation: { navigate }
+      navigation: { navigate },
+      store: { userStore }
     } = this.props;
     const { name, street, email, phone } = this.state;
     return (
@@ -62,6 +64,7 @@ class SettingsScreen extends React.Component {
             onPressBackButton={() => navigate("AccountDefault")}
           />
         </HeaderWrapper>
+        <InactiveUserBanner userIsActive={userStore.active} />
         <ScrollView>
           <ViewCentered>
             <Avatar

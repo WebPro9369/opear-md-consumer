@@ -15,6 +15,7 @@ import {
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
 import { getAge } from "@utils";
+import InactiveUserBanner from "@components/banner"
 
 import { getChild, updateChild } from "@services/opear-api";
 
@@ -180,7 +181,8 @@ class EditChildScreen extends React.Component {
 
   render() {
     const {
-      navigation
+      navigation,
+      store: { userStore }
     } = this.props;
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
@@ -205,6 +207,7 @@ class EditChildScreen extends React.Component {
             onPressBackButton={() => navigation.goBack()}
           />
         </HeaderWrapper>
+        <InactiveUserBanner userIsActive={userStore.active} />
         <KeyboardScrollView>
           <ViewCentered>
             <Avatar

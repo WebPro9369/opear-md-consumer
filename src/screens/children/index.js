@@ -6,6 +6,7 @@ import { StyledText } from "../../components/text";
 import { ContainerView, View, FlexView } from "../../components/views";
 import { ChildCard } from "../../components/cards";
 import { colors } from "../../utils/constants";
+import InactiveUserBanner from "@components/banner"
 
 const imgFox = require("../../../assets/images/Fox.png");
 const imgDog = require("../../../assets/images/Dog.png");
@@ -36,7 +37,8 @@ class ManageChildrenScreen extends React.Component {
 
   render() {
     const {
-      navigation: { push }
+      navigation: { push },
+      store: { userStore }
     } = this.props;
     const { children } = this.state;
     return (
@@ -52,6 +54,7 @@ class ManageChildrenScreen extends React.Component {
               Manage children
             </StyledText>
           </View>
+          <InactiveUserBanner userIsActive={userStore.active} />
           <View
             style={{
               marginTop: 64,

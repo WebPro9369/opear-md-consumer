@@ -13,6 +13,7 @@ import {
 } from "./styles";
 import { ContainerView, View, FlexView } from "../../components/views";
 import { colors } from "../../utils/constants";
+import InactiveUserBanner from "@components/banner"
 
 const imgDoctor = require("../../../assets/images/Doctor.png");
 
@@ -50,12 +51,14 @@ class AccountScreen extends React.Component {
 
   render() {
     const {
-      navigation: { navigate }
+      navigation: { navigate },
+      store: { userStore }
     } = this.props;
     const { name, email, badges } = this.state;
     return (
       <ContainerView padding={16}>
         <NavHeader title="Account" size="medium" hasBackButton={false} />
+        <InactiveUserBanner userIsActive={userStore.active} />
         <View style={{ padding: 16 }}>
           <FlexView justifyContent="start">
             <Avatar rounded size={80} source={imgDoctor} />

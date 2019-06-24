@@ -14,6 +14,7 @@ import { IllnessCard, ContentWrapper, MatchingMessageWrapper } from "./styles";
 import { colors } from "../../utils/constants";
 import { getChildren } from "@services/opear-api";
 import { getAge } from "@utils"
+import InactiveUserBanner from "@components/banner"
 
 const imgRightArrow = require("../../../assets/images/Right_arrow.png");
 
@@ -94,6 +95,7 @@ class DashboardScreen extends React.Component {
           </StyledText>
         </ContentWrapper>
 
+        <InactiveUserBanner userIsActive={userStore.active} />
         {!outstandingAppointment && !readyProviders && appointment && userStore.active ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
@@ -143,10 +145,12 @@ class DashboardScreen extends React.Component {
                 renderItem={({ item }) => (
                   <IllnessCard
                     bgColor={item.color}
-                    onPress={() =>
-                      navigate("DashboardSelectSymptoms", {
-                        illness: item.string
-                      })
+                    onPress={() => {
+                      if(userStore.active){
+                        navigate("DashboardSelectSymptoms", {
+                          illness: item.string
+                        });
+                      }}
                     }
                   >
                     <StyledText

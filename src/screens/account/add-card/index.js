@@ -16,6 +16,7 @@ import {
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
 import { createPaymentAccount } from "@services/opear-api";
+import InactiveUserBanner from "@components/banner"
 
 @inject("store")
 @observer
@@ -91,7 +92,7 @@ class AddCardScreen extends React.Component {
   render() {
     const {
       navigation: { goBack, navigate },
-      store: { cardStore }
+      store: { cardStore, userStore }
     } = this.props;
 
     const {
@@ -117,6 +118,7 @@ class AddCardScreen extends React.Component {
           }}
           hasBackButton
         />
+        <InactiveUserBanner userIsActive={userStore.active} />
         <FormWrapper>
           <FormInputView>
             <FormTextInput

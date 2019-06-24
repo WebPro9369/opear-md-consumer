@@ -8,6 +8,7 @@ import { View, FormView } from "./styles";
 import { FormWrapper } from "../../../components/views";
 import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
 import { updateParent } from "@services/opear-api"
+import InactiveUserBanner from "@components/banner"
 
 @inject("store")
 @observer
@@ -65,7 +66,8 @@ class EditPhoneNumberScreen extends React.Component {
 
   render() {
     const {
-      navigation: { goBack }
+      navigation: { goBack },
+      store: { userStore }
     } = this.props;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
@@ -75,6 +77,7 @@ class EditPhoneNumberScreen extends React.Component {
           hasBackButton
           onPressBackButton={() => goBack()}
         />
+        <InactiveUserBanner userIsActive={userStore.active} />
         <FormWrapper>
           <StyledText fontSize={14}>Phone number</StyledText>
           <FormView>
