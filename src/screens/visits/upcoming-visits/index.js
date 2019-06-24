@@ -31,73 +31,71 @@ class UpcomingVisitsScreen extends React.Component {
 
       this.state = {
         userStore,
-        visitList: [
-          {
-            id: 1,
-            child_id: 10,
-            address_id: 75,
-            reason: "fever",
-            appointment_time: "6 pm",
-            payment_amount: 75,
-            care_provider_id: 101
-          },
-          {
-            id: 2,
-            child_id: 20,
-            address_id: 76,
-            reason: "fever",
-            appointment_time: "6 pm",
-            payment_amount: 175,
-            care_provider_id: 101
-          }
-        ]
+        visits: []
       };
 
-      const successHandler = res => {
+      getVisits(userStore.id, {
+        successHandler: (res) => {
+          const visits = res.data;
 
-        //const dateOptions = { hour: 'numeric' };
-        //new Date().toLocaleDateString("en-US", dateOptions).toString()
-
-        /*this.setState({
-          visitList: res.data
-        });*/
-
-      };
-
-      getVisits(userStore.id, { successHandler });
+          this.setState({ visits: visits })
+        }
+      });
     }
 
   render() {
-    const { visitList, userStore } = this.state;
+    const { visits } = this.state;
     const {
       navigation: { navigate }
     } = this.props;
+
+    const dates = Object.keys(visits)
+
+    var visitsDisplayStack = [];
+    var dayOptions = { month: 'long', day: 'numeric' };
+    var timeOptions = { day: undefined, hour: 'numeric' };
+
+    for (const date of dates) {
+
+      var visitsOnDate = visits[date];
+
+      dateAsObject = new Date(date);
+
+      visitsDisplayStack.push(
+        <StyledText fontSize={16} color={colors.BLACK60}>
+          {dateAsObject.toLocaleString("en-US", dayOptions)}
+        </StyledText>
+      );
+
+      for (const visitOnDate of visitsOnDate) {
+
+        var formattedTime = new Date(visitOnDate.appointment_time).toLocaleDateString("en-US", timeOptions);
+        formattedTime = formattedTime.split(", ");
+
+        visitsDisplayStack.push(
+          <View style={{ marginBottom: 9 }}>
+            <VisitDetailCard
+              avatarImg={imgFox}
+              name={visitOnDate.child.first_name}
+              illness={visitOnDate.reason}
+              time={formattedTime[1]}
+              address={visitOnDate.address.street}
+              onPress={() => navigate("VisitsVisitBooked", {
+                visitID: visitOnDate.id, visit: visitOnDate
+              })}
+            />
+          </View>
+        );
+      }
+
+    }
 
     return (
       <ContainerView style={{ marginTop: 0 }}>
         <ScrollView padding={0}>
           <View style={{ paddingTop: 24 }}>
             <ContentWrapper>
-              <StyledText fontSize={16} color={colors.BLACK60}>
-                Today
-              </StyledText>
-              <View style={{ paddingTop: 16, paddingBottom: 16 }}>
-                {visitList.map(item => (
-                  <View style={{ marginBottom: 9 }}>
-                    <VisitDetailCard
-                      avatarImg={imgFox}
-                      name={userStore.children[getIndexByValue(userStore.children,item.child_id)].name}
-                      illness={item.reason}
-                      time={item.appointment_time}
-                      address={userStore.addresses[getIndexByValue(userStore.addresses,item.address_id)].street}
-                      onPress={() => navigate("VisitsVisitBooked",{
-                        visitID: item.id,
-                        visits: visitList
-                      })}
-                    />
-                  </View>
-                ))}
-              </View>
+            {visitsDisplayStack}
             </ContentWrapper>
           </View>
         </ScrollView>
