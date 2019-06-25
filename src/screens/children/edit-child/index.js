@@ -1,6 +1,10 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-shadow */
+/* eslint-disable camelcase */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, ButtonGroup } from "react-native-elements";
+import { updateChild } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -14,9 +18,8 @@ import {
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
-import { getAge } from "@utils";
-
-import { getChild, updateChild } from "@services/opear-api";
+import { getAge, getValueById } from "@utils";
+import { getIndexByValue } from "../../../utils";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -24,85 +27,39 @@ const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 @observer
 class EditChildScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
 
     const {
       navigation,
-      id,
-      age,
-      gender,
-      firstName,
-      lastName,
-      birthDate,
-      birthHistory,
-      surgicalHistory,
-      currentMedications,
-      hospitalizations,
-      currentMedicalConditions,
-      allergies
+      store: {
+        userStore: { children }
+      }
     } = props;
 
-    const childID = navigation.getParam('childID', 0);
+    const childID = navigation.getParam("childID", 0);
+    const child = getValueById(children, childID) || {};
+    console.tron.log("Edit child: ", childID, child);
+    const nameSplitted = (child.name || "").split(" ");
+    const firstName = nameSplitted[0];
+    const lastName = nameSplitted.length > 1 ? nameSplitted[1] : "";
+    const date = new Date(child.birthDate);
+    const birthDate = `${date.getFullYear()}/${date.getMonth() +
+      1}/${date.getDate()}`;
 
     this.state = {
-      id,
-      age,
-      gender,
+      childID,
+      ...child,
       firstName,
       lastName,
-      birthDate,
-      birthHistory,
-      surgicalHistory,
-      currentMedications,
-      hospitalizations,
-      currentMedicalConditions,
-      allergies
+      birthDate
     };
-
-    const successHandler = res => {
-      const {
-        id,
-        first_name,
-        last_name,
-        gender,
-        dob,
-        allergies
-      } = res.data;
-
-      var genderMap = 0;
-
-      if(gender=="Male"){
-        genderMap = 0;
-      } else if (gender=="Female") {
-        genderMap = 1;
-      } else {
-        console.tr
-        genderMap = 2;
-      }
-
-      this.setState({
-        id: id,
-        firstName: first_name,
-        lastName: last_name,
-        gender: genderMap,
-        birthDate: new Date(dob).toLocaleDateString("en-US"),
-        age: getAge(dob),
-        allergies: allergies.join(", ")
-      });
-    }
-
-    getChild(childID, { successHandler });
 
     this.updateIndex = this.updateIndex.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  updateIndex(gender) {
-    this.setState({ gender });
   }
 
   handleInputChange = name => value => {
@@ -114,74 +71,92 @@ class EditChildScreen extends React.Component {
   onSubmit = () => {
     const {
       navigation,
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = this.props;
 
     const {
+      childID,
+      gender,
       firstName,
       lastName,
-      gender,
       birthDate,
+      birthHistory,
+      surgicalHistory,
+      currentMedications,
+      hospitalizations,
+      currentMedicalConditions,
       allergies
     } = this.state;
 
-    const childID = navigation.getParam('childID', 0);
+    let allergiesArray = [];
 
-    var genderMap = 0;
-
-    if(gender == 0) {
-      genderMap = "Male";
-    } else if(gender == 1){
-      genderMap = "Female";
+    if (allergies.indexOf(",") > -1) {
+      allergiesArray = allergies.split(", ");
     } else {
-      genderMap = "Non-Binary";
+      allergiesArray = allergies;
     }
 
     const data = {
       child: {
         first_name: firstName,
         last_name: lastName,
-        gender: genderMap,
+        gender,
         dob: birthDate,
-        allergies: allergies.split(", ")
-        }
-      };
+        allergies: allergiesArray,
+        birth_history: birthHistory,
+        current_medications: currentMedications,
+        current_medical_conditions: currentMedicalConditions,
+        surgical_history: surgicalHistory,
+        hospitalizations
+      }
+    };
 
     const successHandler = res => {
       const {
         id,
+        // parent_id,
         first_name,
         last_name,
         gender,
         dob,
-        allergies
+        allergies,
+        birth_history,
+        current_medications,
+        current_medical_conditions,
+        surgical_history,
+        hospitalizations
       } = res.data;
 
-      var editedChild = {
+      const editedChild = {
         id,
-        name: first_name+" "+last_name,
-        gender,
-        birthDate: new Date(dob),
         age: getAge(dob),
-        allergies: allergies
-      }
+        gender,
+        name: `${first_name} ${last_name}`,
+        birthDate: new Date(dob),
+        allergies: (allergies || "").split(", "),
+        birthHistory: birth_history || "",
+        surgicalHistory: surgical_history || "",
+        currentMedications: current_medications || "",
+        currentMedicalConditions: current_medical_conditions || "",
+        hospitalizations: hospitalizations || ""
+      };
 
-      var index = userStore.children.map(function(o) { return o.id; }).indexOf(id);
+      const index = getIndexByValue(userStore.children, childID);
 
-      userStore.setChild(index,editedChild);
-
+      userStore.setChild(index, editedChild);
       navigation.goBack();
     };
 
     updateChild(childID, data, { successHandler });
   };
 
+  updateIndex(index) {
+    const buttons = ["Male", "Female", "Non-Binary"];
+    this.setState({ gender: buttons[index] });
+  }
+
   render() {
-    const {
-      navigation
-    } = this.props;
+    const { navigation } = this.props;
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
       gender,
@@ -222,36 +197,47 @@ class EditChildScreen extends React.Component {
           </ViewCentered>
           <FormWrapper>
             <FormInputWrapper>
-              <FormTextInput label="First Name"
-              value={firstName}
-              onChangeText={this.handleInputChange("firstName")}
+              <FormTextInput
+                label="First Name"
+                value={firstName}
+                onChangeText={this.handleInputChange("firstName")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput label="Last Name"
-              value={lastName}
-              onChangeText={this.handleInputChange("lastName")}
+              <FormTextInput
+                label="Last Name"
+                value={lastName}
+                onChangeText={this.handleInputChange("lastName")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <ButtonGroup
                 onPress={this.updateIndex}
-                selectedIndex={gender}
+                selectedIndex={buttons.indexOf(gender)}
                 buttons={buttons}
                 containerStyle={{ height: 40 }}
               />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput label="Birth Date" value={birthDate}
-              onChangeText={this.handleInputChange("birthDate")} />
+              <FormTextInput
+                label="Birth Date"
+                value={birthDate}
+                onChangeText={this.handleInputChange("birthDate")}
+              />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput label="Birth History" value={birthHistory}
-              onChangeText={this.handleInputChange("birthHistory")} />
+              <FormTextInput
+                label="Birth History"
+                value={birthHistory}
+                onChangeText={this.handleInputChange("birthHistory")}
+              />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput label="Surgical History" value={surgicalHistory}
-              onChangeText={this.handleInputChange("surgicalHistory")} />
+              <FormTextInput
+                label="Surgical History"
+                value={surgicalHistory}
+                onChangeText={this.handleInputChange("surgicalHistory")}
+              />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
@@ -268,14 +254,19 @@ class EditChildScreen extends React.Component {
               />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput label="Allergies" value={allergies}
-              onChangeText={this.handleInputChange("allergies")} />
+              <FormTextInput
+                label="Allergies"
+                value={allergies.join(", ")}
+                onChangeText={this.handleInputChange("allergies")}
+              />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Current Medical Conditions"
                 value={currentMedicalConditions}
-                onChangeText={this.handleInputChange("currentMedicalConditions")}
+                onChangeText={this.handleInputChange(
+                  "currentMedicalConditions"
+                )}
               />
             </FormInputWrapper>
           </FormWrapper>
