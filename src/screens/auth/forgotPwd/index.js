@@ -32,7 +32,7 @@ class ForgotPwdScreen extends React.Component {
 
     const regEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!email || !regEmail.test(email)) {
-      return Alert.alert("Please enter a valid email address.");
+      return Alert.alert("Email Error","Please enter a valid email address.");
     }
 
     console.tron.log(email);
