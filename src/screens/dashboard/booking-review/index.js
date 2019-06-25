@@ -31,16 +31,14 @@ class BookingReviewScreen extends React.Component {
 
     const {
       store: {
-        userStore: {
-          children,
-          addresses,
-          visitRequest
-        }
+        userStore: { children, addresses, visitRequest }
       }
     } = props;
 
-    const childName = children[getIndexByValue(children,visitRequest.pickedChild)].name;
-    const addressStreet = addresses[getIndexByValue(addresses,visitRequest.pickedAddress)].street;
+    const childName =
+      children[getIndexByValue(children, visitRequest.pickedChild)].name;
+    const addressStreet =
+      addresses[getIndexByValue(addresses, visitRequest.pickedAddress)].street;
 
     this.state = {
       name: childName,
@@ -58,10 +56,13 @@ class BookingReviewScreen extends React.Component {
       store
     } = this.props;
 
-    const cardSelected = getParam('cardAdded', false);
+    const cardSelected = getParam("cardAdded", false);
 
-    if(!cardSelected){
-      return Alert.alert("Please select a valid payment method.");
+    if (!cardSelected) {
+      return Alert.alert(
+        "Missing Payment",
+        "Please select a valid payment method."
+      );
     }
 
     store.providerStore.setAppointment(true);
@@ -189,10 +190,7 @@ class BookingReviewScreen extends React.Component {
             </View>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 24, marginBottom: 24 }}>
-            <ServiceButton
-              title="Find a provider"
-              onPress={this.onSubmit}
-            />
+            <ServiceButton title="Find a provider" onPress={this.onSubmit} />
           </ContentWrapper>
         </KeyboardScrollView>
       </ContainerView>
