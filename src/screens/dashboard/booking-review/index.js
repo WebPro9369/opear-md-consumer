@@ -5,7 +5,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import { inject, observer } from "mobx-react";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
@@ -52,11 +52,17 @@ class BookingReviewScreen extends React.Component {
     };
   }
 
-  goToDashboard = () => {
+  onSubmit = () => {
     const {
-      navigation: { navigate },
+      navigation: { navigate, getParam },
       store
     } = this.props;
+
+    const cardSelected = getParam('cardAdded', false);
+
+    if(!cardSelected){
+      return Alert.alert("Please select a valid payment method.");
+    }
 
     store.providerStore.setAppointment(true);
     navigate("DashboardDefault");
@@ -185,7 +191,7 @@ class BookingReviewScreen extends React.Component {
           <ContentWrapper style={{ marginTop: 24, marginBottom: 24 }}>
             <ServiceButton
               title="Find a provider"
-              onPress={this.goToDashboard}
+              onPress={this.onSubmit}
             />
           </ContentWrapper>
         </KeyboardScrollView>
