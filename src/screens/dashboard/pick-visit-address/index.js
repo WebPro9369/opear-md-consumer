@@ -27,7 +27,8 @@ class PickVisitAddressScreen extends React.Component {
             pickedAddress
           }
         }
-      }
+      },
+      navigation
     } = props;
 
     this.state = {
@@ -38,19 +39,23 @@ class PickVisitAddressScreen extends React.Component {
 
   onSubmit = addressID => {
     const {
-      navigation: { navigate },
+      navigation: {getParam, navigate},
       store: {
         userStore
       }
     } = this.props;
 
-      const { pickedAddress } = this.state;
+    const { pickedAddress } = this.state;
 
-      userStore.setVisitRequestPickedAddress(addressID);
+    userStore.setVisitRequestPickedAddress(addressID);
 
-      console.tron.log(userStore);
+    const screenRef = getParam('screenRef', null);
 
-      navigate("DashboardSelectDateTime")
+    if(screenRef){
+      return navigate("DashboardBookingReview");
+    }
+
+    return navigate("DashboardSelectDateTime")
   };
 
   render() {
