@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, View } from "react-native";
+import { Alert, Image, View } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 import { ServiceButton } from "@components/service-button";
@@ -12,8 +12,8 @@ const imgProgressbar = require("../../../../assets/images/ProgressBar2.png");
 @observer
 class NameCaptureScreen extends Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -31,9 +31,7 @@ class NameCaptureScreen extends Component {
   onSubmit = () => {
     const {
       navigation: { navigate },
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = this.props;
     const { name } = this.state;
 
@@ -42,7 +40,6 @@ class NameCaptureScreen extends Component {
     userStore.setName(name);
 
     navigate("EmailCapture");
-
   };
 
   render() {

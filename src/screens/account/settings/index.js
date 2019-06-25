@@ -87,7 +87,7 @@ class SettingsScreen extends React.Component {
                 icon={
                   <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }
-                onPress={() => null}
+                onPress={() => navigate("SettingsEditName")}
               />
             </View>
             <View style={{ padding: 16 }}>
