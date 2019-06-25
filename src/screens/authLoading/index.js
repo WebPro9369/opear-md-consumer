@@ -4,7 +4,7 @@ import { ActivityIndicator, View } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { getParent } from "@services/opear-api";
 import { getAuthentication } from "@services/authentication";
-import { userFromResult, getAge } from "@utils";
+import { userFromResult } from "@utils";
 
 @inject("store")
 @observer
@@ -34,13 +34,20 @@ class AuthLoadingScreen extends Component {
     if (!isAuthenticated && wasAuthenticated) return navigate("AccountSignIn");
     if (!isAuthenticated) return navigate("Onboarding");
 
+    userStore.setAuthentication({ id, apiKey });
+
     const successHandler = res => {
       userFromResult(res, userStore);
-
       navigate("Tabs");
     };
 
-    getParent(id, { successHandler });
+    const errorHandler = err => {
+      if (err.response.status === 401) {
+        navigate("AccountSignIn");
+      }
+    };
+
+    return getParent(id, { successHandler, errorHandler });
   };
 
   render() {

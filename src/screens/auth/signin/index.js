@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable import/no-unresolved */
 import React from "react";
 import { Alert } from "react-native";
 import { inject, PropTypes } from "mobx-react";
@@ -19,8 +21,8 @@ class SignInScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: null,
-      password: null
+      email: "",
+      password: ""
     };
   }
 
@@ -34,8 +36,8 @@ class SignInScreen extends React.Component {
     const loginSuccessHandler = res => {
       if (res.data.message) {
         return Alert.alert(`Incorrect credentials. Please try again.`);
-      } 
-      
+      }
+
       const { id, api_key: apiKey } = res.data;
       userStore.setAuthentication({ id, apiKey });
 
@@ -43,10 +45,12 @@ class SignInScreen extends React.Component {
         userFromResult(res, userStore);
         navigate("Tabs");
       };
-      getParent(id, { successHandler });
+      return getParent(id, { successHandler });
     };
 
-    getApiToken(email, password, { successHandler: loginSuccessHandler });
+    getApiToken(email, password, {
+      successHandler: loginSuccessHandler
+    });
   };
 
   onPressForgotPassword = () => {
@@ -120,16 +124,14 @@ class SignInScreen extends React.Component {
             />
           </FormInputWrapper>
           <FormInputWrapper paddingTop={6}>
-            <ViewCentered
-              style={{ flexDirection: "row" }}
-            >
+            <ViewCentered style={{ flexDirection: "row" }}>
               <StyledText
                 style={{ color: "#ffffff" }}
                 onPress={this.onPressSignUp}
               >
                 sign up
-              </StyledText>              
-              <StyledText style={{ color: "#ffffff" }}>  |  </StyledText>
+              </StyledText>
+              <StyledText style={{ color: "#ffffff" }}> | </StyledText>
               <StyledText
                 style={{ color: "#ffffff" }}
                 onPress={this.onPressForgotPassword}

@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/order */
 import React from "react";
 import { FlatList, Image, TouchableOpacity } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
@@ -29,9 +31,7 @@ class DashboardScreen extends React.Component {
     super(props);
 
     const {
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = props;
 
     this.state = {
@@ -46,25 +46,27 @@ class DashboardScreen extends React.Component {
     };
 
     const successHandler = res => {
+      const childAdjustedArray = res.data.map(row => ({
+        id: row.id,
+        age: getAge(row.dob),
+        gender: row.gender || "",
+        name: `${row.first_name} ${row.last_name}`,
+        allergies: Array.isArray(row.allergies)
+          ? row.allergies
+          : [row.allergies || ""],
+        birthDate: new Date(row.dob),
+        birthHistory: row.birth_history || "",
+        surgicalHistory: row.surgical_history || "",
+        currentMedications: row.current_medications || "",
+        hospitalizations: row.hospitalizations || "",
+        currentMedicalConditions: row.current_medical_conditions || ""
+      }));
 
-        var childAdjustedArray = res.data.map(
-          function(row)
-        {
-          return {
-          id: row.id,
-          age: getAge(row.dob),
-          gender: row.gender,
-          name: row.first_name+" "+row.last_name,
-          allergies: row.allergies,
-          birthDate: new Date(row.dob)};
-        });
+      // console.tron.log("Children list: ", childAdjustedArray);
+      userStore.setChildren(childAdjustedArray);
+    };
 
-        userStore.setChildren(childAdjustedArray);
-
-      };
-
-      getChildren( { successHandler });
-
+    getChildren({ successHandler });
   }
 
   render() {
@@ -96,7 +98,10 @@ class DashboardScreen extends React.Component {
         </ContentWrapper>
 
         <InactiveUserBanner userIsActive={userStore.active} />
-        {!outstandingAppointment && !readyProviders && appointment && userStore.active ? (
+        {!outstandingAppointment && 
+        !readyProviders && 
+        appointment && 
+        userStore.active ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
               We are currently matching you with your doctor, be in touch soon!
@@ -117,7 +122,7 @@ class DashboardScreen extends React.Component {
         ) : null}
         {outstandingAppointment && !providerEnRoute && userStore.active ? (
           /*TODO: swap hardcoded visit id when logic is*/
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:3})}>
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:2})}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>

@@ -1,14 +1,15 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-param-reassign */
 import { types } from "mobx-state-tree";
 import { setAuthentication } from "@services/authentication";
 import { formatCardInfo } from "@utils";
 import AddressStore from "@store/address";
-import ChildStore from "@store/child";
+// import ChildStore from "@store/child";
 
 const PaymentAccountStore = types
   .model("PaymentAccountStore", {
-      token_id: types.maybeNull(types.string),
-      last4: types.maybeNull(types.string)
+    token_id: types.maybeNull(types.string),
+    last4: types.maybeNull(types.string)
   })
   .actions(self => ({
     setTokenId(value) {
@@ -28,52 +29,52 @@ export const UserStore = types
     active: types.boolean,
     name: types.string,
     email: types.string,
-    password: types.optional(types.string, ''),
+    password: types.optional(types.string, ""),
     birthday: types.Date,
     phone: types.string,
     acceptedPrivacy: types.boolean,
     acceptedTermsOfService: types.boolean,
     payment_accounts: types.array(PaymentAccountStore),
-    paymentMethods: types.array (
+    paymentMethods: types.array(
       types.model({
         id: types.number,
         type: types.string,
-        paypalEmail: types.optional(types.string, ''),
+        paypalEmail: types.optional(types.string, ""),
         cardNumber: types.optional(types.number, 0),
         expiryYear: types.optional(types.number, 0),
         expiryMonth: types.optional(types.number, 0),
         cvv: types.optional(types.number, 0),
-        cardType: types.optional(types.string, ''),
-        fullName: types.optional(types.string, '')
+        cardType: types.optional(types.string, ""),
+        fullName: types.optional(types.string, "")
       })
     ),
-    addresses: types.array (
+    addresses: types.array(
       types.model({
         id: types.number,
         name: types.string,
         street: types.string,
         city: types.string,
-        state: types.optional(types.string, ''),
+        state: types.optional(types.string, ""),
         zip: types.string
       })
     ),
-    children: types.array (
+    children: types.array(
       types.model({
         id: types.number,
         age: types.number,
         gender: types.string,
         name: types.string,
         birthDate: types.Date,
-        birthHistory: types.optional(types.string, ''),
-        surgicalHistory: types.optional(types.string, ''),
-        currentMedications: types.optional(types.string, ''),
-        hospitalizations: types.optional(types.string, ''),
-        currentMedicalConditions: types.optional(types.string, ''),
-        allergies: types.array(types.string,'')
+        birthHistory: types.optional(types.string, ""),
+        surgicalHistory: types.optional(types.string, ""),
+        currentMedications: types.optional(types.string, ""),
+        hospitalizations: types.optional(types.string, ""),
+        currentMedicalConditions: types.optional(types.string, ""),
+        allergies: types.array(types.string, "")
       })
     ),
-    visitRequest: types.model ({
-      symptoms: types.array (types.string,''),
+    visitRequest: types.model({
+      symptoms: types.array(types.string, ""),
       pickedChild: types.number,
       pickedAddress: types.number,
       date: types.string,
@@ -89,21 +90,21 @@ export const UserStore = types
       fullName: types.string
     }),
     address: types.optional(AddressStore, {
-      name: '',
-      street: '',
-      city: '',
-      state: '',
-      zip_code: '',
-      apartment_number: '',
-      latitude: '',
-      longitude: ''
+      name: "",
+      street: "",
+      city: "",
+      state: "",
+      zip_code: "",
+      apartment_number: "",
+      latitude: "",
+      longitude: ""
     })
   })
   .actions(self => ({
     setID(value) {
       self.id = value;
       return self;
-		},
+    },
     setAPIKey(value) {
       self.apiKey = value;
       return self;
@@ -112,10 +113,9 @@ export const UserStore = types
       self.apiKey = value;
       return self;
     },
-    setAuthentication({ id, apiKey}) {
+    setAuthentication({ id, apiKey }) {
       self.setID(id).setAPIKey(apiKey);
-      setAuthentication({ id, apiKey});
-
+      setAuthentication({ id, apiKey });
       return self;
     },
     setPassword(value) {
@@ -128,6 +128,7 @@ export const UserStore = types
     },
     setName(value) {
       self.name = value;
+      return self;
     },
     setEmail(value) {
       self.email = value;
@@ -135,14 +136,6 @@ export const UserStore = types
     },
     setPhone(value) {
       self.phone = value;
-      return self;
-    },
-    setZip(value) {
-      self.address.zip_code = value
-      return self;
-    },
-    setPassword(value) {
-      self.password = value;
       return self;
     },
     setBirthday(value) {
@@ -164,12 +157,12 @@ export const UserStore = types
       self.paymentMethods.replace(value);
       return self;
     },
-    setPaymentMethod(index,value) {
+    setPaymentMethod(index, value) {
       self.paymentMethods[index] = value;
       return self;
     },
     addChild(value) {
-      console.tron.log(value);
+      // console.tron.log(value);
       self.children.push(value);
       return self;
     },
@@ -207,7 +200,7 @@ export const UserStore = types
       return self;
     },
     addAddress(value) {
-      console.tron.log(value);
+      // console.tron.log(value);
       self.addresses.push(value);
       return self;
     },

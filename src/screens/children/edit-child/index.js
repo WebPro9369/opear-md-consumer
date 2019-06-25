@@ -125,6 +125,11 @@ class EditChildScreen extends React.Component {
       lastName,
       gender,
       birthDate,
+      birthHistory,
+      surgicalHistory,
+      currentMedications,
+      hospitalizations,
+      currentMedicalConditions,
       allergies
     } = this.state;
 
@@ -146,7 +151,12 @@ class EditChildScreen extends React.Component {
         last_name: lastName,
         gender: genderMap,
         dob: birthDate,
-        allergies: allergies.split(", ")
+        birth_history: birthHistory,
+        surgical_history: surgicalHistory,
+        current_medications: currentMedications,
+        hopsitalizations: hospitalizations,
+        current_medical_conditions: currentMedicalConditions,
+        allergies: allergies.split(", "),
         }
       };
 
@@ -166,7 +176,12 @@ class EditChildScreen extends React.Component {
         gender,
         birthDate: new Date(dob),
         age: getAge(dob),
-        allergies: allergies
+        allergies: allergies,
+        birthHistory,
+        surgicalHistory,
+        currentMedications,
+        hospitalizations,
+        currentMedicalConditions,
       }
 
       var index = userStore.children.map(function(o) { return o.id; }).indexOf(id);

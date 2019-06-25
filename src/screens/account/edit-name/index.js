@@ -4,16 +4,15 @@ import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
 import { FormWrapper } from "../../../components/views";
+import { updateCareProvider } from "../../../services/opear-api";
 import {
   KeyboardAvoidingView,
   FormInputView
 } from "../../../components/views/keyboard-view";
-import { updateParent } from "@services/opear-api"
-import InactiveUserBanner from "@components/banner"
 
 @inject("store")
 @observer
-class EditEmailScreen extends React.Component {
+class EditNameScreen extends React.Component {
   static propTypes = {
     store: PropTypes.observableObject.isRequired
   };
@@ -23,74 +22,66 @@ class EditEmailScreen extends React.Component {
 
     const {
       store: {
-        userStore: { email }
+        userStore: { name }
       }
     } = props;
-
-    this.state = { email };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.state = {
+      name: name
+    };
   }
 
-  handleInputChange = name => value => {
-    return this.setState({
-      [name]: value
-    });
+  handleChange = name => {
+    this.setState({ name });
   };
 
   onSubmit = () => {
     const {
       navigation: { goBack },
-      store: {
-        userStore: { id, email }
-      }
+      store: { userStore }
     } = this.props;
 
-    const data = {
-      parent: {
-        email
-      }
-    };
+    const { id } = userStore;
+    const { name } = this.state;
+    const data = { name };
 
     const successHandler = () => {
-      userStore.setEmail(email);
-
+      userStore.setName(name);
       goBack();
     };
 
-    updateParent(id, data, { successHandler });
+    updateCareProvider(id, data, { successHandler });
   };
 
   render() {
     const {
-      navigation: { goBack },
-      store: { userStore }
+      navigation: { goBack }
     } = this.props;
-    const { email } = this.state;
+
+    const { name } = this.state;
+
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <NavHeader
-          title="Edit email"
+          title="Edit name"
           size="medium"
           hasBackButton
           onPressBackButton={() => goBack()}
         />
-        <InactiveUserBanner userIsActive={userStore.active} />
         <FormWrapper>
           <FormInputView>
             <FormTextInput
-              label="Email"
-              value={email}
-              onChangeText={this.handleInputChange("email")}
+              label="Name"
+              value={name}
+              onChangeText={this.handleChange}
             />
           </FormInputView>
         </FormWrapper>
         <FormInputView>
-          <ServiceButton title="Update Email" onPress={this.onSubmit} />
+          <ServiceButton title="Update Name" onPress={this.onSubmit} />
         </FormInputView>
       </KeyboardAvoidingView>
     );
   }
 }
 
-export default EditEmailScreen;
+export default EditNameScreen;

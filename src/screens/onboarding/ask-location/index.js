@@ -7,7 +7,6 @@ import { StyledText, StyledTextInput } from "@components/text";
 import { NavHeader } from "@components/nav-header";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 
-const imgLocation = require("../../../../assets/images/Location.png");
 const imgProgressbar = require("../../../../assets/images/ProgressBar1.png");
 
 @inject("store")
@@ -98,12 +97,17 @@ class AskLocationScreen extends Component {
               placeholder="Zip code"
               value={zipcode}
               onChangeText={this.handleInputChange}
+              keyboardType="number-pad"
+              maxLength={5}
             />
-            <Image source={imgLocation} />
           </View>
         </View>
         <View>
-          <Image source={imgProgressbar} style={{ marginBottom: 16 }} />
+          <Image
+            source={imgProgressbar}
+            resizeMode="contain"
+            style={{ width: "100%", marginBottom: 16 }}
+          />
           <ServiceButton
             title="Check Availability"
             style={{ marginBottom: 20 }}

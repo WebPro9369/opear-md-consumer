@@ -1,8 +1,10 @@
+/* eslint-disable import/no-unresolved */
 import React from "react";
 import { Linking } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, Badge } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { removeAuthentication } from "@services/authentication";
 import { StyledText } from "../../components/text";
 import { NavHeader } from "../../components/nav-header";
 import {
@@ -12,6 +14,7 @@ import {
   styles
 } from "./styles";
 import { ContainerView, View, FlexView } from "../../components/views";
+import { ScrollView } from "../../components/views/scroll-view";
 import { colors } from "../../utils/constants";
 import InactiveUserBanner from "@components/banner"
 
@@ -21,32 +24,36 @@ const imgDoctor = require("../../../assets/images/Doctor.png");
 @observer
 class AccountScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
+    store: PropTypes.observableObject.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    const {
+      store: {
+        userStore: { name, email, children }
+      }
+    } = props;
+
+    this.state = {
+      name,
+      email,
+      badges: children.map(value => value.name)
     };
-
-    constructor(props) {
-      super(props);
-
-      const {
-        store: {
-          userStore: {
-            name,
-            email,
-            children
-          }
-        }
-      } = props;
-
-      this.state = {
-        name,
-        email,
-        badges: children.map(value => value.name)
-      };
-
   }
 
   openURL = url => {
     return Linking.openURL(url);
+  };
+
+  logOut = () => {
+    const {
+      navigation: { navigate }
+    } = this.props;
+
+    removeAuthentication();
+    navigate("AccountSignIn");
   };
 
   render() {
@@ -56,7 +63,7 @@ class AccountScreen extends React.Component {
     } = this.props;
     const { name, email, badges } = this.state;
     return (
-      <ContainerView padding={16}>
+      <ScrollView padding={16}>
         <NavHeader title="Account" size="medium" hasBackButton={false} />
         <InactiveUserBanner userIsActive={userStore.active} />
         <View style={{ padding: 16 }}>
@@ -99,12 +106,12 @@ class AccountScreen extends React.Component {
             <ListButtonText>Support</ListButtonText>
             <FontAwesome name="angle-right" color={colors.MIDGREY} size={24} />
           </ListTouchableButtonWrapper>
-          <ListTouchableButtonWrapper>
+          <ListTouchableButtonWrapper onPress={this.logOut}>
             <ListButtonText>Log out</ListButtonText>
             <FontAwesome name="angle-right" color={colors.MIDGREY} size={24} />
           </ListTouchableButtonWrapper>
         </View>
-      </ContainerView>
+      </ScrollView>
     );
   }
 }

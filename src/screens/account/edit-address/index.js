@@ -5,12 +5,15 @@ import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
 import {
+  KeyboardAvoidingView,
+  FormInputView
+} from "../../../components/views/keyboard-view";
+import {
   ContainerView,
   HeaderWrapper,
   FlexView,
   FormWrapper
 } from "../../../components/views";
-import { KeyboardAvoidingView, FormInputView } from "../../../components/views/keyboard-view";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import InactiveUserBanner from "@components/banner"
 
@@ -23,28 +26,28 @@ const { LIGHTGREEN } = colors;
 @observer
 class EditAddressScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
+    store: PropTypes.observableObject.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    const {
+      store: {
+        userStore: {
+          address: { name, street, city, zip_code }
+        }
+      }
+    } = props;
+
+    this.state = {
+      name,
+      street,
+      city,
+      zip_code
     };
 
-    constructor(props) {
-      super(props);
-
-      const {
-        store: {
-          userStore: {
-            address: { name, street, city, zip_code }
-          }
-        }
-      } = props;
-
-      this.state = {
-        name,
-        street,
-        city,
-        zip_code
-      };
-
-      this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleInputChange = name => value => {
