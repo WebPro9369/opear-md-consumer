@@ -205,11 +205,9 @@ class PhoneNumberScreen extends Component {
               marginTop: 20
             }}
           >
-            I hereby affirm that I read and understood Opear's Terms of
-            Use and Privacy Policy and agree to be bound by their terms. I
-            have (and will maintain during my time as an Opear Provider)
-            all necessary malpractice and other insurance as required
-            under applicable law.
+            {
+              "I hereby affirm that I read and understood Opear's Terms of Use and Privacy Policy and agree to be bound by their terms."
+            }
             </StyledText>
           <CheckBox
             title="I have read and accept"
