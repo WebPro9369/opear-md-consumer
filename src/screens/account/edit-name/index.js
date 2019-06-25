@@ -26,7 +26,7 @@ class EditNameScreen extends React.Component {
       }
     } = props;
     this.state = {
-      name: name
+      name
     };
   }
 
