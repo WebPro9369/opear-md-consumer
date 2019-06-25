@@ -112,7 +112,7 @@ class BookingReviewScreen extends React.Component {
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
             </ContentButton>
-            <ContentButton onPress={() => push("DashboardPickVisitAddress")}>
+            <ContentButton onPress={() => push("DashboardPickVisitAddress",{screenRef:"booking-review"})}>
               <FlexView>
                 <EvilIcons name="location" size={40} color={colors.BLACK60} />
                 <StyledText
@@ -125,7 +125,7 @@ class BookingReviewScreen extends React.Component {
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
             </ContentButton>
-            <ContentButton onPress={() => push("DashboardSelectDateTime")}>
+            <ContentButton onPress={() => push("DashboardSelectDateTime",{screenRef:"booking-review"})}>
               <FlexView>
                 <FontAwesome
                   name="calendar-check-o"
@@ -146,7 +146,7 @@ class BookingReviewScreen extends React.Component {
             </ContentButton>
             <FlexView>
               <View style={{ flex: 1, marginRight: 4 }}>
-                <ContentButton onPress={() => push("DashboardAddCard")}>
+                <ContentButton onPress={() => push("DashboardAddCard",{screenRef:"booking-review"})}>
                   <FlexView justifyContent="center">
                     <AntDesign
                       name="pluscircle"

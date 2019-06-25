@@ -39,7 +39,7 @@ class SelectDateTimeScreen extends React.Component {
 
   onSubmit = () => {
     const {
-      navigation: { navigate },
+      navigation: {getParam, navigate},
       store: {
         userStore
       }
@@ -52,7 +52,13 @@ class SelectDateTimeScreen extends React.Component {
 
     userStore.setVisitRequestDateTime(selectedDate,selectedTime);
 
-    navigate("DashboardBookingReview")
+    const screenRef = getParam('screenRef', null);
+
+    if(screenRef){
+      return navigate("DashboardBookingReview");
+    }
+
+    return navigate("DashboardBookingReview")
   };
 
   render() {
