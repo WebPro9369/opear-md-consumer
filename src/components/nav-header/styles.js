@@ -14,14 +14,14 @@ export const Wrapper = styled.View`
 `;
 
 export const StyledTouchableButtonWrapper = styled.TouchableOpacity`
-  background-color: ${colors.WHITE};
+  background-color: ${props => props.backgroundColor};
   height: 24px;
   padding-top: 4px;
   padding-bottom: 4px;
 `;
 
 export const ServiceText = styled.Text`
-  color: ${colors.BLACK};
+  color: ${props => props.color || colors.BLACK};
   font-family: "FlamaMedium";
   text-align: left;
   font-size: ${props => (props.size === "small" ? "20px" : "28px")};
