@@ -8,6 +8,7 @@ import { View, FlexView } from "../../components/views";
 import { ScrollView } from "../../components/views/scroll-view";
 import { ChildCard } from "../../components/cards";
 import { colors } from "../../utils/constants";
+import InactiveUserBanner from "@components/banner"
 
 @inject("store")
 @observer
@@ -32,7 +33,8 @@ class ManageChildrenScreen extends React.Component {
 
   render() {
     const {
-      navigation: { push }
+      navigation: { push },
+      store: { userStore }
     } = this.props;
     const { children } = this.state;
     return (
@@ -48,6 +50,7 @@ class ManageChildrenScreen extends React.Component {
               Manage children
             </StyledText>
           </View>
+          <InactiveUserBanner userIsActive={userStore.active} />
           <View
             style={{
               marginTop: 64,

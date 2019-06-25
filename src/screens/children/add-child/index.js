@@ -4,6 +4,8 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, ButtonGroup } from "react-native-elements";
+import { registerChild } from "@services/opear-api";
+import InactiveUserBanner from "@components/banner"
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -15,7 +17,7 @@ import {
   ViewCentered
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import { registerChild } from "@services/opear-api";
+import { colors } from "../../../utils/constants";
 import { getAge } from "@utils";
 
 const avatarImages = [];
@@ -155,7 +157,8 @@ class AddChildScreen extends React.Component {
 
   render() {
     const {
-      navigation: { goBack }
+      navigation: { goBack },
+      store: { userStore }
     } = this.props;
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
@@ -182,6 +185,7 @@ class AddChildScreen extends React.Component {
             onPressBackButton={() => goBack()}
           />
         </HeaderWrapper>
+        <InactiveUserBanner userIsActive={userStore.active} />
         <KeyboardScrollView>
           <ViewCentered>
             <Avatar

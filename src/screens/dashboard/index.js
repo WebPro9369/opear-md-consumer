@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/order */
 import React from "react";
-import { FlatList, Image, TouchableOpacity } from "react-native";
+import { Alert, FlatList, Image, TouchableOpacity } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 
 import { StyledText } from "../../components/text";
@@ -16,6 +16,7 @@ import { IllnessCard, ContentWrapper, MatchingMessageWrapper } from "./styles";
 import { colors } from "../../utils/constants";
 import { getChildren, getAddresses } from "@services/opear-api";
 import { getAge } from "@utils";
+import InactiveUserBanner from "@components/banner";
 
 const imgRightArrow = require("../../../assets/images/Right_arrow.png");
 
@@ -34,7 +35,6 @@ class DashboardScreen extends React.Component {
     } = props;
 
     this.state = {
-      // selectedIllness: null,
       userStore,
       illnessList: [
         { key: "1", string: "General", color: "#49AF67" },
@@ -111,6 +111,7 @@ class DashboardScreen extends React.Component {
           </StyledText>
         </ContentWrapper>
 
+        <InactiveUserBanner userIsActive={userStore.active} />
         {!outstandingAppointment &&
         !readyProviders &&
         appointment &&
@@ -163,11 +164,17 @@ class DashboardScreen extends React.Component {
                 renderItem={({ item }) => (
                   <IllnessCard
                     bgColor={item.color}
-                    onPress={() =>
-                      navigate("DashboardSelectSymptoms", {
-                        illness: item.string
-                      })
-                    }
+                    onPress={() => {
+                      if (userStore.active) {
+                        navigate("DashboardSelectSymptoms", {
+                          illness: item.string
+                        });
+                      } else {
+                        Alert.alert(
+                          "Unavailable",
+                          "We're currently not in your area. Please check back later");
+                      }
+                    }}
                   >
                     <StyledText
                       fontSize={16}

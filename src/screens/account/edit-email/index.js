@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   FormInputView
 } from "../../../components/views/keyboard-view";
+import InactiveUserBanner from "@components/banner"
 
 @inject("store")
 @observer
@@ -54,7 +55,8 @@ class EditEmailScreen extends React.Component {
 
   render() {
     const {
-      navigation: { goBack }
+      navigation: { goBack },
+      store: { userStore }
     } = this.props;
     const { email } = this.state;
     return (
@@ -65,6 +67,7 @@ class EditEmailScreen extends React.Component {
           hasBackButton
           onPressBackButton={() => goBack()}
         />
+        <InactiveUserBanner userIsActive={userStore.active} />
         <FormWrapper>
           <FormInputView>
             <FormTextInput

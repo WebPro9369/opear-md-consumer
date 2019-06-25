@@ -14,6 +14,8 @@ import {
   FlexView,
   FormWrapper
 } from "../../../components/views";
+import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
+import InactiveUserBanner from "@components/banner"
 
 import { colors } from "../../../utils/constants";
 import { updateParent } from "@services/opear-api"
@@ -91,7 +93,8 @@ class EditAddressScreen extends React.Component {
 
   render() {
     const {
-      navigation: { goBack }
+      navigation: { goBack },
+      store: { userStore }
     } = this.props;
     const { street, city, zip_code, name } = this.state;
     return (
@@ -102,6 +105,7 @@ class EditAddressScreen extends React.Component {
           hasBackButton
           onPressBackButton={() => goBack()}
         />
+        <InactiveUserBanner userIsActive={userStore.active} />
         <FormWrapper>
           <FormInputView>
             <FormTextInput

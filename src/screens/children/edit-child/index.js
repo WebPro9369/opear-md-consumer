@@ -4,7 +4,8 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, ButtonGroup } from "react-native-elements";
-import { updateChild } from "@services/opear-api";
+import InactiveUserBanner from "@components/banner";
+import { getChild, updateChild } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -17,8 +18,8 @@ import {
   View
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import { getAge, getValueById } from "@utils";
-import { getIndexByValue } from "../../../utils";
+import { colors } from "../../../utils/constants";
+import { getAge, getValueById, getIndexByValue } from "@utils";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -178,6 +179,7 @@ class EditChildScreen extends React.Component {
             onPressBackButton={() => navigation.goBack()}
           />
         </HeaderWrapper>
+        <InactiveUserBanner userIsActive={userStore.active} />
         <KeyboardScrollView>
           <ViewCentered>
             <Avatar
