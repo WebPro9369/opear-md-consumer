@@ -97,6 +97,8 @@ class AskLocationScreen extends Component {
               placeholder="Zip code"
               value={zipcode}
               onChangeText={this.handleInputChange}
+              keyboardType="number-pad"
+              maxLength={5}
             />
           </View>
         </View>

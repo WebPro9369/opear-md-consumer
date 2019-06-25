@@ -41,6 +41,7 @@ class PhoneNumberScreen extends Component {
       store: { userStore }
     } = this.props;
     const { phone, acceptedPrivacy, acceptedTermsOfService } = this.state;
+    const regPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 
     if (!acceptedPrivacy) {
       return Alert.alert("Please review our Privacy Policy to continue");
@@ -49,7 +50,10 @@ class PhoneNumberScreen extends Component {
     if (!acceptedTermsOfService) {
       return Alert.alert("Please review our Terms of Service to continue");
     }
-    if (!phone) Alert.alert("Please enter your phone number");
+
+    if (!phone || !regPhone.test(phone)) {
+      return Alert.alert("Please enter a valid phone number");
+    }
 
     if (phone) userStore.setPhone(phone);
 
@@ -82,8 +86,6 @@ class PhoneNumberScreen extends Component {
       userStore.setPhone(phone);
       userStore.setAcceptedPrivacy(acceptedPrivacy);
       userStore.setAcceptedTermsOfService(acceptedTermsOfServices);
-
-
     };
 
     // eslint-disable-next-line prettier/prettier
@@ -92,7 +94,6 @@ class PhoneNumberScreen extends Component {
     registerParent(data, { successHandler, errorHandler });
 
     navigate("Tabs");
-
   };
 
   render() {

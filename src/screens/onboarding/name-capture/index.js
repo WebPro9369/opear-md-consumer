@@ -18,7 +18,7 @@ class NameCaptureScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: null
+      name: ""
     };
   }
 
@@ -35,7 +35,9 @@ class NameCaptureScreen extends Component {
     } = this.props;
     const { name } = this.state;
 
-    if (!name) Alert.alert("Please enter your name");
+    if (!name) {
+      return Alert.alert("There was an issue", "Please input your full name.");
+    }
 
     userStore.setName(name);
 
@@ -44,7 +46,7 @@ class NameCaptureScreen extends Component {
 
   render() {
     const {
-      navigation: { navigate, goBack }
+      navigation: { goBack }
     } = this.props;
     const { name } = this.state;
 
