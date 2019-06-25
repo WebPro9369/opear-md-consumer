@@ -3,6 +3,7 @@
 import React from "react";
 import { Alert } from "react-native";
 import { inject } from "mobx-react";
+import AntDesign from "react-native-vector-icons/AntDesign";
 import { FormTextInput } from "@components/text";
 import { NavHeader } from "@components/nav-header";
 import { ServiceButton } from "@components/service-button";
@@ -83,6 +84,9 @@ class NewPwdScreen extends React.Component {
   };
 
   render() {
+    const {
+      navigation: { goBack }
+    } = this.props;
     const { confirm, password } = this.state;
     return (
       <KeyboardAvoidingView
@@ -93,8 +97,15 @@ class NewPwdScreen extends React.Component {
         <NavHeader
           title="Enter New Password"
           size="medium"
-          hasBackButton={false}
+          hasBackButton
+          backButtonIcon={
+            <AntDesign name="arrowleft" size={20} color={colors.WHITE} />
+          }
+          backgroundColor={colors.LIGHTGREEN}
           serviceTextStyle={{ color: "#ffffff" }}
+          onPressBackButton={() => {
+            goBack();
+          }}
         />
         <FormWrapper centered padding={0} style={{ marginTop: 32 }}>
           <FormInputWrapper paddingLeft={16} paddingRight={16}>

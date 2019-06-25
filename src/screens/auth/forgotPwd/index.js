@@ -62,9 +62,11 @@ class ForgotPwdScreen extends React.Component {
         <NavHeader
           title="Forgot Password"
           size="medium"
-          hasBackButton={
+          hasBackButton
+          backButtonIcon={
             <AntDesign name="arrowleft" size={20} color={colors.WHITE} />
           }
+          backgroundColor={colors.LIGHTGREEN}
           serviceTextStyle={{ color: "#ffffff" }}
           onPressBackButton={() => {
             goBack();
