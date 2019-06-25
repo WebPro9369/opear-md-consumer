@@ -13,8 +13,8 @@ import { colors } from "../../../utils/constants";
 @observer
 class PickVisitAddressScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -23,9 +23,7 @@ class PickVisitAddressScreen extends React.Component {
       store: {
         userStore: {
           addresses,
-          visitRequest: {
-            pickedAddress
-          }
+          visitRequest: { pickedAddress }
         }
       },
       navigation
@@ -39,23 +37,22 @@ class PickVisitAddressScreen extends React.Component {
 
   onSubmit = addressID => {
     const {
-      navigation: {getParam, navigate},
-      store: {
-        userStore
-      }
+      navigation: { navigate },
+      store: { userStore }
     } = this.props;
 
-    const { pickedAddress } = this.state;
-
+    // TODO: Resolve this commented line
+    // const { pickedAddress } = this.state;
+    
     userStore.setVisitRequestPickedAddress(addressID);
-
+    
     const screenRef = getParam('screenRef', null);
 
     if(screenRef){
       return navigate("DashboardBookingReview");
     }
 
-    return navigate("DashboardSelectDateTime")
+    navigate("DashboardSelectDateTime");
   };
 
   render() {
@@ -102,7 +99,7 @@ class PickVisitAddressScreen extends React.Component {
             {addresses.map(address => (
               <ContentButton
                 key={address.id}
-                onPress={this.onSubmit(address.id)}
+                onPress={() => this.onSubmit(address.id)}
               >
                 <FlexView justifyContent="start">
                   <EvilIcons
