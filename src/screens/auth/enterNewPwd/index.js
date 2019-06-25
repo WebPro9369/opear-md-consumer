@@ -27,9 +27,6 @@ class NewPwdScreen extends React.Component {
     };
   }
 
-
-
-
   onSubmit = () => {
     return true;
   };
