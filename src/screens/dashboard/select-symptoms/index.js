@@ -25,7 +25,7 @@ class SelectSymptomsScreen extends React.Component {
     this.state = {
       hasAppointment: false,
       checkListData: [
-        { key: "1", string: "Fever", checked: true },
+        { key: "1", string: "Fever", checked: false },
         { key: "2", string: "Headache", checked: false },
         { key: "3", string: "Neck pain", checked: false },
         { key: "4", string: "Swollen glands", checked: false },
@@ -33,7 +33,7 @@ class SelectSymptomsScreen extends React.Component {
         { key: "6", string: "Cough", checked: false },
         { key: "7", string: "Congestion", checked: false },
         { key: "8", string: "Sore throat", checked: false },
-        { key: "9", string: "Stomachache", checked: true },
+        { key: "9", string: "Stomachache", checked: false },
         { key: "10", string: "Vomiting", checked: false },
         { key: "11", string: "Diarrhea", checked: false },
         { key: "12", string: "Eye pain/discharge", checked: false },

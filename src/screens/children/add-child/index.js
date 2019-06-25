@@ -27,8 +27,8 @@ avatarImages[3] = require("../../../../assets/images/Tiger.png");
 @observer
 class AddChildScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -37,20 +37,20 @@ class AddChildScreen extends React.Component {
       store: {
         userStore
       },
-        gender,
-        firstName,
-        lastName,
-        birthDate,
-        birthHistory,
-        surgicalHistory,
-        currentMedications,
-        hospitalizations,
-        currentMedicalConditions,
-        allergies
+      gender,
+      firstName,
+      lastName,
+      birthDate,
+      birthHistory,
+      surgicalHistory,
+      currentMedications,
+      hospitalizations,
+      currentMedicalConditions,
+      allergies
     } = props;
 
     this.state = {
-      gender: 0,
+      gender: "",
       firstName: "",
       lastName: "",
       birthDate: null,
@@ -111,9 +111,9 @@ class AddChildScreen extends React.Component {
 
     var genderMap = 0;
 
-    if(gender == 0) {
+    if (gender == 0) {
       genderMap = "Male";
-    } else if(gender == 1){
+    } else if (gender == 1) {
       genderMap = "Female";
     } else {
       genderMap = "Non-Binary";
@@ -127,7 +127,12 @@ class AddChildScreen extends React.Component {
         last_name: lastName,
         gender: genderMap,
         dob: birthDate,
-        allergies: allergiesArray
+        birth_history: birthHistory,
+        surgical_history: surgicalHistory,
+        current_medications: currentMedications,
+        hopsitalizations: hospitalizations,
+        current_medical_conditions: currentMedicalConditions,
+        allergies: allergiesArray,
       }
     }
 
@@ -140,8 +145,13 @@ class AddChildScreen extends React.Component {
         id,
         age: getAge(dob),
         gender,
-        name:first_name+" "+last_name,
+        name: first_name + " " + last_name,
         birthDate: new Date(dob),
+        birthHistory,
+        surgicalHistory,
+        currentMedications,
+        hospitalizations,
+        currentMedicalConditions,
         allergies
       };
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, View } from "react-native";
+import { Alert, Image, View } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 import { ServiceButton } from "@components/service-button";
@@ -31,17 +31,19 @@ class CreatePasswordScreen extends Component {
   onSubmit = () => {
     const {
       navigation: { navigate },
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = this.props;
     const { password } = this.state;
-
-    if (!password) return Alert.alert("Please enter your password");
+    const regEx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
+    if (!password || !password.match(regEx)) {
+      return Alert.alert(
+        "There was an issue",
+        "Please input a valid password. Passwords must be between 8 and 20 characters, must include a combination of numbers and letters (upper or lower case), and/or special characters."
+      );
+    }
 
     if (password) userStore.setPassword(password);
     navigate("PhoneNumber");
-
   };
 
   render() {
@@ -75,7 +77,11 @@ class CreatePasswordScreen extends Component {
           </View>
         </View>
         <View>
-          <Image source={imgProgressbar} style={{ marginBottom: 16 }} />
+          <Image
+            source={imgProgressbar}
+            resizeMode="contain"
+            style={{ width: "100%", marginBottom: 16 }}
+          />
           <ServiceButton
             title="Next"
             style={{ marginBottom: 20 }}
