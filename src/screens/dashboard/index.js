@@ -115,7 +115,7 @@ class DashboardScreen extends React.Component {
         ) : null}
         {outstandingAppointment && !providerEnRoute && userStore.active ? (
           /*TODO: swap hardcoded visit id when logic is*/
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:3})}>
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:2})}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>
