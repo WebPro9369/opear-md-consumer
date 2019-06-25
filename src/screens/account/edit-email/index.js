@@ -1,5 +1,6 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
+import { updateParent } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -8,7 +9,6 @@ import {
   KeyboardAvoidingView,
   FormInputView
 } from "../../../components/views/keyboard-view";
-import { updateParent } from "@services/opear-api"
 import InactiveUserBanner from "@components/banner"
 
 @inject("store")
@@ -28,29 +28,21 @@ class EditEmailScreen extends React.Component {
     } = props;
 
     this.state = { email };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleInputChange = name => value => {
-    return this.setState({
-      [name]: value
-    });
+  handleChange = email => {
+    this.setState({ email });
   };
 
   onSubmit = () => {
     const {
       navigation: { goBack },
-      store: {
-        userStore: { id, email }
-      }
+      store: { userStore }
     } = this.props;
 
-    const data = {
-      parent: {
-        email
-      }
-    };
+    const { id } = userStore;
+    const { email } = this.state;
+    const data = { email };
 
     const successHandler = () => {
       userStore.setEmail(email);
@@ -81,7 +73,7 @@ class EditEmailScreen extends React.Component {
             <FormTextInput
               label="Email"
               value={email}
-              onChangeText={this.handleInputChange("email")}
+              onChangeText={this.handleChange}
             />
           </FormInputView>
         </FormWrapper>

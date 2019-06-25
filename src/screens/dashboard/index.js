@@ -14,7 +14,7 @@ import {
 } from "../../components/views";
 import { IllnessCard, ContentWrapper, MatchingMessageWrapper } from "./styles";
 import { colors } from "../../utils/constants";
-import { getChildren } from "@services/opear-api";
+import { getChildren, getAddresses } from "@services/opear-api";
 import { getAge } from "@utils"
 import InactiveUserBanner from "@components/banner"
 
@@ -45,7 +45,7 @@ class DashboardScreen extends React.Component {
       ]
     };
 
-    const successHandler = res => {
+    const getChildrenSuccessHandler = res => {
       const childAdjustedArray = res.data.map(row => ({
         id: row.id,
         age: getAge(row.dob),
@@ -66,7 +66,22 @@ class DashboardScreen extends React.Component {
       userStore.setChildren(childAdjustedArray);
     };
 
-    getChildren({ successHandler });
+    getChildren({ successHandler: getChildrenSuccessHandler });
+
+    const getAddressesSuccessHandler = res => {
+      const addressAdjustedArray = res.data.map(row => ({
+        id: row.id,
+        name: row.name || "",
+        street: row.street || "",
+        city: row.city || "",
+        state: row.state || "",
+        zip: row.zip || ""
+      }));
+
+      userStore.setAddresses(addressAdjustedArray);
+    };
+
+    getAddresses({ successHandler: getAddressesSuccessHandler });
   }
 
   render() {

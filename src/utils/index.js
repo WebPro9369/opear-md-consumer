@@ -43,3 +43,8 @@ export const getAge = birthDate => {
 export const getIndexByValue = (toSearch, id) => {
   return toSearch.map(o => o.id).indexOf(id);
 };
+
+export const getValueById = (toSearch, id) => {
+  const index = getIndexByValue(toSearch, id);
+  return toSearch[index];
+};

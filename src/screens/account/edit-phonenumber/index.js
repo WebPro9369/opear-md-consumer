@@ -40,16 +40,12 @@ class EditPhoneNumberScreen extends React.Component {
   onSubmit = () => {
     const {
       navigation: { goBack },
-      store: {
-        userStore: { id, phone }
-      }
+      store: { userStore }
     } = this.props;
 
-    const data = {
-      parent: {
-        phone
-      }
-    };
+    const { id } = userStore;
+    const { phone } = this.state;
+    const data = { phone };
 
     const successHandler = () => {
       userStore.setPhone(phone);
