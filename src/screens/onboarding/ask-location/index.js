@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, Image, View } from "react-native";
+import { Alert, Image, View, Linking } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import TouchID from "react-native-touch-id";
 import { ServiceButton } from "@components/service-button";
@@ -20,6 +20,28 @@ class AskLocationScreen extends Component {
     super(props);
     this.state = {
       zipcode: null
+    };
+  }
+
+  componentDidMount() {
+    Linking.addEventListener('url', this.handleOpenURL);
+  }
+
+  componentWillUnmount () {
+    Linking.removeEventListener('url', this.handleOpenURL);
+  }
+
+  handleOpenURL = (event) => {
+    this.navigate(event.url);
+  }
+
+  navigate = (url) => {
+    const { navigate } = this.props.navigation;
+    const route = url.replace(/.*?:\/\//g, '');
+    const routeName = route.split('/')[0];
+
+    if (routeName === 'newpwd') {
+      navigate('AccountNewPwd',{routeInfo:route});
     };
   }
 
