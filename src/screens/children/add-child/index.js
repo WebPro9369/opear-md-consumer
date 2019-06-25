@@ -4,6 +4,8 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, ButtonGroup } from "react-native-elements";
+import { registerChild } from "@services/opear-api";
+import InactiveUserBanner from "@components/banner"
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -16,10 +18,6 @@ import {
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
-import { getAge } from "@utils";
-import InactiveUserBanner from "@components/banner"
-
-import { registerChild } from "@services/opear-api";
 import { getAge } from "@utils";
 
 const avatarImages = [];
