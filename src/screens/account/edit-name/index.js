@@ -4,7 +4,7 @@ import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
 import { FormWrapper } from "../../../components/views";
-import { updateCareProvider } from "../../../services/opear-api";
+import { updateParent } from "@services/opear-api";
 import {
   KeyboardAvoidingView,
   FormInputView
@@ -49,7 +49,7 @@ class EditNameScreen extends React.Component {
       goBack();
     };
 
-    updateCareProvider(id, data, { successHandler });
+    updateParent(id, data, { successHandler });
   };
 
   render() {

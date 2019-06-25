@@ -1,5 +1,6 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
+import { updateParent } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -8,7 +9,6 @@ import {
   KeyboardAvoidingView,
   FormInputView
 } from "../../../components/views/keyboard-view";
-import { updateParent } from "@services/opear-api"
 
 @inject("store")
 @observer
