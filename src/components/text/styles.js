@@ -50,11 +50,14 @@ export const StyledTextInput = styled.TextInput`
   font-size: ${props => props.fontSize};
   line-height: ${props => props.lineHeight};
   text-align: ${props => props.textAlign};
+  padding-top: 0;
+  padding-bottom: 0;
 `;
 
 StyledTextInput.defaultProps = {
   color: colors.BLACK,
   fontSize: 20,
+  height: 36,
   fontFamily: "Flama",
   lineHeight: 30,
   textAlign: "left"
