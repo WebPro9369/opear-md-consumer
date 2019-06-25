@@ -1,8 +1,10 @@
+/* eslint-disable import/no-unresolved */
 import React from "react";
 
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import InactiveUserBanner from "@components/banner";
 import { StyledText } from "../../../components/text";
 import { InputButton } from "../../../components/input-button";
 import { NavHeader } from "../../../components/nav-header";
@@ -14,7 +16,6 @@ import {
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
-import InactiveUserBanner from "@components/banner"
 
 const { GREEN, MIDGREY } = colors;
 const imgDoctor = require("../../../../assets/images/Doctor.png");
@@ -64,7 +65,7 @@ class SettingsScreen extends React.Component {
             onPressBackButton={() => navigate("AccountDefault")}
           />
         </HeaderWrapper>
-        <InactiveUserBanner userIsActive={userStore.active} />
+        <InactiveUserBanner userIsActive={userStore.active} style={{marginLeft: -30, marginRight: -30 }}/>
         <ScrollView>
           <ViewCentered>
             <Avatar
