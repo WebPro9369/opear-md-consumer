@@ -34,26 +34,42 @@ DateCircle.propTypes = {
   selected: PropTypes.bool.isRequired
 };
 
-export const TimeSelector = ({ start, end, selected, onConfirm, ...rest }) => (
-  <TimeSelectorWrapper selected={selected} {...rest}>
-    <StyledText
-      fontSize={16}
-      color={selected ? colors.WHITE : colors.BLACK87}
-      fontFamily={selected ? "FlamaMedium" : "Flama"}
-    >
-      {start >= 12 ? `${start - 12 || 12}pm` : `${start || 12}am`}
-      {" - "}
-      {end >= 12 ? `${end - 12 || 12}pm` : `${end || 12}am`}
-    </StyledText>
-    {selected ? (
-      <ConfirmButton onPress={onConfirm}>
-        <StyledText fontSize={16} fontFamily="FlamaMedium" color={colors.WHITE}>
-          CONFIRM
-        </StyledText>
-      </ConfirmButton>
-    ) : null}
-  </TimeSelectorWrapper>
-);
+const formatTimeStr = time => {
+  const hour = parseInt(time, 10);
+  const min = time - hour;
+  const timeStr =
+    hour >= 12
+      ? `${hour - 12 || 12}${min === 0.5 ? ":30" : ""}pm`
+      : `${hour || 12}${min === 0.5 ? ":30" : ""}am`;
+  return timeStr;
+};
+
+export const TimeSelector = ({ start, end, selected, onConfirm, ...rest }) => {
+  return (
+    <TimeSelectorWrapper selected={selected} {...rest}>
+      <StyledText
+        fontSize={16}
+        color={selected ? colors.WHITE : colors.BLACK87}
+        fontFamily={selected ? "FlamaMedium" : "Flama"}
+      >
+        {formatTimeStr(start)}
+        {" - "}
+        {formatTimeStr(end)}
+      </StyledText>
+      {selected ? (
+        <ConfirmButton onPress={onConfirm}>
+          <StyledText
+            fontSize={16}
+            fontFamily="FlamaMedium"
+            color={colors.WHITE}
+          >
+            CONFIRM
+          </StyledText>
+        </ConfirmButton>
+      ) : null}
+    </TimeSelectorWrapper>
+  );
+};
 
 TimeSelector.propTypes = {
   start: PropTypes.number.isRequired,

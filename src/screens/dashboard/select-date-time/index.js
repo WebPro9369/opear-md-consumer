@@ -5,15 +5,18 @@ import { DateTime } from "luxon";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View } from "../../../components/views";
-import { DateCircle, TimeSelector } from "./styles";
+import {
+  DateCircle,
+  TimeSelector
+} from "../../../components/date-time-selectors";
 import { colors } from "../../../utils/constants";
 
 @inject("store")
 @observer
 class SelectDateTimeScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -40,24 +43,19 @@ class SelectDateTimeScreen extends React.Component {
   onSubmit = () => {
     const {
       navigation: { navigate },
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = this.props;
 
-    const {
-      selectedDate,
-      selectedTime
-    } = this.state;
+    const { selectedDate, selectedTime } = this.state;
 
-    userStore.setVisitRequestDateTime(selectedDate,selectedTime);
+    userStore.setVisitRequestDateTime(selectedDate, selectedTime);
 
-    navigate("DashboardBookingReview")
+    navigate("DashboardBookingReview");
   };
 
   render() {
     const {
-      navigation: { goBack, navigate }
+      navigation: { goBack }
     } = this.props;
     const {
       // eslint-disable-next-line no-unused-vars
@@ -68,7 +66,7 @@ class SelectDateTimeScreen extends React.Component {
       endHour
     } = this.state;
     const hours = [];
-    for (let i = startHour; i <= endHour; i += 1) {
+    for (let i = startHour; i < endHour; i += 0.5) {
       hours.push({ key: `${i}`, value: i });
     }
 
@@ -155,7 +153,7 @@ class SelectDateTimeScreen extends React.Component {
                 <TimeSelector
                   key={item.key}
                   start={item.value}
-                  end={item.value + 1}
+                  end={item.value + 0.5}
                   selected={item.value === selectedTime}
                   onPress={() => {
                     this.setState({
