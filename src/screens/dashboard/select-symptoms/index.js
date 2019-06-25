@@ -16,8 +16,8 @@ import { colors } from "../../../utils/constants";
 @observer
 class SelectSymptomsScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
@@ -50,7 +50,7 @@ class SelectSymptomsScreen extends React.Component {
       store: {
         userStore
       }
-     } = this.props;
+    } = this.props;
 
     const { checkListData } = this.state;
 
@@ -62,7 +62,7 @@ class SelectSymptomsScreen extends React.Component {
       return arr.filter(e => e.type !== type);
     }
 
-    var symptoms = removeBool(checkListData,false);
+    var symptoms = removeBool(checkListData, false);
     symptoms = removeTypes(symptoms, "input");
     symptoms = removeTypes(symptoms, "button");
 
@@ -93,7 +93,7 @@ class SelectSymptomsScreen extends React.Component {
           <NavHeader
             size="small"
             hasBackButton
-            onPressBackButton={() => navigation.navigate("Dashboard")}
+            onPressBackButton={() => navigation.goBack()}
           />
         </View>
         <ContainerView>
@@ -160,7 +160,7 @@ class SelectSymptomsScreen extends React.Component {
                     <View style={{ marginTop: 36, padding: 16 }}>
                       <ServiceButton
                         title={item.string}
-                        onPress={ this.onSubmit }
+                        onPress={this.onSubmit}
                       />
                     </View>
                   );
