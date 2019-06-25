@@ -65,7 +65,7 @@ class SettingsScreen extends React.Component {
             onPressBackButton={() => navigate("AccountDefault")}
           />
         </HeaderWrapper>
-        <InactiveUserBanner userIsActive={userStore.active} style={{marginLeft: -30, marginRight: -30 }}/>
+        <InactiveUserBanner userIsActive={userStore.active} />
         <ScrollView>
           <ViewCentered>
             <Avatar
