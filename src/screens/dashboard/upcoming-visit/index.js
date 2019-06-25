@@ -22,20 +22,18 @@ const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 @observer
 class VisitBookedScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
 
     const {
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = props;
 
     const visitID = 2;
-    //const visitID = navigation.getParam('visitID', 0);
+    // const visitID = navigation.getParam('visitID', 0);
 
     this.state = {
       providerData: {
@@ -56,34 +54,38 @@ class VisitBookedScreen extends React.Component {
     };
 
     const successHandler = res => {
-
       const {
-        //care_provider,
+        // care_provider,
         child,
         address,
         appointment_time,
         reasons
       } = res.data;
 
-
-      var dateOptions = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric' };
+      const dateOptions = {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        hour: "numeric"
+      };
 
       this.setState({
-      /*  providerData: {
+        /*  providerData: {
           avartarImg: doctorImg,
           name: care_provider.name,
           symptom: reason,
           eta: "8:30am - 8:40am"
-        },*/
+        }, */
         child: child.first_name,
         address: address.street,
-        time: new Date(appointment_time).toLocaleDateString("en-US", dateOptions)
+        time: new Date(appointment_time).toLocaleDateString(
+          "en-US",
+          dateOptions
+        )
       });
-
     };
 
     getVisit(userStore.id, visitID, { successHandler });
-
   }
 
   componentDidMount() {
