@@ -15,7 +15,6 @@ import {
   ViewCentered
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import { colors } from "../../../utils/constants";
 import { registerChild } from "@services/opear-api";
 import { getAge } from "@utils";
 
@@ -189,13 +188,7 @@ class AddChildScreen extends React.Component {
               rounded
               size={120}
               source={avatarImages[avatarNumber]}
-              showEditButton
-              editButton={{
-                iconStyle: {
-                  color: colors.WHITE
-                },
-                size: 24
-              }}
+              showEditButton={false}
             />
           </ViewCentered>
           <FormWrapper>

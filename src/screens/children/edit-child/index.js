@@ -17,7 +17,6 @@ import {
   View
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import { colors } from "../../../utils/constants";
 import { getAge, getValueById } from "@utils";
 import { getIndexByValue } from "../../../utils";
 
@@ -185,13 +184,7 @@ class EditChildScreen extends React.Component {
               rounded
               size={120}
               source={imgFoxLarge}
-              showEditButton
-              editButton={{
-                iconStyle: {
-                  color: colors.WHITE
-                },
-                size: 24
-              }}
+              showEditButton={false}
             />
           </ViewCentered>
           <FormWrapper>
