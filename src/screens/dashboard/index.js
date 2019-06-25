@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/order */
 import React from "react";
 import { FlatList, Image, TouchableOpacity } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
@@ -13,7 +15,7 @@ import {
 import { IllnessCard, ContentWrapper, MatchingMessageWrapper } from "./styles";
 import { colors } from "../../utils/constants";
 import { getChildren } from "@services/opear-api";
-import { getAge } from "@utils"
+import { getAge } from "@utils";
 
 const imgRightArrow = require("../../../assets/images/Right_arrow.png");
 
@@ -28,9 +30,7 @@ class DashboardScreen extends React.Component {
     super(props);
 
     const {
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = props;
 
     this.state = {
@@ -45,25 +45,27 @@ class DashboardScreen extends React.Component {
     };
 
     const successHandler = res => {
+      const childAdjustedArray = res.data.map(row => ({
+        id: row.id,
+        age: getAge(row.dob),
+        gender: row.gender || "",
+        name: `${row.first_name} ${row.last_name}`,
+        allergies: Array.isArray(row.allergies)
+          ? row.allergies
+          : [row.allergies || ""],
+        birthDate: new Date(row.dob),
+        birthHistory: row.birth_history || "",
+        surgicalHistory: row.surgical_history || "",
+        currentMedications: row.current_medications || "",
+        hospitalizations: row.hospitalizations || "",
+        currentMedicalConditions: row.current_medical_conditions || ""
+      }));
 
-        var childAdjustedArray = res.data.map(
-          function(row)
-        {
-          return {
-          id: row.id,
-          age: getAge(row.dob),
-          gender: row.gender,
-          name: row.first_name+" "+row.last_name,
-          allergies: row.allergies,
-          birthDate: new Date(row.dob)};
-        });
+      // console.tron.log("Children list: ", childAdjustedArray);
+      userStore.setChildren(childAdjustedArray);
+    };
 
-        userStore.setChildren(childAdjustedArray);
-
-      };
-
-      getChildren( { successHandler });
-
+    getChildren({ successHandler });
   }
 
   render() {
@@ -94,7 +96,10 @@ class DashboardScreen extends React.Component {
           </StyledText>
         </ContentWrapper>
 
-        {!outstandingAppointment && !readyProviders && appointment && userStore.active ? (
+        {!outstandingAppointment &&
+        !readyProviders &&
+        appointment &&
+        userStore.active ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
               We are currently matching you with your doctor, be in touch soon!
@@ -114,8 +119,9 @@ class DashboardScreen extends React.Component {
           </TouchableOpacity>
         ) : null}
         {outstandingAppointment && !providerEnRoute && userStore.active ? (
-          /*TODO: swap hardcoded visit id when logic is*/
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:3})}>
+          <TouchableOpacity
+            onPress={() => navigate("DashboardUpcomingVisit", { visitID: 3 })}
+          >
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>
