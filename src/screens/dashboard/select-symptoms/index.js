@@ -66,14 +66,13 @@ class SelectSymptomsScreen extends React.Component {
     symptoms = removeTypes(symptoms, "input");
     symptoms = removeTypes(symptoms, "button");
 
-
     symptoms = symptoms.map(value => value.string);
 
     userStore.setVisitRequestSymptoms(symptoms);
 
     console.tron.log(userStore);
 
-    navigation.navigate("DashboardPickChild")
+    navigation.navigate("DashboardPickChild");
   };
 
   render() {
