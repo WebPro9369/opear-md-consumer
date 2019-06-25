@@ -42,7 +42,6 @@ class EditChildScreen extends React.Component {
 
     const childID = navigation.getParam("childID", 0);
     const child = getValueById(children, childID) || {};
-    console.tron.log("Edit child: ", childID, child);
     const nameSplitted = (child.name || "").split(" ");
     const firstName = nameSplitted[0];
     const lastName = nameSplitted.length > 1 ? nameSplitted[1] : "";
