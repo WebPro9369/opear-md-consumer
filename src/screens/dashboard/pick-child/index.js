@@ -40,7 +40,7 @@ class PickChildScreen extends React.Component {
 
   onSubmit = () => {
     const {
-      navigation: { navigate },
+      navigation: {getParam, navigate},
       store: {
         userStore
       }
@@ -49,6 +49,12 @@ class PickChildScreen extends React.Component {
       const { pickedChild } = this.state;
 
       userStore.setVisitRequestPickedChild(pickedChild);
+
+      const screenRef = getParam('screenRef', null);
+
+      if(screenRef){
+        return navigate("DashboardBookingReview");
+      }
 
       navigate("DashboardPickVisitAddress")
   };
