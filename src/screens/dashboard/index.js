@@ -45,23 +45,21 @@ class DashboardScreen extends React.Component {
     };
 
     const successHandler = res => {
-      const childAdjustedArray = res.data.map(function(row) {
-        return {
-          id: row.id,
-          age: getAge(row.dob),
-          gender: row.gender || "",
-          name: `${row.first_name} ${row.last_name}`,
-          allergies: Array.isArray(row.allergies)
-            ? row.allergies
-            : [row.allergies],
-          birthDate: new Date(row.dob),
-          birthHistory: row.birth_history || "",
-          surgicalHistory: row.surgical_history || "",
-          currentMedications: row.current_medications || "",
-          hospitalizations: row.hospitalizations || "",
-          currentMedicalConditions: row.current_medical_conditions || ""
-        };
-      });
+      const childAdjustedArray = res.data.map(row => ({
+        id: row.id,
+        age: getAge(row.dob),
+        gender: row.gender || "",
+        name: `${row.first_name} ${row.last_name}`,
+        allergies: Array.isArray(row.allergies)
+          ? row.allergies
+          : [row.allergies || ""],
+        birthDate: new Date(row.dob),
+        birthHistory: row.birth_history || "",
+        surgicalHistory: row.surgical_history || "",
+        currentMedications: row.current_medications || "",
+        hospitalizations: row.hospitalizations || "",
+        currentMedicalConditions: row.current_medical_conditions || ""
+      }));
 
       // console.tron.log("Children list: ", childAdjustedArray);
       userStore.setChildren(childAdjustedArray);
