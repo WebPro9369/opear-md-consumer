@@ -127,7 +127,12 @@ class AddChildScreen extends React.Component {
         last_name: lastName,
         gender: genderMap,
         dob: birthDate,
-        allergies: allergiesArray
+        birth_history: birthHistory,
+        surgical_history: surgicalHistory,
+        current_medications: currentMedications,
+        hopsitalizations: hospitalizations,
+        current_medical_conditions: currentMedicalConditions,
+        allergies: allergiesArray,
       }
     }
 
@@ -142,6 +147,11 @@ class AddChildScreen extends React.Component {
         gender,
         name: first_name + " " + last_name,
         birthDate: new Date(dob),
+        birthHistory,
+        surgicalHistory,
+        currentMedications,
+        hospitalizations,
+        currentMedicalConditions,
         allergies
       };
 

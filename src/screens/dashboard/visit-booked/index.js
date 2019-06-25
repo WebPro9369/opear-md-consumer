@@ -37,14 +37,15 @@ class VisitBookedScreen extends React.Component {
     } = props;
 
     const visitID = navigation.getParam('visitID', 0);
-    const visits = navigation.getParam('visits', 0);
+    const visit = navigation.getParam('visit', 0);
 
-    const visit = visits[visitID-1];
+    console.tron.log(visitID);
+    console.tron.log(visit);
 
     this.state = {
       username: userStore.name,
-      child: userStore.children[getIndexByValue(userStore.children,visit.child_id)].name,
-      address: userStore.addresses[getIndexByValue(userStore.addresses,visit.address_id)].street,
+      child: visit.child.first_name,
+      address: visit.address.street,
       time: visit.appointment_time,
       providerData: {
         avatarImg: doctorImg,
@@ -86,6 +87,10 @@ class VisitBookedScreen extends React.Component {
       navigation: { navigate }
     } = this.props;
     const { username, providerData, child, address, time } = this.state;
+
+    var timeOptions = { month: 'long', day: 'numeric', hour: 'numeric' };
+
+    var formattedTime = new Date(time).toLocaleDateString("en-US", timeOptions);
 
     return (
       <ScrollView padding={0}>
@@ -136,7 +141,7 @@ class VisitBookedScreen extends React.Component {
             />
             <BookedDetailCard
               type="Date &amp; Time"
-              text={time}
+              text={formattedTime}
               icon={
                 // eslint-disable-next-line react/jsx-wrap-multilines
                 <FontAwesome
