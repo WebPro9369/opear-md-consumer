@@ -18,7 +18,6 @@ class NewPwdScreen extends React.Component {
     } = this.props;
 
     const routeInfo = navigation.getParam('routeInfo', 0);
-    //get routeInfo pieces like this: route.split('/')
 
     console.tron.log(routeInfo);
 
