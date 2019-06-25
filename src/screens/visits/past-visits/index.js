@@ -29,6 +29,7 @@ class PastVisitsScreen extends React.Component {
 
     this.state = {
       userStore,
+      // TODO: Fix this to be dynamic
       visitList: [
         {
           id: 1,
@@ -54,10 +55,12 @@ class PastVisitsScreen extends React.Component {
           child_id:
             userStore.children.length > index
               ? userStore.children[index].id
+              // TOOD: Fix this too
               : userStore.children[0].id,
           address_id:
             userStore.addresses.length > index
               ? userStore.addresses[index].id
+              // TOOD: Fix this too
               : userStore.addresses[0].id
         };
       })

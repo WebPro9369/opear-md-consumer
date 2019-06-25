@@ -28,6 +28,8 @@ class UpcomingVisitsScreen extends React.Component {
 
     this.state = {
       userStore,
+      // TODO: Fix all this logic
+      // It currently has dummy data and is statically getting the first child and address for a parent
       visitList: [
         {
           id: 1,
@@ -53,10 +55,12 @@ class UpcomingVisitsScreen extends React.Component {
           child_id:
             userStore.children.length > index
               ? userStore.children[index].id
+              // TOOD: Fix this too
               : userStore.children[0].id,
           address_id:
             userStore.addresses.length > index
               ? userStore.addresses[index].id
+              // TOOD: Fix this too
               : userStore.addresses[0].id
         };
       })
