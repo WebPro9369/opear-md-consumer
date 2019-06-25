@@ -43,7 +43,7 @@ class AddCardScreen extends React.Component {
 
   saveCardHandler = async () => {
     const {
-      navigation: { goBack },
+      navigation: { goBack, getParam },
       store: {
         cardStore,
         userStore
@@ -51,7 +51,7 @@ class AddCardScreen extends React.Component {
     } = this.props;
     const { id } = userStore;
     const {
-      cardInfo: { cardNumber, expiryYear, expiryMonth, cvv, fullName }
+       cardNumber, expiryYear, expiryMonth, cvv, fullName
     } = cardStore;
 
     const params = {
@@ -76,7 +76,13 @@ class AddCardScreen extends React.Component {
             userStore.addPaymentAccount(res.data.paymentAccount);
             this.setState({ loading: false });
 
-            goBack();
+            const screenRef = getParam('screenRef', null);
+
+            if(screenRef){
+              return navigate("DashboardBookingReview",{cardAdded:true});
+            } else {
+              goBack();
+            }
           },
           errorHandler: () => {
             this.setState({ loading: false });
