@@ -3,6 +3,7 @@ import AccountScreen from "../screens/account";
 import SettingsScreen from "../screens/account/settings";
 import PaymentScreen from "../screens/account/payment";
 import EditAddressScreen from "../screens/account/edit-address";
+import EditNameScreen from "../screens/account/edit-name";
 import EditEmailScreen from "../screens/account/edit-email";
 import EditPhoneNumberScreen from "../screens/account/edit-phonenumber";
 import AddCardScreen from "../screens/account/add-card";
@@ -13,6 +14,9 @@ const SettingsNavigator = createStackNavigator(
   {
     SettingsDefault: {
       screen: SettingsScreen
+    },
+    SettingsEditName: {
+      screen: EditNameScreen
     },
     SettingsEditAdress: {
       screen: EditAddressScreen
