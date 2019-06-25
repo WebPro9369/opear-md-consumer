@@ -1,8 +1,12 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable camelcase */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { getIndexByValue } from "@utils";
+import { getCareProvider } from "@services/opear-api";
 import { StyledText } from "../../../components/text";
 import { ServiceButton } from "../../../components/service-button";
 // import { NavHeader } from "../../../components/nav-header";
@@ -11,8 +15,6 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { ProviderCard, BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
-import { getIndexByValue } from "@utils";
-import { getCareProvider } from "@services/opear-api"
 
 const { BLACK60 } = colors;
 
@@ -23,59 +25,54 @@ const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 @observer
 class VisitBookedScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
 
     const {
       navigation,
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = props;
 
-    const visitID = navigation.getParam('visitID', 0);
-    const visits = navigation.getParam('visits', 0);
+    const visitID = navigation.getParam("visitID", 0);
+    const visits = navigation.getParam("visits", 0);
 
-    const visit = visits[visitID-1];
+    const visit = visits[visitID - 1];
 
     this.state = {
       username: userStore.name,
-      child: userStore.children[getIndexByValue(userStore.children,visit.child_id)].name,
-      address: userStore.addresses[getIndexByValue(userStore.addresses,visit.address_id)].street,
+      child:
+        userStore.children[getIndexByValue(userStore.children, visit.child_id)]
+          .name,
+      address:
+        userStore.addresses[
+          getIndexByValue(userStore.addresses, visit.address_id)
+        ].street,
       time: visit.appointment_time,
       providerData: {
-        avatarImg: doctorImg,
-        name: "Dr. John Smith",
-        bio: "Hi, this is my bio",
-        history: "Hi, this is my work history, line two of my work history",
-        rating: "4.5",
-        badges: ["Specialty", "Credentials", "Experience"]
+        avatarImg: null,
+        name: "",
+        bio: "",
+        history: "",
+        rating: "",
+        badges: []
       }
     };
 
     const successHandler = res => {
-
-      const {
-        name,
-        biography,
-        work_history,
-        rating,
-        specialties
-      } = res.data;
+      const { name, biography, work_history, rating, specialties } = res.data;
 
       this.setState({
         providerData: {
-          name: name,
+          name,
           bio: biography,
           history: work_history.join(", "),
-          rating: rating,
+          rating,
           badges: specialties
         }
       });
-
     };
 
     getCareProvider(visit.care_provider_id, { successHandler });

@@ -17,54 +17,62 @@ const imgTiger = require("../../../../assets/images/Tiger.png");
 @observer
 class PastVisitsScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
+    store: PropTypes.observableObject.isRequired
+  };
+
+  constructor(props) {
+    super(props);
+
+    const {
+      store: { userStore }
+    } = props;
+
+    this.state = {
+      userStore,
+      visitList: [
+        {
+          id: 1,
+          child_id: 20,
+          address_id: 75,
+          reason: "fever",
+          appointment_time: "6 pm",
+          payment_amount: 75,
+          care_provider_id: 101
+        },
+        {
+          id: 2,
+          child_id: 10,
+          address_id: 76,
+          reason: "fever",
+          appointment_time: "6 pm",
+          payment_amount: 175,
+          care_provider_id: 101
+        }
+      ].map((visit, index) => {
+        return {
+          ...visit,
+          child_id:
+            userStore.children.length > index
+              ? userStore.children[index].id
+              : userStore.children[0].id,
+          address_id:
+            userStore.addresses.length > index
+              ? userStore.addresses[index].id
+              : userStore.addresses[0].id
+        };
+      })
     };
 
-    constructor(props) {
-      super(props);
-
-      const {
-        store: {
-          userStore
-        }
-      } = props;
-
-      this.state = {
-        userStore,
-        visitList: [
-          {
-            id: 1,
-            child_id: 20,
-            address_id: 75,
-            reason: "fever",
-            appointment_time: "6 pm",
-            payment_amount: 75,
-            care_provider_id: 101
-          },
-          {
-            id: 2,
-            child_id: 10,
-            address_id: 76,
-            reason: "fever",
-            appointment_time: "6 pm",
-            payment_amount: 175,
-            care_provider_id: 101
-          }
-        ]
-      };
-
-      const successHandler = res => {
-
-        //const dateOptions = { hour: 'numeric' };
-        //new Date().toLocaleDateString("en-US", dateOptions).toString()
-
-        /*this.setState({
+    const successHandler = res => {
+      //const dateOptions = { hour: 'numeric' };
+      //new Date().toLocaleDateString("en-US", dateOptions).toString()
+      /*this.setState({
           visitList: res.data
         });*/
-      };
+    };
 
-      getVisits(userStore.id, { past: true, successHandler});
-    }
+    getVisits(userStore.id, { past: true, successHandler });
+  }
 
   render() {
     const { visitList, userStore } = this.state;
@@ -84,14 +92,24 @@ class PastVisitsScreen extends React.Component {
                   <View style={{ marginBottom: 9 }}>
                     <VisitDetailCard
                       avatarImg={imgFox}
-                      name={userStore.children[getIndexByValue(userStore.children,item.child_id)].name}
+                      name={
+                        userStore.children[
+                          getIndexByValue(userStore.children, item.child_id)
+                        ].name
+                      }
                       illness={item.reason}
                       time={item.appointment_time}
-                      address={userStore.addresses[getIndexByValue(userStore.addresses,item.address_id)].street}
-                      onPress={() => navigate("VisitsBookingReceipt",{
-                        visitID: item.id,
-                        visits: visitList
-                      })}
+                      address={
+                        userStore.addresses[
+                          getIndexByValue(userStore.addresses, item.address_id)
+                        ].street
+                      }
+                      onPress={() =>
+                        navigate("VisitsBookingReceipt", {
+                          visitID: item.id,
+                          visits: visitList
+                        })
+                      }
                     />
                   </View>
                 ))}
