@@ -39,6 +39,7 @@ class VisitBookedScreen extends React.Component {
 
     const visitID = navigation.getParam('visitID', 0);
 
+    // TODO: Replace dummy data
     this.state = {
       providerData: {
         avartarImg: doctorImg,
