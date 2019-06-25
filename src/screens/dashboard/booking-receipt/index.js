@@ -185,7 +185,6 @@ class BookingReceiptScreen extends React.Component {
                 >
                   {price}
                 </StyledText>
-                <MaterialIcons name="help" size={24} />
               </FlexView>
             </FlexView>
           </ContentWrapper>
