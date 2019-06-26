@@ -15,20 +15,15 @@ const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 @observer
 class PickChildScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
 
     const {
       store: {
-        userStore: {
-          children,
-          visitRequest: {
-            pickedChild
-          }
-        }
+        userStore: { children }
       }
     } = props;
 
@@ -40,23 +35,21 @@ class PickChildScreen extends React.Component {
 
   onSubmit = () => {
     const {
-      navigation: {getParam, navigate},
-      store: {
-        userStore
-      }
+      navigation: { getParam, navigate },
+      store: { userStore }
     } = this.props;
 
-      const { pickedChild } = this.state;
+    const { pickedChild } = this.state;
 
-      userStore.setVisitRequestPickedChild(pickedChild);
+    userStore.setVisitRequestPickedChild(pickedChild);
 
-      const screenRef = getParam('screenRef', null);
+    const screenRef = getParam("screenRef", null);
 
-      if(screenRef){
-        return navigate("DashboardBookingReview");
-      }
+    if (screenRef) {
+      return navigate("DashboardBookingReview");
+    }
 
-      navigate("DashboardPickVisitAddress")
+    return navigate("DashboardPickVisitAddress");
   };
 
   render() {
@@ -149,10 +142,7 @@ class PickChildScreen extends React.Component {
           </View>
           {pickedChild ? (
             <View style={{ paddingLeft: 16, paddingRight: 16 }}>
-              <ServiceButton
-                title="Select Children"
-                onPress={this.onSubmit}
-              />
+              <ServiceButton title="Select Child" onPress={this.onSubmit} />
             </View>
           ) : null}
         </View>

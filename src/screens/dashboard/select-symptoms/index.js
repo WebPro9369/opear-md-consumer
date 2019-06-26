@@ -33,7 +33,7 @@ class SelectSymptomsScreen extends React.Component {
         { key: "6", string: "Cough", checked: false },
         { key: "7", string: "Congestion", checked: false },
         { key: "8", string: "Sore throat", checked: false },
-        { key: "9", string: "Stomachache", checked: false },
+        { key: "9", string: "Stomach ache", checked: false },
         { key: "10", string: "Vomiting", checked: false },
         { key: "11", string: "Diarrhea", checked: false },
         { key: "12", string: "Eye pain/discharge", checked: false },
