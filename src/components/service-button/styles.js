@@ -8,7 +8,7 @@ export const Wrapper = styled.View`
 
 export const ServiceTouchableButtonWrapper = styled.TouchableOpacity`
   background-color: ${props =>
-    props.grey ? "transparent" : props.backgroundColor || colors.LIGHTGREEN};
+    props.grey ? "transparent" : props.backgroundColor || colors.DARKSKYBLUE};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,7 +17,7 @@ export const ServiceTouchableButtonWrapper = styled.TouchableOpacity`
   border-radius: 5px;
   border-width: 1px;
   border-color: ${props =>
-    props.grey ? colors.BLACK38 : props.borderColor || colors.LIGHTGREEN};
+    props.grey ? colors.BLACK38 : props.borderColor || colors.DARKSKYBLUE};
 `;
 
 export const ServiceText = styled.Text`
