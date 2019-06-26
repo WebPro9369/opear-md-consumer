@@ -91,6 +91,7 @@ export const getParent = (parentID, { successHandler, errorHandler } = {}) => {
     });
 };
 
+// eslint-disable-next-line prettier/prettier
 export const updateParent = (parentID, data, { successHandler, errorHandler } = {}) => {
   axios
     .patch(`/v1/parents/${parentID}`, data)
