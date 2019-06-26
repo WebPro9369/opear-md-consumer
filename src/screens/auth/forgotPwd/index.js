@@ -9,8 +9,8 @@ import { NavHeader } from "@components/nav-header";
 import { ServiceButton } from "@components/service-button";
 import { FormInputWrapper, FormWrapper } from "@components/views";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
-import { colors } from "@utils/constants";
 import { passwordReset } from "@services/opear-api";
+import { colors } from "../../../utils/constants";
 
 @inject("store")
 class ForgotPwdScreen extends React.Component {
@@ -57,7 +57,7 @@ class ForgotPwdScreen extends React.Component {
       <KeyboardAvoidingView
         behavior="padding"
         enabled
-        style={{ backgroundColor: colors.LIGHTGREEN, height: "100%" }}
+        style={{ backgroundColor: colors.DARKSKYBLUE, height: "100%" }}
       >
         <NavHeader
           title="Forgot Password"
@@ -66,13 +66,13 @@ class ForgotPwdScreen extends React.Component {
           backButtonIcon={
             <AntDesign name="arrowleft" size={20} color={colors.WHITE} />
           }
-          backgroundColor={colors.LIGHTGREEN}
+          backgroundColor={colors.DARKSKYBLUE}
           serviceTextStyle={{ color: "#ffffff" }}
           onPressBackButton={() => {
             goBack();
           }}
         />
-        <FormWrapper centered padding={0} style={{ marginTop: 32 }}>
+        <FormWrapper centered padding={0} style={{ marginTop: 0 }}>
           <FormInputWrapper paddingLeft={16} paddingRight={16}>
             <FormTextInput
               label="Email"
@@ -87,7 +87,8 @@ class ForgotPwdScreen extends React.Component {
               title="Reset Password"
               onPress={this.onSubmit}
               backgroundColor="#ffffff"
-              color={colors.LIGHTGREEN}
+              borderColor={colors.DARKSKYBLUE}
+              color={colors.DARKSKYBLUE}
             />
           </FormInputWrapper>
         </FormWrapper>

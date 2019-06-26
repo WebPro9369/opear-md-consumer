@@ -9,7 +9,7 @@ import { NavHeader } from "@components/nav-header";
 import { ServiceButton } from "@components/service-button";
 import { FormInputWrapper, FormWrapper } from "@components/views";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
-import { colors } from "@utils/constants";
+import { colors } from "../../../utils/constants";
 import { updatePassword } from "../../../services/opear-api";
 
 @inject("store")
@@ -92,7 +92,7 @@ class NewPwdScreen extends React.Component {
       <KeyboardAvoidingView
         behavior="padding"
         enabled
-        style={{ backgroundColor: colors.LIGHTGREEN, height: "100%" }}
+        style={{ backgroundColor: colors.DARKSKYBLUE, height: "100%" }}
       >
         <NavHeader
           title="Set New Password"
@@ -101,7 +101,7 @@ class NewPwdScreen extends React.Component {
           backButtonIcon={
             <AntDesign name="arrowleft" size={20} color={colors.WHITE} />
           }
-          backgroundColor={colors.LIGHTGREEN}
+          backgroundColor={colors.DARKSKYBLUE}
           serviceTextStyle={{ color: "#ffffff" }}
           onPressBackButton={() => {
             goBack();
@@ -133,7 +133,8 @@ class NewPwdScreen extends React.Component {
               title="Sign In"
               onPress={this.onSubmit}
               backgroundColor="#ffffff"
-              color={colors.LIGHTGREEN}
+              borderColor={colors.DARKSKYBLUE}
+              color={colors.DARKSKYBLUE}
             />
           </FormInputWrapper>
         </FormWrapper>
