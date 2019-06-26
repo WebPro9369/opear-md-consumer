@@ -3,14 +3,14 @@ import { types } from "mobx-state-tree";
 
 export const VisitsStore = types
   .model("VisitsStore", {
-    visits: types.array (
+    visits: types.array(
       types.model({
         id: types.number,
         childId: types.number,
         addressId: types.number,
         avatarImg: types.string,
         reason: types.string,
-        symptoms: types.array (types.string),
+        symptoms: types.array(types.string),
         appointmentTime: types.Date,
         parentNotes: types.string,
         paymentAmount: types.number
