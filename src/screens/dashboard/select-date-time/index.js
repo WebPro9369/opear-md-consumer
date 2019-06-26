@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
-import { FlatList } from "react-native";
+import { Alert, FlatList } from "react-native";
 import { DateTime } from "luxon";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
@@ -32,8 +32,8 @@ class SelectDateTimeScreen extends React.Component {
       luxonDate = luxonDate.plus({ days: 1 });
     }
     this.state = {
-      selectedDate: null,
-      selectedTime: null,
+      selectedDate: "",
+      selectedTime: "",
       startHour: 8,
       endHour: 18,
       dates
@@ -50,9 +50,13 @@ class SelectDateTimeScreen extends React.Component {
 
     userStore.setVisitRequestDateTime(selectedDate, selectedTime);
 
-    const screenRef = getParam('screenRef', null);
+    const screenRef = getParam("screenRef", null);
 
-    if(screenRef){
+    if (!selectedDate || !selectedTime) {
+      return Alert.alert("Missing Date", "Please pick a date for your visit.");
+    }
+
+    if (screenRef) {
       return navigate("DashboardBookingReview");
     }
 
