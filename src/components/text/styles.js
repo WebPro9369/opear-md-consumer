@@ -29,7 +29,7 @@ export const LeftFlexView = styled.View`
 `;
 
 export const StyledText = styled.Text`
-  color: ${props => props.color};
+  color: ${props => props.color || colors.BLACK};
   font-family: ${props => props.fontFamily};
   font-size: ${props => props.fontSize};
   line-height: ${props => props.lineHeight};
