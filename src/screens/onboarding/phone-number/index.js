@@ -66,10 +66,10 @@ class PhoneNumberScreen extends Component {
 
     const data = {
       parent: {
-        name: name,
-        email: email,
-        phone: phone,
-        password: password,
+        name,
+        email,
+        phone,
+        password,
         zip: zip_code,
         accepted_privacy: acceptedPrivacy,
         accepted_terms_of_service: acceptedTermsOfService
@@ -79,21 +79,25 @@ class PhoneNumberScreen extends Component {
     console.tron.log(data);
 
     const successHandler = response => {
-      const { id, apiKey: api_key } = response.data;
+      const { id, api_key: apiKey } = response.data;
 
       userStore.setAuthentication({ id, apiKey });
 
       userStore.setPhone(phone);
       userStore.setAcceptedPrivacy(acceptedPrivacy);
-      userStore.setAcceptedTermsOfService(acceptedTermsOfServices);
+      userStore.setAcceptedTermsOfService(acceptedTermsOfService);
+
+      navigate("Tabs");
     };
 
-    // eslint-disable-next-line prettier/prettier
-    const errorHandler = () => Alert.alert("Registration failed. Please ensure your information is correct, or contact help@opear.com.");
+    const errorHandler = () => {
+      return Alert.alert(
+        "Uhoh",
+        "Registration failed. Please ensure your information is correct, or contact help@opear.com."
+      );
+    };
 
     registerParent(data, { successHandler, errorHandler });
-
-    navigate("Tabs");
   };
 
   render() {
