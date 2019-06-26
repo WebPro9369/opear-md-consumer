@@ -105,9 +105,7 @@ class EditAddressScreen extends React.Component {
               label="Address"
               value={street}
               onChangeText={this.handleInputChange("street")}
-              rightIcon={
-                <FontAwesome name="map-marker" size={30} color={LIGHTGREEN} />
-              }
+              // rightIcon={ <FontAwesome name="map-marker" size={30} color={LIGHTGREEN} /> }
             />
           </FormInputView>
           <FormInputView>
