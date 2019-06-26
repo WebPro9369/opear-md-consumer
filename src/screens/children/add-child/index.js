@@ -7,6 +7,7 @@ import { Avatar, ButtonGroup } from "react-native-elements";
 import { registerChild } from "@services/opear-api";
 import InactiveUserBanner from "@components/banner"
 import { FormTextInput } from "../../../components/text";
+import { FormMaskedTextInput } from "@components/text-masked";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
 import {
@@ -78,6 +79,15 @@ class AddChildScreen extends React.Component {
       currentMedicalConditions,
       allergies
     } = this.state;
+
+    const dateRegex1 = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
+    const dateRegex2 = /^(0[1-9]|1[0-2])(0[1-9]|1\d|2\d|3[01])(19|20)\d{2}$/;
+
+    if (!dateRegex1.test(birthDate) && !dateRegex2.test(birthDate)) {
+      return Alert.alert(
+        "There was an issue",
+        "Please enter Date of Birth in mm/dd/yyyy format");
+    }
 
     let allergiesArray = [];
 
@@ -221,12 +231,14 @@ class AddChildScreen extends React.Component {
               />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput
-                label="Birth Date"
-                value={birthDate}
-                placeholder="xx / xx / xxxx"
-                onChangeText={this.handleInputChange("birthDate")}
-              />
+            <FormMaskedTextInput
+              label="Birth Date"
+              value={birthDate}
+              placeholder="mm/dd/yyyy"
+              keyboardType="number-pad"
+              maskOptions={{ mask: "99/99/9999" }}
+              onChangeText={this.handleInputChange("birthDate")}
+            />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput

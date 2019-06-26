@@ -1,8 +1,11 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable camelcase */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { getCareProvider } from "@services/opear-api";
 import { StyledText } from "../../../components/text";
 import { ServiceButton } from "../../../components/service-button";
 // import { NavHeader } from "../../../components/nav-header";
@@ -11,33 +14,27 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { ProviderCard, BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
-import { getIndexByValue } from "@utils";
-import { getCareProvider } from "@services/opear-api"
 
 const { BLACK60 } = colors;
-
-const doctorImg = require("../../../../assets/images/Doctor.png");
 const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 
 @inject("store")
 @observer
 class VisitBookedScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
 
     const {
       navigation,
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = props;
 
-    const visitID = navigation.getParam('visitID', 0);
-    const visit = navigation.getParam('visit', 0);
+    const visitID = navigation.getParam("visitID", 0);
+    const visit = navigation.getParam("visit", 0);
 
     console.tron.log(visitID);
     console.tron.log(visit);
@@ -48,35 +45,27 @@ class VisitBookedScreen extends React.Component {
       address: visit.address.street,
       time: visit.appointment_time,
       providerData: {
-        avatarImg: doctorImg,
-        name: "Dr. John Smith",
-        bio: "Hi, this is my bio",
-        history: "Hi, this is my work history, line two of my work history",
-        rating: "4.5",
-        badges: ["Specialty", "Credentials", "Experience"]
+        avatarImg: null,
+        name: "",
+        bio: "",
+        history: "",
+        rating: "",
+        badges: []
       }
     };
 
     const successHandler = res => {
-
-      const {
-        name,
-        biography,
-        work_history,
-        rating,
-        specialties
-      } = res.data;
+      const { name, biography, work_history, rating, specialties } = res.data;
 
       this.setState({
         providerData: {
-          name: name,
+          name,
           bio: biography,
           history: work_history.join(", "),
-          rating: rating,
+          rating,
           badges: specialties
         }
       });
-
     };
 
     getCareProvider(visit.care_provider_id, { successHandler });
@@ -87,10 +76,11 @@ class VisitBookedScreen extends React.Component {
       navigation: { navigate }
     } = this.props;
     const { username, providerData, child, address, time } = this.state;
-
-    var timeOptions = { month: 'long', day: 'numeric', hour: 'numeric' };
-
-    var formattedTime = new Date(time).toLocaleDateString("en-US", timeOptions);
+    const timeOptions = { month: "long", day: "numeric", hour: "numeric" };
+    const formattedTime = new Date(time).toLocaleDateString(
+      "en-US",
+      timeOptions
+    );
 
     return (
       <ScrollView padding={0}>
