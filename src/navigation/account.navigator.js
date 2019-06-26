@@ -9,6 +9,8 @@ import EditPhoneNumberScreen from "../screens/account/edit-phonenumber";
 import AddCardScreen from "../screens/account/add-card";
 import EditChildScreen from "../screens/children/edit-child";
 import ScanCardScreen from "../screens/account/scan-card";
+import ForgotPwdScreen from "../screens/auth/forgotPwd";
+import NewPwdScreen from "../screens/auth/enterNewPwd";
 
 const SettingsNavigator = createStackNavigator(
   {
@@ -29,6 +31,12 @@ const SettingsNavigator = createStackNavigator(
     },
     SettingsEditChild: {
       screen: EditChildScreen
+    },
+    AccountForgotPwd: {
+      screen: ForgotPwdScreen
+    },
+    AccountNewPwd: {
+      screen: NewPwdScreen
     }
   },
   {

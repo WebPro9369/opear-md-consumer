@@ -14,6 +14,7 @@ import {
 } from "./styles";
 import { ContainerView, View, FlexView } from "../../../components/views";
 import { colors } from "../../../utils/constants";
+import InactiveUserBanner from "@components/banner"
 
 @inject("store")
 @observer
@@ -69,7 +70,7 @@ class PaymentScreen extends React.Component {
     const {
       navigation: { navigate },
       store: {
-        userStore: { payment_accounts }
+        userStore: { payment_accounts, active }
       }
     } = this.props;
     const { loading } = this.state;
@@ -81,6 +82,7 @@ class PaymentScreen extends React.Component {
           hasBackButton
           onPressBackButton={() => navigate("AccountDefault")}
         />
+        <InactiveUserBanner userIsActive={active} />
         <View>
           {loading && (
             <ActivityIndicator size="small" color={colors.SEAFOAMBLUE} />

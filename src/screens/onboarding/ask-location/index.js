@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, Image, View } from "react-native";
+import { Alert, Image, View, Linking } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import TouchID from "react-native-touch-id";
 import { ServiceButton } from "@components/service-button";
@@ -23,6 +23,28 @@ class AskLocationScreen extends Component {
     };
   }
 
+  componentDidMount() {
+    Linking.addEventListener('url', this.handleOpenURL);
+  }
+
+  componentWillUnmount () {
+    Linking.removeEventListener('url', this.handleOpenURL);
+  }
+
+  handleOpenURL = (event) => {
+    this.navigate(event.url);
+  }
+
+  navigate = (url) => {
+    const { navigate } = this.props.navigation;
+    const route = url.replace(/.*?:\/\//g, '');
+    const routeName = route.split('/')[0];
+
+    if (routeName === 'newpwd') {
+      navigate('AccountNewPwd',{routeInfo:route});
+    };
+  }
+
   handleInputChange = text => {
     this.setState({
       zipcode: text
@@ -38,7 +60,9 @@ class AskLocationScreen extends Component {
     } = this.props;
     const { zipcode } = this.state;
 
-    if (!zipcode) return Alert.alert("Please enter your zip code");
+    if (!zipcode || zipcode.length !== 5) {
+      return Alert.alert("Please enter your zip code");
+    }
 
     const optionalConfigObject = {
       fallbackLabel: "Show Passcode", // iOS (if empty, then label is hidden)

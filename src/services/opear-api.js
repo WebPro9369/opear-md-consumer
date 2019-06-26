@@ -91,6 +91,7 @@ export const getParent = (parentID, { successHandler, errorHandler } = {}) => {
     });
 };
 
+// eslint-disable-next-line prettier/prettier
 export const updateParent = (parentID, data, { successHandler, errorHandler } = {}) => {
   axios
     .patch(`/v1/parents/${parentID}`, data)
@@ -337,6 +338,19 @@ export const getVisit = (userID, visitID, { successHandler, errorHandler } = {})
     });
 };
 
+export const updateVisit = (visitID, data, { successHandler, errorHandler } = {}) => {
+  axios
+    .patch(`/v1/visits/${visitID}`, data)
+    .then(res => {
+      console.tron.log("Update visit done: ", res);
+      if (successHandler) successHandler(res);
+    })
+    .catch(err => {
+      console.tron.log("Update visit error: ", err);
+      if (errorHandler) errorHandler(err);
+    });
+};
+
 /* Availabilities */
 
 export const getAvailabilities = (userID, { successHandler, errorHandler } = {}) => {
@@ -408,6 +422,19 @@ export const getApiToken = (
     })
     .catch(err => {
       console.tron.log("Authentication error: ", err);
+      if (errorHandler) errorHandler(err);
+    });
+};
+
+export const passwordReset = (data, { successHandler, errorHandler } = {}) => {
+  axios
+    .post("/v1/password_resets", data)
+    .then(res => {
+      console.tron.log("Password reset done: ", res);
+      if (successHandler) successHandler(res);
+    })
+    .catch(err => {
+      console.tron.log("Password reset error: ", err);
       if (errorHandler) errorHandler(err);
     });
 };

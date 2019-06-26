@@ -1,6 +1,8 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import InactiveUserBanner from "@components/banner";
+import { updateParent } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -8,15 +10,8 @@ import {
   KeyboardAvoidingView,
   FormInputView
 } from "../../../components/views/keyboard-view";
-import {
-  ContainerView,
-  HeaderWrapper,
-  FlexView,
-  FormWrapper
-} from "../../../components/views";
-
+import { FlexView, FormWrapper } from "../../../components/views";
 import { colors } from "../../../utils/constants";
-import { updateParent } from "@services/opear-api"
 
 const { LIGHTGREEN } = colors;
 
@@ -91,7 +86,8 @@ class EditAddressScreen extends React.Component {
 
   render() {
     const {
-      navigation: { goBack }
+      navigation: { goBack },
+      store: { userStore }
     } = this.props;
     const { street, city, zip_code, name } = this.state;
     return (
@@ -102,15 +98,14 @@ class EditAddressScreen extends React.Component {
           hasBackButton
           onPressBackButton={() => goBack()}
         />
+        <InactiveUserBanner userIsActive={userStore.active} />
         <FormWrapper>
           <FormInputView>
             <FormTextInput
               label="Address"
               value={street}
               onChangeText={this.handleInputChange("street")}
-              rightIcon={
-                <FontAwesome name="map-marker" size={30} color={LIGHTGREEN} />
-              }
+              // rightIcon={ <FontAwesome name="map-marker" size={30} color={LIGHTGREEN} /> }
             />
           </FormInputView>
           <FormInputView>

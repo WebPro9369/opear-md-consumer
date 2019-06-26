@@ -5,7 +5,6 @@ import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { getIndexByValue } from "@utils";
 import { getCareProvider } from "@services/opear-api";
 import { StyledText } from "../../../components/text";
 import { ServiceButton } from "../../../components/service-button";
@@ -17,8 +16,6 @@ import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
 
 const { BLACK60 } = colors;
-
-const doctorImg = require("../../../../assets/images/Doctor.png");
 const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 
 @inject("store")
@@ -37,19 +34,15 @@ class VisitBookedScreen extends React.Component {
     } = props;
 
     const visitID = navigation.getParam("visitID", 0);
-    const visits = navigation.getParam("visits", 0);
+    const visit = navigation.getParam("visit", 0);
 
-    const visit = visits[visitID - 1];
+    console.tron.log(visitID);
+    console.tron.log(visit);
 
     this.state = {
       username: userStore.name,
-      child:
-        userStore.children[getIndexByValue(userStore.children, visit.child_id)]
-          .name,
-      address:
-        userStore.addresses[
-          getIndexByValue(userStore.addresses, visit.address_id)
-        ].street,
+      child: visit.child.first_name,
+      address: visit.address.street,
       time: visit.appointment_time,
       providerData: {
         avatarImg: null,
@@ -83,6 +76,11 @@ class VisitBookedScreen extends React.Component {
       navigation: { navigate }
     } = this.props;
     const { username, providerData, child, address, time } = this.state;
+    const timeOptions = { month: "long", day: "numeric", hour: "numeric" };
+    const formattedTime = new Date(time).toLocaleDateString(
+      "en-US",
+      timeOptions
+    );
 
     return (
       <ScrollView padding={0}>
@@ -133,7 +131,7 @@ class VisitBookedScreen extends React.Component {
             />
             <BookedDetailCard
               type="Date &amp; Time"
-              text={time}
+              text={formattedTime}
               icon={
                 // eslint-disable-next-line react/jsx-wrap-multilines
                 <FontAwesome

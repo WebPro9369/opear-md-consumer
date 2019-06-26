@@ -110,7 +110,7 @@ export const UserStore = types
       return self;
     },
     setActive(value) {
-      self.apiKey = value;
+      self.active = value;
       return self;
     },
     setAuthentication({ id, apiKey }) {

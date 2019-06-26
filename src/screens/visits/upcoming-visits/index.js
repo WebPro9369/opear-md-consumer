@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-unresolved */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
@@ -8,7 +9,6 @@ import { ContainerView, View, ContentWrapper } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { VisitDetailCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
-import { getIndexByValue } from "@utils";
 
 const imgFox = require("../../../../assets/images/Fox.png");
 
@@ -27,102 +27,72 @@ class UpcomingVisitsScreen extends React.Component {
     } = props;
 
     this.state = {
-      userStore,
-      // TODO: Fix all this logic
-      // It currently has dummy data and is statically getting the first child and address for a parent
-      visitList: [
-        {
-          id: 1,
-          child_id: 10,
-          address_id: 75,
-          reason: "fever",
-          appointment_time: "6 pm",
-          payment_amount: 75,
-          care_provider_id: 101
-        },
-        {
-          id: 2,
-          child_id: 20,
-          address_id: 76,
-          reason: "fever",
-          appointment_time: "6 pm",
-          payment_amount: 175,
-          care_provider_id: 101
-        }
-      ].map((visit, index) => {
-        return {
-          ...visit,
-          child_id:
-            userStore.children.length > index
-              ? userStore.children[index].id
-              // TOOD: Fix this too
-              : userStore.children[0].id,
-          address_id:
-            userStore.addresses.length > index
-              ? userStore.addresses[index].id
-              // TOOD: Fix this too
-              : userStore.addresses[0].id
-        };
-      })
+      visits: []
     };
 
-    const successHandler = () => {
-      // const dateOptions = { hour: 'numeric' };
-      // new Date().toLocaleDateString("en-US", dateOptions).toString()
-      /*
-      this.setState({
-          visitList: res.data
-        });
-      */
-    };
+    getVisits(userStore.id, {
+      successHandler: res => {
+        const visits = res.data;
 
-    // getVisits(userStore.id, { successHandler });
+        this.setState({ visits });
+      }
+    });
   }
 
   render() {
-    const { visitList, userStore } = this.state;
+    const { visits } = this.state;
     const {
       navigation: { navigate }
     } = this.props;
 
-    console.log("Visitlist: ", visitList)
+    const dates = Object.keys(visits);
+
+    const visitsDisplayStack = [];
+    const dayOptions = { month: "long", day: "numeric" };
+    const timeOptions = { day: undefined, hour: "numeric" };
+
+    for (const date of dates) {
+      const visitsOnDate = visits[date];
+
+      const dateAsObject = new Date(date);
+
+      visitsDisplayStack.push(
+        <StyledText fontSize={16} color={colors.BLACK60}>
+          {dateAsObject.toLocaleString("en-US", dayOptions)}
+        </StyledText>
+      );
+
+      for (const visitOnDate of visitsOnDate) {
+        let formattedTime = new Date(
+          visitOnDate.appointment_time
+        ).toLocaleDateString("en-US", timeOptions);
+        formattedTime = formattedTime.split(", ");
+
+        visitsDisplayStack.push(
+          <View style={{ marginBottom: 9 }}>
+            <VisitDetailCard
+              avatarImg={imgFox}
+              name={visitOnDate.child.first_name}
+              illness={visitOnDate.reason}
+              time={formattedTime[1]}
+              address={visitOnDate.address.street}
+              onPress={() =>
+                navigate("VisitsVisitBooked", {
+                  visitID: visitOnDate.id,
+                  visit: visitOnDate
+                })
+              }
+            />
+          </View>
+        );
+      }
+    }
 
     return (
       <ContainerView style={{ marginTop: 0 }}>
         <ScrollView padding={0}>
           <View style={{ paddingTop: 24 }}>
-            <ContentWrapper>
-              <StyledText fontSize={16} color={colors.BLACK60}>
-                Today
-              </StyledText>
-              <View style={{ paddingTop: 16, paddingBottom: 16 }}>
-                {visitList.map(item => (
-                  <View style={{ marginBottom: 9 }}>
-                    <VisitDetailCard
-                      avatarImg={imgFox}
-                      name={
-                        userStore.children[
-                          getIndexByValue(userStore.children, item.child_id)
-                        ].name
-                      }
-                      illness={item.reason}
-                      time={item.appointment_time}
-                      address={
-                        userStore.addresses[
-                          getIndexByValue(userStore.addresses, item.address_id)
-                        ].street
-                      }
-                      onPress={() =>
-                        navigate("VisitsVisitBooked", {
-                          visitID: item.id,
-                          visits: visitList
-                        })
-                      }
-                    />
-                  </View>
-                ))}
-              </View>
-            </ContentWrapper>
+            <ContentWrapper>{visitsDisplayStack}</ContentWrapper>
           </View>
         </ScrollView>
       </ContainerView>

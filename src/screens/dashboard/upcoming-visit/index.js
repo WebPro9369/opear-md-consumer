@@ -1,9 +1,13 @@
+/* eslint-disable camelcase */
+/* eslint-disable import/no-unresolved */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import MapView from "react-native-maps";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { getVisit } from "@services/opear-api";
+import { ServiceButton } from "@components/service-button";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { View, ViewCentered, FlexView } from "../../../components/views";
@@ -11,7 +15,7 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
-import { getVisit } from "@services/opear-api";
+import { TwilioService } from "@services";
 
 const { BLACK60 } = colors;
 
@@ -29,18 +33,20 @@ class VisitBookedScreen extends React.Component {
     super(props);
 
     const {
-      store: { userStore }
+      store: { userStore },
+      navigation
     } = props;
 
-    const visitID = 2;
-    // const visitID = navigation.getParam('visitID', 0);
+    const visitID = navigation.getParam("visitID", 0);
 
+    // TODO: Replace dummy data
     this.state = {
       providerData: {
         avartarImg: doctorImg,
-        name: "Dr. John Smith",
+        name: "Dr. test John Smith",
         symptom: "Respiratory",
-        eta: "8:30am - 8:40am"
+        eta: "8:30am - 8:40am",
+        phone: "+17174663337"
       },
       child: "Benjamin",
       address: "18 Mission St",
@@ -58,8 +64,8 @@ class VisitBookedScreen extends React.Component {
         // care_provider,
         child,
         address,
-        appointment_time,
-        reasons
+        appointment_time
+        // reasons
       } = res.data;
 
       const dateOptions = {
@@ -88,11 +94,15 @@ class VisitBookedScreen extends React.Component {
     getVisit(userStore.id, visitID, { successHandler });
   }
 
-  componentDidMount() {
+  componentDidMount() {}
+
+  onCall = () => {
     const {
-      navigation: { navigate }
-    } = this.props;
-  }
+      providerData: { phone }
+    } = this.state;
+
+    TwilioService.makeCall(null, null, phone);
+  };
 
   render() {
     const {
@@ -142,7 +152,7 @@ class VisitBookedScreen extends React.Component {
                   Your doctor will arrive in 10 minutes!
                 </StyledText>
               </View>
-              <View style={{ marginTop: 40, marginBottom: 60 }}>
+              <View style={{ marginTop: 40, marginBottom: 10 }}>
                 <FlexView justifyContent="center">
                   <StyledText
                     fontFamily="FlamaMedium"
@@ -177,11 +187,7 @@ class VisitBookedScreen extends React.Component {
               </View>
             </ViewCentered>
           </ContentWrapper>
-          <ContentWrapper
-            style={{
-              marginTop: 24
-            }}
-          >
+          <ContentWrapper>
             <BookedDetailCard
               type="Child"
               text={child}
@@ -204,6 +210,12 @@ class VisitBookedScreen extends React.Component {
                 />
               }
             />
+            <View style={{ paddingTop: 50, paddingBottom: 10 }}>
+              <ServiceButton
+                title="Contact Care Provider"
+                onPress={this.onCall}
+              />
+            </View>
           </ContentWrapper>
         </View>
       </ScrollView>
