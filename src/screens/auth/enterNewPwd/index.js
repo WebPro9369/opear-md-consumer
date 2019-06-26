@@ -97,8 +97,6 @@ class NewPwdScreen extends React.Component {
               textAlign="center"
               style={{
                 color: "#ffffff"
-                // borderBottomWidth: 1,
-                // borderBottomColor: "#ffffff"
               }}
               onPress={this.onPressForgotPassword}
             >
