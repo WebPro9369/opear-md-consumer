@@ -1,7 +1,5 @@
 import React from "react";
 import { Alert, View, Linking } from "react-native";
-// import { inject, observer } from "mobx-react";
-// import axios from "axios";
 import { FormTextInput, StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
