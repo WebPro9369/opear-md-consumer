@@ -7,6 +7,7 @@ import { Avatar, ButtonGroup } from "react-native-elements";
 import InactiveUserBanner from "@components/banner";
 import { getChild, updateChild } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
+import { FormMaskedTextInput } from "@components/text-masked";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
 import {
@@ -20,6 +21,7 @@ import {
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
 import { getAge, getValueById, getIndexByValue } from "@utils";
+import { getFormattedDate } from "@utils/helpers";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -45,9 +47,7 @@ class EditChildScreen extends React.Component {
     const nameSplitted = (child.name || "").split(" ");
     const firstName = nameSplitted[0];
     const lastName = nameSplitted.length > 1 ? nameSplitted[1] : "";
-    const date = new Date(child.birthDate);
-    const birthDate = `${date.getFullYear()}/${date.getMonth() +
-      1}/${date.getDate()}`;
+    const birthDate = getFormattedDate(new Date(child.birthDate));
 
     this.state = {
       childID,
@@ -86,6 +86,15 @@ class EditChildScreen extends React.Component {
       currentMedicalConditions,
       allergies
     } = this.state;
+
+    const dateRegex1 = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
+    const dateRegex2 = /^(0[1-9]|1[0-2])(0[1-9]|1\d|2\d|3[01])(19|20)\d{2}$/;
+
+    if (!dateRegex1.test(birthDate) && !dateRegex2.test(birthDate)) {
+      return Alert.alert(
+        "There was an issue",
+        "Please enter Date of Birth in mm/dd/yyyy format");
+    }
 
     let allergiesArray = [];
 
@@ -155,7 +164,12 @@ class EditChildScreen extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
+    const { navigation,
+      store:
+      {
+        userStore: { active }
+      }
+    } = this.props;
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
       gender,
@@ -169,6 +183,7 @@ class EditChildScreen extends React.Component {
       currentMedicalConditions,
       allergies
     } = this.state;
+
     return (
       <ContainerView behavior="padding" enabled>
         <HeaderWrapper>
@@ -179,7 +194,7 @@ class EditChildScreen extends React.Component {
             onPressBackButton={() => navigation.goBack()}
           />
         </HeaderWrapper>
-        <InactiveUserBanner userIsActive={userStore.active} />
+        <InactiveUserBanner userIsActive={active} />
         <KeyboardScrollView>
           <ViewCentered>
             <Avatar
@@ -213,9 +228,11 @@ class EditChildScreen extends React.Component {
               />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput
+              <FormMaskedTextInput
                 label="Birth Date"
                 value={birthDate}
+                keyboardType="number-pad"
+                maskOptions={{ mask: "99/99/9999" }}
                 onChangeText={this.handleInputChange("birthDate")}
               />
             </FormInputWrapper>
