@@ -60,7 +60,9 @@ class AskLocationScreen extends Component {
     } = this.props;
     const { zipcode } = this.state;
 
-    if (!zipcode) return Alert.alert("Please enter your zip code");
+    if (!zipcode || zipcode.length !== 5) {
+      return Alert.alert("Please enter your zip code");
+    }
 
     const optionalConfigObject = {
       fallbackLabel: "Show Passcode", // iOS (if empty, then label is hidden)
