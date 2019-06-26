@@ -18,10 +18,11 @@ export const FlexView = styled.View`
   padding-bottom: 10px;
   border-style: solid;
   border-bottom-width: 0.5px;
-  border-color: ${colors.BLACK};
+  border-color: ${props => props.color || colors.BLACK};
 `;
 
 export const LeftFlexView = styled.View`
+  flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -29,11 +30,12 @@ export const LeftFlexView = styled.View`
 `;
 
 export const StyledText = styled.Text`
-  color: ${props => props.color};
+  color: ${props => props.color || colors.BLACK};
   font-family: ${props => props.fontFamily};
   font-size: ${props => props.fontSize};
   line-height: ${props => props.lineHeight};
   text-align: ${props => props.textAlign};
+  text-decoration: ${props => props.textDecoration};
 `;
 
 StyledText.defaultProps = {
@@ -41,11 +43,14 @@ StyledText.defaultProps = {
   fontSize: 20,
   fontFamily: "Flama",
   lineHeight: 30,
-  textAlign: "left"
+  textAlign: "left",
+  textDecoration: "none"
 };
 
 export const StyledTextInput = styled.TextInput`
-  color: ${props => props.color};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  color: ${props => props.color || colors.BLACK};
   font-family: ${props => props.fontFamily};
   font-size: ${props => props.fontSize};
   line-height: ${props => props.lineHeight};
@@ -55,9 +60,10 @@ export const StyledTextInput = styled.TextInput`
 `;
 
 StyledTextInput.defaultProps = {
+  width: "100%",
+  height: 36,
   color: colors.BLACK,
   fontSize: 20,
-  height: 36,
   fontFamily: "Flama",
   lineHeight: 30,
   textAlign: "left"
