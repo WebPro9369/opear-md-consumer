@@ -1,8 +1,10 @@
+/* eslint-disable import/no-unresolved */
 import React from "react";
 
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import InactiveUserBanner from "@components/banner";
 import { StyledText } from "../../../components/text";
 import { InputButton } from "../../../components/input-button";
 import { NavHeader } from "../../../components/nav-header";
@@ -25,33 +27,15 @@ class SettingsScreen extends React.Component {
     store: PropTypes.observableObject.isRequired
   };
 
-  constructor(props) {
-    super(props);
-
-    const {
-      store: {
-        userStore: {
-          name,
-          address: { street },
-          email,
-          phone
-        }
-      }
-    } = props;
-
-    this.state = {
-      name,
-      street,
-      email,
-      phone
-    };
-  }
-
   render() {
     const {
-      navigation: { navigate }
+      navigation: { navigate },
+      store: { userStore }
     } = this.props;
-    const { name, street, email, phone } = this.state;
+
+    const { name, addresses, email, phone } = userStore;
+    const address = addresses.length ? addresses[addresses.length - 1] : {};
+
     return (
       <ContainerView>
         <HeaderWrapper>
@@ -62,6 +46,7 @@ class SettingsScreen extends React.Component {
             onPressBackButton={() => navigate("AccountDefault")}
           />
         </HeaderWrapper>
+        <InactiveUserBanner userIsActive={userStore.active} />
         <ScrollView>
           <ViewCentered>
             <Avatar
@@ -93,7 +78,7 @@ class SettingsScreen extends React.Component {
             <View style={{ padding: 16 }}>
               <InputButton
                 label="Address"
-                value={street}
+                value={address.street}
                 icon={
                   <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }

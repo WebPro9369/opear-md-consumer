@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React from "react";
 import PropTypes from "prop-types";
 import {
@@ -59,6 +60,7 @@ class FormTextInput extends React.Component {
 FormTextInput.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
+  color: PropTypes.string,
   type: PropTypes.string,
   leftIcon: PropTypes.element,
   rightIcon: PropTypes.element,
@@ -70,6 +72,7 @@ FormTextInput.propTypes = {
 FormTextInput.defaultProps = {
   label: "",
   value: null,
+  color: null,
   type: "text",
   leftIcon: null,
   rightIcon: null,

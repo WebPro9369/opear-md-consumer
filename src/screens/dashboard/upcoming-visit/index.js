@@ -1,9 +1,13 @@
+/* eslint-disable camelcase */
+/* eslint-disable import/no-unresolved */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import MapView from "react-native-maps";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { getVisit } from "@services/opear-api";
+import { ServiceButton } from "@components/service-button";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { View, ViewCentered, FlexView } from "../../../components/views";
@@ -24,20 +28,18 @@ const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 @observer
 class VisitBookedScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
 
     const {
-      store: {
-        userStore
-      },
+      store: { userStore },
       navigation
     } = props;
 
-    const visitID = navigation.getParam('visitID', 0);
+    const visitID = navigation.getParam("visitID", 0);
 
     // TODO: Replace dummy data
     this.state = {
@@ -60,47 +62,45 @@ class VisitBookedScreen extends React.Component {
     };
 
     const successHandler = res => {
-
       const {
-        //care_provider,
+        // care_provider,
         child,
         address,
-        appointment_time,
-        reasons
+        appointment_time
+        // reasons
       } = res.data;
 
-
-      var dateOptions = { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric' };
+      const dateOptions = {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        hour: "numeric"
+      };
 
       this.setState({
-      /*  providerData: {
+        /*  providerData: {
           avartarImg: doctorImg,
           name: care_provider.name,
           symptom: reason,
           eta: "8:30am - 8:40am"
-        },*/
+        }, */
         child: child.first_name,
         address: address.street,
-        time: new Date(appointment_time).toLocaleDateString("en-US", dateOptions)
+        time: new Date(appointment_time).toLocaleDateString(
+          "en-US",
+          dateOptions
+        )
       });
-
     };
 
     getVisit(userStore.id, visitID, { successHandler });
-
   }
 
-  componentDidMount() {
-    const {
-      navigation: { navigate }
-    } = this.props;
-  }
+  componentDidMount() {}
 
   onCall = () => {
     const {
-      providerData: {
-        phone
-      }
+      providerData: { phone }
     } = this.state;
     TwilioVoice.connect({ To: phone });
   }
@@ -211,8 +211,11 @@ class VisitBookedScreen extends React.Component {
                 />
               }
             />
-            <View style={{paddingTop:50, paddingBottom: 10}}>
-              <ServiceButton title="Contact Care Provider" onPress={this.onCall} />
+            <View style={{ paddingTop: 50, paddingBottom: 10 }}>
+              <ServiceButton
+                title="Contact Care Provider"
+                onPress={this.onCall}
+              />
             </View>
           </ContentWrapper>
         </View>

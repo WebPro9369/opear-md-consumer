@@ -14,6 +14,7 @@ import {
 
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { registerAddress } from "@services/opear-api";
+import InactiveUserBanner from "@components/banner"
 
 @inject("store")
 @observer
@@ -104,7 +105,8 @@ class AddAddressScreen extends React.Component {
 
   render() {
     const {
-      navigation: { goBack }
+      navigation: { goBack },
+      store: { userStore }
     } = this.props;
     const { locationName, street, city, zip, map } = this.state;
     return (
@@ -117,6 +119,7 @@ class AddAddressScreen extends React.Component {
             onPressBackButton={() => goBack()}
           />
         </HeaderWrapper>
+        <InactiveUserBanner userIsActive={userStore.active} />
         <KeyboardScrollView padding={0}>
           <MapView
             style={{ alignSelf: "stretch", height: 200 }}
