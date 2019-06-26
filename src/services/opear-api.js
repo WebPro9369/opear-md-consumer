@@ -91,6 +91,7 @@ export const getParent = (parentID, { successHandler, errorHandler } = {}) => {
     });
 };
 
+// eslint-disable-next-line prettier/prettier
 export const updateParent = (parentID, data, { successHandler, errorHandler } = {}) => {
   axios
     .patch(`/v1/parents/${parentID}`, data)
@@ -333,6 +334,19 @@ export const getVisit = (userID, visitID, { successHandler, errorHandler } = {})
     })
     .catch(err => {
       console.tron.log("Get visit error: ", err);
+      if (errorHandler) errorHandler(err);
+    });
+};
+
+export const updateVisit = (visitID, data, { successHandler, errorHandler } = {}) => {
+  axios
+    .patch(`/v1/visits/${visitID}`, data)
+    .then(res => {
+      console.tron.log("Update visit done: ", res);
+      if (successHandler) successHandler(res);
+    })
+    .catch(err => {
+      console.tron.log("Update visit error: ", err);
       if (errorHandler) errorHandler(err);
     });
 };

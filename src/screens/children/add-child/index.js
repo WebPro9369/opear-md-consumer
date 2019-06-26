@@ -1,6 +1,11 @@
+/* eslint-disable no-shadow */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable camelcase */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, ButtonGroup } from "react-native-elements";
+import { registerChild } from "@services/opear-api";
+import InactiveUserBanner from "@components/banner"
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -14,8 +19,6 @@ import {
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors } from "../../../utils/constants";
 import { getAge } from "@utils";
-
-import { registerChild } from "@services/opear-api";
 
 const avatarImages = [];
 avatarImages[0] = require("../../../../assets/images/Fox.png");
@@ -32,22 +35,6 @@ class AddChildScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
-    const {
-      store: {
-        userStore
-      },
-      gender,
-      firstName,
-      lastName,
-      birthDate,
-      birthHistory,
-      surgicalHistory,
-      currentMedications,
-      hospitalizations,
-      currentMedicalConditions,
-      allergies
-    } = props;
 
     this.state = {
       gender: "",
@@ -67,10 +54,6 @@ class AddChildScreen extends React.Component {
     this.updateIndex = this.updateIndex.bind(this);
   }
 
-  updateIndex(gender) {
-    this.setState({ gender });
-  }
-
   handleInputChange = name => value => {
     return this.setState({
       [name]: value
@@ -78,13 +61,9 @@ class AddChildScreen extends React.Component {
   };
 
   onSubmit = () => {
-
     const {
       navigation: { goBack },
-      store: {
-        childStore,
-        userStore
-      }
+      store: { userStore }
     } = this.props;
 
     const {
@@ -100,63 +79,86 @@ class AddChildScreen extends React.Component {
       allergies
     } = this.state;
 
-    var allergiesArray = [];
+    let allergiesArray = [];
 
-    if (allergies.indexOf(",") != -1) {
+    if (allergies.indexOf(",") > -1) {
       allergiesArray = allergies.split(", ");
-    }
-    else {
+    } else {
       allergiesArray = allergies;
     }
 
-    var genderMap = 0;
+    let genderMap = 0;
 
-    if (gender == 0) {
+    if (gender === 0) {
       genderMap = "Male";
-    } else if (gender == 1) {
+    } else if (gender === 1) {
       genderMap = "Female";
     } else {
       genderMap = "Non-Binary";
     }
 
-    const data =
-    {
-      child:
-      {
+    const data = {
+      child: {
         first_name: firstName,
         last_name: lastName,
         gender: genderMap,
         dob: birthDate,
-        allergies: allergiesArray
+        allergies: allergiesArray,
+        birth_history: birthHistory,
+        current_medications: currentMedications,
+        current_medical_conditions: currentMedicalConditions,
+        surgical_history: surgicalHistory,
+        hospitalizations
       }
-    }
+    };
 
-    var age = getAge(birthDate);
+    // const age = getAge(birthDate);
 
     const successHandler = response => {
-      const { id, first_name, last_name, gender, dob, allergies } = response.data;
+      const {
+        id,
+        // parent_id,
+        first_name,
+        last_name,
+        gender,
+        dob,
+        allergies,
+        birth_history,
+        current_medications,
+        current_medical_conditions,
+        surgical_history,
+        hospitalizations
+      } = response.data;
 
       const newChild = {
         id,
         age: getAge(dob),
         gender,
-        name: first_name + " " + last_name,
+        name: `${first_name} ${last_name}`,
         birthDate: new Date(dob),
-        allergies
+        allergies: (allergies || "").split(", "),
+        birthHistory: birth_history || "",
+        surgicalHistory: surgical_history || "",
+        currentMedications: current_medications || "",
+        currentMedicalConditions: current_medical_conditions || "",
+        hospitalizations: hospitalizations || ""
       };
 
       userStore.addChild(newChild);
-
       goBack();
     };
 
     registerChild(data, { successHandler });
+  };
 
+  updateIndex(gender) {
+    this.setState({ gender });
   }
 
   render() {
     const {
-      navigation: { goBack }
+      navigation: { goBack },
+      store: { userStore }
     } = this.props;
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
@@ -183,19 +185,14 @@ class AddChildScreen extends React.Component {
             onPressBackButton={() => goBack()}
           />
         </HeaderWrapper>
+        <InactiveUserBanner userIsActive={userStore.active} />
         <KeyboardScrollView>
           <ViewCentered>
             <Avatar
               rounded
               size={120}
               source={avatarImages[avatarNumber]}
-              showEditButton
-              editButton={{
-                iconStyle: {
-                  color: colors.WHITE
-                },
-                size: 24
-              }}
+              showEditButton={false}
             />
           </ViewCentered>
           <FormWrapper>
@@ -276,7 +273,9 @@ class AddChildScreen extends React.Component {
                 label="Current Medical Conditions"
                 value={currentMedicalConditions}
                 placeholder="Current Medical Conditions"
-                onChangeText={this.handleInputChange("currentMedicalConditions")}
+                onChangeText={this.handleInputChange(
+                  "currentMedicalConditions"
+                )}
               />
             </FormInputWrapper>
           </FormWrapper>

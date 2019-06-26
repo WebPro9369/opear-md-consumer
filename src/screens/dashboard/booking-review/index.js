@@ -5,7 +5,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import { inject, observer } from "mobx-react";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
@@ -31,16 +31,14 @@ class BookingReviewScreen extends React.Component {
 
     const {
       store: {
-        userStore: {
-          children,
-          addresses,
-          visitRequest
-        }
+        userStore: { children, addresses, visitRequest }
       }
     } = props;
 
-    const childName = children[getIndexByValue(children,visitRequest.pickedChild)].name;
-    const addressStreet = addresses[getIndexByValue(addresses,visitRequest.pickedAddress)].street;
+    const childName =
+      children[getIndexByValue(children, visitRequest.pickedChild)].name;
+    const addressStreet =
+      addresses[getIndexByValue(addresses, visitRequest.pickedAddress)].street;
 
     this.state = {
       name: childName,
@@ -52,11 +50,20 @@ class BookingReviewScreen extends React.Component {
     };
   }
 
-  goToDashboard = () => {
+  onSubmit = () => {
     const {
-      navigation: { navigate },
+      navigation: { navigate, getParam },
       store
     } = this.props;
+
+    const cardSelected = getParam("cardAdded", false);
+
+    if (!cardSelected) {
+      return Alert.alert(
+        "Missing Payment",
+        "Please select a valid payment method."
+      );
+    }
 
     store.providerStore.setAppointment(true);
     navigate("DashboardDefault");
@@ -112,7 +119,7 @@ class BookingReviewScreen extends React.Component {
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
             </ContentButton>
-            <ContentButton onPress={() => push("DashboardPickVisitAddress")}>
+            <ContentButton onPress={() => push("DashboardPickVisitAddress",{screenRef:"booking-review"})}>
               <FlexView>
                 <EvilIcons name="location" size={40} color={colors.BLACK60} />
                 <StyledText
@@ -125,7 +132,7 @@ class BookingReviewScreen extends React.Component {
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
             </ContentButton>
-            <ContentButton onPress={() => push("DashboardSelectDateTime")}>
+            <ContentButton onPress={() => push("DashboardSelectDateTime",{screenRef:"booking-review"})}>
               <FlexView>
                 <FontAwesome
                   name="calendar-check-o"
@@ -146,7 +153,7 @@ class BookingReviewScreen extends React.Component {
             </ContentButton>
             <FlexView>
               <View style={{ flex: 1, marginRight: 4 }}>
-                <ContentButton onPress={() => push("DashboardAddCard")}>
+                <ContentButton onPress={() => push("DashboardAddCard",{screenRef:"booking-review"})}>
                   <FlexView justifyContent="center">
                     <AntDesign
                       name="pluscircle"
@@ -183,10 +190,7 @@ class BookingReviewScreen extends React.Component {
             </View>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 24, marginBottom: 24 }}>
-            <ServiceButton
-              title="Find a provider"
-              onPress={this.goToDashboard}
-            />
+            <ServiceButton title="Find a provider" onPress={this.onSubmit} />
           </ContentWrapper>
         </KeyboardScrollView>
       </ContainerView>

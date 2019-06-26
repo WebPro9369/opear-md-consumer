@@ -95,7 +95,7 @@ class NewPwdScreen extends React.Component {
         style={{ backgroundColor: colors.LIGHTGREEN, height: "100%" }}
       >
         <NavHeader
-          title="Enter New Password"
+          title="Set New Password"
           size="medium"
           hasBackButton
           backButtonIcon={
@@ -130,7 +130,7 @@ class NewPwdScreen extends React.Component {
           </FormInputWrapper>
           <FormInputWrapper paddingBottom={6} style={{ marginBottom: 0 }}>
             <ServiceButton
-              title="Update Password"
+              title="Sign In"
               onPress={this.onSubmit}
               backgroundColor="#ffffff"
               color={colors.LIGHTGREEN}

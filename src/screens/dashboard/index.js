@@ -1,5 +1,7 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/order */
 import React from "react";
-import { FlatList, Image, TouchableOpacity } from "react-native";
+import { Alert, FlatList, Image, TouchableOpacity } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 
 import { StyledText } from "../../components/text";
@@ -12,8 +14,9 @@ import {
 } from "../../components/views";
 import { IllnessCard, ContentWrapper, MatchingMessageWrapper } from "./styles";
 import { colors } from "../../utils/constants";
-import { getChildren } from "@services/opear-api";
-import { getAge } from "@utils"
+import { getChildren, getAddresses } from "@services/opear-api";
+import { getAge } from "@utils";
+import InactiveUserBanner from "@components/banner";
 
 const imgRightArrow = require("../../../assets/images/Right_arrow.png");
 
@@ -28,13 +31,10 @@ class DashboardScreen extends React.Component {
     super(props);
 
     const {
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = props;
 
     this.state = {
-      // selectedIllness: null,
       userStore,
       illnessList: [
         { key: "1", string: "General", color: "#49AF67" },
@@ -44,26 +44,43 @@ class DashboardScreen extends React.Component {
       ]
     };
 
-    const successHandler = res => {
+    const getChildrenSuccessHandler = res => {
+      const childAdjustedArray = res.data.map(row => ({
+        id: row.id,
+        age: getAge(row.dob),
+        gender: row.gender || "",
+        name: `${row.first_name} ${row.last_name}`,
+        allergies: Array.isArray(row.allergies)
+          ? row.allergies
+          : [row.allergies || ""],
+        birthDate: new Date(row.dob),
+        birthHistory: row.birth_history || "",
+        surgicalHistory: row.surgical_history || "",
+        currentMedications: row.current_medications || "",
+        hospitalizations: row.hospitalizations || "",
+        currentMedicalConditions: row.current_medical_conditions || ""
+      }));
 
-        var childAdjustedArray = res.data.map(
-          function(row)
-        {
-          return {
-          id: row.id,
-          age: getAge(row.dob),
-          gender: row.gender,
-          name: row.first_name+" "+row.last_name,
-          allergies: row.allergies,
-          birthDate: new Date(row.dob)};
-        });
+      // console.tron.log("Children list: ", childAdjustedArray);
+      userStore.setChildren(childAdjustedArray);
+    };
 
-        userStore.setChildren(childAdjustedArray);
+    getChildren({ successHandler: getChildrenSuccessHandler });
 
-      };
+    const getAddressesSuccessHandler = res => {
+      const addressAdjustedArray = res.data.map(row => ({
+        id: row.id,
+        name: row.name || "",
+        street: row.street || "",
+        city: row.city || "",
+        state: row.state || "",
+        zip: row.zip || ""
+      }));
 
-      getChildren( { successHandler });
+      userStore.setAddresses(addressAdjustedArray);
+    };
 
+    getAddresses({ successHandler: getAddressesSuccessHandler });
   }
 
   render() {
@@ -94,7 +111,11 @@ class DashboardScreen extends React.Component {
           </StyledText>
         </ContentWrapper>
 
-        {!outstandingAppointment && !readyProviders && appointment && userStore.active ? (
+        <InactiveUserBanner userIsActive={userStore.active} />
+        {!outstandingAppointment &&
+        !readyProviders &&
+        appointment &&
+        userStore.active ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
               We are currently matching you with your doctor, be in touch soon!
@@ -115,7 +136,7 @@ class DashboardScreen extends React.Component {
         ) : null}
         {outstandingAppointment && !providerEnRoute && userStore.active ? (
           /*TODO: swap hardcoded visit id when logic is*/
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:3})}>
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:2})}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>
@@ -143,11 +164,17 @@ class DashboardScreen extends React.Component {
                 renderItem={({ item }) => (
                   <IllnessCard
                     bgColor={item.color}
-                    onPress={() =>
-                      navigate("DashboardSelectSymptoms", {
-                        illness: item.string
-                      })
-                    }
+                    onPress={() => {
+                      if (userStore.active) {
+                        navigate("DashboardSelectSymptoms", {
+                          illness: item.string
+                        });
+                      } else {
+                        Alert.alert(
+                          "Unavailable",
+                          "We're currently not in your area. Please check back later");
+                      }
+                    }}
                   >
                     <StyledText
                       fontSize={16}
