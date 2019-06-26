@@ -1,6 +1,8 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import InactiveUserBanner from "@components/banner";
+import { updateParent } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -8,17 +10,8 @@ import {
   KeyboardAvoidingView,
   FormInputView
 } from "../../../components/views/keyboard-view";
-import {
-  ContainerView,
-  HeaderWrapper,
-  FlexView,
-  FormWrapper
-} from "../../../components/views";
-import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import InactiveUserBanner from "@components/banner"
-
+import { FlexView, FormWrapper } from "../../../components/views";
 import { colors } from "../../../utils/constants";
-import { updateParent } from "@services/opear-api"
 
 const { LIGHTGREEN } = colors;
 
