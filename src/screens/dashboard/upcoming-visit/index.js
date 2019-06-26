@@ -13,7 +13,7 @@ import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
 import { getVisit, updateVisit } from "@services/opear-api";
 import { ServiceButton } from "@components/service-button";
-import { TwilioService } from "@services";
+import TwilioVoice from "react-native-twilio-programmable-voice";
 
 const { BLACK60 } = colors;
 
@@ -102,8 +102,7 @@ class VisitBookedScreen extends React.Component {
         phone
       }
     } = this.state;
-
-    TwilioService.makeCall(null, null, phone);
+    TwilioVoice.connect({ To: phone });
   }
 
   render() {
