@@ -1,10 +1,10 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
+import { updateParent } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
 import { FormWrapper } from "../../../components/views";
-import { updateParent } from "@services/opear-api";
 import {
   KeyboardAvoidingView,
   FormInputView
