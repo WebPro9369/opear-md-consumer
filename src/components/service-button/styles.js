@@ -7,19 +7,22 @@ export const Wrapper = styled.View`
 `;
 
 export const ServiceTouchableButtonWrapper = styled.TouchableOpacity`
-  background-color: rgb(35, 140, 229);
+  background-color: ${props =>
+    props.grey ? "transparent" : props.backgroundColor || colors.LIGHTGREEN};
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   padding: 13px;
   border-radius: 5px;
+  border-width: 1px;
+  border-color: ${props =>
+    props.grey ? colors.BLACK38 : props.borderColor || colors.LIGHTGREEN};
 `;
 
 export const ServiceText = styled.Text`
-  color: ${colors.WHITE};
+  color: ${props => props.color || colors.WHITE};
   font-family: "FlamaMedium";
   font-size: 20px;
-  line-height: 30px;
   text-align: center;
 `;
