@@ -3,7 +3,6 @@ package com.opear;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.hoxfon.react.RNTwilioVoice.TwilioVoicePackage;
 import com.oblador.keychain.KeychainPackage;
 import com.gettipsi.stripe.StripeReactPackage;
 import com.rnfingerprint.FingerprintAuthPackage;
@@ -33,7 +32,6 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new TwilioVoicePackage(),
             new KeychainPackage(),
             new StripeReactPackage(),
             new FingerprintAuthPackage(),

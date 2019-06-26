@@ -138,7 +138,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-twilio-programmable-voice')
     implementation project(':react-native-keychain')
     implementation project(':tipsi-stripe')
     implementation project(':react-native-touch-id')
