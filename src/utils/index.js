@@ -15,6 +15,7 @@ export const userFromResult = (res, userStore) => {
     name,
     email,
     phone,
+    active,
     // payment_accounts,
     // birthday,
     zip
@@ -27,6 +28,7 @@ export const userFromResult = (res, userStore) => {
     .setName(name)
     .setEmail(email)
     .setPhone(phone)
+    .setActive(active)
     // .setBirthday(dob)
     // .setPaymentAccounts(payment_accounts)
     .setZip(zip);
