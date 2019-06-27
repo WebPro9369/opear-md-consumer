@@ -52,7 +52,7 @@ class AccountScreen extends React.Component {
     } = this.props;
 
     removeAuthentication();
-    navigate("AccountSignIn");
+    navigate("Authenticating");
   };
 
   render() {
