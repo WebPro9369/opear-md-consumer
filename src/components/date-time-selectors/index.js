@@ -7,6 +7,7 @@ import {
   TimeSelectorWrapper,
   ConfirmButton
 } from "./styles";
+import { formatTimeStr } from "../../utils/helpers";
 
 export const DateCircle = ({ day, date, selected, ...rest }) => (
   <DateCircleWrapper selected={selected} {...rest}>
@@ -32,16 +33,6 @@ DateCircle.propTypes = {
   day: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   selected: PropTypes.bool.isRequired
-};
-
-const formatTimeStr = time => {
-  const hour = parseInt(time, 10);
-  const min = time - hour;
-  const timeStr =
-    hour >= 12
-      ? `${hour - 12 || 12}${min === 0.5 ? ":30" : ""}pm`
-      : `${hour || 12}${min === 0.5 ? ":30" : ""}am`;
-  return timeStr;
 };
 
 export const TimeSelector = ({ start, end, selected, onConfirm, ...rest }) => {
