@@ -118,7 +118,7 @@ class DashboardScreen extends React.Component {
         userStore.active ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
-              We are currently matching you with your doctor, be in touch soon!
+              We are currently matching you with your care provider, be in touch soon!
             </StyledText>
           </MatchingMessageWrapper>
         ) : null}
@@ -127,7 +127,7 @@ class DashboardScreen extends React.Component {
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
                 <StyledText fontSize={16} lineHeight={24}>
-                  Your doctor recommendations are ready!
+                  Your care provider recommendations are ready!
                 </StyledText>
                 <Image source={imgRightArrow} width={25} />
               </FlexView>
@@ -140,7 +140,7 @@ class DashboardScreen extends React.Component {
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>
-                  Your doctor is on the way! Review details
+                  Your care provider is on the way! Review details
                 </StyledText>
                 <Image source={imgRightArrow} width={25} />
               </FlexView>
