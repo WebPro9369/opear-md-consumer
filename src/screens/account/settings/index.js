@@ -17,8 +17,8 @@ import {
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
 
-const { GREEN, MIDGREY } = colors;
-const imgDoctor = require("../../../../assets/images/Doctor.png");
+const { MIDGREY } = colors;
+const imgAvatar = require("../../../../assets/images/Placeholder_Photo.png");
 
 @inject("store")
 @observer
@@ -33,8 +33,7 @@ class SettingsScreen extends React.Component {
       store: { userStore }
     } = this.props;
 
-    const { name, addresses, email, phone } = userStore;
-    const address = addresses.length ? addresses[addresses.length - 1] : {};
+    const { name, address, email, phone } = userStore;
 
     return (
       <ContainerView>
@@ -52,15 +51,8 @@ class SettingsScreen extends React.Component {
             <Avatar
               rounded
               size={120}
-              source={imgDoctor}
-              showEditButton
-              editButton={{
-                containerStyle: {
-                  backgroundColor: GREEN,
-                  borderRadius: 12
-                },
-                size: 24
-              }}
+              source={imgAvatar}
+              showEditButton={false}
             />
           </ViewCentered>
           <View>

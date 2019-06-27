@@ -35,6 +35,7 @@ export const UserStore = types
     acceptedPrivacy: types.boolean,
     acceptedTermsOfService: types.boolean,
     payment_accounts: types.array(PaymentAccountStore),
+    notificationToken: types.string,
     paymentMethods: types.array(
       types.model({
         id: types.number,
@@ -94,7 +95,7 @@ export const UserStore = types
       street: "",
       city: "",
       state: "",
-      zip_code: "",
+      zip: "",
       apartment_number: "",
       latitude: "",
       longitude: ""
@@ -208,6 +209,13 @@ export const UserStore = types
       self.addresses.replace(value);
       return self;
     },
+    setAddress(value, index) {
+      if (!(index > -1)) {
+        index = self.addresses.length - 1;
+      }
+      self.addresses[index] = value;
+      return self;
+    },
     setChildren(value) {
       self.children.replace(value);
       return self;
@@ -223,5 +231,9 @@ export const UserStore = types
     addPaymentAccount(value) {
       self.payment_accounts.push(value);
       return self;
-    }
+    },
+    setNotificationToken(value) {
+      self.notificationToken = value;
+      return self;
+    },
   }));

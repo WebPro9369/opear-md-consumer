@@ -2,7 +2,9 @@ import Axios from "axios";
 
 export const API_SETTINGS = {
   apiKey: null,
-  endpoint: "https://api.opear.com" //'http://localhost:3000/' // 'http://ec2-18-191-228-16.us-east-2.compute.amazonaws.com',
+  endpoint: "https://api.opear.com"
+  // 'http://localhost:3000/'
+  // 'http://ec2-18-191-228-16.us-east-2.compute.amazonaws.com',
 };
 
 const axios = Axios.create({
@@ -22,7 +24,11 @@ const axios = Axios.create({
 
 /* Visit Requests */
 
-export const getVisitRequest = (visitID, visitRequestID, { successHandler, errorHandler } = {}) => {
+export const getVisitRequest = (
+  visitID,
+  visitRequestID,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .get(`/v1/visits/${visitID}/visit_requests/${visitRequestID}`)
     .then(res => {
@@ -35,8 +41,11 @@ export const getVisitRequest = (visitID, visitRequestID, { successHandler, error
     });
 };
 
-export const getVisitRequests = (visitID, { past, successHandler, errorHandler } = {}) => {
-  const url = `/v1/visits/${visitID}/visit_requests` + (past ? '?past=true' : '');
+export const getVisitRequests = (
+  visitID,
+  { past, successHandler, errorHandler } = {}
+) => {
+  const url = `/v1/visits/${visitID}/visit_requests${past ? "?past=true" : ""}`;
 
   axios
     .get(url)
@@ -50,9 +59,14 @@ export const getVisitRequests = (visitID, { past, successHandler, errorHandler }
     });
 };
 
-export const updateVisitRequests = (visitID, visitRequestID, data, { successHandler, errorHandler } = {}) => {
+export const updateVisitRequests = (
+  visitID,
+  visitRequestID,
+  data,
+  { successHandler, errorHandler } = {}
+) => {
   axios
-    .patch(`/v1/visits/${visitID}/visit_requests/${userID}`, data)
+    .patch(`/v1/visits/${visitID}/visit_requests/${visitRequestID}`, data)
     .then(res => {
       console.tron.log("Visit requests update done: ", res);
       if (successHandler) successHandler(res);
@@ -92,7 +106,11 @@ export const getParent = (parentID, { successHandler, errorHandler } = {}) => {
 };
 
 // eslint-disable-next-line prettier/prettier
-export const updateParent = (parentID, data, { successHandler, errorHandler } = {}) => {
+export const updateParent = (
+  parentID,
+  data,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .patch(`/v1/parents/${parentID}`, data)
     .then(res => {
@@ -146,7 +164,11 @@ export const getChildren = ({ successHandler, errorHandler } = {}) => {
     });
 };
 
-export const updateChild = (childID, data, { successHandler, errorHandler } = {}) => {
+export const updateChild = (
+  childID,
+  data,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .patch(`/v1/children/${childID}`, data)
     .then(res => {
@@ -161,7 +183,10 @@ export const updateChild = (childID, data, { successHandler, errorHandler } = {}
 
 /* Addresses */
 
-export const registerAddress = (data, { successHandler, errorHandler } = {}) => {
+export const registerAddress = (
+  data,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .post("/v1/addresses", data)
     .then(res => {
@@ -174,7 +199,10 @@ export const registerAddress = (data, { successHandler, errorHandler } = {}) => 
     });
 };
 
-export const getAddress = (addressID, { successHandler, errorHandler } = {}) => {
+export const getAddress = (
+  addressID,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .get(`/v1/addresses/${addressID}`)
     .then(res => {
@@ -200,7 +228,11 @@ export const getAddresses = ({ successHandler, errorHandler } = {}) => {
     });
 };
 
-export const updateAddress = (addressID, data, { successHandler, errorHandler } = {}) => {
+export const updateAddress = (
+  addressID,
+  data,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .patch(`/v1/addresses/${addressID}`, data)
     .then(res => {
@@ -254,7 +286,11 @@ export const getReviews = ({ successHandler, errorHandler } = {}) => {
     });
 };
 
-export const updateReview = (reviewID, data, { successHandler, errorHandler } = {}) => {
+export const updateReview = (
+  reviewID,
+  data,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .patch(`/v1/reviews/${reviewID}`, data)
     .then(res => {
@@ -269,7 +305,10 @@ export const updateReview = (reviewID, data, { successHandler, errorHandler } = 
 
 /* Care Providers */
 
-export const registerCareProvider = (data, { successHandler, errorHandler } = {}) => {
+export const registerCareProvider = (
+  data,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .post("/v1/care_providers", data)
     .then(res => {
@@ -282,7 +321,10 @@ export const registerCareProvider = (data, { successHandler, errorHandler } = {}
     });
 };
 
-export const getCareProvider = (userID, { successHandler, errorHandler } = {}) => {
+export const getCareProvider = (
+  userID,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .get(`/v1/care_providers/${userID}`)
     .then(res => {
@@ -295,7 +337,11 @@ export const getCareProvider = (userID, { successHandler, errorHandler } = {}) =
     });
 };
 
-export const updateCareProvider = (userID, data, { successHandler, errorHandler } = {}) => {
+export const updateCareProvider = (
+  userID,
+  data,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .patch(`/v1/care_providers/${userID}`, data)
     .then(res => {
@@ -310,8 +356,11 @@ export const updateCareProvider = (userID, data, { successHandler, errorHandler 
 
 /* Visits */
 
-export const getVisits = ({ past, successHandler, errorHandler } = {}) => {
-  const url = `/v1/visits` + (past ? '?past=true' : '');
+export const getVisits = (
+  userID,
+  { past, successHandler, errorHandler } = {}
+) => {
+  const url = `/v1/visits${past ? "?past=true" : ""}`;
 
   axios
     .get(url)
@@ -325,7 +374,11 @@ export const getVisits = ({ past, successHandler, errorHandler } = {}) => {
     });
 };
 
-export const getVisit = (userID, visitID, { successHandler, errorHandler } = {}) => {
+export const getVisit = (
+  userID,
+  visitID,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .get(`/v1/visits/${visitID}`)
     .then(res => {
@@ -338,7 +391,11 @@ export const getVisit = (userID, visitID, { successHandler, errorHandler } = {})
     });
 };
 
-export const updateVisit = (visitID, data, { successHandler, errorHandler } = {}) => {
+export const updateVisit = (
+  visitID,
+  data,
+  { successHandler, errorHandler } = {}
+) => {
   axios
     .patch(`/v1/visits/${visitID}`, data)
     .then(res => {
@@ -353,7 +410,10 @@ export const updateVisit = (visitID, data, { successHandler, errorHandler } = {}
 
 /* Availabilities */
 
-export const getAvailabilities = (userID, { successHandler, errorHandler } = {}) => {
+export const getAvailabilities = (
+  userID,
+  { successHandler, errorHandler } = {}
+) => {
   const url = `/v1/care_providers/${userID}/availability`;
 
   axios
@@ -368,7 +428,11 @@ export const getAvailabilities = (userID, { successHandler, errorHandler } = {})
     });
 };
 
-export const updateAvailabilities = (userID, data, { successHandler, errorHandler } = {}) => {
+export const updateAvailabilities = (
+  userID,
+  data,
+  { successHandler, errorHandler } = {}
+) => {
   const url = `/v1/care_providers/${userID}/availability`;
 
   axios
