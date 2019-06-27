@@ -7,7 +7,7 @@ import { StyledText } from "../../components/text";
 import { View, FlexView } from "../../components/views";
 import { ScrollView } from "../../components/views/scroll-view";
 import { ChildCard } from "../../components/cards";
-import { colors } from "../../utils/constants";
+import { colors, avatarImages } from "../../utils/constants";
 import InactiveUserBanner from "@components/banner"
 
 @inject("store")
@@ -64,7 +64,7 @@ class ManageChildrenScreen extends React.Component {
                 key={child.id}
                 name={child.name}
                 age={child.age}
-                avatarImg={eval(child.avatarImg)}
+                avatarImg={avatarImages[child.avatarImageIndex]}
                 onPress={() => push("ChildrenEditChild", { childID: child.id })}
               />
             ))}

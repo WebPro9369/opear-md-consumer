@@ -27,6 +27,7 @@ class SelectDateTimeScreen extends React.Component {
         key: `${i + 1}`,
         day: luxonDate.weekdayShort,
         date: luxonDate.toFormat("LLL d"),
+        year: luxonDate.toFormat("yyyy"),
         selected: false
       });
       luxonDate = luxonDate.plus({ days: 1 });
@@ -60,7 +61,7 @@ class SelectDateTimeScreen extends React.Component {
       return navigate("DashboardBookingReview");
     }
 
-    navigate("DashboardBookingReview");
+    return navigate("DashboardBookingReview");
   };
 
   render() {
@@ -129,7 +130,7 @@ class SelectDateTimeScreen extends React.Component {
                     const newDates = dates.map(date => {
                       if (item.key === date.key) {
                         this.setState({
-                          selectedDate: date.date
+                          selectedDate: `${date.date} ${date.year}`
                         });
                         return {
                           ...date,

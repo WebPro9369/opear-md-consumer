@@ -31,7 +31,7 @@ class PastVisitsScreen extends React.Component {
       store: { userStore }
     } = props;
 
-    getVisits(userStore.id, {
+    getVisits({
       past: true,
       successHandler: res => {
         const visits = res.data;

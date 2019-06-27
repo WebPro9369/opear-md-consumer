@@ -19,14 +19,8 @@ import {
   ViewCentered
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import { colors } from "../../../utils/constants";
+import { colors, avatarImages } from "../../../utils/constants";
 import { getAge } from "@utils";
-
-const avatarImages = [];
-avatarImages[0] = require("../../../../assets/images/Fox.png");
-avatarImages[1] = require("../../../../assets/images/chicken.png");
-avatarImages[2] = require("../../../../assets/images/Dog.png");
-avatarImages[3] = require("../../../../assets/images/Tiger.png");
 
 @inject("store")
 @observer

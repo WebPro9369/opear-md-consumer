@@ -35,6 +35,13 @@ const colors = {
   VIVIDORANGE: "#FC4214"
 };
 
+const avatarImages = [
+  require("../../assets/images/Fox.png"),
+  require("../../assets/images/chicken.png"),
+  require("../../assets/images/Dog.png"),
+  require("../../assets/images/Tiger.png")
+];
+
 const MAX_STARS = 5;
 
-export { DEVICE_WIDTH, DEVICE_HEIGHT, MAX_STARS, colors };
+export { DEVICE_WIDTH, DEVICE_HEIGHT, MAX_STARS, colors, avatarImages };

@@ -59,8 +59,8 @@ class AuthLoadingScreen extends Component {
       wasAuthenticated
     } = await getAuthentication();
 
-    if (!isAuthenticated && wasAuthenticated) return navigate("AccountSignIn");
-    if (!isAuthenticated) return navigate("AccountSignIn");
+    if (!isAuthenticated && wasAuthenticated) return navigate("Authenticating");
+    if (!isAuthenticated) return navigate("Authenticating");
 
     userStore.setAuthentication({ id, apiKey });
 
@@ -71,7 +71,7 @@ class AuthLoadingScreen extends Component {
 
     const errorHandler = err => {
       if (err.response.status === 401) {
-        navigate("AccountSignIn");
+        navigate("Authenticating");
       }
     };
 

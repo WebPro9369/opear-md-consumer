@@ -31,7 +31,7 @@ class UpcomingVisitsScreen extends React.Component {
       visits: []
     };
 
-    getVisits(userStore.id, {
+    getVisits({
       successHandler: res => {
         const visits = res.data;
 

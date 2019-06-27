@@ -24,3 +24,13 @@ export function getFormattedDate(date) {
 
   return `${month}/${day}/${year}`;
 }
+
+export const formatTimeStr = time => {
+  const hour = parseInt(time, 10);
+  const min = time - hour;
+  const timeStr =
+    hour >= 12
+      ? `${hour - 12 || 12}${min === 0.5 ? ":30" : ""}pm`
+      : `${hour || 12}${min === 0.5 ? ":30" : ""}am`;
+  return timeStr;
+};
