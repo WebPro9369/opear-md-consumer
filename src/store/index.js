@@ -13,8 +13,18 @@ const MainStore = types.model("MainStore", {
   providerStore: types.optional(ProviderStore, {
     appointment: false,
     readyProviders: false,
-    outstandingAppointment: true,
+    outstandingAppointment: false,
     providerEnRoute: false
+  }),
+  cardStore: types.optional(CardStore, {
+    cardInfo: {
+      cardNumber: "",
+      expiryYear: 0,
+      expiryMonth: 0,
+      cvv: "",
+      cardType: "",
+      fullName: ""
+    }
   }),
   userStore: types.optional(UserStore, {
     id: 112,
@@ -34,22 +44,13 @@ const MainStore = types.model("MainStore", {
     }],
     visitRequest: {
       symptoms: [""],
+      reason: "",
       pickedChild: 1,
       pickedAddress: 1,
       date: "",
       time: 0,
       cost: 0
     },
-    cardStore: types.optional(CardStore, {
-      cardInfo: {
-        cardNumber: "",
-        expiryYear: 0,
-        expiryMonth: 0,
-        cvv: "",
-        cardType: "",
-        fullName: ""
-      }
-    }),
     cardInfo: {
       cardNumber: "",
       expiryYear: 0,

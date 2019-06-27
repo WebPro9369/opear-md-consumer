@@ -52,6 +52,8 @@ class SelectSymptomsScreen extends React.Component {
       }
     } = this.props;
 
+    const illness = navigation.getParam("illness");
+
     const { checkListData } = this.state;
 
     function removeBool(arr, boolState) {
@@ -69,6 +71,7 @@ class SelectSymptomsScreen extends React.Component {
     symptoms = symptoms.map(value => value.string);
 
     userStore.setVisitRequestSymptoms(symptoms);
+    userStore.setVisitRequestReason(illness);
 
     console.tron.log(userStore);
 

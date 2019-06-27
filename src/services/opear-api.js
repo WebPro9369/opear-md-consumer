@@ -351,6 +351,19 @@ export const updateVisit = (visitID, data, { successHandler, errorHandler } = {}
     });
 };
 
+export const registerVisit = (data, { successHandler, errorHandler } = {}) => {
+  axios
+    .post("/v1/visits", data)
+    .then(res => {
+      console.tron.log("Visit registration done: ", res);
+      if (successHandler) successHandler(res);
+    })
+    .catch(err => {
+      console.tron.log("Visit registration error: ", err);
+      if (errorHandler) errorHandler(err);
+    });
+};
+
 /* Availabilities */
 
 export const getAvailabilities = (userID, { successHandler, errorHandler } = {}) => {
