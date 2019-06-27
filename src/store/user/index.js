@@ -228,5 +228,5 @@ export const UserStore = types
     setNotificationToken(value) {
       self.notificationToken = value;
       return self;
-		},
+    },
   }));
