@@ -106,7 +106,7 @@ class BookingReviewScreen extends React.Component {
             </StyledText>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 32 }}>
-            <ContentButton onPress={() => push("DashboardPickChild")}>
+            <ContentButton onPress={() => push("DashboardPickChild",{screenRef:"booking-review"})}>
               <FlexView>
                 <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
