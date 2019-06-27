@@ -29,6 +29,7 @@ const MainStore = types.model("MainStore", {
     acceptedPrivacy: false,
     phone: "",
     payment_accounts: [],
+    notificationToken: '',
     paymentMethods: [{
       id:0, type:"Card", cardNumber:19990, expiryYear:10, expiryMonth:11, cvv:320, fullName:"Card Name"
     }],

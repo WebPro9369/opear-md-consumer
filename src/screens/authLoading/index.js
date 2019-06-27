@@ -32,7 +32,7 @@ class AuthLoadingScreen extends Component {
     } = await getAuthentication();
 
     if (!isAuthenticated && wasAuthenticated) return navigate("AccountSignIn");
-    if (!isAuthenticated) return navigate("Onboarding");
+    if (!isAuthenticated) return navigate("AccountSignIn");
 
     userStore.setAuthentication({ id, apiKey });
 
