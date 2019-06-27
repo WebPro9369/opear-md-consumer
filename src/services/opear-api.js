@@ -310,7 +310,7 @@ export const updateCareProvider = (userID, data, { successHandler, errorHandler 
 
 /* Visits */
 
-export const getVisits = (userID, { past, successHandler, errorHandler } = {}) => {
+export const getVisits = ({ past, successHandler, errorHandler } = {}) => {
   const url = `/v1/visits` + (past ? '?past=true' : '');
 
   axios
