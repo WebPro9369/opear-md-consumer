@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-unresolved */
 import React from "react";
@@ -68,7 +69,11 @@ class UpcomingVisitsScreen extends React.Component {
         ).toLocaleDateString("en-US", timeOptions);
         formattedTime = formattedTime.split(", ");
 
-        const { child, reason, address, id } = visitOnDate;
+        const { child, reason, address, id, state } = visitOnDate;
+
+        if (state !== "scheduled") {
+          continue;
+        }
 
         visitsDisplayStack.push(
           <View style={{ marginBottom: 9 }}>
