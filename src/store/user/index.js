@@ -77,6 +77,7 @@ export const UserStore = types
     ),
     visitRequest: types.model({
       symptoms: types.array(types.string, ""),
+      reason: types.string,
       pickedChild: types.number,
       pickedAddress: types.number,
       date: types.string,
@@ -175,6 +176,10 @@ export const UserStore = types
     setVisitRequestSymptoms(value) {
       self.visitRequest.symptoms.replace(value);
       return self;
+    },
+    setVisitRequestReason(value) {
+        self.visitRequestReason = value;
+        return self;
     },
     setVisitRequestPickedChild(value) {
       self.visitRequest.pickedChild = value;

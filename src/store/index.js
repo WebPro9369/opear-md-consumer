@@ -16,6 +16,16 @@ const MainStore = types.model("MainStore", {
     outstandingAppointment: false,
     providerEnRoute: false
   }),
+  cardStore: types.optional(CardStore, {
+    cardInfo: {
+      cardNumber: "",
+      expiryYear: 0,
+      expiryMonth: 0,
+      cvv: "",
+      cardType: "",
+      fullName: ""
+    }
+  }),
   userStore: types.optional(UserStore, {
     id: 112,
     apiKey: "",
@@ -43,6 +53,7 @@ const MainStore = types.model("MainStore", {
     ],
     visitRequest: {
       symptoms: [""],
+      reason: "",
       pickedChild: 1,
       pickedAddress: 1,
       date: "",

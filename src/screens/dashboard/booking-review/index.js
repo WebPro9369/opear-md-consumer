@@ -18,6 +18,7 @@ import { ContentButton } from "../../account/settings/styles";
 import { ContentWrapper, AdditionalInput } from "./styles";
 import { colors } from "../../../utils/constants";
 import { getIndexByValue } from "@utils";
+import { registerVisit } from "@services/opear-api";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -48,15 +49,31 @@ class BookingReviewScreen extends React.Component {
       date: visitRequest.date,
       time: visitRequest.time,
       // card: null,
-      price: visitRequest.cost
+      price: visitRequest.cost,
+      parentNotes: ""
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
+
+  handleInputChange = name => value => {
+    return this.setState({
+      [name]: value
+    });
+  };
 
   onSubmit = () => {
     const {
       navigation: { navigate, getParam },
-      store
+      store: {providerStore,
+        userStore: {
+          visitRequest
+        }}
     } = this.props;
+
+    const {
+      parentNotes
+    } = this.state;
 
     const cardSelected = getParam("cardAdded", false);
 
@@ -67,15 +84,32 @@ class BookingReviewScreen extends React.Component {
       );
     }
 
-    store.providerStore.setAppointment(true);
-    return navigate("DashboardDefault");
+    const data =
+    {
+      visit: {
+        child_id: visitRequest.pickedChild,
+        address_id: visitRequest.pickedAddress,
+        reason: visitRequest.reason,
+        symptoms: visitRequest.symptoms,
+        appointment_time: visitRequest.date + ", " + visitRequest.time,
+        parent_notes: parentNotes,
+        payment_amount: visitRequest.cost
+      }
+    };
+
+    successHandler = res => {
+      providerStore.setAppointment(true);
+      navigate("DashboardDefault");
+    }
+
+    registerVisit(data, {successHandler});
   };
 
   render() {
     const {
       navigation: { goBack, push }
     } = this.props;
-    const { name, address, date, time, price } = this.state;
+    const { name, address, date, time, price, parentNotes } = this.state;
 
     return (
       <ContainerView padding={0}>
@@ -202,6 +236,8 @@ class BookingReviewScreen extends React.Component {
               <AdditionalInput
                 multiline
                 placeholder="Enter additional notes..."
+                value={parentNotes}
+                onChangeText={this.handleInputChange("parentNotes")}
               />
             </View>
           </ContentWrapper>
