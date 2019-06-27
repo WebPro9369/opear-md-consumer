@@ -27,34 +27,15 @@ class SettingsScreen extends React.Component {
     store: PropTypes.observableObject.isRequired
   };
 
-  constructor(props) {
-    super(props);
-
-    const {
-      store: {
-        userStore: {
-          name,
-          address: { street },
-          email,
-          phone
-        }
-      }
-    } = props;
-
-    this.state = {
-      name,
-      street,
-      email,
-      phone
-    };
-  }
-
   render() {
     const {
       navigation: { navigate },
       store: { userStore }
     } = this.props;
-    const { name, street, email, phone } = this.state;
+
+    const { name, addresses, email, phone } = userStore;
+    const address = addresses.length ? addresses[addresses.length - 1] : {};
+
     return (
       <ContainerView>
         <HeaderWrapper>
@@ -90,7 +71,7 @@ class SettingsScreen extends React.Component {
             <View style={{ padding: 16 }}>
               <InputButton
                 label="Address"
-                value={street}
+                value={address.street}
                 icon={
                   <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }

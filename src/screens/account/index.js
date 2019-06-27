@@ -2,7 +2,7 @@
 import React from "react";
 import { Linking } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
-import { Avatar, Badge } from "react-native-elements";
+import { Avatar } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { removeAuthentication } from "@services/authentication";
 import InactiveUserBanner from "@components/banner";
@@ -32,14 +32,13 @@ class AccountScreen extends React.Component {
 
     const {
       store: {
-        userStore: { name, email, children }
+        userStore: { name, email }
       }
     } = props;
 
     this.state = {
       name,
-      email,
-      badges: children.map(value => value.name)
+      email
     };
   }
 
@@ -61,7 +60,7 @@ class AccountScreen extends React.Component {
       navigation: { navigate },
       store: { userStore }
     } = this.props;
-    const { name, email, badges } = this.state;
+    const { name, email } = this.state;
     return (
       <ScrollView padding={16}>
         <NavHeader title="Account" size="medium" hasBackButton={false} />
@@ -76,16 +75,6 @@ class AccountScreen extends React.Component {
               </StyledText>
             </View>
           </FlexView>
-          <FlexViewSpread style={{ paddingTop: 30 }}>
-            {badges.map(badge => (
-              <Badge
-                key={badge}
-                value={badge}
-                textStyle={styles.badgeText}
-                badgeStyle={styles.badge}
-              />
-            ))}
-          </FlexViewSpread>
         </View>
         <View style={{ paddingTop: 16, paddingBottom: 16 }}>
           <ListTouchableButtonWrapper

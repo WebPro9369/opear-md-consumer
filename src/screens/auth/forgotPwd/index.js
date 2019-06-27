@@ -17,7 +17,7 @@ class ForgotPwdScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "reo@matterproductstudio.com"
+      email: ""
     };
   }
 
