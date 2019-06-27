@@ -71,7 +71,8 @@ export const UserStore = types
         currentMedications: types.optional(types.string, ""),
         hospitalizations: types.optional(types.string, ""),
         currentMedicalConditions: types.optional(types.string, ""),
-        allergies: types.array(types.string, "")
+        allergies: types.array(types.string, ""),
+        avatarImageIndex: types.number
       })
     ),
     visitRequest: types.model({
