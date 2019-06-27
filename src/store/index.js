@@ -29,6 +29,7 @@ const MainStore = types.model("MainStore", {
     acceptedPrivacy: false,
     phone: "",
     payment_accounts: [],
+    notificationToken: '',
     paymentMethods: [
       {
         id: 0,

@@ -35,6 +35,7 @@ export const UserStore = types
     acceptedPrivacy: types.boolean,
     acceptedTermsOfService: types.boolean,
     payment_accounts: types.array(PaymentAccountStore),
+    notificationToken: types.string,
     paymentMethods: types.array(
       types.model({
         id: types.number,
@@ -230,5 +231,9 @@ export const UserStore = types
     addPaymentAccount(value) {
       self.payment_accounts.push(value);
       return self;
-    }
+    },
+    setNotificationToken(value) {
+      self.notificationToken = value;
+      return self;
+    },
   }));
