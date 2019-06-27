@@ -58,7 +58,8 @@ class DashboardScreen extends React.Component {
         surgicalHistory: row.surgical_history || "",
         currentMedications: row.current_medications || "",
         hospitalizations: row.hospitalizations || "",
-        currentMedicalConditions: row.current_medical_conditions || ""
+        currentMedicalConditions: row.current_medical_conditions || "",
+        avatarImageIndex: row.avatar_image_index || 0
       }));
 
       // console.tron.log("Children list: ", childAdjustedArray);
