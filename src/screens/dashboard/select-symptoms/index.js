@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { FlatList, View } from "react-native";
-import { StyledText } from "../../../components/text";
+import { StyledText, StyledTextInput, FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView } from "../../../components/views";
 import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
@@ -37,12 +37,19 @@ class SelectSymptomsScreen extends React.Component {
         { key: "10", string: "Vomiting", checked: false },
         { key: "11", string: "Diarrhea", checked: false },
         { key: "12", string: "Eye pain/discharge", checked: false },
-        { key: "13", string: "Rash", checked: false },
-        { key: "14", type: "input", string: "Other" },
-        { key: "15", type: "button", string: "Next" }
-      ]
+        { key: "13", string: "Rash", checked: false }
+      ],
+      otherInputText: ""
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
+
+  handleInputChange = name => value => {
+    return this.setState({
+      [name]: value
+    });
+  };
 
   onSubmit = () => {
     const {
@@ -54,7 +61,7 @@ class SelectSymptomsScreen extends React.Component {
 
     const illness = navigation.getParam("illness");
 
-    const { checkListData } = this.state;
+    const { checkListData, otherInputText } = this.state;
 
     function removeBool(arr, boolState) {
       return arr.filter(e => e.checked !== boolState);
@@ -70,6 +77,12 @@ class SelectSymptomsScreen extends React.Component {
 
     symptoms = symptoms.map(value => value.string);
 
+    if(otherInputText != ""){
+      symptoms.push(otherInputText);
+    }
+
+    console.tron.log(symptoms);
+
     userStore.setVisitRequestSymptoms(symptoms);
     userStore.setVisitRequestReason(illness);
 
@@ -81,7 +94,7 @@ class SelectSymptomsScreen extends React.Component {
   render() {
     const { navigation } = this.props;
     const illness = navigation.getParam("illness");
-    const { hasAppointment, checkListData } = this.state;
+    const { hasAppointment, checkListData, otherInputText } = this.state;
 
     return (
       <KeyboardAvoidingView padding={0} behavior="padding" startFromTop enabled>
@@ -124,9 +137,8 @@ class SelectSymptomsScreen extends React.Component {
             </View>
           ) : null}
           <ContentWrapper
-            marginTop={hasAppointment ? 16 : 48}
+            marginTop={hasAppointment ? 16 : 30}
             marginBottom={0}
-            style={{ flex: 1 }}
           >
             <FlatList
               data={checkListData}
@@ -155,22 +167,20 @@ class SelectSymptomsScreen extends React.Component {
                     />
                   );
                 }
-                if (item.type === "input") {
-                  return <CustomInput placeholder={item.string} />;
-                }
-                if (item.type === "button") {
-                  return (
-                    <View style={{ marginTop: 36, padding: 16 }}>
-                      <ServiceButton
-                        title={item.string}
-                        onPress={this.onSubmit}
-                      />
-                    </View>
-                  );
-                }
                 return null;
               }}
             />
+            <FormTextInput
+              placeholder={"Other"}
+              value = {otherInputText}
+              onChangeText={this.handleInputChange("otherInputText")}
+              />
+            <View style={{ padding: 16 }}>
+              <ServiceButton
+                title={"Next"}
+                onPress={this.onSubmit}
+              />
+            </View>
           </ContentWrapper>
         </ContainerView>
       </KeyboardAvoidingView>

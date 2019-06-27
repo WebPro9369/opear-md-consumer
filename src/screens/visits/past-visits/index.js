@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-restricted-syntax */
 import React from "react";
@@ -30,7 +31,7 @@ class PastVisitsScreen extends React.Component {
       store: { userStore }
     } = props;
 
-    getVisits(userStore.id, {
+    getVisits({
       past: true,
       successHandler: res => {
         const visits = res.data;
@@ -69,17 +70,23 @@ class PastVisitsScreen extends React.Component {
 
         formattedTime = formattedTime.split(", ");
 
+        const { child, reason, address, id, state } = visitOnDate;
+
+        if (state !== "completed") {
+          continue;
+        }
+
         visitsDisplayStack.push(
           <View style={{ marginBottom: 9 }}>
             <VisitDetailCard
               avatarImg={imgFox}
-              name={visitOnDate.child.first_name}
-              illness={visitOnDate.reason}
+              name={(child && child.first_name) || "N/A"}
+              illness={reason}
               time={formattedTime[1]}
-              address={visitOnDate.address.street}
+              address={(address && address.street) || "N/A"}
               onPress={() =>
                 navigate("VisitsVisitBooked", {
-                  visitID: visitOnDate.id,
+                  visitID: id,
                   visit: visitOnDate
                 })
               }

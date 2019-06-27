@@ -14,7 +14,7 @@ import {
 } from "../../components/views";
 import { IllnessCard, ContentWrapper, MatchingMessageWrapper } from "./styles";
 import { colors } from "../../utils/constants";
-import { getChildren, getAddresses } from "@services/opear-api";
+import { getChildren, getAddresses, getVisits } from "@services/opear-api";
 import { getAge } from "@utils";
 import InactiveUserBanner from "@components/banner";
 
@@ -31,7 +31,7 @@ class DashboardScreen extends React.Component {
     super(props);
 
     const {
-      store: { userStore }
+      store: { userStore, providerStore }
     } = props;
 
     this.state = {
@@ -41,7 +41,8 @@ class DashboardScreen extends React.Component {
         { key: "2", string: "Respiratory", color: "#0e7092" },
         { key: "3", string: "Abdominal", color: "#d7707d" },
         { key: "4", string: "Ear Nose Throat", color: "#6b82a3" }
-      ]
+      ],
+      upcomingVisitId: null
     };
 
     const getChildrenSuccessHandler = res => {
@@ -58,7 +59,8 @@ class DashboardScreen extends React.Component {
         surgicalHistory: row.surgical_history || "",
         currentMedications: row.current_medications || "",
         hospitalizations: row.hospitalizations || "",
-        currentMedicalConditions: row.current_medical_conditions || ""
+        currentMedicalConditions: row.current_medical_conditions || "",
+        avatarImageIndex: row.avatar_image_index || 0
       }));
 
       // console.tron.log("Children list: ", childAdjustedArray);
@@ -81,6 +83,26 @@ class DashboardScreen extends React.Component {
     };
 
     getAddresses({ successHandler: getAddressesSuccessHandler });
+
+    const getVisitsSuccessHandler = res => {
+      const visits = res.data;
+
+      const dates = Object.keys(res.data);
+
+      for (const date of dates) {
+        const visitsOnDate = visits[date];
+
+        for (const visitOnDate of visitsOnDate) {
+          if(visitOnDate.state == "scheduled") {
+            this.setState({upcomingVisitId: visitOnDate.id});
+            providerStore.setOutstandingAppointment(true);
+            return;
+          }
+        }
+      }
+    }
+
+    getVisits({ successHandler: getVisitsSuccessHandler });
   }
 
   render() {
@@ -96,7 +118,7 @@ class DashboardScreen extends React.Component {
       providerEnRoute
     } = providerStore;
 
-    const { userStore, illnessList } = this.state;
+    const { userStore, illnessList, upcomingVisitId } = this.state;
 
     return (
       <ContainerView>
@@ -118,7 +140,7 @@ class DashboardScreen extends React.Component {
         userStore.active ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
-              We are currently matching you with your doctor, be in touch soon!
+              We are currently matching you with your care provider, be in touch soon!
             </StyledText>
           </MatchingMessageWrapper>
         ) : null}
@@ -127,7 +149,7 @@ class DashboardScreen extends React.Component {
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
                 <StyledText fontSize={16} lineHeight={24}>
-                  Your doctor recommendations are ready!
+                  Your care provider recommendations are ready!
                 </StyledText>
                 <Image source={imgRightArrow} width={25} />
               </FlexView>
@@ -135,12 +157,11 @@ class DashboardScreen extends React.Component {
           </TouchableOpacity>
         ) : null}
         {outstandingAppointment && !providerEnRoute && userStore.active ? (
-          /*TODO: swap hardcoded visit id when logic is*/
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:2})}>
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:upcomingVisitId})}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>
-                  Your doctor is on the way! Review details
+                  Your care provider is on the way! Review details
                 </StyledText>
                 <Image source={imgRightArrow} width={25} />
               </FlexView>

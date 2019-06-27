@@ -1,8 +1,9 @@
+/* eslint-disable no-shadow */
 /* eslint-disable import/no-unresolved */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import InactiveUserBanner from "@components/banner";
-import { updateParent } from "@services/opear-api";
+import { updateAddress } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -29,10 +30,10 @@ class EditAddressScreen extends React.Component {
     } = props;
 
     const address = addresses.length ? addresses[addresses.length - 1] : {};
-    const { name, street, city, zip } = address;
+    const { id, name, street, city, zip } = address;
 
     this.state = {
-      // id,
+      id,
       name,
       street,
       city,
@@ -52,36 +53,49 @@ class EditAddressScreen extends React.Component {
   onSubmit = () => {
     const {
       navigation: { goBack },
-      store: {
-        userStore: { id, address }
-      }
+      store: { userStore }
     } = this.props;
 
-    const { street, city, zip, name } = this.state;
-    const data = {
-      parent: {
-        address: [
-          {
-            name,
-            street,
-            city,
-            zip
-          }
-        ]
-      }
-    };
+    const { id, street, city, zip, name } = this.state;
+    const data =
+      // parent: {
+      //   address: [
+      {
+        name,
+        street,
+        city,
+        zip
+        // }
+        //   ]
+        // }
+      };
 
-    const successHandler = () => {
-      address
-        .setName(name)
-        .setStreet(street)
-        .setCity(city)
-        .setZipCode(zip);
+    const successHandler = res => {
+      console.tron.log("update address res: ", res.data);
+      const { id, name, street, city, state, zip } = res.data;
+      const newAddress = {
+        id,
+        name: name || "",
+        street: street || "",
+        city: city || "",
+        state: state || "",
+        zip: zip || ""
+      };
+
+      userStore.address
+        .setName(name || "")
+        .setStreet(street || "")
+        .setCity(city || "")
+        .setZipCode(zip || "");
+
+      console.tron.log("addresses: ", newAddress);
+
+      userStore.setAddress(newAddress);
 
       goBack();
     };
 
-    updateParent(id, data, { successHandler });
+    updateAddress(id, data, { successHandler });
   };
 
   render() {
@@ -125,7 +139,7 @@ class EditAddressScreen extends React.Component {
                 wrapperStyle={{
                   flex: 1
                 }}
-                onChangeText={this.handleInputChange("zip_code")}
+                onChangeText={this.handleInputChange("zip")}
               />
             </FlexView>
           </FormInputView>
@@ -133,7 +147,7 @@ class EditAddressScreen extends React.Component {
             <FormTextInput
               label="Location Name"
               value={name}
-              onChangeText={this.handleInputChange("city")}
+              onChangeText={this.handleInputChange("name")}
             />
           </FormInputView>
         </FormWrapper>

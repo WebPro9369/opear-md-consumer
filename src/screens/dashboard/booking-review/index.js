@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import React from "react";
 import PropTypes from "prop-types";
 import { Avatar } from "react-native-elements";
@@ -7,6 +8,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { View, Alert } from "react-native";
 import { inject, observer } from "mobx-react";
+import { formatTimeStr } from "@utils/helpers";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, FlexView } from "../../../components/views";
@@ -82,8 +84,6 @@ class BookingReviewScreen extends React.Component {
       );
     }
 
-    console.tron.log(visitRequest);
-
     const data =
     {
       visit: {
@@ -103,7 +103,6 @@ class BookingReviewScreen extends React.Component {
     }
 
     registerVisit(data, {successHandler});
-
   };
 
   render() {
@@ -143,7 +142,7 @@ class BookingReviewScreen extends React.Component {
             </StyledText>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 32 }}>
-            <ContentButton onPress={() => push("DashboardPickChild")}>
+            <ContentButton onPress={() => push("DashboardPickChild",{screenRef:"booking-review"})}>
               <FlexView>
                 <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
@@ -156,7 +155,13 @@ class BookingReviewScreen extends React.Component {
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
             </ContentButton>
-            <ContentButton onPress={() => push("DashboardPickVisitAddress",{screenRef:"booking-review"})}>
+            <ContentButton
+              onPress={() =>
+                push("DashboardPickVisitAddress", {
+                  screenRef: "booking-review"
+                })
+              }
+            >
               <FlexView>
                 <EvilIcons name="location" size={40} color={colors.BLACK60} />
                 <StyledText
@@ -169,7 +174,11 @@ class BookingReviewScreen extends React.Component {
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
             </ContentButton>
-            <ContentButton onPress={() => push("DashboardSelectDateTime",{screenRef:"booking-review"})}>
+            <ContentButton
+              onPress={() =>
+                push("DashboardSelectDateTime", { screenRef: "booking-review" })
+              }
+            >
               <FlexView>
                 <FontAwesome
                   name="calendar-check-o"
@@ -183,14 +192,18 @@ class BookingReviewScreen extends React.Component {
                 >
                   {date}
                   {", "}
-                  {time}
+                  {formatTimeStr(time)}
                 </StyledText>
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
             </ContentButton>
             <FlexView>
               <View style={{ flex: 1, marginRight: 4 }}>
-                <ContentButton onPress={() => push("DashboardAddCard",{screenRef:"booking-review"})}>
+                <ContentButton
+                  onPress={() =>
+                    push("DashboardAddCard", { screenRef: "booking-review" })
+                  }
+                >
                   <FlexView justifyContent="center">
                     <AntDesign
                       name="pluscircle"

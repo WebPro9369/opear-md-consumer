@@ -76,10 +76,18 @@ class AskLocationScreen extends Component {
 
   render() {
     const { zipcode } = this.state;
+    const {
+      navigation: { navigate }
+    } = this.props;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <View>
-          <NavHeader title="Welcome to opear" hasBackButton size="small" />
+          <NavHeader
+            title="Welcome to opear"
+            hasBackButton
+            size="small"
+            onPressBackButton={() => navigate("Authenticating")}
+          />
           <StyledText
             textAlign="left"
             style={{ marginTop: 24, marginBottom: 24 }}

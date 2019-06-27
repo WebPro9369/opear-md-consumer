@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-unresolved */
 import React from "react";
@@ -30,7 +31,7 @@ class UpcomingVisitsScreen extends React.Component {
       visits: []
     };
 
-    getVisits(userStore.id, {
+    getVisits({
       successHandler: res => {
         const visits = res.data;
 
@@ -68,17 +69,23 @@ class UpcomingVisitsScreen extends React.Component {
         ).toLocaleDateString("en-US", timeOptions);
         formattedTime = formattedTime.split(", ");
 
+        const { child, reason, address, id, state } = visitOnDate;
+
+        if (state !== "scheduled") {
+          continue;
+        }
+
         visitsDisplayStack.push(
           <View style={{ marginBottom: 9 }}>
             <VisitDetailCard
               avatarImg={imgFox}
-              name={visitOnDate.child.first_name}
-              illness={visitOnDate.reason}
+              name={(child && child.first_name) || "N/A"}
+              illness={reason}
               time={formattedTime[1]}
-              address={visitOnDate.address.street}
+              address={(address && address.street) || "N/A"}
               onPress={() =>
                 navigate("VisitsVisitBooked", {
-                  visitID: visitOnDate.id,
+                  visitID: id,
                   visit: visitOnDate
                 })
               }

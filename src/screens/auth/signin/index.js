@@ -11,6 +11,7 @@ import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
 import { getParent, getApiToken } from "@services/opear-api";
 import { userFromResult } from "@utils";
+import { storeNotificationToken } from "@services/authentication";
 
 @inject("store")
 class SignInScreen extends React.Component {
@@ -40,6 +41,9 @@ class SignInScreen extends React.Component {
 
       const { id, api_key: apiKey } = res.data;
       userStore.setAuthentication({ id, apiKey });
+
+      const { notificationToken } = userStore;
+      storeNotificationToken(id, notificationToken);
 
       const successHandler = res => {
         userFromResult(res, userStore);

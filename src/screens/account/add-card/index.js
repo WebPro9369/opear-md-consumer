@@ -1,7 +1,11 @@
+/* eslint-disable no-else-return */
+/* eslint-disable import/no-unresolved */
 import React from "react";
 import stripe from "tipsi-stripe";
 import { inject, observer, PropTypes } from "mobx-react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { createPaymentAccount } from "@services/opear-api";
+import InactiveUserBanner from "@components/banner";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -15,8 +19,6 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
-import { createPaymentAccount } from "@services/opear-api";
-import InactiveUserBanner from "@components/banner"
 
 @inject("store")
 @observer
@@ -36,23 +38,18 @@ class AddCardScreen extends React.Component {
 
     this.state = {
       loading: false,
-      isEditing: params && params.last4 && params.last4.length == 4,
+      isEditing: params && params.last4 && params.last4.length === 4,
       last4: params && params.last4
     };
   }
 
   saveCardHandler = async () => {
     const {
-      navigation: { goBack, getParam },
-      store: {
-        cardStore,
-        userStore
-      }
+      navigation: { goBack, getParam, navigate },
+      store: { cardStore, userStore }
     } = this.props;
     const { id } = userStore;
-    const {
-       cardNumber, expiryYear, expiryMonth, cvv, fullName
-    } = cardStore;
+    const { cardNumber, expiryYear, expiryMonth, cvv, fullName } = cardStore;
 
     const params = {
       number: cardNumber,
@@ -61,7 +58,9 @@ class AddCardScreen extends React.Component {
       cvc: cvv,
       name: fullName
     };
+
     this.setState({ loading: true });
+
     try {
       const token = await stripe.createTokenWithCard(params);
 
@@ -71,18 +70,20 @@ class AddCardScreen extends React.Component {
           payment_account: {
             token_id: token.tokenId
           }
-        }, {
+        },
+        {
           successHandler: res => {
             userStore.addPaymentAccount(res.data.paymentAccount);
             this.setState({ loading: false });
 
-            const screenRef = getParam('screenRef', null);
+            const screenRef = getParam("screenRef", null);
 
-            if(screenRef){
-              return navigate("DashboardBookingReview",{cardAdded:true});
+            if (screenRef) {
+              return navigate("DashboardBookingReview", { cardAdded: true });
             } else {
               goBack();
             }
+            return true;
           },
           errorHandler: () => {
             this.setState({ loading: false });
@@ -90,7 +91,7 @@ class AddCardScreen extends React.Component {
         }
       );
     } catch (e) {
-      console.log(e);
+      console.tron.log("Error saving card info: ", e);
       this.setState({ loading: false });
     }
   };
@@ -101,11 +102,9 @@ class AddCardScreen extends React.Component {
       store: { cardStore, userStore }
     } = this.props;
 
-    const {
-      cardInfo
-    } = cardStore;
-
-    const { cardNumber, expiryYear, expiryMonth, cvv, fullName } = cardInfo;
+    const { cardInfo } = cardStore;
+    const { cardNumber, expiryYear, expiryMonth, cvv, fullName } =
+      cardInfo || {};
 
     const { loading, isEditing, last4 } = this.state;
     return (
@@ -137,9 +136,6 @@ class AddCardScreen extends React.Component {
               }
               onChangeText={value =>
                 cardStore.setCardInfo({ ...cardInfo, cardNumber: value })
-              }
-              leftIcon={
-                <FontAwesome name="cc-visa" size={30} color={colors.BLUE} />
               }
               rightIcon={
                 // eslint-disable-next-line react/jsx-wrap-multilines
@@ -183,7 +179,9 @@ class AddCardScreen extends React.Component {
                 label="CVV"
                 value={cvv}
                 placeholder="###"
-                onChangeText={value => cardStore.setCardInfo({ ...cardInfo, cvv: value })}
+                onChangeText={value =>
+                  cardStore.setCardInfo({ ...cardInfo, cvv: value })
+                }
                 style={{
                   width: 120
                 }}
@@ -194,7 +192,9 @@ class AddCardScreen extends React.Component {
             <FormTextInput
               label="Full Name"
               value={fullName}
-              onChangeText={value => cardStore.setCardInfo({ ...cardInfo, fullName: value })}
+              onChangeText={value =>
+                cardStore.setCardInfo({ ...cardInfo, fullName: value })
+              }
               placeholder="Full Name"
             />
           </FormInputView>
