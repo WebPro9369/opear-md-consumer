@@ -1,9 +1,13 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable camelcase */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+// import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { getIndexByValue } from "@utils";
+import { getCareProvider } from "@services/opear-api";
 import { ServiceButton } from "../../../components/service-button";
 import { StyledText } from "../../../components/text";
 import { View, FlexView } from "../../../components/views";
@@ -11,8 +15,6 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard, ProviderStarsCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
-import { getIndexByValue } from "@utils";
-import { getCareProvider } from "@services/opear-api"
 
 const { BLACK60 } = colors;
 
@@ -23,23 +25,21 @@ const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 @observer
 class BookingReceiptScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
 
     const {
       navigation,
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = props;
 
-    const visitID = navigation.getParam('visitID', 0);
-    const visits = navigation.getParam('visits', 0);
+    const visitID = navigation.getParam("visitID", 0);
+    const visits = navigation.getParam("visits", 0);
 
-    const visit = visits[visitID-1];
+    const visit = visits[visitID - 1];
 
     this.state = {
       providerData: {
@@ -50,35 +50,31 @@ class BookingReceiptScreen extends React.Component {
         symptom: "Respiratory",
         rating: "4.5"
       },
-      child: userStore.children[getIndexByValue(userStore.children,visit.child_id)].name,
-      address: userStore.addresses[getIndexByValue(userStore.addresses,visit.address_id)].street,
+      child:
+        userStore.children[getIndexByValue(userStore.children, visit.child_id)]
+          .name,
+      address:
+        userStore.addresses[
+          getIndexByValue(userStore.addresses, visit.address_id)
+        ].street,
       time: visit.appointment_time,
       card: "4985",
       price: visit.payment_amount,
-      stars: 0,
-      starsEditable: false
+      stars: 0
     };
 
     const successHandler = res => {
-
-      const {
-        name,
-        biography,
-        work_history,
-        rating,
-        specialties
-      } = res.data;
+      const { name, biography, work_history, rating, specialties } = res.data;
 
       this.setState({
         providerData: {
-          name: name,
+          name,
           bio: biography,
           history: work_history.join(", "),
-          rating: rating,
+          rating,
           badges: specialties
         }
       });
-
     };
 
     getCareProvider(visit.care_provider_id, { successHandler });
@@ -173,7 +169,6 @@ class BookingReceiptScreen extends React.Component {
               }}
             >
               <FlexView>
-                <FontAwesome name="cc-visa" color={colors.BLUE} size={30} />
                 <StyledText fontSize={14} style={{ marginLeft: 20 }}>
                   {card}
                 </StyledText>

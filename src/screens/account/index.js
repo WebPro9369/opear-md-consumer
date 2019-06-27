@@ -5,6 +5,7 @@ import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { removeAuthentication } from "@services/authentication";
+import InactiveUserBanner from "@components/banner";
 import { StyledText } from "../../components/text";
 import { NavHeader } from "../../components/nav-header";
 import {
@@ -13,12 +14,11 @@ import {
   ListButtonText,
   styles
 } from "./styles";
-import { ContainerView, View, FlexView } from "../../components/views";
+import { View, FlexView } from "../../components/views";
 import { ScrollView } from "../../components/views/scroll-view";
 import { colors } from "../../utils/constants";
-import InactiveUserBanner from "@components/banner"
 
-const imgDoctor = require("../../../assets/images/Doctor.png");
+const imgAvatar = require("../../../assets/images/Placeholder_Photo.png");
 
 @inject("store")
 @observer
@@ -67,7 +67,7 @@ class AccountScreen extends React.Component {
         <InactiveUserBanner userIsActive={userStore.active} />
         <View style={{ padding: 16 }}>
           <FlexView justifyContent="start">
-            <Avatar rounded size={80} source={imgDoctor} />
+            <Avatar rounded size={80} source={imgAvatar} />
             <View style={{ paddingLeft: 20 }}>
               <StyledText fontSize={16}>{name}</StyledText>
               <StyledText fontSize={16} fontFamily="FlamaLight">

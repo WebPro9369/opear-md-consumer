@@ -1,6 +1,5 @@
 /* eslint-disable import/no-unresolved */
 import { types } from "mobx-state-tree";
-// import { ChildStore } from "@store/child";
 import { VisitsStore } from "@store/visits";
 import { ApplicationStore } from "./app";
 import { ProviderStore } from "./provider";
@@ -49,16 +48,6 @@ const MainStore = types.model("MainStore", {
       time: 0,
       cost: 0
     },
-    cardStore: types.optional(CardStore, {
-      cardInfo: {
-        cardNumber: "",
-        expiryYear: 0,
-        expiryMonth: 0,
-        cvv: "",
-        cardType: "",
-        fullName: ""
-      }
-    }),
     cardInfo: {
       cardNumber: "",
       expiryYear: 0,
@@ -76,6 +65,16 @@ const MainStore = types.model("MainStore", {
       apartment_number: "",
       latitude: "",
       longitude: ""
+    }
+  }),
+  cardStore: types.optional(CardStore, {
+    cardInfo: {
+      cardNumber: "",
+      expiryYear: 0,
+      expiryMonth: 0,
+      cvv: "",
+      cardType: "",
+      fullName: ""
     }
   }),
   visitsStore: types.optional(VisitsStore, {
