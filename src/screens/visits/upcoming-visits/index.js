@@ -68,17 +68,19 @@ class UpcomingVisitsScreen extends React.Component {
         ).toLocaleDateString("en-US", timeOptions);
         formattedTime = formattedTime.split(", ");
 
+        const { child, reason, address, id } = visitOnDate;
+
         visitsDisplayStack.push(
           <View style={{ marginBottom: 9 }}>
             <VisitDetailCard
               avatarImg={imgFox}
-              name={visitOnDate.child.first_name}
-              illness={visitOnDate.reason}
+              name={(child && child.first_name) || "N/A"}
+              illness={reason}
               time={formattedTime[1]}
-              address={visitOnDate.address.street}
+              address={(address && address.street) || "N/A"}
               onPress={() =>
                 navigate("VisitsVisitBooked", {
-                  visitID: visitOnDate.id,
+                  visitID: id,
                   visit: visitOnDate
                 })
               }
