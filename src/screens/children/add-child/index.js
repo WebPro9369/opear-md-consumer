@@ -2,10 +2,11 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable camelcase */
 import React from "react";
+import { Alert } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, ButtonGroup } from "react-native-elements";
 import { registerChild } from "@services/opear-api";
-import InactiveUserBanner from "@components/banner"
+import InactiveUserBanner from "@components/banner";
 import { FormTextInput } from "../../../components/text";
 import { FormMaskedTextInput } from "@components/text-masked";
 import { NavHeader } from "../../../components/nav-header";
