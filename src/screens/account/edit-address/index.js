@@ -1,8 +1,9 @@
+/* eslint-disable no-shadow */
+/* eslint-disable import/no-unresolved */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import InactiveUserBanner from "@components/banner";
-import { updateParent } from "@services/opear-api";
+import { updateAddress } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -11,9 +12,6 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { FlexView, FormWrapper } from "../../../components/views";
-import { colors } from "../../../utils/constants";
-
-const { LIGHTGREEN } = colors;
 
 @inject("store")
 @observer
@@ -27,17 +25,20 @@ class EditAddressScreen extends React.Component {
 
     const {
       store: {
-        userStore: {
-          address: { name, street, city, zip_code }
-        }
+        userStore: { addresses }
       }
     } = props;
 
+    const address = addresses.length ? addresses[addresses.length - 1] : {};
+    const { id, name, street, city, zip } = address;
+
     this.state = {
+      id,
       name,
       street,
       city,
-      zip_code
+      // state,
+      zip
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -52,36 +53,49 @@ class EditAddressScreen extends React.Component {
   onSubmit = () => {
     const {
       navigation: { goBack },
-      store: {
-        userStore: { id, address }
-      }
+      store: { userStore }
     } = this.props;
 
-    const { street, city, zip_code, name } = this.state;
-    const data = {
-      parent: {
-        address: [
-          {
-            name,
-            street,
-            city,
-            zip: zip_code
-          }
-        ]
-      }
-    };
+    const { id, street, city, zip, name } = this.state;
+    const data =
+      // parent: {
+      //   address: [
+      {
+        name,
+        street,
+        city,
+        zip
+        // }
+        //   ]
+        // }
+      };
 
-    const successHandler = () => {
-      address
-        .setName(name)
-        .setStreet(street)
-        .setCity(city)
-        .setZipCode(zip_code);
+    const successHandler = res => {
+      console.tron.log("update address res: ", res.data);
+      const { id, name, street, city, state, zip } = res.data;
+      const newAddress = {
+        id,
+        name: name || "",
+        street: street || "",
+        city: city || "",
+        state: state || "",
+        zip: zip || ""
+      };
+
+      userStore.address
+        .setName(name || "")
+        .setStreet(street || "")
+        .setCity(city || "")
+        .setZipCode(zip || "");
+
+      console.tron.log("addresses: ", newAddress);
+
+      userStore.setAddress(newAddress);
 
       goBack();
     };
 
-    updateParent(id, data, { successHandler });
+    updateAddress(id, data, { successHandler });
   };
 
   render() {
@@ -89,7 +103,7 @@ class EditAddressScreen extends React.Component {
       navigation: { goBack },
       store: { userStore }
     } = this.props;
-    const { street, city, zip_code, name } = this.state;
+    const { street, city, zip, name } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <NavHeader
@@ -112,26 +126,29 @@ class EditAddressScreen extends React.Component {
             <FlexView>
               <FormTextInput
                 label="City"
-                style={{
-                  width: 120,
-                  marginRight: 40
+                wrapperStyle={{
+                  marginRight: 10,
+                  flex: 1
                 }}
                 value={city}
                 onChangeText={this.handleInputChange("city")}
               />
               <FormTextInput
                 label="Zip"
-                style={{
-                  width: 120
+                value={zip}
+                wrapperStyle={{
+                  flex: 1
                 }}
-                value={zip_code}
-                onChangeText={this.handleInputChange("zip_code")}
+                onChangeText={this.handleInputChange("zip")}
               />
             </FlexView>
           </FormInputView>
           <FormInputView>
-            <FormTextInput label="Location Name" value={name}
-            onChangeText={this.handleInputChange("city")} />
+            <FormTextInput
+              label="Location Name"
+              value={name}
+              onChangeText={this.handleInputChange("name")}
+            />
           </FormInputView>
         </FormWrapper>
         <ServiceButton title="Update Address" onPress={this.onSubmit} />

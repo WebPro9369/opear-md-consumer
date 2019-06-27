@@ -17,8 +17,8 @@ import {
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
 
-const { GREEN, MIDGREY } = colors;
-const imgDoctor = require("../../../../assets/images/Doctor.png");
+const { MIDGREY } = colors;
+const imgAvatar = require("../../../../assets/images/Placeholder_Photo.png");
 
 @inject("store")
 @observer
@@ -27,34 +27,14 @@ class SettingsScreen extends React.Component {
     store: PropTypes.observableObject.isRequired
   };
 
-  constructor(props) {
-    super(props);
-
-    const {
-      store: {
-        userStore: {
-          name,
-          address: { street },
-          email,
-          phone
-        }
-      }
-    } = props;
-
-    this.state = {
-      name,
-      street,
-      email,
-      phone
-    };
-  }
-
   render() {
     const {
       navigation: { navigate },
       store: { userStore }
     } = this.props;
-    const { name, street, email, phone } = this.state;
+
+    const { name, address, email, phone } = userStore;
+
     return (
       <ContainerView>
         <HeaderWrapper>
@@ -71,15 +51,8 @@ class SettingsScreen extends React.Component {
             <Avatar
               rounded
               size={120}
-              source={imgDoctor}
-              showEditButton
-              editButton={{
-                containerStyle: {
-                  backgroundColor: GREEN,
-                  borderRadius: 12
-                },
-                size: 24
-              }}
+              source={imgAvatar}
+              showEditButton={false}
             />
           </ViewCentered>
           <View>
@@ -97,7 +70,7 @@ class SettingsScreen extends React.Component {
             <View style={{ padding: 16 }}>
               <InputButton
                 label="Address"
-                value={street}
+                value={address.street}
                 icon={
                   <FontAwesome name="angle-right" size={24} color={MIDGREY} />
                 }

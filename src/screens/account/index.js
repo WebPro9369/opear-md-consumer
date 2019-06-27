@@ -2,9 +2,10 @@
 import React from "react";
 import { Linking } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
-import { Avatar, Badge } from "react-native-elements";
+import { Avatar } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { removeAuthentication } from "@services/authentication";
+import InactiveUserBanner from "@components/banner";
 import { StyledText } from "../../components/text";
 import { NavHeader } from "../../components/nav-header";
 import {
@@ -13,12 +14,11 @@ import {
   ListButtonText,
   styles
 } from "./styles";
-import { ContainerView, View, FlexView } from "../../components/views";
+import { View, FlexView } from "../../components/views";
 import { ScrollView } from "../../components/views/scroll-view";
 import { colors } from "../../utils/constants";
-import InactiveUserBanner from "@components/banner"
 
-const imgDoctor = require("../../../assets/images/Doctor.png");
+const imgAvatar = require("../../../assets/images/Placeholder_Photo.png");
 
 @inject("store")
 @observer
@@ -32,14 +32,13 @@ class AccountScreen extends React.Component {
 
     const {
       store: {
-        userStore: { name, email, children }
+        userStore: { name, email }
       }
     } = props;
 
     this.state = {
       name,
-      email,
-      badges: children.map(value => value.name)
+      email
     };
   }
 
@@ -61,14 +60,14 @@ class AccountScreen extends React.Component {
       navigation: { navigate },
       store: { userStore }
     } = this.props;
-    const { name, email, badges } = this.state;
+    const { name, email } = this.state;
     return (
       <ScrollView padding={16}>
         <NavHeader title="Account" size="medium" hasBackButton={false} />
         <InactiveUserBanner userIsActive={userStore.active} />
         <View style={{ padding: 16 }}>
           <FlexView justifyContent="start">
-            <Avatar rounded size={80} source={imgDoctor} />
+            <Avatar rounded size={80} source={imgAvatar} />
             <View style={{ paddingLeft: 20 }}>
               <StyledText fontSize={16}>{name}</StyledText>
               <StyledText fontSize={16} fontFamily="FlamaLight">
@@ -76,16 +75,6 @@ class AccountScreen extends React.Component {
               </StyledText>
             </View>
           </FlexView>
-          <FlexViewSpread style={{ paddingTop: 30 }}>
-            {badges.map(badge => (
-              <Badge
-                key={badge}
-                value={badge}
-                textStyle={styles.badgeText}
-                badgeStyle={styles.badge}
-              />
-            ))}
-          </FlexViewSpread>
         </View>
         <View style={{ paddingTop: 16, paddingBottom: 16 }}>
           <ListTouchableButtonWrapper

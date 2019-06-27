@@ -1,9 +1,9 @@
+/* eslint-disable import/no-unresolved */
 import { types } from "mobx-state-tree";
+import { VisitsStore } from "@store/visits";
 import { ApplicationStore } from "./app";
 import { ProviderStore } from "./provider";
 import { UserStore } from "./user";
-import { ChildStore } from "@store/child";
-import { VisitsStore } from "@store/visits";
 import { CardStore } from "./card";
 
 const MainStore = types.model("MainStore", {
@@ -30,9 +30,17 @@ const MainStore = types.model("MainStore", {
     phone: "",
     payment_accounts: [],
     notificationToken: '',
-    paymentMethods: [{
-      id:0, type:"Card", cardNumber:19990, expiryYear:10, expiryMonth:11, cvv:320, fullName:"Card Name"
-    }],
+    paymentMethods: [
+      {
+        id: 0,
+        type: "Card",
+        cardNumber: 19990,
+        expiryYear: 10,
+        expiryMonth: 11,
+        cvv: 320,
+        fullName: "Card Name"
+      }
+    ],
     visitRequest: {
       symptoms: [""],
       pickedChild: 1,
@@ -41,16 +49,6 @@ const MainStore = types.model("MainStore", {
       time: 0,
       cost: 0
     },
-    cardStore: types.optional(CardStore, {
-      cardInfo: {
-        cardNumber: "",
-        expiryYear: 0,
-        expiryMonth: 0,
-        cvv: "",
-        cardType: "",
-        fullName: ""
-      }
-    }),
     cardInfo: {
       cardNumber: "",
       expiryYear: 0,
@@ -60,14 +58,24 @@ const MainStore = types.model("MainStore", {
       fullName: ""
     },
     address: {
-      name: "Name",
-      street: "street",
-      city: "city",
-      state: "state",
-      zip_code: "zip",
-      apartment_number: "apartment",
-      latitude: "lat",
-      longitude: "long"
+      name: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+      apartment_number: "",
+      latitude: "",
+      longitude: ""
+    }
+  }),
+  cardStore: types.optional(CardStore, {
+    cardInfo: {
+      cardNumber: "",
+      expiryYear: 0,
+      expiryMonth: 0,
+      cvv: "",
+      cardType: "",
+      fullName: ""
     }
   }),
   visitsStore: types.optional(VisitsStore, {
@@ -77,7 +85,7 @@ const MainStore = types.model("MainStore", {
         childId: 1,
         addressId: 1,
         reason: "reason",
-        symptoms: ['fever','stomachache'],
+        symptoms: ["fever", "stomachache"],
         appointmentTime: new Date("1970-01-01"),
         parentNotes: "note",
         paymentAmount: 100,
@@ -88,7 +96,7 @@ const MainStore = types.model("MainStore", {
         childId: 1,
         addressId: 1,
         reason: "alot of reasons",
-        symptoms: ['super fever','stomachache'],
+        symptoms: ["super fever", "stomachache"],
         appointmentTime: new Date("2020-01-01"),
         parentNotes: "note",
         paymentAmount: 100,
@@ -99,7 +107,7 @@ const MainStore = types.model("MainStore", {
         childId: 2,
         addressId: 1,
         reason: "reason",
-        symptoms: ['fever','stomachache'],
+        symptoms: ["fever", "stomachache"],
         appointmentTime: new Date("1970-01-01"),
         parentNotes: "note",
         paymentAmount: 100,

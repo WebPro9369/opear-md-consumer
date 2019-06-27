@@ -95,7 +95,7 @@ export const UserStore = types
       street: "",
       city: "",
       state: "",
-      zip_code: "",
+      zip: "",
       apartment_number: "",
       latitude: "",
       longitude: ""
@@ -207,6 +207,13 @@ export const UserStore = types
     },
     setAddresses(value) {
       self.addresses.replace(value);
+      return self;
+    },
+    setAddress(value, index) {
+      if (!(index > -1)) {
+        index = self.addresses.length - 1;
+      }
+      self.addresses[index] = value;
       return self;
     },
     setChildren(value) {

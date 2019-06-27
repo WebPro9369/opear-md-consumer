@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable camelcase */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -5,6 +7,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { ActivityIndicator } from "react-native";
 import { getParent } from "@services/opear-api";
 import { userFromResult } from "@utils";
+import InactiveUserBanner from "@components/banner";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import {
@@ -14,22 +17,16 @@ import {
 } from "./styles";
 import { ContainerView, View, FlexView } from "../../../components/views";
 import { colors } from "../../../utils/constants";
-import InactiveUserBanner from "@components/banner"
 
 @inject("store")
 @observer
 class PaymentScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
-    const {
-      store: {
-        userStore
-      }
-    } = props;
 
     this.state = {
       loading: false
@@ -93,15 +90,11 @@ class PaymentScreen extends React.Component {
                 return (
                   <ListTouchableButtonWrapper
                     key={pm.last4}
-                    onPress={() => navigate("PaymentAddCard", { last4: pm.last4 })}
+                    onPress={() =>
+                      navigate("PaymentAddCard", { last4: pm.last4 })
+                    }
                   >
                     <FlexView justifyContent="start">
-                      <FontAwesome
-                        name="cc-visa"
-                        size={30}
-                        color={colors.BLUE}
-                        style={{ marginRight: 16 }}
-                      />
                       <ListButtonText>{`****${pm.last4}`}</ListButtonText>
                     </FlexView>
                     <FontAwesome

@@ -1,23 +1,21 @@
+/* eslint-disable no-shadow */
+/* eslint-disable import/no-unresolved */
 import React from "react";
-import { Alert, View, Linking } from "react-native";
-import { FormTextInput, StyledText } from "../../../components/text";
-import { NavHeader } from "../../../components/nav-header";
-import { ServiceButton } from "../../../components/service-button";
-import { FormInputWrapper, FormWrapper } from "../../../components/views";
-import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
+import { Alert } from "react-native";
+import { inject } from "mobx-react";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import { FormTextInput } from "@components/text";
+import { NavHeader } from "@components/nav-header";
+import { ServiceButton } from "@components/service-button";
+import { FormInputWrapper, FormWrapper } from "@components/views";
+import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
+import { updatePassword } from "../../../services/opear-api";
 
+@inject("store")
 class NewPwdScreen extends React.Component {
   constructor(props) {
     super(props);
-
-    const {
-      navigation
-    } = this.props;
-
-    const routeInfo = navigation.getParam('routeInfo', 0);
-
-    console.tron.log(routeInfo);
 
     this.state = {
       confirm: null,
@@ -26,6 +24,42 @@ class NewPwdScreen extends React.Component {
   }
 
   onSubmit = () => {
+    const { confirm, password } = this.state;
+    const { navigation } = this.props;
+    const routeInfo = navigation.getParam("routeInfo", 0);
+
+    if (!confirm || !password) {
+      return Alert.alert("New Password", "Please input new password.");
+    }
+
+    if (confirm && password && confirm !== password) {
+      return Alert.alert("Password Error", "Passwords do not match.");
+    }
+    const id = routeInfo.substring(
+      routeInfo.lastIndexOf("reset_token=") + 12,
+      routeInfo.lastIndexOf("/email")
+    );
+    const email = routeInfo.substring(routeInfo.lastIndexOf("email=") + 6);
+
+    // console.tron.log("Token: ", id, email);
+    const data = {
+      id,
+      email,
+      password
+    };
+
+    const successHandler = () => {
+      navigation.navigate("AccountSignIn");
+    };
+
+    const errorHandler = () => {
+      Alert.alert(
+        "Error",
+        "Failed to update your password. Please check if your token is expired."
+      );
+    };
+
+    updatePassword(data, { successHandler, errorHandler });
     return true;
   };
 
@@ -50,20 +84,30 @@ class NewPwdScreen extends React.Component {
   };
 
   render() {
+    const {
+      navigation: { goBack }
+    } = this.props;
     const { confirm, password } = this.state;
     return (
       <KeyboardAvoidingView
         behavior="padding"
         enabled
-        style={{ backgroundColor: colors.LIGHTGREEN, height: "100%" }}
+        style={{ backgroundColor: colors.DARKSKYBLUE, height: "100%" }}
       >
         <NavHeader
-          title="Sign In"
+          title="Set New Password"
           size="medium"
-          hasBackButton={false}
+          hasBackButton
+          backButtonIcon={
+            <AntDesign name="arrowleft" size={20} color={colors.WHITE} />
+          }
+          backgroundColor={colors.DARKSKYBLUE}
           serviceTextStyle={{ color: "#ffffff" }}
+          onPressBackButton={() => {
+            goBack();
+          }}
         />
-        <FormWrapper centered padding={0}>
+        <FormWrapper centered padding={0} style={{ marginTop: 32 }}>
           <FormInputWrapper paddingLeft={16} paddingRight={16}>
             <FormTextInput
               label="Password"
@@ -78,7 +122,7 @@ class NewPwdScreen extends React.Component {
             <FormTextInput
               label="Confirm Password"
               value={confirm}
-              placeholder="Confirm Password"
+              placeholder="Confirm password"
               type="password"
               color="#ffffff"
               onChangeText={this.handleConfirmChange}
@@ -89,19 +133,9 @@ class NewPwdScreen extends React.Component {
               title="Sign In"
               onPress={this.onSubmit}
               backgroundColor="#ffffff"
-              color={colors.LIGHTGREEN}
+              borderColor={colors.DARKSKYBLUE}
+              color={colors.DARKSKYBLUE}
             />
-          </FormInputWrapper>
-          <FormInputWrapper paddingTop={6}>
-            <StyledText
-              textAlign="center"
-              style={{
-                color: "#ffffff"
-              }}
-              onPress={this.onPressForgotPassword}
-            >
-              forgot password?
-            </StyledText>
           </FormInputWrapper>
         </FormWrapper>
       </KeyboardAvoidingView>

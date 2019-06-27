@@ -160,7 +160,6 @@ class BookingReceiptCommentScreen extends React.Component {
               }}
             >
               <FlexView>
-                <FontAwesome name="cc-visa" color={colors.BLUE} size={30} />
                 <StyledText fontSize={14} style={{ marginLeft: 20 }}>
                   {card}
                 </StyledText>
