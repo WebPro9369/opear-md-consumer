@@ -33,8 +33,7 @@ class SettingsScreen extends React.Component {
       store: { userStore }
     } = this.props;
 
-    const { name, addresses, email, phone } = userStore;
-    const address = addresses.length ? addresses[addresses.length - 1] : {};
+    const { name, address, email, phone } = userStore;
 
     return (
       <ContainerView>

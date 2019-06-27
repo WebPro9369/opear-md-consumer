@@ -4,7 +4,6 @@ import { VisitsStore } from "@store/visits";
 import { ApplicationStore } from "./app";
 import { ProviderStore } from "./provider";
 import { UserStore } from "./user";
-// import { ChildStore } from "@store/child";
 import { CardStore } from "./card";
 
 const MainStore = types.model("MainStore", {
@@ -58,14 +57,14 @@ const MainStore = types.model("MainStore", {
       fullName: ""
     },
     address: {
-      name: "Name",
-      street: "street",
-      city: "city",
-      state: "state",
-      zip_code: "zip",
-      apartment_number: "apartment",
-      latitude: "lat",
-      longitude: "long"
+      name: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: "",
+      apartment_number: "",
+      latitude: "",
+      longitude: ""
     }
   }),
   cardStore: types.optional(CardStore, {
