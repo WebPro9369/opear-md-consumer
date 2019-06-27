@@ -13,7 +13,7 @@ const MainStore = types.model("MainStore", {
   providerStore: types.optional(ProviderStore, {
     appointment: false,
     readyProviders: false,
-    outstandingAppointment: true,
+    outstandingAppointment: false,
     providerEnRoute: false
   }),
   userStore: types.optional(UserStore, {
