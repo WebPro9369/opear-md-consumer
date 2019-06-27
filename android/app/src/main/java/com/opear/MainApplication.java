@@ -3,6 +3,7 @@ package com.opear;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.maps.MapsPackage;
 import com.oblador.keychain.KeychainPackage;
 import com.gettipsi.stripe.StripeReactPackage;
 import com.rnfingerprint.FingerprintAuthPackage;
@@ -10,7 +11,6 @@ import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.airbnb.android.react.maps.MapsPackage;
 import com.cardio.RNCardIOPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -32,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new MapsPackage(),
             new KeychainPackage(),
             new StripeReactPackage(),
             new FingerprintAuthPackage(),
@@ -39,7 +40,6 @@ public class MainApplication extends Application implements ReactApplication {
             new ReanimatedPackage(),
             new RNGestureHandlerPackage(),
             new VectorIconsPackage(),
-            new MapsPackage(),
             new RNCardIOPackage()
       );
     }
