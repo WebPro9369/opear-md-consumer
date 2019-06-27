@@ -1,14 +1,14 @@
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-unresolved */
 import React from "react";
-import { Alert, Linking } from "react-native";
+import { Alert } from "react-native";
 import { inject, PropTypes } from "mobx-react";
 import { FormTextInput, StyledText } from "@components/text";
 import { NavHeader } from "@components/nav-header";
 import { ServiceButton } from "@components/service-button";
 import { ViewCentered, FormInputWrapper, FormWrapper } from "@components/views";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
-import { colors } from "@utils/constants";
+import { colors } from "../../../utils/constants";
 import { getParent, getApiToken } from "@services/opear-api";
 import { userFromResult } from "@utils";
 
@@ -23,28 +23,6 @@ class SignInScreen extends React.Component {
     this.state = {
       email: "",
       password: ""
-    };
-  }
-
-  componentDidMount() {
-    Linking.addEventListener('url', this.handleOpenURL);
-  }
-
-  componentWillUnmount () {
-    Linking.removeEventListener('url', this.handleOpenURL);
-  }
-
-  handleOpenURL = (event) => {
-    this.navigate(event.url);
-  }
-
-  navigate = (url) => {
-    const { navigate } = this.props.navigation;
-    const route = url.replace(/.*?:\/\//g, '');
-    const routeName = route.split('/')[0];
-
-    if (routeName === 'newpwd') {
-      navigate('AccountNewPwd',{routeInfo:route});
     };
   }
 
@@ -109,7 +87,7 @@ class SignInScreen extends React.Component {
       <KeyboardAvoidingView
         behavior="padding"
         enabled
-        style={{ backgroundColor: colors.LIGHTGREEN, height: "100%" }}
+        style={{ backgroundColor: colors.DARKSKYBLUE, height: "100%" }}
       >
         <NavHeader
           title="Sign In"
@@ -142,7 +120,8 @@ class SignInScreen extends React.Component {
               title="Sign In"
               onPress={this.onSubmit}
               backgroundColor="#ffffff"
-              color={colors.LIGHTGREEN}
+              borderColor={colors.DARKSKYBLUE}
+              color={colors.DARKSKYBLUE}
             />
           </FormInputWrapper>
           <FormInputWrapper paddingTop={6}>
@@ -151,7 +130,7 @@ class SignInScreen extends React.Component {
                 style={{ color: "#ffffff" }}
                 onPress={this.onPressSignUp}
               >
-                sign up
+                create account
               </StyledText>
               <StyledText style={{ color: "#ffffff" }}> | </StyledText>
               <StyledText
