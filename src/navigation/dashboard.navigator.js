@@ -13,6 +13,7 @@ import UpcomingVisitScreen from "../screens/dashboard/upcoming-visit";
 import BookingReceiptScreen from "../screens/dashboard/booking-receipt";
 import BookingReceiptCommentScreen from "../screens/dashboard/booking-receipt-comment";
 import AddCardScreen from "../screens/account/add-card";
+import SelectPayment from "../screens/account/payment";
 
 const DashboardNavigator = createStackNavigator(
   {
@@ -54,6 +55,9 @@ const DashboardNavigator = createStackNavigator(
     },
     DashboardBookingReceiptComment: {
       screen: BookingReceiptCommentScreen
+    },
+    DashboardPaymentDefault: {
+      screen: SelectPayment
     },
     DashboardAddCard: {
       screen: AddCardScreen

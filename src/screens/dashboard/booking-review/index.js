@@ -65,15 +65,13 @@ class BookingReviewScreen extends React.Component {
   onSubmit = () => {
     const {
       navigation: { navigate, getParam },
-      store: {providerStore,
-        userStore: {
-          visitRequest
-        }}
+      store: {
+        providerStore,
+        userStore: { visitRequest }
+      }
     } = this.props;
 
-    const {
-      parentNotes
-    } = this.state;
+    const { parentNotes } = this.state;
 
     const cardSelected = getParam("cardAdded", false);
 
@@ -201,7 +199,9 @@ class BookingReviewScreen extends React.Component {
               <View style={{ flex: 1, marginRight: 4 }}>
                 <ContentButton
                   onPress={() =>
-                    push("DashboardAddCard", { screenRef: "booking-review" })
+                    push("DashboardPaymentDefault", {
+                      screenRef: "booking-review"
+                    })
                   }
                 >
                   <FlexView justifyContent="center">
