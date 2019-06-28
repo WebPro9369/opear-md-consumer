@@ -98,7 +98,7 @@ export const UserStore = types
       city: "",
       state: "",
       zip: "",
-      apartment_number: "",
+      apartmentNumber: "",
       latitude: "",
       longitude: ""
     })

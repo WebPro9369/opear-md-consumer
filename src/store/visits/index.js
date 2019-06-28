@@ -26,6 +26,7 @@ export const VisitsStore = types
           id: -1,
           age: -1,
           gender: "",
+          name: "",
           firstName: "",
           lastName: "",
           birthDate: new Date("01/01/1900"),
