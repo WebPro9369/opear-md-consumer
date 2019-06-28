@@ -163,7 +163,7 @@ class VisitBookedScreen extends React.Component {
                   color={colors.BLACK87}
                   textAlign="center"
                 >
-                  Your doctor will arrive in 10 minutes!
+                  Your doctor should arrive by {time}.
                 </StyledText>
               </View>
               <View style={{ marginTop: 40, marginBottom: 10 }}>
@@ -184,18 +184,6 @@ class VisitBookedScreen extends React.Component {
                     color={colors.TEXT_GREEN}
                   >
                     {reason}
-                  </StyledText>
-                </FlexView>
-                <FlexView justifyContent="center">
-                  <StyledText
-                    fontSize={20}
-                    lineHeight={24}
-                    color={colors.BLACK87}
-                  >
-                    {"ETA "}
-                  </StyledText>
-                  <StyledText fontSize={20} lineHeight={24} color={colors.BLUE}>
-                    {providerData.eta}
                   </StyledText>
                 </FlexView>
               </View>
