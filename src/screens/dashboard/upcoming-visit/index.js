@@ -6,8 +6,9 @@ import { Avatar } from "react-native-elements";
 import MapView from "react-native-maps";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { getVisit } from "@services/opear-api";
 import { ServiceButton } from "@components/service-button";
+import { getVisit } from "@services/opear-api";
+import TwilioVoice from "react-native-twilio-programmable-voice";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { View, ViewCentered, FlexView } from "../../../components/views";
@@ -15,9 +16,6 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
-import { getVisit, updateVisit } from "@services/opear-api";
-import { ServiceButton } from "@components/service-button";
-import TwilioVoice from "react-native-twilio-programmable-voice";
 
 const { BLACK60 } = colors;
 
