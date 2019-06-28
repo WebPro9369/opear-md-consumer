@@ -34,7 +34,7 @@ class UpcomingVisitsScreen extends React.Component {
       successHandler: res => {
         for (const key in res.data) {
           const visitArray = res.data[key];
-
+          console.tron.log("visit array: ", visitArray);
           visitArray.forEach(visit => {
             let {
               parent_id,
@@ -66,10 +66,10 @@ class UpcomingVisitsScreen extends React.Component {
               reason,
               symptoms,
               appointmentTime: new Date(appointment_time),
-              parentNotes: parent_notes,
-              visitNotes: visit_notes,
-              paymentAmount: payment_amount,
-              state,
+              parentNotes: parent_notes || "",
+              visitNotes: visit_notes || "",
+              paymentAmount: payment_amount || 0,
+              state: state || "",
               child: {
                 id: child.id || -1,
                 age: getAge(new Date(child.dob || "01/01/1900")),
