@@ -7,7 +7,7 @@ import MapView from "react-native-maps";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { ServiceButton } from "@components/service-button";
-import { getVisit } from "@services/opear-api";
+import { getVisit, getCareProvider } from "@services/opear-api";
 import TwilioVoice from "react-native-twilio-programmable-voice";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
@@ -44,11 +44,12 @@ class VisitBookedScreen extends React.Component {
       providerData: {
         avartarImg: doctorImg,
         name: "Dr. test John Smith",
-        symptom: "Respiratory",
         eta: "8:30am - 8:40am",
         phone: "+17174663337"
       },
+      providerID: 0,
       child: "Benjamin",
+      reason: "",
       address: "18 Mission St",
       time: "Sun Dec 31, 8am - 9am",
       map: {
@@ -59,14 +60,28 @@ class VisitBookedScreen extends React.Component {
       }
     };
 
+    careProviderSuccess = res => {
+      const {
+        name,
+        phone
+      } = res.data;
+
+      this.setState({
+        providerData: {
+          name: name,
+          phone: phone
+        }
+      })
+
+    };
+
     const successHandler = res => {
       const {
-        //TODO: Hook in care provider when its attached to the visit
-        // care_provider,
+        care_provider_id,
         child,
         address,
-        appointment_time
-        // reasons
+        appointment_time,
+        reason
       } = res.data;
 
       const dateOptions = {
@@ -77,22 +92,21 @@ class VisitBookedScreen extends React.Component {
       };
 
       this.setState({
-        /*  providerData: {
-          avartarImg: doctorImg,
-          name: care_provider.name,
-          symptom: reason,
-          eta: "8:30am - 8:40am"
-        }, */
+        providerID: care_provider_id,
         child: child.first_name,
         address: address.street,
         time: new Date(appointment_time).toLocaleDateString(
           "en-US",
           dateOptions
-        )
+        ),
+        reason: reason
       });
+
+      getCareProvider(this.state.providerID, { successHandler: careProviderSuccess });
     };
 
     getVisit(userStore.id, visitID, { successHandler });
+
   }
 
   componentDidMount() {}
@@ -108,7 +122,7 @@ class VisitBookedScreen extends React.Component {
     const {
       navigation: { goBack }
     } = this.props;
-    const { providerData, child, address, time, map } = this.state;
+    const { providerData, child, address, time, map, reason } = this.state;
 
     return (
       <ScrollView padding={0} marginTop={24}>
@@ -169,7 +183,7 @@ class VisitBookedScreen extends React.Component {
                     lineHeight={24}
                     color={colors.TEXT_GREEN}
                   >
-                    {providerData.symptom}
+                    {reason}
                   </StyledText>
                 </FlexView>
                 <FlexView justifyContent="center">
