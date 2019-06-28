@@ -93,6 +93,12 @@ class DashboardScreen extends React.Component {
         const visitsOnDate = visits[date];
 
         for (const visitOnDate of visitsOnDate) {
+          if(visitOnDate.state == "in_progress") {
+            this.setState({upcomingVisitId: visitOnDate.id});
+            providerStore.setOutstandingAppointment(true);
+            providerStore.setProviderEnRoute(true);
+          }
+
           if(visitOnDate.state == "scheduled") {
             this.setState({upcomingVisitId: visitOnDate.id});
             providerStore.setOutstandingAppointment(true);
@@ -169,11 +175,13 @@ class DashboardScreen extends React.Component {
           </TouchableOpacity>
         ) : null}
         {outstandingAppointment && providerEnRoute && userStore.active ? (
-          <MatchingMessageWrapper>
-            <StyledText fontSize={16} lineHeight={24}>
-              Your Care Provider is on their way!
-            </StyledText>
-          </MatchingMessageWrapper>
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:upcomingVisitId})}>
+            <MatchingMessageWrapper>
+              <StyledText fontSize={16} lineHeight={24}>
+                Your Care Provider is on their way!
+              </StyledText>
+            </MatchingMessageWrapper>
+          </TouchableOpacity>
         ) : null}
 
         <View style={{ marginTop: appointment ? 16 : 48, marginBottom: 40 }}>

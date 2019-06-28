@@ -61,6 +61,7 @@ class VisitBookedScreen extends React.Component {
 
     const successHandler = res => {
       const {
+        //TODO: Hook in care provider when its attached to the visit
         // care_provider,
         child,
         address,
