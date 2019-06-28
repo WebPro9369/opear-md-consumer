@@ -23,6 +23,7 @@ class PhoneNumberScreen extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       phone: null,
       acceptedPrivacy: false,
@@ -62,7 +63,7 @@ class PhoneNumberScreen extends Component {
       name,
       email,
       password,
-      address: {zip_code}
+      address
     } = userStore;
 
     const data = {
@@ -71,7 +72,7 @@ class PhoneNumberScreen extends Component {
         email,
         phone,
         password,
-        zip: zip_code,
+        zip: address.zip,
         accepted_privacy: acceptedPrivacy,
         accepted_terms_of_service: acceptedTermsOfService
       }
