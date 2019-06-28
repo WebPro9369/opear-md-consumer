@@ -2,6 +2,7 @@
 /* eslint-disable import/no-unresolved */
 import React from "react";
 import stripe from "tipsi-stripe";
+import { Alert } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { createPaymentAccount } from "@services/opear-api";
@@ -80,18 +81,23 @@ class AddCardScreen extends React.Component {
         },
         {
           successHandler: res => {
-            userStore.addPaymentAccount(res.data);
             this.setState({ loading: false });
 
-            this.previousScreen();
+            if (res.status === 200) {
+              userStore.addPaymentAccount(res.data);
+              this.previousScreen();
+            } else {
+              Alert.alert("Error", "There was an error saving your card.");
+            }
           },
           errorHandler: () => {
+            Alert.alert("Error", "There was an error saving your card.");
             this.setState({ loading: false });
           }
         }
       );
     } catch (e) {
-      console.tron.log("Error saving card info: ", e);
+      Alert.alert("Error", "There was an error saving your card.");
       this.setState({ loading: false });
     }
   };

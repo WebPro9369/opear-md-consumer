@@ -5,7 +5,7 @@ import { StyledText, StyledTextInput, FormTextInput } from "../../../components/
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView } from "../../../components/views";
 import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
-
+import { ScrollView } from "../../../components/views/scroll-view";
 import { CustomCheckBox } from "../../../components/checkbox";
 import { ServiceButton } from "../../../components/service-button";
 import { ContentWrapper, CustomInput } from "./styles";
@@ -136,52 +136,54 @@ class SelectSymptomsScreen extends React.Component {
               </MatchingMessageWrapper>
             </View>
           ) : null}
-          <ContentWrapper
-            marginTop={hasAppointment ? 16 : 30}
-            marginBottom={0}
-          >
-            <FlatList
-              data={checkListData}
-              renderItem={({ item }) => {
-                if (!item.type || item.type === "checkbox") {
-                  return (
-                    <CustomCheckBox
-                      title={item.string}
-                      checked={item.checked}
-                      onPress={() => {
-                        const newCheckListData = checkListData.map(
-                          (val, index) => {
-                            if (parseInt(item.key, 10) - 1 === index) {
-                              return {
-                                ...val,
-                                checked: !val.checked
-                              };
+          <ScrollView>
+            <ContentWrapper
+              marginTop={hasAppointment ? 16 : 30}
+              marginBottom={0}
+            >
+              <FlatList
+                data={checkListData}
+                renderItem={({ item }) => {
+                  if (!item.type || item.type === "checkbox") {
+                    return (
+                      <CustomCheckBox
+                        title={item.string}
+                        checked={item.checked}
+                        onPress={() => {
+                          const newCheckListData = checkListData.map(
+                            (val, index) => {
+                              if (parseInt(item.key, 10) - 1 === index) {
+                                return {
+                                  ...val,
+                                  checked: !val.checked
+                                };
+                              }
+                              return val;
                             }
-                            return val;
-                          }
-                        );
-                        this.setState({
-                          checkListData: newCheckListData
-                        });
-                      }}
-                    />
-                  );
-                }
-                return null;
-              }}
-            />
-            <FormTextInput
-              placeholder={"Other"}
-              value = {otherInputText}
-              onChangeText={this.handleInputChange("otherInputText")}
+                          );
+                          this.setState({
+                            checkListData: newCheckListData
+                          });
+                        }}
+                      />
+                    );
+                  }
+                  return null;
+                }}
               />
-            <View style={{ padding: 16 }}>
-              <ServiceButton
-                title={"Next"}
-                onPress={this.onSubmit}
-              />
-            </View>
-          </ContentWrapper>
+              <FormTextInput
+                placeholder={"Other"}
+                value = {otherInputText}
+                onChangeText={this.handleInputChange("otherInputText")}
+                />
+              <View style={{ padding: 16 }}>
+                <ServiceButton
+                  title={"Next"}
+                  onPress={this.onSubmit}
+                />
+              </View>
+            </ContentWrapper>
+          </ScrollView>
         </ContainerView>
       </KeyboardAvoidingView>
     );
