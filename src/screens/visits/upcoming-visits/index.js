@@ -27,16 +27,14 @@ class UpcomingVisitsScreen extends React.Component {
 
   componentDidMount() {
     const {
-      store: {
-        currentUserStore: { id },
-        visitsStore
-      }
+      store: { visitsStore }
     } = this.props;
 
-    getVisits(id, {
+    getVisits({
       successHandler: res => {
         for (const key in res.data) {
           const visitArray = res.data[key];
+
           visitArray.forEach(visit => {
             let {
               parent_id,
@@ -76,6 +74,7 @@ class UpcomingVisitsScreen extends React.Component {
                 id: child.id || -1,
                 age: getAge(new Date(child.dob || "01/01/1900")),
                 gender: child.gender || "",
+                name: child.name || "",
                 firstName: child.first_name || "",
                 lastName: child.last_name || "",
                 birthDate: new Date(child.dob || "01/01/1900"),
