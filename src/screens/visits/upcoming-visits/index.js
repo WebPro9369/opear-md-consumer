@@ -1,3 +1,7 @@
+/* eslint-disable prefer-const */
+/* eslint-disable camelcase */
+/* eslint-disable no-loop-func */
+/* eslint-disable guard-for-in */
 /* eslint-disable no-continue */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable import/no-unresolved */
@@ -10,6 +14,7 @@ import { ContainerView, View, ContentWrapper } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { VisitDetailCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
+import { getAge } from "../../../utils";
 
 const imgFox = require("../../../../assets/images/Fox.png");
 
@@ -20,80 +25,153 @@ class UpcomingVisitsScreen extends React.Component {
     store: PropTypes.observableObject.isRequired
   };
 
-  constructor(props) {
-    super(props);
-
+  componentDidMount() {
     const {
-      store: { userStore }
-    } = props;
+      store: {
+        currentUserStore: { id },
+        visitsStore
+      }
+    } = this.props;
 
-    this.state = {
-      visits: []
-    };
-
-    getVisits({
+    getVisits(id, {
       successHandler: res => {
-        const visits = res.data;
+        for (const key in res.data) {
+          const visitArray = res.data[key];
+          visitArray.forEach(visit => {
+            let {
+              parent_id,
+              child_id,
+              address_id,
+              care_provider_id,
+              reason,
+              symptoms,
+              appointment_time,
+              parent_notes,
+              visit_notes,
+              payment_amount,
+              state,
+              child,
+              address,
+              parent
+            } = visit;
 
-        this.setState({ visits });
+            child = child || {};
+            address = address || {};
+            parent = parent || {};
+
+            const newVisit = {
+              id: visit.id,
+              parentId: parent_id,
+              childId: child_id,
+              addressId: address_id,
+              careProviderId: care_provider_id,
+              reason,
+              symptoms,
+              appointmentTime: new Date(appointment_time),
+              parentNotes: parent_notes,
+              visitNotes: visit_notes,
+              paymentAmount: payment_amount,
+              state,
+              child: {
+                id: child.id || -1,
+                age: getAge(new Date(child.dob || "01/01/1900")),
+                gender: child.gender || "",
+                firstName: child.first_name || "",
+                lastName: child.last_name || "",
+                birthDate: new Date(child.dob || "01/01/1900"),
+                birthHistory: child.birth_history || "",
+                surgicalHistory: child.surgical_history || "",
+                currentMedications: child.current_medications || "",
+                hospitalizations: child.hospitalizations || "",
+                currentMedicalConditions:
+                  child.current_medical_conditions || "",
+                allergies: (child.allergies || "").split(", ")
+              },
+              address: {
+                id: address.id || -1,
+                name: address.name || "",
+                street: address.street || "",
+                city: address.city || "",
+                state: address.state || "",
+                zip: address.zip || 0,
+                apartmentNumber: "",
+                latitude: "",
+                longitude: ""
+              },
+              parent: {
+                id: parent.id || -1,
+                name: parent.name || "",
+                email: parent.email || "",
+                phone: parent.phone || "",
+                zip: parent.zip || "",
+                acceptedPrivacy: parent.accepted_privacy || false,
+                acceptedTermsOfService:
+                  parent.accepted_terms_of_service || false,
+                active: parent.active || false
+              }
+            };
+            visitsStore.addVisit(newVisit);
+          });
+        }
       }
     });
   }
 
   render() {
-    const { visits } = this.state;
     const {
-      navigation: { navigate }
+      navigation: { navigate },
+      store: { visitsStore }
     } = this.props;
 
-    const dates = Object.keys(visits);
+    const visits = visitsStore.visits
+      .filter(v => v.state === "scheduled")
+      .sort(
+        (a, b) => new Date(b.appointmentTime) - new Date(a.appointmentTime)
+      );
 
     const visitsDisplayStack = [];
+    const addedTimes = [];
     const dayOptions = { month: "long", day: "numeric" };
     const timeOptions = { day: undefined, hour: "numeric" };
 
-    for (const date of dates) {
-      const visitsOnDate = visits[date];
+    visits.map(visit => {
+      const { appointmentTime } = visit;
+      const dateAsObject = new Date(appointmentTime);
 
-      const dateAsObject = new Date(date);
-
-      visitsDisplayStack.push(
-        <StyledText fontSize={16} color={colors.BLACK60}>
-          {dateAsObject.toLocaleString("en-US", dayOptions)}
-        </StyledText>
-      );
-
-      for (const visitOnDate of visitsOnDate) {
-        let formattedTime = new Date(
-          visitOnDate.appointment_time
-        ).toLocaleDateString("en-US", timeOptions);
-        formattedTime = formattedTime.split(", ");
-
-        const { child, reason, address, id, state } = visitOnDate;
-
-        if (state !== "scheduled") {
-          continue;
-        }
-
+      if (!addedTimes.includes(appointmentTime)) {
+        addedTimes.push(appointmentTime);
         visitsDisplayStack.push(
-          <View style={{ marginBottom: 9 }}>
-            <VisitDetailCard
-              avatarImg={imgFox}
-              name={(child && child.first_name) || "N/A"}
-              illness={reason}
-              time={formattedTime[1]}
-              address={(address && address.street) || "N/A"}
-              onPress={() =>
-                navigate("VisitsVisitBooked", {
-                  visitID: id,
-                  visit: visitOnDate
-                })
-              }
-            />
-          </View>
+          <StyledText fontSize={16} color={colors.BLACK60}>
+            {dateAsObject.toLocaleString("en-US", dayOptions)}
+          </StyledText>
         );
       }
-    }
+
+      const formattedTime = new Date(visit.appointmentTime)
+        .toLocaleDateString("en-US", timeOptions)
+        .split(", ");
+
+      const childName = visit.child.firstName
+        ? `${visit.child.firstName} ${visit.child.lastName}`
+        : "N/A";
+
+      return visitsDisplayStack.push(
+        <View style={{ marginBottom: 9 }}>
+          <VisitDetailCard
+            avatarImg={imgFox}
+            name={childName}
+            illness={visit.reason}
+            time={formattedTime[1]}
+            address={visit.address.street || "N/A"}
+            onPress={() =>
+              navigate("VisitsVisitDetails", {
+                visitID: visit.id
+              })
+            }
+          />
+        </View>
+      );
+    });
 
     return (
       <ContainerView style={{ marginTop: 0 }}>
