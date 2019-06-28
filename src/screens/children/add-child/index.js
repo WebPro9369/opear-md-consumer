@@ -72,7 +72,8 @@ class AddChildScreen extends React.Component {
       currentMedications,
       hospitalizations,
       currentMedicalConditions,
-      allergies
+      allergies,
+      avatarNumber
     } = this.state;
 
     const dateRegex1 = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
@@ -113,11 +114,10 @@ class AddChildScreen extends React.Component {
         current_medications: currentMedications,
         current_medical_conditions: currentMedicalConditions,
         surgical_history: surgicalHistory,
-        hospitalizations
+        hospitalizations,
+        avatar_image_index: avatarNumber
       }
     };
-
-    // const age = getAge(birthDate);
 
     const successHandler = response => {
       const {
@@ -132,7 +132,8 @@ class AddChildScreen extends React.Component {
         current_medications,
         current_medical_conditions,
         surgical_history,
-        hospitalizations
+        hospitalizations,
+        avatar_image_index
       } = response.data;
 
       const newChild = {
@@ -146,7 +147,8 @@ class AddChildScreen extends React.Component {
         surgicalHistory: surgical_history || "",
         currentMedications: current_medications || "",
         currentMedicalConditions: current_medical_conditions || "",
-        hospitalizations: hospitalizations || ""
+        hospitalizations: hospitalizations || "",
+        avatarImageIndex: avatar_image_index || 0
       };
 
       userStore.addChild(newChild);
