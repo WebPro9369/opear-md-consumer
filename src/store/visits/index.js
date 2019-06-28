@@ -10,10 +10,10 @@ export const VisitsStore = types
     visits: types.array(
       types.model({
         id: types.number,
-        parentId: types.number,
-        childId: types.number,
-        addressId: types.number,
-        careProviderId: types.number,
+        parentId: types.maybeNull(types.number),
+        childId: types.maybeNull(types.number),
+        addressId: types.maybeNull(types.number),
+        careProviderId: types.maybeNull(types.number),
         // avatarImg: types.string,
         reason: types.string,
         symptoms: types.array(types.string),
