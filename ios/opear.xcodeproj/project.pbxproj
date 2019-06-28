@@ -435,13 +435,6 @@
 			remoteGlobalIDString = 3A3A7F1A1DC27B520030F9DC;
 			remoteInfo = TPSStripe;
 		};
-		A44DEF5722C30C1F00A2501E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4AB706B5BD054DFBAF5F901A /* RNReanimated.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FDBB176E229BF04900D1E455;
-			remoteInfo = "RNReanimated-tvOS";
-		};
 		A44DEF6122C30C1F00A2501E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 67D7584F284A43769AB2C067 /* RNTwilioVoice.xcodeproj */;
@@ -937,7 +930,6 @@
 			isa = PBXGroup;
 			children = (
 				84CBC0AD2243F81A000599FE /* libRNReanimated.a */,
-				A44DEF5822C30C1F00A2501E /* libRNReanimated-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1571,13 +1563,6 @@
 			fileType = archive.ar;
 			path = libTPSStripe.a;
 			remoteRef = 89F0591A22B0B9D6006FFF85 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A44DEF5822C30C1F00A2501E /* libRNReanimated-tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libRNReanimated-tvOS.a";
-			remoteRef = A44DEF5722C30C1F00A2501E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		A44DEF6222C30C1F00A2501E /* libRNTwilioVoice.a */ = {
