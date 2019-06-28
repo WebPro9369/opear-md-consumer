@@ -30,13 +30,6 @@ class SelectProviderScreen extends React.Component {
       this.setState({
         providers: care_provider
       });
-
-        id: "1",
-        name: "Dr. John Smith",
-        bio: "Hi, this is my bio",
-        history: "Hi, this is my work history, line two of my work history",
-        rating: "4.5",
-        badges: ["Specialty", "Credentials", "Experience"]
     }
 
     getVisitRequest(visitID, { successHandler });
