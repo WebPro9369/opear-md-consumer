@@ -357,7 +357,6 @@ export const updateCareProvider = (
 /* Visits */
 
 export const getVisits = (
-  userID,
   { past, successHandler, errorHandler } = {}
 ) => {
   const url = `/v1/visits${past ? "?past=true" : ""}`;
