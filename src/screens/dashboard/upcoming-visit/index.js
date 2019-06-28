@@ -15,7 +15,9 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
-import { TwilioService } from "@services";
+import { getVisit, updateVisit } from "@services/opear-api";
+import { ServiceButton } from "@components/service-button";
+import TwilioVoice from "react-native-twilio-programmable-voice";
 
 const { BLACK60 } = colors;
 
@@ -100,9 +102,8 @@ class VisitBookedScreen extends React.Component {
     const {
       providerData: { phone }
     } = this.state;
-
-    TwilioService.makeCall(null, null, phone);
-  };
+    TwilioVoice.connect({ To: phone });
+  }
 
   render() {
     const {
