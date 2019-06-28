@@ -178,7 +178,7 @@ export const UserStore = types
       return self;
     },
     setVisitRequestReason(value) {
-        self.visitRequestReason = value;
+        self.visitRequest.reason = value;
         return self;
     },
     setVisitRequestPickedChild(value) {
