@@ -58,7 +58,7 @@ const MainStore = types.model("MainStore", {
       pickedAddress: 1,
       date: "",
       time: 0,
-      cost: 0
+      cost: 150
     },
     cardInfo: {
       cardNumber: "",
