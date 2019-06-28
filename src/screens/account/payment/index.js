@@ -63,21 +63,37 @@ class PaymentScreen extends React.Component {
     });
   }
 
+  previousScreen() {
+    const {
+      navigation: { getParam, navigate }
+    } = this.props;
+
+    const screenRef = getParam("screenRef", null);
+
+    if (screenRef) {
+      navigate("DashboardBookingReview", { cardAdded: true });
+    } else {
+      navigate("AccountDefault");
+    }
+  }
+
   render() {
     const {
-      navigation: { navigate },
+      navigation: { navigate, getParam },
       store: {
         userStore: { payment_accounts, active }
       }
     } = this.props;
     const { loading } = this.state;
+    const screenRef = getParam("screenRef", null);
+
     return (
       <ContainerView padding={16}>
         <NavHeader
           title="Payment settings"
           size="medium"
           hasBackButton
-          onPressBackButton={() => navigate("AccountDefault")}
+          onPressBackButton={() => this.previousScreen()}
         />
         <InactiveUserBanner userIsActive={active} />
         <View>
@@ -109,7 +125,9 @@ class PaymentScreen extends React.Component {
           )}
           {!loading && !payment_accounts.length && (
             <View style={{ marginTop: 16, marginLeft: 28 }}>
-              <TouchableWrapper onPress={() => navigate("PaymentAddCard")}>
+              <TouchableWrapper
+                onPress={() => navigate("PaymentAddCard", { screenRef })}
+              >
                 <FlexView justifyContent="start">
                   <AntDesign
                     name="pluscircleo"

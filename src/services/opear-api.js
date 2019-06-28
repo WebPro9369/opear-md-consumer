@@ -467,7 +467,7 @@ export const createPaymentAccount = (
   data,
   { successHandler, errorHandler } = {}
 ) => {
-  const url = `/v1/parents/${userID}/payment_account`;
+  const url = `/v1/parents/${userID}/payment_accounts`;
   axios
     .post(url, data)
     .then(res => {

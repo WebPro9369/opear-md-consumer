@@ -7,6 +7,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { createPaymentAccount } from "@services/opear-api";
 import InactiveUserBanner from "@components/banner";
 import { FormTextInput } from "../../../components/text";
+import { FormMaskedTextInput } from "../../../components/text-masked";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
 import {
@@ -49,7 +50,13 @@ class AddCardScreen extends React.Component {
       store: { cardStore, userStore }
     } = this.props;
     const { id } = userStore;
-    const { cardNumber, expiryYear, expiryMonth, cvv, fullName } = cardStore;
+    const {
+      cardNumber,
+      expiryYear,
+      expiryMonth,
+      cvv,
+      fullName
+    } = cardStore.cardInfo;
 
     const params = {
       number: cardNumber,
@@ -73,17 +80,10 @@ class AddCardScreen extends React.Component {
         },
         {
           successHandler: res => {
-            userStore.addPaymentAccount(res.data.paymentAccount);
+            userStore.addPaymentAccount(res.data);
             this.setState({ loading: false });
 
-            const screenRef = getParam("screenRef", null);
-
-            if (screenRef) {
-              return navigate("DashboardBookingReview", { cardAdded: true });
-            } else {
-              goBack();
-            }
-            return true;
+            this.previousScreen();
           },
           errorHandler: () => {
             this.setState({ loading: false });
@@ -96,9 +96,23 @@ class AddCardScreen extends React.Component {
     }
   };
 
+  previousScreen() {
+    const {
+      navigation: { getParam, navigate, goBack }
+    } = this.props;
+
+    const screenRef = getParam("screenRef", null);
+
+    if (screenRef) {
+      navigate("DashboardPaymentDefault", { screenRef });
+    } else {
+      goBack();
+    }
+  }
+
   render() {
     const {
-      navigation: { goBack, navigate },
+      navigation: { navigate },
       store: { cardStore, userStore }
     } = this.props;
 
@@ -119,14 +133,14 @@ class AddCardScreen extends React.Component {
               expiryMonth: "",
               cvv: ""
             });
-            goBack();
+            this.previousScreen();
           }}
           hasBackButton
         />
         <InactiveUserBanner userIsActive={userStore.active} />
         <FormWrapper>
           <FormInputView>
-            <FormTextInput
+            <FormMaskedTextInput
               label="Card Number"
               value={cardNumber}
               placeholder={
@@ -134,8 +148,12 @@ class AddCardScreen extends React.Component {
                   ? `Current Card ending in ${last4}`
                   : "1234 5678 3456 2456"
               }
+              maskOptions={{ mask: "9999 9999 9999 9999" }}
               onChangeText={value =>
-                cardStore.setCardInfo({ ...cardInfo, cardNumber: value })
+                cardStore.setCardInfo({
+                  ...cardInfo,
+                  cardNumber: value
+                })
               }
               rightIcon={
                 // eslint-disable-next-line react/jsx-wrap-multilines
@@ -154,31 +172,40 @@ class AddCardScreen extends React.Component {
               <FormTextInput
                 label="Exp. Month"
                 value={expiryMonth}
-                onChangeText={value =>
-                  cardStore.setCardInfo({ ...cardInfo, expiryMonth: value })
-                }
-                placeholder="##"
+                placeholder="MM"
+                maxLength={2}
                 style={{
                   width: 120,
                   marginRight: 40
                 }}
+                onChangeText={value =>
+                  cardStore.setCardInfo({
+                    ...cardInfo,
+                    expiryMonth: Number(value)
+                  })
+                }
               />
               <FormTextInput
                 label="Exp. Year"
                 value={expiryYear}
+                placeholder="YY"
+                maxLength={2}
                 onChangeText={value =>
-                  cardStore.setCardInfo({ ...cardInfo, expiryYear: value })
+                  cardStore.setCardInfo({
+                    ...cardInfo,
+                    expiryYear: Number(value)
+                  })
                 }
-                placeholder="##"
                 style={{
                   width: 120,
                   marginRight: 40
                 }}
               />
-              <FormTextInput
+              <FormMaskedTextInput
                 label="CVV"
                 value={cvv}
-                placeholder="###"
+                placeholder="123"
+                maskOptions={{ mask: "999" }}
                 onChangeText={value =>
                   cardStore.setCardInfo({ ...cardInfo, cvv: value })
                 }
@@ -199,13 +226,15 @@ class AddCardScreen extends React.Component {
             />
           </FormInputView>
         </FormWrapper>
-        <ServiceButton
-          title={!isEditing ? "Save Card" : "Edit Card"}
-          onPress={async () => {
-            await this.saveCardHandler();
-          }}
-          loading={loading}
-        />
+        <FormInputView>
+          <ServiceButton
+            title={!isEditing ? "Save Card" : "Edit Card"}
+            onPress={async () => {
+              await this.saveCardHandler();
+            }}
+            loading={loading}
+          />
+        </FormInputView>
       </KeyboardAvoidingView>
     );
   }
