@@ -40,17 +40,6 @@ const MainStore = types.model("MainStore", {
     phone: "",
     payment_accounts: [],
     notificationToken: '',
-    paymentMethods: [
-      {
-        id: 0,
-        type: "Card",
-        cardNumber: 19990,
-        expiryYear: 10,
-        expiryMonth: 11,
-        cvv: 320,
-        fullName: "Card Name"
-      }
-    ],
     visitRequest: {
       symptoms: [""],
       reason: "",
@@ -59,14 +48,6 @@ const MainStore = types.model("MainStore", {
       date: "",
       time: 0,
       cost: 150
-    },
-    cardInfo: {
-      cardNumber: "",
-      expiryYear: 0,
-      expiryMonth: 0,
-      cvv: "",
-      cardType: "",
-      fullName: ""
     },
     address: {
       name: "",
@@ -77,16 +58,6 @@ const MainStore = types.model("MainStore", {
       apartment_number: "",
       latitude: "",
       longitude: ""
-    }
-  }),
-  cardStore: types.optional(CardStore, {
-    cardInfo: {
-      cardNumber: "",
-      expiryYear: 0,
-      expiryMonth: 0,
-      cvv: "",
-      cardType: "",
-      fullName: ""
     }
   }),
   visitsStore: types.optional(VisitsStore, {

@@ -2,12 +2,12 @@
 /* eslint-disable no-param-reassign */
 import { types } from "mobx-state-tree";
 import { setAuthentication } from "@services/authentication";
-import { formatCardInfo } from "@utils";
 import AddressStore from "@store/address";
 // import ChildStore from "@store/child";
 
 const PaymentAccountStore = types
   .model("PaymentAccountStore", {
+    id: types.maybeNull(types.number),
     token_id: types.maybeNull(types.string),
     last4: types.maybeNull(types.string)
   })
@@ -36,19 +36,6 @@ export const UserStore = types
     acceptedTermsOfService: types.boolean,
     payment_accounts: types.array(PaymentAccountStore),
     notificationToken: types.string,
-    paymentMethods: types.array(
-      types.model({
-        id: types.number,
-        type: types.string,
-        paypalEmail: types.optional(types.string, ""),
-        cardNumber: types.optional(types.number, 0),
-        expiryYear: types.optional(types.number, 0),
-        expiryMonth: types.optional(types.number, 0),
-        cvv: types.optional(types.number, 0),
-        cardType: types.optional(types.string, ""),
-        fullName: types.optional(types.string, "")
-      })
-    ),
     addresses: types.array(
       types.model({
         id: types.number,
@@ -83,14 +70,6 @@ export const UserStore = types
       date: types.string,
       time: types.number,
       cost: types.number
-    }),
-    cardInfo: types.model({
-      cardNumber: types.string,
-      expiryYear: types.number,
-      expiryMonth: types.number,
-      cvv: types.string,
-      cardType: types.string,
-      fullName: types.string
     }),
     address: types.optional(AddressStore, {
       name: "",
@@ -143,25 +122,6 @@ export const UserStore = types
     },
     setBirthday(value) {
       self.birthday = value;
-      return self;
-    },
-    setCardInfo(value) {
-      self.cardInfo = {
-        ...self.cardInfo,
-        ...formatCardInfo(value)
-      };
-      return self;
-    },
-    addPaymentMethod(value) {
-      self.paymentMethods.push(value);
-      return self;
-    },
-    setPaymentMethods(value) {
-      self.paymentMethods.replace(value);
-      return self;
-    },
-    setPaymentMethod(index, value) {
-      self.paymentMethods[index] = value;
       return self;
     },
     addChild(value) {

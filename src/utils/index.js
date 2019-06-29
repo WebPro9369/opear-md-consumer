@@ -17,7 +17,7 @@ export const userFromResult = (res, userStore) => {
     phone,
     active,
     addresses,
-    // payment_accounts,
+    payment_accounts,
     // birthday,
     zip
   } = res.data;
@@ -25,7 +25,7 @@ export const userFromResult = (res, userStore) => {
   // const dob = getFormattedDate(new Date(birthday));
   const address =
     addresses && addresses.length ? addresses[addresses.length - 1] : null;
-  const addressesAdjusted = addresses.map(a => ({
+  const addressesAdjusted = (addresses || []).map(a => ({
     id: a.id,
     name: a.name || "",
     street: a.street || "",
@@ -40,7 +40,7 @@ export const userFromResult = (res, userStore) => {
     .setPhone(phone)
     .setActive(active)
     // .setBirthday(dob)
-    // .setPaymentAccounts(payment_accounts)
+    .setPaymentAccounts(payment_accounts)
     .setZip(zip)
     .setAddresses(addressesAdjusted);
 
