@@ -8,7 +8,7 @@ const AddressStore = types
     city: types.string,
     state: types.string,
     zip: types.string,
-    apartment_number: types.string,
+    apartmentNumber: types.string,
     latitude: types.string,
     longitude: types.string
   })
@@ -34,7 +34,7 @@ const AddressStore = types
       return self;
     },
     setApartmentNumber(value) {
-      self.apartment_number = value;
+      self.apartmentNumber = value;
       return self;
     },
     setLatitude(value) {

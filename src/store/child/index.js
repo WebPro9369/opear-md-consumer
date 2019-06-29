@@ -7,13 +7,15 @@ export const ChildStore = types
     age: types.number,
     gender: types.string,
     name: types.string,
+    firstName: types.string,
+    lastName: types.string,
     birthDate: types.Date,
-    birthHistory: types.optional(types.string, ''),
-    surgicalHistory: types.optional(types.string, ''),
-    currentMedications: types.optional(types.string, ''),
-    hospitalizations: types.optional(types.string, ''),
-    currentMedicalConditions: types.optional(types.string, ''),
-    allergies: types.array(types.string,'')
+    birthHistory: types.optional(types.string, ""),
+    surgicalHistory: types.optional(types.string, ""),
+    currentMedications: types.optional(types.string, ""),
+    hospitalizations: types.optional(types.string, ""),
+    currentMedicalConditions: types.optional(types.string, ""),
+    allergies: types.array(types.string, "")
   })
   .actions(self => ({
     setGender(value) {
@@ -22,6 +24,14 @@ export const ChildStore = types
     },
     setName(value) {
       self.name = value;
+      return self;
+    },
+    setFirstName(value) {
+      self.firstName = value;
+      return self;
+    },
+    setLastName(value) {
+      self.lastName = value;
       return self;
     },
     setBirthDate(value) {
