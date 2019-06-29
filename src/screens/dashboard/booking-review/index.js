@@ -64,26 +64,23 @@ class BookingReviewScreen extends React.Component {
 
   onSubmit = () => {
     const {
-      navigation: { navigate, getParam },
+      navigation: { navigate },
       store: {
         providerStore,
-        userStore: { visitRequest }
+        userStore: { visitRequest, payment_accounts }
       }
     } = this.props;
 
     const { parentNotes } = this.state;
 
-    const cardSelected = getParam("cardAdded", false);
-
-    if (!cardSelected) {
+    if (!payment_accounts || payment_accounts.length === 0) {
       return Alert.alert(
         "Missing Payment",
         "Please select a valid payment method."
       );
     }
 
-    const data =
-    {
+    const data = {
       visit: {
         child_id: visitRequest.pickedChild,
         address_id: visitRequest.pickedAddress,
@@ -91,21 +88,25 @@ class BookingReviewScreen extends React.Component {
         symptoms: visitRequest.symptoms,
         appointment_time: visitRequest.date + ", " + visitRequest.time,
         parent_notes: parentNotes,
-        payment_amount: visitRequest.cost
+        payment_amount: visitRequest.cost,
+        payment_account_id: payment_accounts[payment_accounts.length - 1].id // TODO: only allows one account
       }
     };
 
-    successHandler = res => {
+    const successHandler = () => {
       providerStore.setAppointment(true);
       navigate("DashboardDefault");
-    }
+    };
 
-    registerVisit(data, {successHandler});
+    registerVisit(data, { successHandler });
   };
 
   render() {
     const {
-      navigation: { goBack, push }
+      navigation: { goBack, push },
+      store: {
+        userStore: { payment_accounts }
+      }
     } = this.props;
     const { name, address, date, time, price, parentNotes } = this.state;
 
@@ -197,28 +198,48 @@ class BookingReviewScreen extends React.Component {
             </ContentButton>
             <FlexView>
               <View style={{ flex: 1, marginRight: 4 }}>
-                <ContentButton
-                  onPress={() =>
-                    push("DashboardPaymentDefault", {
-                      screenRef: "booking-review"
-                    })
-                  }
-                >
-                  <FlexView justifyContent="center">
-                    <AntDesign
-                      name="pluscircle"
-                      size={24}
-                      color={colors.LIGHTGREEN}
-                      style={{
-                        marginRight: 12
-                      }}
-                    />
-                    <StyledText fontSize={16}>Add card</StyledText>
-                  </FlexView>
-                </ContentButton>
+                {(!payment_accounts || payment_accounts.length === 0) &&
+                  <ContentButton
+                    onPress={() =>
+                      push("DashboardPaymentDefault", {
+                        screenRef: "booking-review"
+                      })
+                    }
+                  >
+                    <FlexView justifyContent="center">
+                      <AntDesign
+                        name="pluscircle"
+                        size={24}
+                        color={colors.LIGHTGREEN}
+                        style={{
+                          marginRight: 12
+                        }}
+                      />
+                      <StyledText fontSize={16}>Add card</StyledText>
+                    </FlexView>
+                  </ContentButton>
+                }
+                {payment_accounts && payment_accounts.length > 0 &&
+                  <ContentButton
+                    onPress={() => {}}
+                    disabled={true}
+                  >
+                    <FlexView justifyContent="center">
+                      <AntDesign
+                        name="creditcard"
+                        size={24}
+                        color={colors.LIGHTGREEN}
+                        style={{
+                          marginRight: 12
+                        }}
+                      />
+                      <StyledText fontSize={16}>{`****${payment_accounts[payment_accounts.length - 1].last4}`}</StyledText>
+                    </FlexView>
+                  </ContentButton>
+                }
               </View>
               <View style={{ flex: 1, marginLeft: 4 }}>
-                <ContentButton>
+                <ContentButton disabled={true}>
                   <StyledText
                     fontFamily="FlamaMedium"
                     fontSize={20}

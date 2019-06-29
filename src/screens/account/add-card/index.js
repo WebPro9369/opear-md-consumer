@@ -47,7 +47,6 @@ class AddCardScreen extends React.Component {
 
   saveCardHandler = async () => {
     const {
-      navigation: { goBack, getParam, navigate },
       store: { cardStore, userStore }
     } = this.props;
     const { id } = userStore;
@@ -110,7 +109,7 @@ class AddCardScreen extends React.Component {
     const screenRef = getParam("screenRef", null);
 
     if (screenRef) {
-      navigate("DashboardPaymentDefault", { screenRef });
+      navigate("DashboardBookingReview", { screenRef });
     } else {
       goBack();
     }
