@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.airbnb.android.react.maps.MapsPackage;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.hoxfon.react.RNTwilioVoice.TwilioVoicePackage;
 import com.oblador.keychain.KeychainPackage;
 import com.gettipsi.stripe.StripeReactPackage;
@@ -34,6 +35,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new MapsPackage(),
+            new SplashScreenReactPackage(),
             new TwilioVoicePackage(),
             new KeychainPackage(),
             new StripeReactPackage(),
