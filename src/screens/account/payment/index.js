@@ -71,7 +71,7 @@ class PaymentScreen extends React.Component {
     const screenRef = getParam("screenRef", null);
 
     if (screenRef) {
-      navigate("DashboardBookingReview", { cardAdded: true });
+      navigate("DashboardBookingReview");
     } else {
       navigate("AccountDefault");
     }
@@ -102,7 +102,7 @@ class PaymentScreen extends React.Component {
           )}
           {!loading && payment_accounts && payment_accounts.length > 0 && (
             <View style={{ paddingTop: 16, paddingBottom: 16 }}>
-              {payment_accounts.map(pm => {
+              {[ payment_accounts[payment_accounts.length - 1] ].map(pm => {
                 return (
                   <ListTouchableButtonWrapper
                     key={pm.last4}
