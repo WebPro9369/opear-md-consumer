@@ -48,6 +48,7 @@
 		44D054A0505948D793A3D9A4 /* libRNCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5AB5AD7329453481FA65EB /* libRNCardIO.a */; };
 		473956575F69468DAE7B0990 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 636A6A1BD6A9495D8478694F /* Foundation.ttf */; };
 		4D80D47B71F346ECB9D4AAB5 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE423E204B5D41A18078659C /* FontAwesome5_Brands.ttf */; };
+		53433FBC22C94F2A002A846C /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53433FB822C94F15002A846C /* libSplashScreen.a */; };
 		537402AB22A2EE8D00D5D49C /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 537402AA22A2EE8C00D5D49C /* main.jsbundle */; };
 		53C27FCD22B7DC8100FFF0DD /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 53C27F9D22B7DC8100FFF0DD /* assets */; };
 		73A3F4C588FF4D4CA662E881 /* libTPSStripe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2746879EC288466881882829 /* libTPSStripe.a */; };
@@ -289,6 +290,13 @@
 			remoteGlobalIDString = 3D3CD9321DE5FBEE00167DC4;
 			remoteInfo = "cxxreact-tvOS";
 		};
+		53433FB722C94F15002A846C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53433F8322C94F15002A846C /* SplashScreen.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D7682761D8E76B80014119E;
+			remoteInfo = SplashScreen;
+		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -492,6 +500,7 @@
 		3C38F3AF522A4CC3856A8223 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		4AB706B5BD054DFBAF5F901A /* RNReanimated.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReanimated.xcodeproj; path = "../node_modules/react-native-reanimated/ios/RNReanimated.xcodeproj"; sourceTree = "<group>"; };
 		4BAF1199E9204745B1F2FF4E /* Flama-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Flama-Medium.otf"; path = "../assets/fonts/Flama-Medium.otf"; sourceTree = "<group>"; };
+		53433F8322C94F15002A846C /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		537402AA22A2EE8C00D5D49C /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		53C27F9D22B7DC8100FFF0DD /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		5494BDCE521B499DB5443179 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
@@ -553,6 +562,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53433FBC22C94F2A002A846C /* libSplashScreen.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				840733CC228578A100A9535B /* libTouchID.a in Frameworks */,
 				84B32AEE225B57D500F27AE0 /* libRCTPushNotification.a in Frameworks */,
@@ -742,6 +752,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		53433F8422C94F15002A846C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				53433FB822C94F15002A846C /* libSplashScreen.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -778,6 +796,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				53433F8322C94F15002A846C /* SplashScreen.xcodeproj */,
 				848B44B322B6B79800E9288C /* RCTLinking.xcodeproj */,
 				840733C62285788D00A9535B /* TouchID.xcodeproj */,
 				84B32AE5225B57B800F27AE0 /* RCTPushNotification.xcodeproj */,
@@ -1200,6 +1219,10 @@
 					ProjectRef = 13941AB592D44CCFA9F58932 /* RNVectorIcons.xcodeproj */;
 				},
 				{
+					ProductGroup = 53433F8422C94F15002A846C /* Products */;
+					ProjectRef = 53433F8322C94F15002A846C /* SplashScreen.xcodeproj */;
+				},
+				{
 					ProductGroup = 840733C72285788D00A9535B /* Products */;
 					ProjectRef = 840733C62285788D00A9535B /* TouchID.xcodeproj */;
 				},
@@ -1417,6 +1440,13 @@
 			fileType = archive.ar;
 			path = libcxxreact.a;
 			remoteRef = 3DAD3EAA1DF850E9000B6D8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		53433FB822C94F15002A846C /* libSplashScreen.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSplashScreen.a;
+			remoteRef = 53433FB722C94F15002A846C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
@@ -1965,6 +1995,7 @@
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
 					"$(SRCROOT)/../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = opear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2001,6 +2032,7 @@
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
 					"$(SRCROOT)/../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = opear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

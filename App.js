@@ -2,9 +2,11 @@ import React from "react";
 import { AppState, Platform } from "react-native";
 import { Provider, observer } from "mobx-react";
 import PushNotification from "react-native-push-notification";
+import SplashScreen from "react-native-splash-screen";
 import { mainStore } from "./src/store";
 import RootContainer from "./src/root-container";
 import { TwilioService } from "./src/services";
+
 // import { DEVICE_WIDTH, DEVICE_HEIGHT } from "./src/utils/constants";
 
 // const imgSplash = require("./assets/splash.png");
@@ -42,6 +44,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     AppState.addEventListener("change", this.handleAppStateChange);
+    SplashScreen.hide();
   }
 
   componentWillReceiveProps() {}

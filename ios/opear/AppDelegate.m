@@ -12,6 +12,7 @@
 #import <React/RCTRootView.h>
 #import <React/RCTPushNotificationManager.h>
 #import <React/RCTLinkingManager.h>
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -29,6 +30,8 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  [RNSplashScreen show];
   return YES;
 }
 
