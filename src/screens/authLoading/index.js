@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { Component } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, Linking, View } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { getParent } from "@services/opear-api";
 import { getAuthentication } from "@services/authentication";
@@ -13,10 +13,38 @@ class AuthLoadingScreen extends Component {
     store: PropTypes.observableObject.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.bootstrapAsync();
+  componentDidMount() {
+    Linking.addEventListener("url", this.handleOpenURL);
+    Linking.getInitialURL()
+      .then(url => {
+        if (url) {
+          console.tron.log(`Initial url is: ${url}`);
+          return this.handleOpenURL(url);
+        }
+        return this.bootstrapAsync();
+      })
+      .catch(err => console.tron.log("Error getInitialURL", err));
   }
+
+  componentWillUnmount() {
+    Linking.removeEventListener("url", this.handleOpenURL);
+  }
+
+  handleOpenURL = url => {
+    this.navigate(url);
+  };
+
+  navigate = url => {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    const route = url.replace(/.*?:\/\//g, "");
+    const routeName = route.split("/")[0];
+
+    if (routeName === "newpwd") {
+      navigate("AccountNewPwd", { routeInfo: route });
+    }
+  };
 
   bootstrapAsync = async () => {
     const {
@@ -31,8 +59,8 @@ class AuthLoadingScreen extends Component {
       wasAuthenticated
     } = await getAuthentication();
 
-    if (!isAuthenticated && wasAuthenticated) return navigate("AccountSignIn");
-    if (!isAuthenticated) return navigate("AccountSignIn");
+    if (!isAuthenticated && wasAuthenticated) return navigate("Authenticating");
+    if (!isAuthenticated) return navigate("Authenticating");
 
     userStore.setAuthentication({ id, apiKey });
 
@@ -43,7 +71,7 @@ class AuthLoadingScreen extends Component {
 
     const errorHandler = err => {
       if (err.response.status === 401) {
-        navigate("AccountSignIn");
+        navigate("Authenticating");
       }
     };
 

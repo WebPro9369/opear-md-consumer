@@ -2,12 +2,12 @@
 /* eslint-disable no-param-reassign */
 import { types } from "mobx-state-tree";
 import { setAuthentication } from "@services/authentication";
-import { formatCardInfo } from "@utils";
 import AddressStore from "@store/address";
 // import ChildStore from "@store/child";
 
 const PaymentAccountStore = types
   .model("PaymentAccountStore", {
+    id: types.maybeNull(types.number),
     token_id: types.maybeNull(types.string),
     last4: types.maybeNull(types.string)
   })
@@ -35,19 +35,7 @@ export const UserStore = types
     acceptedPrivacy: types.boolean,
     acceptedTermsOfService: types.boolean,
     payment_accounts: types.array(PaymentAccountStore),
-    paymentMethods: types.array(
-      types.model({
-        id: types.number,
-        type: types.string,
-        paypalEmail: types.optional(types.string, ""),
-        cardNumber: types.optional(types.number, 0),
-        expiryYear: types.optional(types.number, 0),
-        expiryMonth: types.optional(types.number, 0),
-        cvv: types.optional(types.number, 0),
-        cardType: types.optional(types.string, ""),
-        fullName: types.optional(types.string, "")
-      })
-    ),
+    notificationToken: types.string,
     addresses: types.array(
       types.model({
         id: types.number,
@@ -70,32 +58,26 @@ export const UserStore = types
         currentMedications: types.optional(types.string, ""),
         hospitalizations: types.optional(types.string, ""),
         currentMedicalConditions: types.optional(types.string, ""),
-        allergies: types.array(types.string, "")
+        allergies: types.array(types.string, ""),
+        avatarImageIndex: types.number
       })
     ),
     visitRequest: types.model({
       symptoms: types.array(types.string, ""),
+      reason: types.string,
       pickedChild: types.number,
       pickedAddress: types.number,
       date: types.string,
       time: types.number,
       cost: types.number
     }),
-    cardInfo: types.model({
-      cardNumber: types.string,
-      expiryYear: types.number,
-      expiryMonth: types.number,
-      cvv: types.string,
-      cardType: types.string,
-      fullName: types.string
-    }),
     address: types.optional(AddressStore, {
       name: "",
       street: "",
       city: "",
       state: "",
-      zip_code: "",
-      apartment_number: "",
+      zip: "",
+      apartmentNumber: "",
       latitude: "",
       longitude: ""
     })
@@ -142,25 +124,6 @@ export const UserStore = types
       self.birthday = value;
       return self;
     },
-    setCardInfo(value) {
-      self.cardInfo = {
-        ...self.cardInfo,
-        ...formatCardInfo(value)
-      };
-      return self;
-    },
-    addPaymentMethod(value) {
-      self.paymentMethods.push(value);
-      return self;
-    },
-    setPaymentMethods(value) {
-      self.paymentMethods.replace(value);
-      return self;
-    },
-    setPaymentMethod(index, value) {
-      self.paymentMethods[index] = value;
-      return self;
-    },
     addChild(value) {
       // console.tron.log(value);
       self.children.push(value);
@@ -173,6 +136,10 @@ export const UserStore = types
     setVisitRequestSymptoms(value) {
       self.visitRequest.symptoms.replace(value);
       return self;
+    },
+    setVisitRequestReason(value) {
+        self.visitRequest.reason = value;
+        return self;
     },
     setVisitRequestPickedChild(value) {
       self.visitRequest.pickedChild = value;
@@ -208,6 +175,13 @@ export const UserStore = types
       self.addresses.replace(value);
       return self;
     },
+    setAddress(value, index) {
+      if (!(index > -1)) {
+        index = self.addresses.length - 1;
+      }
+      self.addresses[index] = value;
+      return self;
+    },
     setChildren(value) {
       self.children.replace(value);
       return self;
@@ -223,5 +197,9 @@ export const UserStore = types
     addPaymentAccount(value) {
       self.payment_accounts.push(value);
       return self;
-    }
+    },
+    setNotificationToken(value) {
+      self.notificationToken = value;
+      return self;
+    },
   }));

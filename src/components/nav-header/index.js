@@ -11,10 +11,10 @@ import {
 export const NavHeader = ({
   title,
   size,
-  serviceTextStyle,
   hasBackButton,
   backButtonIcon,
   backgroundColor,
+  serviceTextStyle,
   onPressBackButton,
   ...rest
 }) => (
@@ -36,20 +36,20 @@ export const NavHeader = ({
 NavHeader.propTypes = {
   title: PropTypes.string,
   size: PropTypes.oneOf(["small", "medium", "large"]),
-  serviceTextStyle: PropTypes.instanceOf(Object),
   hasBackButton: PropTypes.bool,
   backButtonIcon: PropTypes.element,
   backgroundColor: PropTypes.string,
+  serviceTextStyle: PropTypes.instanceOf(Object),
   onPressBackButton: PropTypes.func
 };
 
 NavHeader.defaultProps = {
   title: "",
   size: "small",
-  serviceTextStyle: {},
   hasBackButton: false,
   backButtonIcon: null,
   backgroundColor: "#ffffff",
+  serviceTextStyle: {},
   onPressBackButton: null
 };
 

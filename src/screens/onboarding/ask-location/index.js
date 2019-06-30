@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Alert, Image, View, Linking } from "react-native";
+import { Alert, Image, View } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import TouchID from "react-native-touch-id";
 import { ServiceButton } from "@components/service-button";
@@ -13,35 +13,13 @@ const imgProgressbar = require("../../../../assets/images/ProgressBar1.png");
 @observer
 class AskLocationScreen extends Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
     this.state = {
       zipcode: null
-    };
-  }
-
-  componentDidMount() {
-    Linking.addEventListener('url', this.handleOpenURL);
-  }
-
-  componentWillUnmount () {
-    Linking.removeEventListener('url', this.handleOpenURL);
-  }
-
-  handleOpenURL = (event) => {
-    this.navigate(event.url);
-  }
-
-  navigate = (url) => {
-    const { navigate } = this.props.navigation;
-    const route = url.replace(/.*?:\/\//g, '');
-    const routeName = route.split('/')[0];
-
-    if (routeName === 'newpwd') {
-      navigate('AccountNewPwd',{routeInfo:route});
     };
   }
 
@@ -73,35 +51,43 @@ class AskLocationScreen extends Component {
     if (zipcode) address.setZipCode(zipcode);
     navigate("NameCapture");
     // TODO: Get TouchID working
-  //   return TouchID.isSupported(optionalConfigObject)
-  //     .then(biometryType => {
-  //       console.tron.log("BiometryType: ", biometryType);
-  //       TouchID.authenticate()
-  //         .then(success => {
-  //           console.tron.log("TouchID Auth successful: ", success);
-  //           Alert.alert("Authenticated Successfully!");
-  //           navigate("NameCapture");
-  //         })
-  //         .catch(error => {
-  //           console.tron.log("TouchID auth failed: ", error);
-  //           if (error.name === "LAErrorTouchIDNotAvailable") {
-  //             return Alert.alert("TouchID is not supported.");
-  //           }
-  //           Alert.alert("Authentication failed.");
-  //         });
-  //     })
-  //     .catch(error => {
-  //       console.tron.log("TouchID not supported: ", error);
-  //       Alert.alert("TouchID is not supported.");
-  //     });
+    //   return TouchID.isSupported(optionalConfigObject)
+    //     .then(biometryType => {
+    //       console.tron.log("BiometryType: ", biometryType);
+    //       TouchID.authenticate()
+    //         .then(success => {
+    //           console.tron.log("TouchID Auth successful: ", success);
+    //           Alert.alert("Authenticated Successfully!");
+    //           navigate("NameCapture");
+    //         })
+    //         .catch(error => {
+    //           console.tron.log("TouchID auth failed: ", error);
+    //           if (error.name === "LAErrorTouchIDNotAvailable") {
+    //             return Alert.alert("TouchID is not supported.");
+    //           }
+    //           Alert.alert("Authentication failed.");
+    //         });
+    //     })
+    //     .catch(error => {
+    //       console.tron.log("TouchID not supported: ", error);
+    //       Alert.alert("TouchID is not supported.");
+    //     });
   };
 
   render() {
     const { zipcode } = this.state;
+    const {
+      navigation: { navigate }
+    } = this.props;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <View>
-          <NavHeader title="Welcome to opear" hasBackButton size="small" />
+          <NavHeader
+            title="Welcome to opear"
+            hasBackButton
+            size="small"
+            onPressBackButton={() => navigate("Authenticating")}
+          />
           <StyledText
             textAlign="left"
             style={{ marginTop: 24, marginBottom: 24 }}

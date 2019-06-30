@@ -1,8 +1,8 @@
 import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import AuthLoadingScreen from "../screens/authLoading";
 import TabNavigator from "./tab.navigator";
-import SignInScreen from "../screens/auth/signin";
 import OnboardingNavigator from "./onboarding.navigator";
+import AuthNavigator from "./auth.navigator";
 
 const MainNavigator = createSwitchNavigator(
   {
@@ -12,8 +12,8 @@ const MainNavigator = createSwitchNavigator(
     Tabs: {
       screen: TabNavigator
     },
-    AccountSignIn: {
-      screen: SignInScreen
+    Authenticating: {
+      screen: AuthNavigator
     },
     Onboarding: {
       screen: OnboardingNavigator

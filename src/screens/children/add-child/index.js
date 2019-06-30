@@ -2,10 +2,11 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable camelcase */
 import React from "react";
+import { Alert } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, ButtonGroup } from "react-native-elements";
 import { registerChild } from "@services/opear-api";
-import InactiveUserBanner from "@components/banner"
+import InactiveUserBanner from "@components/banner";
 import { FormTextInput } from "../../../components/text";
 import { FormMaskedTextInput } from "@components/text-masked";
 import { NavHeader } from "../../../components/nav-header";
@@ -18,14 +19,8 @@ import {
   ViewCentered
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import { colors } from "../../../utils/constants";
+import { colors, avatarImages } from "../../../utils/constants";
 import { getAge } from "@utils";
-
-const avatarImages = [];
-avatarImages[0] = require("../../../../assets/images/Fox.png");
-avatarImages[1] = require("../../../../assets/images/chicken.png");
-avatarImages[2] = require("../../../../assets/images/Dog.png");
-avatarImages[3] = require("../../../../assets/images/Tiger.png");
 
 @inject("store")
 @observer
@@ -77,7 +72,8 @@ class AddChildScreen extends React.Component {
       currentMedications,
       hospitalizations,
       currentMedicalConditions,
-      allergies
+      allergies,
+      avatarNumber
     } = this.state;
 
     const dateRegex1 = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
@@ -118,11 +114,10 @@ class AddChildScreen extends React.Component {
         current_medications: currentMedications,
         current_medical_conditions: currentMedicalConditions,
         surgical_history: surgicalHistory,
-        hospitalizations
+        hospitalizations,
+        avatar_image_index: avatarNumber
       }
     };
-
-    // const age = getAge(birthDate);
 
     const successHandler = response => {
       const {
@@ -137,7 +132,8 @@ class AddChildScreen extends React.Component {
         current_medications,
         current_medical_conditions,
         surgical_history,
-        hospitalizations
+        hospitalizations,
+        avatar_image_index
       } = response.data;
 
       const newChild = {
@@ -151,7 +147,8 @@ class AddChildScreen extends React.Component {
         surgicalHistory: surgical_history || "",
         currentMedications: current_medications || "",
         currentMedicalConditions: current_medical_conditions || "",
-        hospitalizations: hospitalizations || ""
+        hospitalizations: hospitalizations || "",
+        avatarImageIndex: avatar_image_index || 0
       };
 
       userStore.addChild(newChild);

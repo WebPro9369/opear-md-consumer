@@ -19,7 +19,7 @@ import {
   View
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import { colors } from "../../../utils/constants";
+import { colors, avatarImages } from "../../../utils/constants";
 import { getAge, getValueById, getIndexByValue } from "@utils";
 import { getFormattedDate } from "@utils/helpers";
 
@@ -48,13 +48,15 @@ class EditChildScreen extends React.Component {
     const firstName = nameSplitted[0];
     const lastName = nameSplitted.length > 1 ? nameSplitted[1] : "";
     const birthDate = getFormattedDate(new Date(child.birthDate));
+    const avatarImageIndex = child.avatarImageIndex;
 
     this.state = {
       childID,
       ...child,
       firstName,
       lastName,
-      birthDate
+      birthDate,
+      avatarImageIndex
     };
 
     this.updateIndex = this.updateIndex.bind(this);
@@ -84,7 +86,8 @@ class EditChildScreen extends React.Component {
       currentMedications,
       hospitalizations,
       currentMedicalConditions,
-      allergies
+      allergies,
+      avatarImageIndex
     } = this.state;
 
     const dateRegex1 = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
@@ -115,7 +118,8 @@ class EditChildScreen extends React.Component {
         current_medications: currentMedications,
         current_medical_conditions: currentMedicalConditions,
         surgical_history: surgicalHistory,
-        hospitalizations
+        hospitalizations,
+        avatar_image_index: avatarImageIndex
       }
     };
 
@@ -132,7 +136,8 @@ class EditChildScreen extends React.Component {
         current_medications,
         current_medical_conditions,
         surgical_history,
-        hospitalizations
+        hospitalizations,
+        avatar_image_index
       } = res.data;
 
       const editedChild = {
@@ -146,7 +151,8 @@ class EditChildScreen extends React.Component {
         surgicalHistory: surgical_history || "",
         currentMedications: current_medications || "",
         currentMedicalConditions: current_medical_conditions || "",
-        hospitalizations: hospitalizations || ""
+        hospitalizations: hospitalizations || "",
+        avatarImageIndex: avatar_image_index || 0,
       };
 
       const index = getIndexByValue(userStore.children, childID);
@@ -181,7 +187,8 @@ class EditChildScreen extends React.Component {
       currentMedications,
       hospitalizations,
       currentMedicalConditions,
-      allergies
+      allergies,
+      avatarImageIndex
     } = this.state;
 
     return (
@@ -200,7 +207,7 @@ class EditChildScreen extends React.Component {
             <Avatar
               rounded
               size={120}
-              source={imgFoxLarge}
+              source={avatarImages[avatarImageIndex]}
               showEditButton={false}
             />
           </ViewCentered>

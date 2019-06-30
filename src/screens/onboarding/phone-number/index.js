@@ -10,6 +10,7 @@ import { StyledText, StyledTextInput } from "@components/text";
 import { NavHeader } from "@components/nav-header";
 import { registerParent } from "@services/opear-api";
 import { colors } from "@utils/constants"
+import { storeNotificationToken } from "@services/authentication";
 
 const imgProgressbar = require("../../../../assets/images/ProgressBar5.png");
 
@@ -22,6 +23,7 @@ class PhoneNumberScreen extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       phone: null,
       acceptedPrivacy: false,
@@ -61,7 +63,7 @@ class PhoneNumberScreen extends Component {
       name,
       email,
       password,
-      address: {zip_code}
+      address
     } = userStore;
 
     const data = {
@@ -70,7 +72,7 @@ class PhoneNumberScreen extends Component {
         email,
         phone,
         password,
-        zip: zip_code,
+        zip: address.zip,
         accepted_privacy: acceptedPrivacy,
         accepted_terms_of_service: acceptedTermsOfService
       }
@@ -82,6 +84,9 @@ class PhoneNumberScreen extends Component {
       const { id, api_key: apiKey } = response.data;
 
       userStore.setAuthentication({ id, apiKey });
+
+      const { notificationToken } = userStore;
+      storeNotificationToken(id, notificationToken);
 
       userStore.setPhone(phone);
       userStore.setAcceptedPrivacy(acceptedPrivacy);

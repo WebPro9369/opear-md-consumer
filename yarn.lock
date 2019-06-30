@@ -5473,6 +5473,11 @@ react-native-touch-id@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-native-touch-id/-/react-native-touch-id-4.4.1.tgz#8b1bb2d04c30bac36bb9696d2d723e719c4a8b08"
 
+react-native-twilio-programmable-voice@^3.21.1:
+  version "3.21.1"
+  resolved "https://registry.yarnpkg.com/react-native-twilio-programmable-voice/-/react-native-twilio-programmable-voice-3.21.1.tgz#4a870021237c671bbc46e4b75d4ce14095fed3ca"
+  integrity sha512-Eyk71S0BpDVS2jQLkEE3UUiw/Bje8e65fUuTLh2xQ91U3dDT1yZXbsGEGaQbkr6yMdc/L8OYpjy4suhq8eYWYA==
+
 react-native-user-inactivity@^0.1.3-next:
   version "0.1.3-next"
   resolved "https://registry.yarnpkg.com/react-native-user-inactivity/-/react-native-user-inactivity-0.1.3-next.tgz#f396f7deb87a3b0e33bb2f8cf564b7ec95f376f2"

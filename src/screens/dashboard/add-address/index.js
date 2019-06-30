@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import MapView from "react-native-maps";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -70,6 +70,16 @@ class AddAddressScreen extends React.Component {
       city,
       zip
     } = this.state;
+
+    if (!zip) return Alert.alert("Please enter your zip code");
+
+    const dateRegex1 = /^\d\d\d\d\d$/;
+
+    if (!dateRegex1.test(zip)) {
+      return Alert.alert(
+        "There was an issue",
+        "Please enter your 5-digit Zip Code");
+    }
 
     const data =
     {
@@ -147,8 +157,14 @@ class AddAddressScreen extends React.Component {
               onChangeText={this.handleInputChange("city")} />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput label="Zip" value={zip} placeholder="Zip"
-              onChangeText={this.handleInputChange("zip")} />
+              <FormTextInput
+                label="Zip"
+                value={zip}
+                placeholder="Zip"
+                keyboardType="number-pad"
+                maxLength={5}
+                onChangeText={this.handleInputChange("zip")}
+              />
             </FormInputWrapper>
           </FormWrapper>
           <FormInputWrapper style={{ marginBottom: 20 }}>

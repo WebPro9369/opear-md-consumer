@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.airbnb.android.react.maps.MapsPackage;
+import com.hoxfon.react.RNTwilioVoice.TwilioVoicePackage;
 import com.oblador.keychain.KeychainPackage;
 import com.gettipsi.stripe.StripeReactPackage;
 import com.rnfingerprint.FingerprintAuthPackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new MapsPackage(),
+            new TwilioVoicePackage(),
             new KeychainPackage(),
             new StripeReactPackage(),
             new FingerprintAuthPackage(),

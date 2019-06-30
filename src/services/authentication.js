@@ -1,9 +1,18 @@
 import * as Keychain from "react-native-keychain";
-import { API_SETTINGS } from "@services/opear-api";
+import { 
+  API_SETTINGS,
+  updateParent
+} from "@services/opear-api";
 
 export function setAuthentication({ id, apiKey }) {
   Keychain.setGenericPassword(`${id}`, apiKey);
   API_SETTINGS.apiKey = apiKey;
+}
+
+export function storeNotificationToken(id, notificationToken) {
+  if (!notificationToken) return;
+
+  updateParent(id, { notification_token: notificationToken });
 }
 
 export async function getAuthentication() {

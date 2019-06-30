@@ -24,6 +24,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		179F737B72CA3D358DA1B230 /* libPods-opear-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1ABB0E0A08D5D5718815D0 /* libPods-opear-tvOS.a */; };
 		1975A1F00072494698293A3E /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B2D0B1E12F04DC8856AAAA3 /* Entypo.ttf */; };
 		1D9F6829C2F741F8B5177459 /* libTouchID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 132A7A1BB70D44B2867F81BA /* libTouchID.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -53,10 +54,12 @@
 		840733CC228578A100A9535B /* libTouchID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 840733CB2285788D00A9535B /* libTouchID.a */; };
 		848B44EB22B6B7A500E9288C /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 848B44C222B6B79800E9288C /* libRCTLinking.a */; };
 		84B32AEE225B57D500F27AE0 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84B32AEB225B57B800F27AE0 /* libRCTPushNotification.a */; };
+		9146146B636649B995AEF957 /* libRNTwilioVoice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34613F327432409A92E2E04F /* libRNTwilioVoice.a */; };
 		993ADD9ACF3E4C5DA6B8D21F /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E17BD4049EF2402CBB9D17BB /* MaterialCommunityIcons.ttf */; };
 		A094C1E24FA548C794CB5A26 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 596643FEE0594CC2883BCF9F /* EvilIcons.ttf */; };
 		A0BE3E02A1B744B7B2A25A00 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22E49B16C8614B41849081E8 /* Ionicons.ttf */; };
 		A2814FBC130744D18FF6492D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C38F3AF522A4CC3856A8223 /* FontAwesome.ttf */; };
+		A97383A268033C0587736981 /* libPods-opear-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E752A0D3C3C5FAB83C7188B /* libPods-opear-tvOSTests.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		CF5FBA9AE3B84916AFE8E220 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7D9008CE91648F8BFB9F0A2 /* MaterialIcons.ttf */; };
 		D9BBAC7D15F64D71B787B776 /* libRNReanimated.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57EAA8351C2F471BA89C8512 /* libRNReanimated.a */; };
@@ -69,6 +72,7 @@
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED2971642150620600B7C4FE /* JavaScriptCore.framework */; };
 		F35FECFF81AF4305B9D3C201 /* FlamaMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9A7A323A2034A4B8419A806 /* FlamaMedium.otf */; };
+		F3C30A4A947FED15228F1279 /* libPods-opearTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA969097C8719A334582381 /* libPods-opearTests.a */; };
 		F96FBB1275974A4DA91D5168 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8615C17EB81A4F609BB99927 /* libRNGestureHandler.a */; };
 /* End PBXBuildFile section */
 
@@ -423,6 +427,13 @@
 			remoteGlobalIDString = 3A3A7F1A1DC27B520030F9DC;
 			remoteInfo = TPSStripe;
 		};
+		A44DEF6122C30C1F00A2501E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 67D7584F284A43769AB2C067 /* RNTwilioVoice.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 38F71DF51E9C333F0067E86F;
+			remoteInfo = RNTwilioVoice;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -444,6 +455,7 @@
 		00E356F21AD99517003FC87E /* opearTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = opearTests.m; sourceTree = "<group>"; };
 		06C051C73697429992900251 /* FlamaLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FlamaLight.otf; path = ../assets/fonts/FlamaLight.otf; sourceTree = "<group>"; };
 		06DB89B627D34F0BB2D2F0CB /* Flama-Basic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Flama-Basic.otf"; path = "../assets/fonts/Flama-Basic.otf"; sourceTree = "<group>"; };
+		090A550D96B39DFFBAB93822 /* Pods-opear-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-opear-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-opear-tvOSTests/Pods-opear-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		132A7A1BB70D44B2867F81BA /* libTouchID.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTouchID.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		13941AB592D44CCFA9F58932 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -459,12 +471,14 @@
 		1B2D0B1E12F04DC8856AAAA3 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		1B58A8F12B2B4DE286D6F3C5 /* RNCardIO.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCardIO.xcodeproj; path = "../node_modules/react-native-awesome-card-io/ios/RNCardIO.xcodeproj"; sourceTree = "<group>"; };
 		2022AA7895474693B7C26B1B /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		21FC7D98431086A267FC5D73 /* Pods-opearTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-opearTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-opearTests/Pods-opearTests.release.xcconfig"; sourceTree = "<group>"; };
 		22E49B16C8614B41849081E8 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		2746879EC288466881882829 /* libTPSStripe.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTPSStripe.a; sourceTree = "<group>"; };
 		289EE1B5FEDB45AF8CBE0F68 /* libRNVectorIcons-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNVectorIcons-tvOS.a"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* opear-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "opear-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* opear-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "opear-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		34613F327432409A92E2E04F /* libRNTwilioVoice.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNTwilioVoice.a; sourceTree = "<group>"; };
 		3B5AB5AD7329453481FA65EB /* libRNCardIO.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCardIO.a; sourceTree = "<group>"; };
 		3C38F3AF522A4CC3856A8223 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		4AB706B5BD054DFBAF5F901A /* RNReanimated.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNReanimated.xcodeproj; path = "../node_modules/react-native-reanimated/ios/RNReanimated.xcodeproj"; sourceTree = "<group>"; };
@@ -477,6 +491,7 @@
 		596643FEE0594CC2883BCF9F /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		636A6A1BD6A9495D8478694F /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		67D7584F284A43769AB2C067 /* RNTwilioVoice.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNTwilioVoice.xcodeproj; path = "../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice.xcodeproj"; sourceTree = "<group>"; };
 		6A676253C7754668A8398222 /* Flama.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Flama.otf; path = ../assets/fonts/Flama.otf; sourceTree = "<group>"; };
 		75621E91FC704ACC0B090FF6 /* Pods-opear.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-opear.debug.xcconfig"; path = "Pods/Target Support Files/Pods-opear/Pods-opear.debug.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -487,14 +502,22 @@
 		84E2D906225E388A00DFD84D /* opear.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = opear.entitlements; path = opear/opear.entitlements; sourceTree = "<group>"; };
 		8615C17EB81A4F609BB99927 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		86F9719CF56E47BDBF5BBCB5 /* TouchID.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = TouchID.xcodeproj; path = "../node_modules/react-native-touch-id/TouchID.xcodeproj"; sourceTree = "<group>"; };
+		8BA969097C8719A334582381 /* libPods-opearTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-opearTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E59944011FF4BF89BCB0C41 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		8E752A0D3C3C5FAB83C7188B /* libPods-opear-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-opear-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F2225E484C0F1061C00F986 /* Pods-opear-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-opear-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-opear-tvOSTests/Pods-opear-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		941809608CD94F6ABD85F0FE /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		A86D576680FF4CD4B3829EBA /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		B7C41D5FF5B4447598297A69 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
+		C2F7C4924872FB6F4B3B375F /* Pods-opearTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-opearTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-opearTests/Pods-opearTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C755EF6855745913CB58AFF4 /* Pods-opear.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-opear.release.xcconfig"; path = "Pods/Target Support Files/Pods-opear/Pods-opear.release.xcconfig"; sourceTree = "<group>"; };
+		CA1ABB0E0A08D5D5718815D0 /* libPods-opear-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-opear-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD2B54E36EB420FB9C3D34F /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		D3C1A7112B0C408D8C81769E /* TPSStripe.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = TPSStripe.xcodeproj; path = "../node_modules/tipsi-stripe/ios/TPSStripe.xcodeproj"; sourceTree = "<group>"; };
+		D54EE486FE1D17E3D4B258FC /* Pods-opear-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-opear-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-opear-tvOS/Pods-opear-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		DB0C100AA7F54078983A29EB /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		E0D545757BB7323BA7F39DCB /* Pods-opear-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-opear-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-opear-tvOS/Pods-opear-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E0E6273AFCFA48959E6678EF /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		E17BD4049EF2402CBB9D17BB /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		E7D9008CE91648F8BFB9F0A2 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -512,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
+				F3C30A4A947FED15228F1279 /* libPods-opearTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +566,7 @@
 				1D9F6829C2F741F8B5177459 /* libTouchID.a in Frameworks */,
 				73A3F4C588FF4D4CA662E881 /* libTPSStripe.a in Frameworks */,
 				E0DA81842C664B2E231B3FC0 /* libPods-opear.a in Frameworks */,
+				9146146B636649B995AEF957 /* libRNTwilioVoice.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,6 +584,7 @@
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
 				DFC15C4984634E8FA272984F /* libRNVectorIcons-tvOS.a in Frameworks */,
+				179F737B72CA3D358DA1B230 /* libPods-opear-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,6 +593,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */,
+				A97383A268033C0587736981 /* libPods-opear-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,6 +724,9 @@
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				54CD6303E71CD0EEE0DFFE17 /* libPods-opear.a */,
+				CA1ABB0E0A08D5D5718815D0 /* libPods-opear-tvOS.a */,
+				8E752A0D3C3C5FAB83C7188B /* libPods-opear-tvOSTests.a */,
+				8BA969097C8719A334582381 /* libPods-opearTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -715,6 +745,12 @@
 			children = (
 				75621E91FC704ACC0B090FF6 /* Pods-opear.debug.xcconfig */,
 				C755EF6855745913CB58AFF4 /* Pods-opear.release.xcconfig */,
+				E0D545757BB7323BA7F39DCB /* Pods-opear-tvOS.debug.xcconfig */,
+				D54EE486FE1D17E3D4B258FC /* Pods-opear-tvOS.release.xcconfig */,
+				090A550D96B39DFFBAB93822 /* Pods-opear-tvOSTests.debug.xcconfig */,
+				8F2225E484C0F1061C00F986 /* Pods-opear-tvOSTests.release.xcconfig */,
+				C2F7C4924872FB6F4B3B375F /* Pods-opearTests.debug.xcconfig */,
+				21FC7D98431086A267FC5D73 /* Pods-opearTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -752,6 +788,7 @@
 				4AB706B5BD054DFBAF5F901A /* RNReanimated.xcodeproj */,
 				86F9719CF56E47BDBF5BBCB5 /* TouchID.xcodeproj */,
 				D3C1A7112B0C408D8C81769E /* TPSStripe.xcodeproj */,
+				67D7584F284A43769AB2C067 /* RNTwilioVoice.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -840,6 +877,7 @@
 				57EAA8351C2F471BA89C8512 /* libRNReanimated.a */,
 				132A7A1BB70D44B2867F81BA /* libTouchID.a */,
 				2746879EC288466881882829 /* libTPSStripe.a */,
+				34613F327432409A92E2E04F /* libRNTwilioVoice.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -881,6 +919,14 @@
 			isa = PBXGroup;
 			children = (
 				89F0591B22B0B9D6006FFF85 /* libTPSStripe.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A44DEF5E22C30C1F00A2501E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A44DEF6222C30C1F00A2501E /* libRNTwilioVoice.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -929,6 +975,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "opearTests" */;
 			buildPhases = (
+				D7A14890FA87E2C9EDCDCFE5 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -953,6 +1000,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				8A3986E124A1F9AE38BC738E /* [CP] Copy Pods Resources */,
+				DF10930266BA0D26E93F56B1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -967,6 +1015,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "opear-tvOS" */;
 			buildPhases = (
+				0E1D03B5067039E562EFD6BB /* [CP] Check Pods Manifest.lock */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
 				2D02E4791E0B4A5D006451C7 /* Resources */,
@@ -985,6 +1034,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "opear-tvOSTests" */;
 			buildPhases = (
+				E42E111DC834C873EAF5A6F9 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -1116,6 +1166,10 @@
 				{
 					ProductGroup = 84CBC0A92243F81A000599FE /* Products */;
 					ProjectRef = 4AB706B5BD054DFBAF5F901A /* RNReanimated.xcodeproj */;
+				},
+				{
+					ProductGroup = A44DEF5E22C30C1F00A2501E /* Products */;
+					ProjectRef = 67D7584F284A43769AB2C067 /* RNTwilioVoice.xcodeproj */;
 				},
 				{
 					ProductGroup = 84CBBFF72243E346000599FE /* Products */;
@@ -1481,6 +1535,13 @@
 			remoteRef = 89F0591A22B0B9D6006FFF85 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		A44DEF6222C30C1F00A2501E /* libRNTwilioVoice.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNTwilioVoice.a;
+			remoteRef = A44DEF6122C30C1F00A2501E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1559,6 +1620,28 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
+		0E1D03B5067039E562EFD6BB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-opear-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -1600,21 +1683,79 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-opear/Pods-opear-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-opear/Pods-opear-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Stripe/Stripe.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Stripe.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-opear/Pods-opear-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-opear/Pods-opear-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7A14890FA87E2C9EDCDCFE5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-opearTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DF10930266BA0D26E93F56B1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-opear/Pods-opear-frameworks.sh",
+				"${PODS_ROOT}/TwilioVoice/TwilioVoice.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwilioVoice.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-opear/Pods-opear-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E42E111DC834C873EAF5A6F9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-opear-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1684,6 +1825,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2F7C4924872FB6F4B3B375F /* Pods-opearTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = 9YPJMYZZXT;
@@ -1699,12 +1841,22 @@
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
+					"$(SRCROOT)/../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice",
 				);
 				INFOPLIST_FILE = opearTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1718,6 +1870,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21FC7D98431086A267FC5D73 /* Pods-opearTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -1730,12 +1883,22 @@
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
+					"$(SRCROOT)/../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice",
 				);
 				INFOPLIST_FILE = opearTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1767,6 +1930,7 @@
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
+					"$(SRCROOT)/../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice",
 				);
 				INFOPLIST_FILE = opear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1801,6 +1965,7 @@
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
+					"$(SRCROOT)/../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice",
 				);
 				INFOPLIST_FILE = opear/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1818,6 +1983,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0D545757BB7323BA7F39DCB /* Pods-opear-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1836,11 +2002,21 @@
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
+					"$(SRCROOT)/../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice",
 				);
 				INFOPLIST_FILE = "opear-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1856,6 +2032,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D54EE486FE1D17E3D4B258FC /* Pods-opear-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1874,11 +2051,21 @@
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
+					"$(SRCROOT)/../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice",
 				);
 				INFOPLIST_FILE = "opear-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1894,6 +2081,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 090A550D96B39DFFBAB93822 /* Pods-opear-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1911,11 +2099,21 @@
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
+					"$(SRCROOT)/../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice",
 				);
 				INFOPLIST_FILE = "opear-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1931,6 +2129,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F2225E484C0F1061C00F986 /* Pods-opear-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1948,11 +2147,21 @@
 					"$(SRCROOT)/../node_modules/react-native-reanimated/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-touch-id",
 					"$(SRCROOT)/../node_modules/tipsi-stripe/ios/TPSStripe",
+					"$(SRCROOT)/../node_modules/react-native-twilio-programmable-voice/ios/RNTwilioVoice",
 				);
 				INFOPLIST_FILE = "opear-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",

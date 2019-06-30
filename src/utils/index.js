@@ -16,13 +16,23 @@ export const userFromResult = (res, userStore) => {
     email,
     phone,
     active,
-    // payment_accounts,
+    addresses,
+    payment_accounts,
     // birthday,
     zip
-    // active
   } = res.data;
 
   // const dob = getFormattedDate(new Date(birthday));
+  const address =
+    addresses && addresses.length ? addresses[addresses.length - 1] : null;
+  const addressesAdjusted = (addresses || []).map(a => ({
+    id: a.id,
+    name: a.name || "",
+    street: a.street || "",
+    city: a.city || "",
+    state: a.state || "",
+    zip: a.zip || ""
+  }));
 
   userStore
     .setName(name)
@@ -30,8 +40,18 @@ export const userFromResult = (res, userStore) => {
     .setPhone(phone)
     .setActive(active)
     // .setBirthday(dob)
-    // .setPaymentAccounts(payment_accounts)
-    .setZip(zip);
+    .setPaymentAccounts(payment_accounts)
+    .setZip(zip)
+    .setAddresses(addressesAdjusted);
+
+  if (address) {
+    userStore.address
+      .setName(address.name || "")
+      .setStreet(address.street || "")
+      .setCity(address.city || "")
+      .setState(address.state || "")
+      .setZipCode(address.zip || "");
+  }
 };
 
 export const getAge = birthDate => {

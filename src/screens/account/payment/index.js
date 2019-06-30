@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable camelcase */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -5,6 +7,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { ActivityIndicator } from "react-native";
 import { getParent } from "@services/opear-api";
 import { userFromResult } from "@utils";
+import InactiveUserBanner from "@components/banner";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import {
@@ -14,22 +17,16 @@ import {
 } from "./styles";
 import { ContainerView, View, FlexView } from "../../../components/views";
 import { colors } from "../../../utils/constants";
-import InactiveUserBanner from "@components/banner"
 
 @inject("store")
 @observer
 class PaymentScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
-    const {
-      store: {
-        userStore
-      }
-    } = props;
 
     this.state = {
       loading: false
@@ -66,21 +63,37 @@ class PaymentScreen extends React.Component {
     });
   }
 
+  previousScreen() {
+    const {
+      navigation: { getParam, navigate }
+    } = this.props;
+
+    const screenRef = getParam("screenRef", null);
+
+    if (screenRef) {
+      navigate("DashboardBookingReview");
+    } else {
+      navigate("AccountDefault");
+    }
+  }
+
   render() {
     const {
-      navigation: { navigate },
+      navigation: { navigate, getParam },
       store: {
         userStore: { payment_accounts, active }
       }
     } = this.props;
     const { loading } = this.state;
+    const screenRef = getParam("screenRef", null);
+
     return (
       <ContainerView padding={16}>
         <NavHeader
           title="Payment settings"
           size="medium"
           hasBackButton
-          onPressBackButton={() => navigate("AccountDefault")}
+          onPressBackButton={() => this.previousScreen()}
         />
         <InactiveUserBanner userIsActive={active} />
         <View>
@@ -89,19 +102,15 @@ class PaymentScreen extends React.Component {
           )}
           {!loading && payment_accounts && payment_accounts.length > 0 && (
             <View style={{ paddingTop: 16, paddingBottom: 16 }}>
-              {payment_accounts.map(pm => {
+              {[ payment_accounts[payment_accounts.length - 1] ].map(pm => {
                 return (
                   <ListTouchableButtonWrapper
                     key={pm.last4}
-                    onPress={() => navigate("PaymentAddCard", { last4: pm.last4 })}
+                    onPress={() =>
+                      navigate("PaymentAddCard", { last4: pm.last4 })
+                    }
                   >
                     <FlexView justifyContent="start">
-                      <FontAwesome
-                        name="cc-visa"
-                        size={30}
-                        color={colors.BLUE}
-                        style={{ marginRight: 16 }}
-                      />
                       <ListButtonText>{`****${pm.last4}`}</ListButtonText>
                     </FlexView>
                     <FontAwesome
@@ -116,7 +125,9 @@ class PaymentScreen extends React.Component {
           )}
           {!loading && !payment_accounts.length && (
             <View style={{ marginTop: 16, marginLeft: 28 }}>
-              <TouchableWrapper onPress={() => navigate("PaymentAddCard")}>
+              <TouchableWrapper
+                onPress={() => navigate("PaymentAddCard", { screenRef })}
+              >
                 <FlexView justifyContent="start">
                   <AntDesign
                     name="pluscircleo"
