@@ -1,34 +1,19 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable prefer-const */
-/* eslint-disable camelcase */
-/* eslint-disable no-loop-func */
-/* eslint-disable guard-for-in */
-/* eslint-disable no-restricted-syntax */
 /* eslint-disable react/no-unused-state */
-// eslint-disable-next-line import/no-extraneous-dependencies
 import React from "react";
-import { inject, observer, PropTypes } from "mobx-react";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import Animated from "react-native-reanimated";
 import { TabView, SceneMap } from "react-native-tab-view";
-import { getVisits } from "@services/opear-api";
 import { StyledText } from "../../components/text";
 import { View, FlexView } from "../../components/views";
 import { tabViewStyles, TabItem } from "./styles";
 import { colors } from "../../utils/constants";
 import UpcomingVisitsScreen from "./upcoming-visits";
 import PastVisitsScreen from "./past-visits";
-import { getAge } from "../../utils";
 
 const FirstRoute = () => <UpcomingVisitsScreen />;
 const SecondRoute = () => <PastVisitsScreen />;
 
-@inject("store")
-@observer
 class ManageVisitsScreen extends React.Component {
-  static propTypes = {
-    store: PropTypes.observableObject.isRequired
-  };
-
   state = {
     index: 0,
     routes: [
