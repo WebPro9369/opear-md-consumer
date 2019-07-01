@@ -84,7 +84,17 @@ class DashboardScreen extends React.Component {
     };
 
     getAddresses({ successHandler: getAddressesSuccessHandler });
+  }
 
+  componentDidMount() {
+    this.timer = setInterval(() => this.getVisits(), 30000);
+  };
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  getVisits = () => {
     const getVisitsSuccessHandler = res => {
       const visits = res.data;
 
@@ -109,7 +119,7 @@ class DashboardScreen extends React.Component {
     }
 
     getVisits({ successHandler: getVisitsSuccessHandler });
-  }
+  };
 
   render() {
     const {
