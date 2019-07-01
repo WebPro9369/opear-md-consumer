@@ -159,7 +159,7 @@ class DashboardScreen extends React.Component {
         {visitState === "approving" ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
-              We are currently awaiting for the care provider to accept your request, be in touch soon!
+              Your visit request has been sent to the care provider - check back soon!
             </StyledText>
           </MatchingMessageWrapper>
         ) : null}
