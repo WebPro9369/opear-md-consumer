@@ -16,6 +16,7 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
+import { GoogleMapsService } from "@services";
 
 const { BLACK60 } = colors;
 
@@ -51,17 +52,17 @@ class VisitBookedScreen extends React.Component {
       child: "Benjamin",
       address: "18 Mission St",
       time: "Sun Dec 31, 8am - 9am",
-      map: {
+      region: {
         latitude: 37.78825,
         longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
+        latitudeDelta: 0.09,
+        longitudeDelta: 0.09
       }
     };
 
     const successHandler = res => {
       const {
-        //TODO: Hook in care provider when its attached to the visit
+        // TODO: Hook in care provider when its attached to the visit
         // care_provider,
         child,
         address,
@@ -90,6 +91,33 @@ class VisitBookedScreen extends React.Component {
           dateOptions
         )
       });
+
+      GoogleMapsService.getGeo(
+        `${address.street}${address.city && ", "}${address.city}${address.state && ", "}${address.state}`,
+        innerRes => {
+          const { data } = innerRes;
+          if (data && data.result && data.result.geometry) {
+            const { lat, lng } = data.result.geometry.location;
+            this.setState({
+              region: {
+                latitude: lat,
+                longitude: lng,
+                latitudeDelta: 0.09,
+                longitudeDelta: 0.09
+              }
+            });
+          } else {
+            this.setState({
+              region: null
+            });
+          }
+        },
+        () => {
+          this.setState({
+            region: null
+          });
+        }
+      );
     };
 
     getVisit(userStore.id, visitID, { successHandler });
@@ -102,13 +130,13 @@ class VisitBookedScreen extends React.Component {
       providerData: { phone }
     } = this.state;
     TwilioVoice.connect({ To: phone });
-  }
+  };
 
   render() {
     const {
       navigation: { goBack }
     } = this.props;
-    const { providerData, child, address, time, map } = this.state;
+    const { providerData, child, address, time, region } = this.state;
 
     return (
       <ScrollView padding={0} marginTop={24}>
@@ -134,10 +162,12 @@ class VisitBookedScreen extends React.Component {
           </ContentWrapper>
         </View>
         <View style={{ marginTop: 16 }}>
-          <MapView
-            style={{ alignSelf: "stretch", height: 200 }}
-            initialRegion={map}
-          />
+          {region && (
+            <MapView
+              style={{ alignSelf: "stretch", height: 200 }}
+              initialRegion={region}
+            />
+          )}
           <ContentWrapper style={{ marginTop: -60 }}>
             <ViewCentered>
               <Avatar rounded size={150} source={doctorImg} />
