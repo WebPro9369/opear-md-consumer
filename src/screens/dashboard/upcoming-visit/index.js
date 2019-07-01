@@ -180,7 +180,7 @@ class VisitBookedScreen extends React.Component {
               initialRegion={region}
             />
           )}
-          <ContentWrapper style={{ marginTop: -60 }}>
+          <ContentWrapper style={{ marginTop: 0 }}>
             <ViewCentered>
               <Avatar rounded size={150} source={doctorImg} />
               <View style={{ marginTop: 16, maxWidth: 240 }}>
