@@ -24,11 +24,11 @@ class SelectProviderScreen extends React.Component {
 
     successHandler = res => {
       const {
-        care_providers
+        care_provider
       } = res.data;
 
       this.setState({
-        providers: care_providers
+        providers: care_provider
       });
     }
 
