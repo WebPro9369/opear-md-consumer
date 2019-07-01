@@ -99,6 +99,11 @@ class DashboardScreen extends React.Component {
             providerStore.setProviderEnRoute(true);
           }
 
+          if(visitOnDate.state == "matched") {
+            this.setState({visitID: visitOnDate.id});
+            providerStore.setReadyProviders(true);
+          }
+
           if(visitOnDate.state == "scheduled") {
             this.setState({visitID: visitOnDate.id});
             providerStore.setOutstandingAppointment(true);
@@ -151,7 +156,7 @@ class DashboardScreen extends React.Component {
           </MatchingMessageWrapper>
         ) : null}
         {!outstandingAppointment && readyProviders && userStore.active ? (
-          <TouchableOpacity onPress={() => navigate("DashboardSelectProvider"),{visitID:visitID}}>
+          <TouchableOpacity onPress={() => navigate("DashboardSelectProvider", {visitID:visitID})}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
                 <StyledText fontSize={16} lineHeight={24}>

@@ -28,6 +28,7 @@
 		179F737B72CA3D358DA1B230 /* libPods-opear-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA1ABB0E0A08D5D5718815D0 /* libPods-opear-tvOS.a */; };
 		1975A1F00072494698293A3E /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B2D0B1E12F04DC8856AAAA3 /* Entypo.ttf */; };
 		1D9F6829C2F741F8B5177459 /* libTouchID.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 132A7A1BB70D44B2867F81BA /* libTouchID.a */; };
+		212FBB9E22CA8DC000441B86 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53433FB822C94F15002A846C /* libSplashScreen.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -48,7 +49,6 @@
 		44D054A0505948D793A3D9A4 /* libRNCardIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B5AB5AD7329453481FA65EB /* libRNCardIO.a */; };
 		473956575F69468DAE7B0990 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 636A6A1BD6A9495D8478694F /* Foundation.ttf */; };
 		4D80D47B71F346ECB9D4AAB5 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE423E204B5D41A18078659C /* FontAwesome5_Brands.ttf */; };
-		53433FBC22C94F2A002A846C /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53433FB822C94F15002A846C /* libSplashScreen.a */; };
 		537402AB22A2EE8D00D5D49C /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 537402AA22A2EE8C00D5D49C /* main.jsbundle */; };
 		53C27FCD22B7DC8100FFF0DD /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 53C27F9D22B7DC8100FFF0DD /* assets */; };
 		73A3F4C588FF4D4CA662E881 /* libTPSStripe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2746879EC288466881882829 /* libTPSStripe.a */; };
@@ -562,7 +562,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53433FBC22C94F2A002A846C /* libSplashScreen.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
 				840733CC228578A100A9535B /* libTouchID.a in Frameworks */,
 				84B32AEE225B57D500F27AE0 /* libRCTPushNotification.a in Frameworks */,
@@ -588,6 +587,7 @@
 				73A3F4C588FF4D4CA662E881 /* libTPSStripe.a in Frameworks */,
 				E0DA81842C664B2E231B3FC0 /* libPods-opear.a in Frameworks */,
 				9146146B636649B995AEF957 /* libRNTwilioVoice.a in Frameworks */,
+				212FBB9E22CA8DC000441B86 /* libSplashScreen.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

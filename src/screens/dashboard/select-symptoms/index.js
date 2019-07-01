@@ -81,12 +81,8 @@ class SelectSymptomsScreen extends React.Component {
       symptoms.push(otherInputText);
     }
 
-    console.tron.log(symptoms);
-
     userStore.setVisitRequestSymptoms(symptoms);
     userStore.setVisitRequestReason(illness);
-
-    console.tron.log(userStore);
 
     navigation.navigate("DashboardPickChild");
   };
