@@ -42,7 +42,8 @@ class DashboardScreen extends React.Component {
         { key: "3", string: "Abdominal", color: "#d7707d" },
         { key: "4", string: "Ear Nose Throat", color: "#6b82a3" }
       ],
-      visitId: null
+      visitId: null,
+      visitState: "",
     };
 
     const getChildrenSuccessHandler = res => {
@@ -93,16 +94,15 @@ class DashboardScreen extends React.Component {
         const visitsOnDate = visits[date];
 
         for (const visitOnDate of visitsOnDate) {
-          if(visitOnDate.state == "in_progress") {
-            this.setState({visitID: visitOnDate.id});
-            providerStore.setOutstandingAppointment(true);
-            providerStore.setProviderEnRoute(true);
-          }
 
-          if(visitOnDate.state == "scheduled") {
-            this.setState({visitID: visitOnDate.id});
-            providerStore.setOutstandingAppointment(true);
-            return;
+          switch (visitOnDate.state) {
+            case "pending":
+            case "matched":
+            case "approving":
+            case "scheduled":
+            case "in_progress":
+                this.setState({ visitID: visitOnDate.id, visitState: visitOnDate.state });
+                break;
           }
         }
       }
@@ -118,13 +118,10 @@ class DashboardScreen extends React.Component {
     } = this.props;
     const { providerStore } = store;
     const {
-      appointment,
-      readyProviders,
-      outstandingAppointment,
-      providerEnRoute
+      appointment
     } = providerStore;
 
-    const { userStore, illnessList, visitID } = this.state;
+    const { userStore, illnessList, visitID, visitState } = this.state;
 
     return (
       <ContainerView>
@@ -140,18 +137,15 @@ class DashboardScreen extends React.Component {
         </ContentWrapper>
 
         <InactiveUserBanner userIsActive={userStore.active} />
-        {!outstandingAppointment &&
-        !readyProviders &&
-        appointment &&
-        userStore.active ? (
+        {visitState === "pending" ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
               We are currently matching you with your care provider, be in touch soon!
             </StyledText>
           </MatchingMessageWrapper>
-        ) : null}
-        {!outstandingAppointment && readyProviders && userStore.active ? (
-          <TouchableOpacity onPress={() => navigate("DashboardSelectProvider"),{visitID:visitID}}>
+      ) : null}
+        {visitState === "matched" ? (
+          <TouchableOpacity onPress={() => navigate("DashboardSelectProvider", {visitID: visitID})}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
                 <StyledText fontSize={16} lineHeight={24}>
@@ -162,8 +156,15 @@ class DashboardScreen extends React.Component {
             </MatchingMessageWrapper>
           </TouchableOpacity>
         ) : null}
-        {outstandingAppointment && !providerEnRoute && userStore.active ? (
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:visitID})}>
+        {visitState === "approving" ? (
+          <MatchingMessageWrapper>
+            <StyledText fontSize={16} lineHeight={24}>
+              Your visit request has been sent to the care provider - check back soon!
+            </StyledText>
+          </MatchingMessageWrapper>
+        ) : null}
+        {visitState === "scheduled" ? (
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID: visitID})}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>
@@ -174,8 +175,8 @@ class DashboardScreen extends React.Component {
             </MatchingMessageWrapper>
           </TouchableOpacity>
         ) : null}
-        {outstandingAppointment && providerEnRoute && userStore.active ? (
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:visitID})}>
+        {visitState === "in_progress" ? (
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID: visitID})}>
             <MatchingMessageWrapper>
               <StyledText fontSize={16} lineHeight={24}>
                 Your Care Provider is on their way!

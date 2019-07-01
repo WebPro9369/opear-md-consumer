@@ -5,21 +5,17 @@ import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View } from "../../../components/views";
 import { ProviderCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
-import { getVisitRequest } from "@services/opear-api";
-
-const doctorImg = require("../../../../assets/images/Doctor.png");
+import  { getVisitRequests, updateVisitRequests } from "@services/opear-api";
 
 class SelectProviderScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    const {
-      navigation
-    } = this.props;
+    const { navigation } = this.props;
 
     this.state = {
+      visitID: navigation.getParam("visitID", 0),
       providers: [],
-      visitID: navigation.getParam("visitID", 0)
     };
 
     successHandler = res => {
@@ -31,30 +27,62 @@ class SelectProviderScreen extends React.Component {
         providers: care_provider
       });
     }
-
-    getVisitRequest(visitID, { successHandler });
-
   }
 
-  selectProvider = providerID => {
+  componentDidMount() {
     const { visitID } = this.state;
 
-    const data = {
-      care_provider_id: providerID
-    };
+    const successHandler = res => {
+      if  (!res.data) return;
 
-    successHandler = res => {
+      const providers = res.data.map(visitRequest => {
+        const { 
+          id: visitRequestID, 
+          visit_id: visitID,
+          care_provider_id: careProviderID,
+          care_provider: {
+            name,
+            biography: bio,
+            work_history:  history,
+            avatar,
+            rating,
+            specialties: badges,
+          }
+        } = visitRequest;
+        
+        return {
+          visitRequestID,
+          visitID,
+          careProviderID,
+          name,
+          bio,
+          history: history.join(", "),
+          avatar,
+          rating,
+          badges: badges,
+        }
+      });
+      
+      this.setState({ providers });
+    }
 
-      return navigate("DashboardVisitBooked",{visitID:visitID});
-    };
+    getVisitRequests(visitID, {successHandler});
+  }
 
-    updateVisit(visitID, data, { successHandler });
+  providerSelectHandler = ({visitID , visitRequestID} = {}) => {
+    const {
+      navigation: { navigate }
+    } = this.props;
 
-  };
+
+    const successHandler =  () => navigate("DashboardVisitBooked");
+
+    updateVisitRequests(visitID, visitRequestID, { accepted: true, successHandler });
+  }
 
   render() {
     const {
-      navigation: { goBack, navigate, getParam }
+      navigation: { goBack }
     } = this.props;
     const { providers } = this.state;
 
@@ -85,13 +113,14 @@ class SelectProviderScreen extends React.Component {
             renderItem={({ item }) => (
               <View style={{ marginTop: 8, marginBottom: 8 }}>
                 <ProviderCard
+                  key={item.visitRequestID}
                   avatarImg={item.avatar}
                   name={item.name}
                   bio={item.biography}
                   history={item.work_history}
                   rating={item.rating}
-                  badges={item.specialties.split(",")}
-                  onPress={this.selectProvider(item.id)}
+                  badges={item.badges}
+                  onPress={() => this.providerSelectHandler({ visitID: item.visitID, visitRequestID: item.visitRequestID  })}
                 />
               </View>
             )}
