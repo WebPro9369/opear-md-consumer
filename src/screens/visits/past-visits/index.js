@@ -12,6 +12,8 @@ import { ContainerView, View, ContentWrapper } from "@components/views";
 import { ScrollView } from "@components/views/scroll-view";
 import { VisitDetailCard } from "@components/cards";
 import { colors } from "@utils/constants";
+import { getAge } from "@utils/helpers";
+import { getVisits } from "@services/opear-api";
 
 const imgFox = require("../../../../assets/images/Fox.png");
 
@@ -21,6 +23,97 @@ class PastVisitsScreen extends React.Component {
   static propTypes = {
     store: MobXPropTypes.observableObject.isRequired
   };
+
+  componentDidMount() {
+    const {
+      store: { visitsStore }
+    } = this.props;
+
+    getVisits({
+      past: true,
+      successHandler: res => {
+        for (const key in res.data) {
+          const visitArray = res.data[key];
+          visitArray.forEach(visit => {
+            let {
+              parent_id,
+              child_id,
+              address_id,
+              care_provider_id,
+              reason,
+              symptoms,
+              appointment_time,
+              parent_notes,
+              visit_notes,
+              payment_amount,
+              state,
+              child,
+              address,
+              parent
+            } = visit;
+
+            child = child || {};
+            address = address || {};
+            parent = parent || {};
+
+            const newVisit = {
+              id: visit.id,
+              parentId: parent_id,
+              childId: child_id,
+              addressId: address_id,
+              careProviderId: care_provider_id,
+              reason,
+              symptoms,
+              appointmentTime: new Date(appointment_time),
+              parentNotes: parent_notes || "",
+              visitNotes: visit_notes || "",
+              paymentAmount: payment_amount || 0,
+              state: state || "",
+              child: {
+                id: child.id || -1,
+                age: getAge(new Date(child.dob || "01/01/1900")),
+                gender: child.gender || "",
+                name: child.name || "",
+                firstName: child.first_name || "",
+                lastName: child.last_name || "",
+                birthDate: new Date(child.dob || "01/01/1900"),
+                birthHistory: child.birth_history || "",
+                surgicalHistory: child.surgical_history || "",
+                currentMedications: child.current_medications || "",
+                hospitalizations: child.hospitalizations || "",
+                currentMedicalConditions:
+                  child.current_medical_conditions || "",
+                allergies: (child.allergies || "").split(", ")
+              },
+              address: {
+                id: address.id || -1,
+                name: address.name || "",
+                street: address.street || "",
+                city: address.city || "",
+                state: address.state || "",
+                zip: address.zip || 0,
+                apartmentNumber: "",
+                latitude: "",
+                longitude: ""
+              },
+              parent: {
+                id: parent.id || -1,
+                name: parent.name || "",
+                email: parent.email || "",
+                phone: parent.phone || "",
+                zip: parent.zip || "",
+                acceptedPrivacy: parent.accepted_privacy || false,
+                acceptedTermsOfService:
+                  parent.accepted_terms_of_service || false,
+                active: parent.active || false
+              }
+            };
+            visitsStore.addVisit(newVisit);
+          });
+        }
+      }
+    });
+  }
 
   render() {
     const {
