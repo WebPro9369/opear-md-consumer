@@ -25,7 +25,7 @@ class AskLocationScreen extends Component {
 
   handleInputChange = text => {
     this.setState({
-      zipcode: text
+      zipcode: text.replace(/\D/, "")
     });
   };
 
@@ -38,8 +38,13 @@ class AskLocationScreen extends Component {
     } = this.props;
     const { zipcode } = this.state;
 
-    if (!zipcode || zipcode.length !== 5) {
-      return Alert.alert("Please enter your zip code");
+    const regEx = /^\d{5}(?:[-\s]\d{4})?$/;
+
+    if (!zipcode || !zipcode.match(regEx)) {
+      return Alert.alert(
+        "There was an issue",
+        "Please enter a valid US zip code."
+      )
     }
 
     const optionalConfigObject = {
