@@ -2,8 +2,8 @@ import Axios from "axios";
 
 export const API_SETTINGS = {
   apiKey: null,
-  // endpoint: "https://api.opear.com"
-  endpoint: "http://opear-api.serveo.net/"
+  endpoint: "https://api.opear.com"
+  // endpoint: "http://opear-api.serveo.net/"
   // 'http://localhost:3000/'
   // 'http://ec2-18-191-228-16.us-east-2.compute.amazonaws.com',
 };

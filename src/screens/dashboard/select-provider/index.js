@@ -7,8 +7,6 @@ import { ProviderCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import  { getVisitRequests, updateVisitRequests } from "@services/opear-api";
 
-const doctorImg = require("../../../../assets/images/Doctor.png");
-
 class SelectProviderScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -29,9 +27,6 @@ class SelectProviderScreen extends React.Component {
         providers: care_provider
       });
     }
-
-    getVisitRequest(visitID, { successHandler });
-
   }
 
   componentDidMount() {
@@ -83,7 +78,6 @@ class SelectProviderScreen extends React.Component {
     const successHandler =  () => navigate("DashboardVisitBooked");
 
     updateVisitRequests(visitID, visitRequestID, { accepted: true, successHandler });
-
   }
 
   render() {
