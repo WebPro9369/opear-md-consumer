@@ -41,7 +41,7 @@ class ManageVisitsScreen extends React.Component {
     const { navigation } = this.props;
     navigation.addListener("willFocus", route => {
       console.tron.log("Visits screen will focus: ", route);
-      getVisits({ successHandler: this.handleVisits });
+      getVisits({ successHandler: this.handleFetchedVisits });
       getVisits({ past: true, successHandler: this.handleFetchedVisits });
     });
   }
