@@ -14,7 +14,7 @@ import { ServiceButton } from "@components/service-button";
 import { ContainerView, HeaderWrapper, View } from "@components/views";
 import { ScrollView } from "@components/views/scroll-view";
 import { colors } from "@utils/constants";
-import { updateVisit } from "@services/opear-api";
+import { updateVisit, getCareProvider } from "@services/opear-api";
 import { getValueById, getIndexByValue } from "@utils";
 import { formatAMPM } from "@utils/helpers";
 
@@ -37,9 +37,14 @@ class VisitDetailsScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    const { navigation } = props;
+    const {
+      navigation,
+      store: { visitsStore }
+     } = props;
     const visitID = navigation.getParam("visitID", false);
     // TODO: if (!visitID) error!
+
+    const visit = getValueById(visitsStore.visits, visitID);
 
     this.state = {
       visitID,
@@ -53,8 +58,19 @@ class VisitDetailsScreen extends React.Component {
         currentLongitude: -122.4924,
         distance: 0
       },
-      loaded: true
+      loaded: true,
+      careProviderPhone: 0
     };
+
+    const careProviderSuccess = res => {
+      this.setState({
+        careProviderPhone: res.data.phone
+      });
+    };
+
+    getCareProvider(visit.careProviderId, {
+      successHandler: careProviderSuccess
+    });
   }
 
   componentWillUnmount() {
@@ -144,7 +160,7 @@ class VisitDetailsScreen extends React.Component {
       store: { providerStore, visitsStore }
     } = this.props;
     const { arrived } = providerStore;
-    const { visitID, loaded, map } = this.state;
+    const { visitID, loaded, map, careProviderPhone } = this.state;
 
     const visit = getValueById(visitsStore.visits, visitID);
     const {
@@ -157,6 +173,8 @@ class VisitDetailsScreen extends React.Component {
       parentNotes,
       visitNotes
     } = visit;
+
+    console.tron.log(careProviderPhone);
 
     const childName = child.firstName
       ? `${child.firstName} ${child.lastName}`
@@ -218,7 +236,7 @@ class VisitDetailsScreen extends React.Component {
                 }
                 disabled
                 onPress={() => {
-                  TwilioVoice.connect({ To: "+19085008863" });
+                  TwilioVoice.connect({ To: careProviderPhone });
                 }}
               />
               <LargeBookedDetailCard
