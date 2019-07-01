@@ -131,7 +131,7 @@ class UpcomingVisitsScreen extends React.Component {
     const visitsDisplayStack = [];
     const addedTimes = [];
     const dayOptions = { month: "long", day: "numeric" };
-    const timeOptions = { day: undefined, hour: "numeric" };
+    const timeOptions = { day: undefined, hour: "numeric", minute: "2-digit" };
 
     visits.map(visit => {
       const { appointmentTime } = visit;
