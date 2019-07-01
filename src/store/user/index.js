@@ -77,7 +77,7 @@ export const UserStore = types
       city: "",
       state: "",
       zip: "",
-      apartment_number: "",
+      apartmentNumber: "",
       latitude: "",
       longitude: ""
     })
@@ -138,7 +138,7 @@ export const UserStore = types
       return self;
     },
     setVisitRequestReason(value) {
-        self.visitRequestReason = value;
+        self.visitRequest.reason = value;
         return self;
     },
     setVisitRequestPickedChild(value) {

@@ -42,7 +42,7 @@ class DashboardScreen extends React.Component {
         { key: "3", string: "Abdominal", color: "#d7707d" },
         { key: "4", string: "Ear Nose Throat", color: "#6b82a3" }
       ],
-      upcomingVisitId: null
+      visitId: null
     };
 
     const getChildrenSuccessHandler = res => {
@@ -94,13 +94,13 @@ class DashboardScreen extends React.Component {
 
         for (const visitOnDate of visitsOnDate) {
           if(visitOnDate.state == "in_progress") {
-            this.setState({upcomingVisitId: visitOnDate.id});
+            this.setState({visitID: visitOnDate.id});
             providerStore.setOutstandingAppointment(true);
             providerStore.setProviderEnRoute(true);
           }
 
           if(visitOnDate.state == "scheduled") {
-            this.setState({upcomingVisitId: visitOnDate.id});
+            this.setState({visitID: visitOnDate.id});
             providerStore.setOutstandingAppointment(true);
             return;
           }
@@ -124,7 +124,7 @@ class DashboardScreen extends React.Component {
       providerEnRoute
     } = providerStore;
 
-    const { userStore, illnessList, upcomingVisitId } = this.state;
+    const { userStore, illnessList, visitID } = this.state;
 
     return (
       <ContainerView>
@@ -151,7 +151,7 @@ class DashboardScreen extends React.Component {
           </MatchingMessageWrapper>
         ) : null}
         {!outstandingAppointment && readyProviders && userStore.active ? (
-          <TouchableOpacity onPress={() => navigate("DashboardSelectProvider")}>
+          <TouchableOpacity onPress={() => navigate("DashboardSelectProvider"),{visitID:visitID}}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
                 <StyledText fontSize={16} lineHeight={24}>
@@ -163,7 +163,7 @@ class DashboardScreen extends React.Component {
           </TouchableOpacity>
         ) : null}
         {outstandingAppointment && !providerEnRoute && userStore.active ? (
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:upcomingVisitId})}>
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:visitID})}>
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>
@@ -175,7 +175,7 @@ class DashboardScreen extends React.Component {
           </TouchableOpacity>
         ) : null}
         {outstandingAppointment && providerEnRoute && userStore.active ? (
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:upcomingVisitId})}>
+          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID:visitID})}>
             <MatchingMessageWrapper>
               <StyledText fontSize={16} lineHeight={24}>
                 Your Care Provider is on their way!

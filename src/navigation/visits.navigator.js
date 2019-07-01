@@ -2,6 +2,7 @@ import { createStackNavigator } from "react-navigation";
 import UpcomingVisitsScreen from "../screens/visits";
 import BookingReceiptScreen from "../screens/dashboard/booking-receipt";
 import VisitBookedScreen from "../screens/dashboard/visit-booked";
+import VisitDetailsScreen from "../screens/visits/visit-details";
 
 const VisitsNavigator = createStackNavigator(
   {
@@ -13,6 +14,9 @@ const VisitsNavigator = createStackNavigator(
     },
     VisitsVisitBooked: {
       screen: VisitBookedScreen
+    },
+    VisitsVisitDetails: {
+      screen: VisitDetailsScreen
     }
   },
   {

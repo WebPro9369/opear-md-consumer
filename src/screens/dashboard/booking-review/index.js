@@ -80,13 +80,30 @@ class BookingReviewScreen extends React.Component {
       );
     }
 
-    const data = {
+    const formattedDate = new Date(visitRequest.date);
+
+    var hour = Math.floor(visitRequest.time);
+    var minutes = 0;
+
+    if(visitRequest.time%1 == 0.5) {
+      minutes = 30;
+    }
+    const completedDate = new Date(
+      formattedDate.getFullYear(),
+      formattedDate.getMonth(),
+      formattedDate.getDate(),
+      hour,
+      minutes
+    );
+
+    const data =
+    {
       visit: {
         child_id: visitRequest.pickedChild,
         address_id: visitRequest.pickedAddress,
         reason: visitRequest.reason,
         symptoms: visitRequest.symptoms,
-        appointment_time: visitRequest.date + ", " + visitRequest.time,
+        appointment_time: completedDate,
         parent_notes: parentNotes,
         payment_amount: visitRequest.cost,
         payment_account_id: payment_accounts[payment_accounts.length - 1].id // TODO: only allows one account
