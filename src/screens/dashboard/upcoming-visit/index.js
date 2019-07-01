@@ -60,19 +60,15 @@ class VisitBookedScreen extends React.Component {
       }
     };
 
-    careProviderSuccess = res => {
-      const {
-        name,
-        phone
-      } = res.data;
+    const careProviderSuccess = res => {
+      const { name, phone } = res.data;
 
       this.setState({
         providerData: {
-          name: name,
-          phone: phone
+          name,
+          phone
         }
-      })
-
+      });
     };
 
     const successHandler = res => {
@@ -99,14 +95,15 @@ class VisitBookedScreen extends React.Component {
           "en-US",
           dateOptions
         ),
-        reason: reason
+        reason
       });
 
-      getCareProvider(this.state.providerID, { successHandler: careProviderSuccess });
+      getCareProvider(this.state.providerID, {
+        successHandler: careProviderSuccess
+      });
     };
 
     getVisit(userStore.id, visitID, { successHandler });
-
   }
 
   componentDidMount() {}
@@ -163,7 +160,7 @@ class VisitBookedScreen extends React.Component {
                   color={colors.BLACK87}
                   textAlign="center"
                 >
-                  Your doctor should arrive by {time}.
+                  {providerData.name} should arrive by {time}.
                 </StyledText>
               </View>
               <View style={{ marginTop: 40, marginBottom: 10 }}>
