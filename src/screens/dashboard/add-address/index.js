@@ -1,6 +1,5 @@
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
-import MapView from "react-native-maps";
 import { View, Alert } from "react-native";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
@@ -36,13 +35,7 @@ class AddAddressScreen extends React.Component {
       locationName: "",
       street: "",
       city: "",
-      zip: "",
-      map: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
-      }
+      zip: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -118,7 +111,7 @@ class AddAddressScreen extends React.Component {
       navigation: { goBack },
       store: { userStore }
     } = this.props;
-    const { locationName, street, city, zip, map } = this.state;
+    const { locationName, street, city, zip } = this.state;
     return (
       <ContainerView>
         <HeaderWrapper>
@@ -131,10 +124,6 @@ class AddAddressScreen extends React.Component {
         </HeaderWrapper>
         <InactiveUserBanner userIsActive={userStore.active} />
         <KeyboardScrollView padding={0}>
-          <MapView
-            style={{ alignSelf: "stretch", height: 200 }}
-            initialRegion={map}
-          />
           <FormWrapper padding={32}>
             <FormInputWrapper>
               <FormTextInput
