@@ -33,24 +33,7 @@ class BookingReviewScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    const {
-      store: {
-        userStore: { children, addresses, visitRequest }
-      }
-    } = props;
-
-    const childName =
-      children[getIndexByValue(children, visitRequest.pickedChild)].name;
-    const addressStreet =
-      addresses[getIndexByValue(addresses, visitRequest.pickedAddress)].street;
-
     this.state = {
-      name: childName,
-      address: addressStreet,
-      date: visitRequest.date,
-      time: visitRequest.time,
-      // card: null,
-      price: visitRequest.cost,
       parentNotes: ""
     };
 
@@ -122,10 +105,17 @@ class BookingReviewScreen extends React.Component {
     const {
       navigation: { goBack, push },
       store: {
-        userStore: { payment_accounts }
+        userStore: { children, addresses, visitRequest, payment_accounts }
       }
     } = this.props;
-    const { name, address, date, time, price, parentNotes } = this.state;
+
+    const { parentNotes } = this.state;
+
+    const childName =
+      children[getIndexByValue(children, visitRequest.pickedChild)].name;
+    const addressStreet =
+      addresses[getIndexByValue(addresses, visitRequest.pickedAddress)].street;
+    const { date, time, cost } = visitRequest;
 
     return (
       <ContainerView padding={0}>
@@ -170,7 +160,7 @@ class BookingReviewScreen extends React.Component {
                   fontSize={16}
                   style={{ marginLeft: 12 }}
                 >
-                  {name}
+                  {childName}
                 </StyledText>
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
@@ -189,7 +179,7 @@ class BookingReviewScreen extends React.Component {
                   fontSize={16}
                   style={{ marginLeft: 12 }}
                 >
-                  {address}
+                  {addressStreet}
                 </StyledText>
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
@@ -268,7 +258,7 @@ class BookingReviewScreen extends React.Component {
                     color={colors.MIDGREY}
                   >
                     {"$"}
-                    {price.toFixed(2)}
+                    {cost.toFixed(2)}
                   </StyledText>
                 </ContentButton>
               </View>
