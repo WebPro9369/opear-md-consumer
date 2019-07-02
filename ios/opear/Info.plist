@@ -19,7 +19,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.5</string>
+	<string>1.0.6</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>11</string>
+	<string>12</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -57,9 +57,11 @@
 	<key>NSHumanReadableCopyright</key>
 	<string></string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>To get your current location</string>
+	<string>To get your location to match you with a service provider in your area</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>To get your current location</string>
+	<string>To get your location to match you with a service provider in your area</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow you to call your service provider</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To set your user photo</string>
 	<key>UIAppFonts</key>
