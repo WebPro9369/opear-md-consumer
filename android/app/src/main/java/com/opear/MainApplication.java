@@ -3,6 +3,7 @@ package com.opear;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.maps.MapsPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.hoxfon.react.RNTwilioVoice.TwilioVoicePackage;
 import com.oblador.keychain.KeychainPackage;
@@ -12,7 +13,6 @@ import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.swmansion.reanimated.ReanimatedPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.airbnb.android.react.maps.MapsPackage;
 import com.cardio.RNCardIOPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -34,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new MapsPackage(),
             new SplashScreenReactPackage(),
             new TwilioVoicePackage(),
             new KeychainPackage(),
@@ -43,7 +44,6 @@ public class MainApplication extends Application implements ReactApplication {
             new ReanimatedPackage(),
             new RNGestureHandlerPackage(),
             new VectorIconsPackage(),
-            new MapsPackage(),
             new RNCardIOPackage()
       );
     }
