@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable import/no-unresolved */
 import React from "react";
 import PropTypes from "prop-types";
@@ -9,6 +10,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { View, Alert } from "react-native";
 import { inject, observer } from "mobx-react";
 import { formatTimeStr } from "@utils/helpers";
+import { registerVisit } from "@services/opear-api";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, FlexView } from "../../../components/views";
@@ -18,7 +20,6 @@ import { ContentButton } from "../../account/settings/styles";
 import { ContentWrapper, AdditionalInput } from "./styles";
 import { colors } from "../../../utils/constants";
 import { getIndexByValue } from "@utils";
-import { registerVisit } from "@services/opear-api";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -82,10 +83,10 @@ class BookingReviewScreen extends React.Component {
 
     const formattedDate = new Date(visitRequest.date);
 
-    var hour = Math.floor(visitRequest.time);
-    var minutes = 0;
+    const hour = Math.floor(visitRequest.time);
+    let minutes = 0;
 
-    if(visitRequest.time%1 == 0.5) {
+    if (visitRequest.time % 1 === 0.5) {
       minutes = 30;
     }
     const completedDate = new Date(
@@ -96,8 +97,7 @@ class BookingReviewScreen extends React.Component {
       minutes
     );
 
-    const data =
-    {
+    const data = {
       visit: {
         child_id: visitRequest.pickedChild,
         address_id: visitRequest.pickedAddress,
@@ -115,7 +115,7 @@ class BookingReviewScreen extends React.Component {
       navigate("DashboardDefault");
     };
 
-    registerVisit(data, { successHandler });
+    return registerVisit(data, { successHandler });
   };
 
   render() {
@@ -158,7 +158,11 @@ class BookingReviewScreen extends React.Component {
             </StyledText>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 32 }}>
-            <ContentButton onPress={() => push("DashboardPickChild",{screenRef:"booking-review"})}>
+            <ContentButton
+              onPress={() =>
+                push("DashboardPickChild", { screenRef: "booking-review" })
+              }
+            >
               <FlexView>
                 <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
@@ -215,7 +219,7 @@ class BookingReviewScreen extends React.Component {
             </ContentButton>
             <FlexView>
               <View style={{ flex: 1, marginRight: 4 }}>
-                {(!payment_accounts || payment_accounts.length === 0) &&
+                {(!payment_accounts || payment_accounts.length === 0) && (
                   <ContentButton
                     onPress={() =>
                       push("DashboardPaymentDefault", {
@@ -235,12 +239,9 @@ class BookingReviewScreen extends React.Component {
                       <StyledText fontSize={16}>Add card</StyledText>
                     </FlexView>
                   </ContentButton>
-                }
-                {payment_accounts && payment_accounts.length > 0 &&
-                  <ContentButton
-                    onPress={() => {}}
-                    disabled={true}
-                  >
+                )}
+                {payment_accounts && payment_accounts.length > 0 && (
+                  <ContentButton onPress={() => {}} disabled>
                     <FlexView justifyContent="center">
                       <AntDesign
                         name="creditcard"
@@ -250,13 +251,17 @@ class BookingReviewScreen extends React.Component {
                           marginRight: 12
                         }}
                       />
-                      <StyledText fontSize={16}>{`****${payment_accounts[payment_accounts.length - 1].last4}`}</StyledText>
+                      <StyledText fontSize={16}>
+                        {`****${
+                          payment_accounts[payment_accounts.length - 1].last4
+                        }`}
+                      </StyledText>
                     </FlexView>
                   </ContentButton>
-                }
+                )}
               </View>
               <View style={{ flex: 1, marginLeft: 4 }}>
-                <ContentButton disabled={true}>
+                <ContentButton disabled>
                   <StyledText
                     fontFamily="FlamaMedium"
                     fontSize={20}
