@@ -49,7 +49,7 @@ class SelectProviderScreen extends React.Component {
             specialties: badges,
           }
         } = visitRequest;
-        
+
         return {
           visitRequestID,
           visitID,
@@ -59,26 +59,30 @@ class SelectProviderScreen extends React.Component {
           history: history.join(", "),
           avatar,
           rating,
-          badges: badges,
+          badges,
         }
       });
-      
+
       this.setState({ providers });
     }
 
-    getVisitRequests(visitID, {successHandler});
+    getVisitRequests(visitID, { successHandler });
   }
 
-  providerSelectHandler = ({visitID , visitRequestID} = {}) => {
+  providerSelectHandler = ({ visitID, visitRequestID } = {}) => {
     const {
       navigation: { navigate }
     } = this.props;
 
+    const successHandler = () => {
+      navigate("DashboardDefault");
+    };
 
-    const successHandler =  () => navigate("DashboardVisitBooked");
-
-    updateVisitRequests(visitID, visitRequestID, { accepted: true, successHandler });
-  }
+    updateVisitRequests(visitID, visitRequestID, {
+      accepted: true,
+      successHandler
+    });
+  };
 
   render() {
     const {

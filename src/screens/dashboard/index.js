@@ -89,7 +89,7 @@ class DashboardScreen extends React.Component {
   componentDidMount() {
     this.getVisit();
     this.timer = setInterval(() => this.getVisits(), 30000);
-  };
+  }
 
   componentWillUnmount() {
     clearInterval(this.timer);
@@ -112,8 +112,8 @@ class DashboardScreen extends React.Component {
             case "approving":
             case "scheduled":
             case "in_progress":
-                this.setState({ visitID: visitOnDate.id, visitState: visitOnDate.state });
-                break;
+              this.setState({ visitID: visitOnDate.id, visitState: visitOnDate.state });
+              break;
           }
         }
       }
