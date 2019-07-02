@@ -35,8 +35,8 @@ class SelectDateTimeScreen extends React.Component {
     this.state = {
       selectedDate: "",
       selectedTime: "",
-      startHour: 8,
-      endHour: 18,
+      startHour: 6,
+      endHour: 23.5,
       dates
     };
   }
@@ -79,6 +79,10 @@ class SelectDateTimeScreen extends React.Component {
     const hours = [];
     for (let i = startHour; i < endHour; i += 0.5) {
       hours.push({ key: `${i}`, value: i });
+    }
+
+    if (endHour === 23.5) {
+      hours.push({ key: `${23}`, value: 23.98 });
     }
 
     return (
@@ -164,7 +168,11 @@ class SelectDateTimeScreen extends React.Component {
                 <TimeSelector
                   key={item.key}
                   start={item.value}
-                  end={item.value + 0.5}
+                  end={
+                    item.value + 0.5 > 24
+                      ? item.value - 24 + 0.5
+                      : item.value + 0.5
+                  }
                   selected={item.value === selectedTime}
                   onPress={() => {
                     this.setState({

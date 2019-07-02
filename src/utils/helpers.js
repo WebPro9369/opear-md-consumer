@@ -27,10 +27,17 @@ export function getFormattedDate(date) {
 
 export const formatTimeStr = time => {
   const hour = parseInt(time, 10);
-  const min = time - hour;
+  let min = time - hour;
+  if (hour === 23 && min > 0.5) {
+    return "Midnight";
+  }
+  if (min !== 0 || min !== 0.5) {
+    min = (Math.round(min * 2) / 2).toFixed(1);
+  }
   const timeStr =
     hour >= 12
       ? `${hour - 12 || 12}${min === 0.5 ? ":30" : ""}pm`
       : `${hour || 12}${min === 0.5 ? ":30" : ""}am`;
+
   return timeStr;
 };
