@@ -48,6 +48,7 @@ const MainStore = types.model("MainStore", {
       cost: 150
     },
     address: {
+      id: -1,
       name: "",
       street: "",
       city: "",

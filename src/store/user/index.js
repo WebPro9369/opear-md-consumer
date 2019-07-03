@@ -69,6 +69,7 @@ export const UserStore = types
       cost: types.number
     }),
     address: types.optional(AddressStore, {
+      id: -1,
       name: "",
       street: "",
       city: "",
