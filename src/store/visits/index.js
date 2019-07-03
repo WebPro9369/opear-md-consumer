@@ -24,7 +24,7 @@ export const VisitsStore = types
         child: types.optional(ChildStore, {
           id: -1,
           gender: "",
-          avatar_image_index: types.number,
+          avatar_image_index: 0,
           first_name: "",
           last_name: "",
           dob: "01/01/1900",
