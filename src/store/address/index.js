@@ -7,10 +7,7 @@ const AddressStore = types
     street: types.string,
     city: types.string,
     state: types.string,
-    zip: types.string,
-    apartmentNumber: types.string,
-    latitude: types.string,
-    longitude: types.string
+    zip: types.string
   })
   .actions(self => ({
     setName(value) {
@@ -31,18 +28,6 @@ const AddressStore = types
     },
     setZipCode(value) {
       self.zip = value;
-      return self;
-    },
-    setApartmentNumber(value) {
-      self.apartmentNumber = value;
-      return self;
-    },
-    setLatitude(value) {
-      self.latitude = value;
-      return self;
-    },
-    setLongitude(value) {
-      self.longitude = value;
       return self;
     }
   }));

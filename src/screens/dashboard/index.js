@@ -31,7 +31,7 @@ class DashboardScreen extends React.Component {
     super(props);
 
     const {
-      store: { userStore, providerStore }
+      store: { userStore, visitsStore }
     } = props;
 
     this.state = {
@@ -43,25 +43,22 @@ class DashboardScreen extends React.Component {
         { key: "4", string: "Ear Nose Throat", color: "#6b82a3" }
       ],
       visitId: null,
-      visitState: "",
+      visitState: ""
     };
 
     const getChildrenSuccessHandler = res => {
       const childAdjustedArray = res.data.map(row => ({
         id: row.id,
-        age: getAge(row.dob),
         gender: row.gender || "",
         name: `${row.first_name} ${row.last_name}`,
-        allergies: Array.isArray(row.allergies)
-          ? row.allergies
-          : [row.allergies || ""],
-        birthDate: new Date(row.dob),
-        birthHistory: row.birth_history || "",
-        surgicalHistory: row.surgical_history || "",
-        currentMedications: row.current_medications || "",
+        allergies: row.allergies,
+        dob: new Date(row.dob),
+        birth_history: row.birth_history || "",
+        surgical_history: row.surgical_history || "",
+        current_medications: row.current_medications || "",
         hospitalizations: row.hospitalizations || "",
-        currentMedicalConditions: row.current_medical_conditions || "",
-        avatarImageIndex: row.avatar_image_index || 0
+        current_medical_conditions: row.current_medical_conditions || "",
+        avatar_image_index: row.avatar_image_index || 0
       }));
 
       // console.tron.log("Children list: ", childAdjustedArray);
@@ -98,14 +95,13 @@ class DashboardScreen extends React.Component {
   getVisits = () => {
     const getVisitsSuccessHandler = res => {
       const visits = res.data;
-
-      const dates = Object.keys(res.data);
+      visitsStore.setVisits(Object.values(visits).flat());
+      const dates = Object.keys(visits);
 
       for (const date of dates) {
         const visitsOnDate = visits[date];
 
         for (const visitOnDate of visitsOnDate) {
-
           switch (visitOnDate.state) {
             case "pending":
             case "matched":
@@ -117,7 +113,7 @@ class DashboardScreen extends React.Component {
           }
         }
       }
-    }
+    };
 
     getVisits({ successHandler: getVisitsSuccessHandler });
   };
@@ -128,9 +124,7 @@ class DashboardScreen extends React.Component {
       store
     } = this.props;
     const { providerStore } = store;
-    const {
-      appointment
-    } = providerStore;
+    const { appointment } = providerStore;
 
     const { userStore, illnessList, visitID, visitState } = this.state;
 
@@ -151,12 +145,17 @@ class DashboardScreen extends React.Component {
         {visitState === "pending" ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
-              We are currently matching you with your care provider, be in touch soon!
+              We are currently matching you with your care provider, be in touch
+              soon!
             </StyledText>
           </MatchingMessageWrapper>
-      ) : null}
+        ) : null}
         {visitState === "matched" ? (
-          <TouchableOpacity onPress={() => navigate("DashboardSelectProvider", {visitID: visitID})}>
+          <TouchableOpacity
+            onPress={() =>
+              navigate("DashboardSelectProvider", { visitID: visitID })
+            }
+          >
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
                 <StyledText fontSize={16} lineHeight={24}>
@@ -170,12 +169,17 @@ class DashboardScreen extends React.Component {
         {visitState === "approving" ? (
           <MatchingMessageWrapper>
             <StyledText fontSize={16} lineHeight={24}>
-              Your visit request has been sent to the care provider - check back soon!
+              Your visit request has been sent to the care provider - check back
+              soon!
             </StyledText>
           </MatchingMessageWrapper>
         ) : null}
         {visitState === "scheduled" ? (
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID: visitID})}>
+          <TouchableOpacity
+            onPress={() =>
+              navigate("DashboardUpcomingVisit", { visitID: visitID })
+            }
+          >
             <MatchingMessageWrapper>
               <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
                 <StyledText fontSize={16} lineHeight={24}>
@@ -187,7 +191,11 @@ class DashboardScreen extends React.Component {
           </TouchableOpacity>
         ) : null}
         {visitState === "in_progress" ? (
-          <TouchableOpacity onPress={() => navigate("DashboardUpcomingVisit",{visitID: visitID})}>
+          <TouchableOpacity
+            onPress={() =>
+              navigate("DashboardUpcomingVisit", { visitID: visitID })
+            }
+          >
             <MatchingMessageWrapper>
               <StyledText fontSize={16} lineHeight={24}>
                 Your Care Provider is on their way!
@@ -213,7 +221,8 @@ class DashboardScreen extends React.Component {
                       } else {
                         Alert.alert(
                           "Unavailable",
-                          "We're currently not in your area. Please check back later");
+                          "We're currently not in your area. Please check back later"
+                        );
                       }
                     }}
                   >
