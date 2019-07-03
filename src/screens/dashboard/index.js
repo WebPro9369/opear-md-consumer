@@ -81,7 +81,18 @@ class DashboardScreen extends React.Component {
     };
 
     getAddresses({ successHandler: getAddressesSuccessHandler });
+  }
 
+  componentDidMount() {
+    this.getVisits();
+    this.timer = setInterval(() => this.getVisits(), 30000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  getVisits = () => {
     const getVisitsSuccessHandler = res => {
       const visits = res.data;
       visitsStore.setVisits(Object.values(visits).flat());
@@ -97,10 +108,7 @@ class DashboardScreen extends React.Component {
             case "approving":
             case "scheduled":
             case "in_progress":
-              this.setState({
-                visitID: visitOnDate.id,
-                visitState: visitOnDate.state
-              });
+              this.setState({ visitID: visitOnDate.id, visitState: visitOnDate.state });
               break;
           }
         }
@@ -108,7 +116,7 @@ class DashboardScreen extends React.Component {
     };
 
     getVisits({ successHandler: getVisitsSuccessHandler });
-  }
+  };
 
   render() {
     const {

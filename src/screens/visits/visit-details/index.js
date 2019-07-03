@@ -3,9 +3,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { inject, observer, PropTypes as MobXPropTypes } from "mobx-react";
-import { Platform, Linking, Alert } from "react-native";
+import { Alert } from "react-native";
 import MapView from "react-native-maps";
-import haversine from "haversine";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import TwilioVoice from "react-native-twilio-programmable-voice";
 import { NavHeader } from "@components/nav-header";
@@ -21,8 +20,6 @@ import { addressToString } from "../../../utils/helpers";
 import { GoogleMapsService } from "@services";
 
 const imgDog = require("../../../../assets/images/Dog.png");
-
-const threshold = 1000;
 
 @inject("store")
 @observer
@@ -107,56 +104,6 @@ class VisitDetailsScreen extends React.Component {
     navigator.geolocation.clearWatch(this.watchID);
   }
 
-  navigatorWatch() {
-    const {
-      store: { providerStore }
-    } = this.props;
-    this.watchID = navigator.geolocation.watchPosition(
-      position => {
-        const { map } = this.state;
-        const { latitude, longitude } = position.coords;
-        const visitCoordinate = {
-          latitude: map.latitude,
-          longitude: map.longitude
-        };
-        const newCoordinate = {
-          latitude,
-          longitude
-        };
-        const distance =
-          haversine(visitCoordinate, newCoordinate, { unit: "meter" }) || 0;
-        providerStore.setArrived(distance < threshold);
-
-        this.setState({
-          map: {
-            ...map,
-            currentLatitude: latitude,
-            currentLongitude: longitude,
-            distance
-          }
-        });
-      },
-      error => console.log(error),
-      {
-        enableHighAccuracy: true,
-        timeout: 2000,
-        maximumAge: 1000,
-        distanceFilter: 10
-      }
-    );
-  }
-
-  navigateHandler = () => {
-    const { map } = this.state;
-    const from = `${map.currentLatitude},${map.currentLongitude}`;
-    const to = `${map.latitude},${map.longitude}`;
-    const url = Platform.select({
-      ios: `maps:0, 0?saddr=${from}&daddr=${to}`,
-      android: `https://www.google.com/maps/dir/?api=1&origin=${from}&destination=${to}`
-    });
-    Linking.openURL(url);
-  };
-
   cancelVisit = () => {
     const {
       navigation: { goBack },
@@ -186,10 +133,9 @@ class VisitDetailsScreen extends React.Component {
   render() {
     const {
       past,
-      navigation: { goBack, navigate },
-      store: { providerStore, visitsStore }
+      navigation: { goBack },
+      store: { visitsStore }
     } = this.props;
-    const { arrived } = providerStore;
     const { visitID, loaded, map, careProviderPhone } = this.state;
 
     const visit = getValueById(visitsStore.visits, visitID);
@@ -204,10 +150,15 @@ class VisitDetailsScreen extends React.Component {
       visit_notes
     } = visit;
 
+<<<<<<< HEAD
     console.tron.log(careProviderPhone);
 
     const childName = child.first_name
       ? `${child.first_name} ${child.last_name}`
+=======
+    const childName = child.firstName
+      ? `${child.firstName} ${child.lastName}`
+>>>>>>> 30c27d968b0b2b05b3ebe52985e898966c54f130
       : "N/A";
 
     const time = formatAMPM(new Date(appointment_time));
@@ -293,19 +244,6 @@ class VisitDetailsScreen extends React.Component {
           </View>
           {!past ? (
             <View style={{ marginTop: 48, paddingLeft: 16, paddingRight: 16 }}>
-              <View style={{ paddingTop: 6, paddingBottom: 6 }}>
-                {arrived ? (
-                  <ServiceButton
-                    title="Arrived"
-                    onPress={() => navigate("VisitsVisitInProgress")}
-                  />
-                ) : (
-                  <ServiceButton
-                    title="Navigate"
-                    onPress={this.navigateHandler}
-                  />
-                )}
-              </View>
               <View style={{ paddingTop: 6, paddingBottom: 6 }}>
                 <ServiceButton
                   grey

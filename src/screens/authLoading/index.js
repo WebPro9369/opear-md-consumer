@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { ActivityIndicator, Linking, View } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { getParent } from "@services/opear-api";
-import { getAuthentication } from "@services/authentication";
+import { getAuthentication, removeAuthentication } from "@services/authentication";
 import { userFromResult } from "@utils";
 
 @inject("store")
@@ -51,31 +51,40 @@ class AuthLoadingScreen extends Component {
       store: { userStore },
       navigation: { navigate }
     } = this.props;
+    try {
+      const {
+        id,
+        apiKey,
+        isAuthenticated,
+        wasAuthenticated
+      } = await getAuthentication();
 
-    const {
-      id,
-      apiKey,
-      isAuthenticated,
-      wasAuthenticated
-    } = await getAuthentication();
+      if (!isAuthenticated && wasAuthenticated) return navigate("Authenticating");
+      if (!isAuthenticated) return navigate("Authenticating");
 
-    if (!isAuthenticated && wasAuthenticated) return navigate("Authenticating");
-    if (!isAuthenticated) return navigate("Authenticating");
+      userStore.setAuthentication({ id, apiKey });
 
-    userStore.setAuthentication({ id, apiKey });
+      const successHandler = res => {
+        try {
+          userFromResult(res, userStore);
+          navigate("Tabs");
+        } catch {
+          removeAuthentication();
+          navigate("Authenticating");
+        }
+      };
 
-    const successHandler = res => {
-      userFromResult(res, userStore);
-      navigate("Tabs");
-    };
+      const errorHandler = err => {
+        if (err.response.status === 401) {
+          navigate("Authenticating");
+        }
+      };
 
-    const errorHandler = err => {
-      if (err.response.status === 401) {
-        navigate("Authenticating");
-      }
-    };
-
-    return getParent(id, { successHandler, errorHandler });
+      return getParent(id, { successHandler, errorHandler });
+    } catch {
+      removeAuthentication();
+      navigate("Authenticating");
+    }
   };
 
   render() {
