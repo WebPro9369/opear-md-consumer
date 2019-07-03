@@ -150,15 +150,10 @@ class VisitDetailsScreen extends React.Component {
       visit_notes
     } = visit;
 
-<<<<<<< HEAD
     console.tron.log(careProviderPhone);
 
     const childName = child.first_name
       ? `${child.first_name} ${child.last_name}`
-=======
-    const childName = child.firstName
-      ? `${child.firstName} ${child.lastName}`
->>>>>>> 30c27d968b0b2b05b3ebe52985e898966c54f130
       : "N/A";
 
     const time = formatAMPM(new Date(appointment_time));

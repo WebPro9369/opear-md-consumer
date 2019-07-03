@@ -5,7 +5,6 @@ export const ChildStore = types
   .model("ChildStore", {
     id: types.number,
     gender: types.string,
-    name: types.string,
     first_name: types.string,
     last_name: types.string,
     dob: types.string,
@@ -19,10 +18,6 @@ export const ChildStore = types
   .actions(self => ({
     setGender(value) {
       self.gender = value;
-      return self;
-    },
-    setName(value) {
-      self.name = value;
       return self;
     },
     setFirstName(value) {
