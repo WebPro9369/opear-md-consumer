@@ -17,6 +17,8 @@ import { colors } from "@utils/constants";
 import { updateVisit, getCareProvider } from "@services/opear-api";
 import { getValueById, getIndexByValue } from "@utils";
 import { formatAMPM } from "@utils/helpers";
+import { addressToString } from "../../../utils/helpers";
+import { GoogleMapsService } from "@services";
 
 const imgDog = require("../../../../assets/images/Dog.png");
 
@@ -40,7 +42,7 @@ class VisitDetailsScreen extends React.Component {
     const {
       navigation,
       store: { visitsStore }
-     } = props;
+    } = props;
     const visitID = navigation.getParam("visitID", false);
     // TODO: if (!visitID) error!
 
@@ -71,6 +73,34 @@ class VisitDetailsScreen extends React.Component {
     getCareProvider(visit.careProviderId, {
       successHandler: careProviderSuccess
     });
+
+    GoogleMapsService.getGeo(
+      addressToString(visit.address),
+      innerRes => {
+        const { data } = innerRes;
+        if (data && data.results && data.results[0].geometry) {
+          const { lat, lng } = data.results[0].geometry.location;
+          this.setState({
+            map: {
+              ...this.state.map,
+              latitude: lat,
+              longitude: lng,
+              latitudeDelta: 0.09,
+              longitudeDelta: 0.09
+            }
+          });
+        } else {
+          this.setState({
+            region: null
+          });
+        }
+      },
+      () => {
+        this.setState({
+          region: null
+        });
+      }
+    );
   }
 
   componentWillUnmount() {
@@ -168,22 +198,19 @@ class VisitDetailsScreen extends React.Component {
       address,
       parent,
       symptoms,
-      appointmentTime,
+      appointment_time,
       reason,
-      parentNotes,
-      visitNotes
+      parent_notes,
+      visit_notes
     } = visit;
 
     console.tron.log(careProviderPhone);
 
-    const childName = child.firstName
-      ? `${child.firstName} ${child.lastName}`
+    const childName = child.first_name
+      ? `${child.first_name} ${child.last_name}`
       : "N/A";
 
-    const time = formatAMPM(new Date(appointmentTime));
-    const strAddress = `${address.city}${
-      address.state ? `, ${address.state}` : ""
-    }`;
+    const time = formatAMPM(new Date(appointment_time));
 
     if (!loaded) {
       return (
@@ -208,6 +235,7 @@ class VisitDetailsScreen extends React.Component {
         <ScrollView padding={0}>
           <MapView
             style={{ alignSelf: "stretch", height: 200 }}
+            region={map}
             initialRegion={map}
           />
           <View style={{ padding: 16, marginTop: 16 }}>
@@ -216,7 +244,7 @@ class VisitDetailsScreen extends React.Component {
               name={childName}
               illness={symptoms.join(", ")}
               time={time}
-              address={strAddress}
+              address={address}
               disabled
             />
             <View style={{ marginTop: 32 }}>
@@ -251,13 +279,13 @@ class VisitDetailsScreen extends React.Component {
               />
               <LargeBookedDetailCard
                 type="Parent Notes"
-                text={parentNotes}
+                text={parent_notes}
                 disabled
               />
               {past ? (
                 <LargeBookedDetailCard
                   type="Visit Notes"
-                  text={visitNotes}
+                  text={visit_notes}
                   disabled
                 />
               ) : null}

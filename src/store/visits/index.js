@@ -10,32 +10,30 @@ export const VisitsStore = types
     visits: types.array(
       types.model({
         id: types.number,
-        parentId: types.maybeNull(types.number),
-        childId: types.maybeNull(types.number),
-        addressId: types.maybeNull(types.number),
-        careProviderId: types.maybeNull(types.number),
-        // avatarImg: types.string,
+        parent_id: types.number,
+        child_id: types.number,
+        address_id: types.number,
+        care_provider_id: types.number,
         reason: types.string,
         symptoms: types.array(types.string),
-        appointmentTime: types.Date,
-        parentNotes: types.string,
-        visitNotes: types.string,
-        paymentAmount: types.string,
+        appointment_time: types.string,
+        parent_notes: types.string,
+        visit_notes: types.maybeNull(types.string),
+        payment_amount: types.string,
         state: types.string,
         child: types.optional(ChildStore, {
           id: -1,
-          age: -1,
           gender: "",
-          name: "",
-          firstName: "",
-          lastName: "",
-          birthDate: new Date("01/01/1900"),
-          birthHistory: "",
-          surgicalHistory: "",
-          currentMedications: "",
+          avatar_image_index: types.number,
+          first_name: "",
+          last_name: "",
+          dob: "01/01/1900",
+          surgical_history: "",
+          current_medications: "",
+          birth_history: "",
           hospitalizations: "",
-          currentMedicalConditions: "",
-          allergies: []
+          current_medical_conditions: "",
+          allergies: ""
         }),
         address: types.optional(AddressStore, {
           id: -1,
@@ -43,10 +41,7 @@ export const VisitsStore = types
           street: "",
           city: "",
           state: "",
-          zip: "",
-          apartmentNumber: "",
-          latitude: "",
-          longitude: ""
+          zip: ""
         }),
         parent: types.optional(ParentStore, {
           id: -1,
@@ -54,8 +49,8 @@ export const VisitsStore = types
           email: "",
           phone: "",
           zip: "",
-          acceptedPrivacy: false,
-          acceptedTermsOfService: false,
+          accepted_privacy: false,
+          accepted_terms_of_service: false,
           active: false
         })
       })

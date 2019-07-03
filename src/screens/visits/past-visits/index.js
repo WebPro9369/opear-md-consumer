@@ -30,87 +30,8 @@ class PastVisitsScreen extends React.Component {
     } = this.props;
 
     getVisits({
-      past: true,
       successHandler: res => {
-        for (const key in res.data) {
-          const visitArray = res.data[key];
-          visitArray.forEach(visit => {
-            let {
-              parent_id,
-              child_id,
-              address_id,
-              care_provider_id,
-              reason,
-              symptoms,
-              appointment_time,
-              parent_notes,
-              visit_notes,
-              payment_amount,
-              state,
-              child,
-              address,
-              parent
-            } = visit;
-
-            child = child || {};
-            address = address || {};
-            parent = parent || {};
-
-            const newVisit = {
-              id: visit.id,
-              parentId: parent_id,
-              childId: child_id,
-              addressId: address_id,
-              careProviderId: care_provider_id,
-              reason,
-              symptoms,
-              appointmentTime: new Date(appointment_time),
-              parentNotes: parent_notes || "",
-              visitNotes: visit_notes || "",
-              paymentAmount: payment_amount || 0,
-              state: state || "",
-              child: {
-                id: child.id || -1,
-                age: getAge(new Date(child.dob || "01/01/1900")),
-                gender: child.gender || "",
-                name: child.name || "",
-                firstName: child.first_name || "",
-                lastName: child.last_name || "",
-                birthDate: new Date(child.dob || "01/01/1900"),
-                birthHistory: child.birth_history || "",
-                surgicalHistory: child.surgical_history || "",
-                currentMedications: child.current_medications || "",
-                hospitalizations: child.hospitalizations || "",
-                currentMedicalConditions:
-                  child.current_medical_conditions || "",
-                allergies: (child.allergies || "").split(", ")
-              },
-              address: {
-                id: address.id || -1,
-                name: address.name || "",
-                street: address.street || "",
-                city: address.city || "",
-                state: address.state || "",
-                zip: address.zip || 0,
-                apartmentNumber: "",
-                latitude: "",
-                longitude: ""
-              },
-              parent: {
-                id: parent.id || -1,
-                name: parent.name || "",
-                email: parent.email || "",
-                phone: parent.phone || "",
-                zip: parent.zip || "",
-                acceptedPrivacy: parent.accepted_privacy || false,
-                acceptedTermsOfService:
-                  parent.accepted_terms_of_service || false,
-                active: parent.active || false
-              }
-            };
-            visitsStore.addVisit(newVisit);
-          });
-        }
+        visitsStore.setVisits(Object.values(res.data).flat());
       }
     });
   }
@@ -124,7 +45,7 @@ class PastVisitsScreen extends React.Component {
     const visits = visitsStore.visits
       .filter(v => v.state === "completed")
       .sort(
-        (a, b) => new Date(b.appointmentTime) - new Date(a.appointmentTime)
+        (a, b) => new Date(b.appointment_time) - new Date(a.appointment_time)
       );
 
     const visitsDisplayStack = [];
@@ -133,34 +54,36 @@ class PastVisitsScreen extends React.Component {
     const timeOptions = { day: undefined, hour: "numeric" };
 
     visits.map(visit => {
-      const { appointmentTime } = visit;
-      const dateAsObject = new Date(appointmentTime);
+      const { appointment_time } = visit;
+      const dateAsObject = new Date(appointment_time);
 
-      if (!addedTimes.includes(appointmentTime)) {
-        addedTimes.push(appointmentTime);
+      const day = dateAsObject.toLocaleString("en-US", dayOptions);
+      if (!addedTimes.includes(day)) {
+        addedTimes.push(day);
         visitsDisplayStack.push(
-          <StyledText fontSize={16} color={colors.BLACK60}>
-            {dateAsObject.toLocaleString("en-US", dayOptions)}
+          <StyledText key={day} fontSize={16} color={colors.BLACK60}>
+            {day}
           </StyledText>
         );
       }
 
-      const formattedTime = new Date(visit.appointmentTime)
+      const formattedTime = dateAsObject
         .toLocaleDateString("en-US", timeOptions)
         .split(", ");
 
-      const childName = visit.child.firstName
-        ? `${visit.child.firstName} ${visit.child.lastName}`
+      const childName = visit.child.first_name
+        ? `${visit.child.first_name} ${visit.child.last_name}`
         : "N/A";
 
       return visitsDisplayStack.push(
-        <View style={{ marginBottom: 9 }}>
+        <View key={`visit-detail-wrapper-${visit.id}`} style={{ marginBottom: 9 }}>
           <VisitDetailCard
+            key={`visit-detail-${visit.id}`}
             avatarImg={imgFox}
             name={childName}
             illness={visit.reason}
             time={formattedTime[1]}
-            address={visit.address.street || "N/A"}
+            address={{ street: visit.address.street }}
             onPress={() =>
               navigate("VisitsVisitDetails", {
                 visitID: visit.id

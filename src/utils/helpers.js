@@ -41,3 +41,9 @@ export const formatTimeStr = time => {
 
   return timeStr;
 };
+
+export const addressToString = address => {
+  return `${address.street} ,${address.city}${
+    address.state ? `, ${address.state}` : ""
+  }`;
+};

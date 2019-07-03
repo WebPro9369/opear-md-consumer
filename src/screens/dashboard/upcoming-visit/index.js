@@ -16,6 +16,7 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
+import { addressToString } from "../../../utils/helpers";
 import { GoogleMapsService } from "@services";
 
 const { BLACK60 } = colors;
@@ -53,12 +54,7 @@ class VisitBookedScreen extends React.Component {
       reason: "",
       address: "18 Mission St",
       time: "Sun Dec 31, 8am - 9am",
-      region: {
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.09,
-        longitudeDelta: 0.09
-      }
+      region: null
     };
 
     const careProviderSuccess = res => {
@@ -74,7 +70,6 @@ class VisitBookedScreen extends React.Component {
 
     const successHandler = res => {
       const {
-
         care_provider_id,
         child,
         address,
@@ -92,7 +87,7 @@ class VisitBookedScreen extends React.Component {
       this.setState({
         providerID: care_provider_id,
         child: child.first_name,
-        address: address.street,
+        address,
         time: new Date(appointment_time).toLocaleDateString(
           "en-US",
           dateOptions
@@ -105,11 +100,11 @@ class VisitBookedScreen extends React.Component {
       });
 
       GoogleMapsService.getGeo(
-        `${address.street}${address.city && ", "}${address.city}${address.state && ", "}${address.state}`,
+        addressToString(address),
         innerRes => {
           const { data } = innerRes;
-          if (data && data.result && data.result.geometry) {
-            const { lat, lng } = data.result.geometry.location;
+          if (data && data.results && data.results[0].geometry) {
+            const { lat, lng } = data.results[0].geometry.location;
             this.setState({
               region: {
                 latitude: lat,
@@ -177,6 +172,7 @@ class VisitBookedScreen extends React.Component {
           {region && (
             <MapView
               style={{ alignSelf: "stretch", height: 200 }}
+              region={region}
               initialRegion={region}
             />
           )}
@@ -225,7 +221,7 @@ class VisitBookedScreen extends React.Component {
             />
             <BookedDetailCard
               type="Address"
-              text={address}
+              text={addressToString(address)}
               icon={<EvilIcons name="location" size={30} color={BLACK60} />}
             />
             <BookedDetailCard

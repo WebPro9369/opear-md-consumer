@@ -8,7 +8,6 @@ const AddressStore = types
     city: types.string,
     state: types.string,
     zip: types.string,
-    apartmentNumber: types.string,
     latitude: types.string,
     longitude: types.string
   })
@@ -31,10 +30,6 @@ const AddressStore = types
     },
     setZipCode(value) {
       self.zip = value;
-      return self;
-    },
-    setApartmentNumber(value) {
-      self.apartmentNumber = value;
       return self;
     },
     setLatitude(value) {
