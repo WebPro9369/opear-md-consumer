@@ -82,7 +82,7 @@ class SelectDateTimeScreen extends React.Component {
     }
 
     if (endHour === 23.5) {
-      hours.push({ key: `${23}`, value: 23.98 });
+      hours.push({ key: `${23.5}`, value: 23.98 });
     }
 
     return (
