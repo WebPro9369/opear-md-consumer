@@ -8,6 +8,8 @@ import { View, FlexView } from "../../components/views";
 import { ScrollView } from "../../components/views/scroll-view";
 import { ChildCard } from "../../components/cards";
 import { colors, avatarImages } from "../../utils/constants";
+import { getAge } from "../../utils";
+import { getChildren } from "@services/opear-api";
 import InactiveUserBanner from "@components/banner"
 
 @inject("store")
@@ -17,18 +19,16 @@ class ManageChildrenScreen extends React.Component {
     store: PropTypes.observableObject.isRequired
   };
 
-  constructor(props) {
-    super(props);
-
+  componentWillMount() {
     const {
-      store: {
-        userStore: { children }
-      }
-    } = props;
+      store: { userStore }
+    } = this.props;
 
-    this.state = {
-      children
+    const getChildrenSuccessHandler = res => {
+      userStore.setChildren(res.data);
     };
+
+    getChildren({ successHandler: getChildrenSuccessHandler });
   }
 
   render() {
@@ -36,7 +36,7 @@ class ManageChildrenScreen extends React.Component {
       navigation: { push },
       store: { userStore }
     } = this.props;
-    const { children } = this.state;
+    const { children } = userStore;
     return (
       <ScrollView>
         <View style={{ paddingTop: 44 }}>
@@ -62,9 +62,9 @@ class ManageChildrenScreen extends React.Component {
             {children.map(child => (
               <ChildCard
                 key={child.id}
-                name={child.name}
-                age={child.age}
-                avatarImg={avatarImages[child.avatarImageIndex]}
+                name={`${child.first_name} ${child.last_name}`}
+                age={getAge(child.dob)}
+                avatarImg={avatarImages[child.avatar_image_index]}
                 onPress={() => push("ChildrenEditChild", { childID: child.id })}
               />
             ))}

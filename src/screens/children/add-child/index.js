@@ -34,16 +34,16 @@ class AddChildScreen extends React.Component {
 
     this.state = {
       gender: "",
-      firstName: "",
-      lastName: "",
-      birthDate: null,
-      birthHistory: "",
-      surgicalHistory: "",
-      currentMedications: "",
+      first_name: "",
+      last_name: "",
+      dob: null,
+      birth_history: "",
+      surgical_history: "",
+      current_medications: "",
       hospitalizations: "",
-      currentMedicalConditions: "",
-      allergies: [],
-      avatarNumber: Math.floor(Math.random() * 4)
+      current_medical_conditions: "",
+      allergies: ","
+      avatar_image_index: Math.floor(Math.random() * 4)
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -64,33 +64,25 @@ class AddChildScreen extends React.Component {
 
     const {
       gender,
-      firstName,
-      lastName,
-      birthDate,
-      birthHistory,
-      surgicalHistory,
-      currentMedications,
+      first_name,
+      last_name,
+      dob,
+      birth_history,
+      surgical_history,
+      current_medications,
       hospitalizations,
-      currentMedicalConditions,
+      current_medical_conditions,
       allergies,
-      avatarNumber
+      avatar_image_index
     } = this.state;
 
     const dateRegex1 = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
     const dateRegex2 = /^(0[1-9]|1[0-2])(0[1-9]|1\d|2\d|3[01])(19|20)\d{2}$/;
 
-    if (!dateRegex1.test(birthDate) && !dateRegex2.test(birthDate)) {
+    if (!dateRegex1.test(dob) && !dateRegex2.test(dob)) {
       return Alert.alert(
         "There was an issue",
         "Please enter Date of Birth in mm/dd/yyyy format");
-    }
-
-    let allergiesArray = [];
-
-    if (allergies.indexOf(",") > -1) {
-      allergiesArray = allergies.split(", ");
-    } else {
-      allergiesArray = allergies;
     }
 
     let genderMap = 0;
@@ -105,27 +97,9 @@ class AddChildScreen extends React.Component {
 
     const data = {
       child: {
-        first_name: firstName,
-        last_name: lastName,
-        gender: genderMap,
-        dob: birthDate,
-        allergies: allergiesArray,
-        birth_history: birthHistory,
-        current_medications: currentMedications,
-        current_medical_conditions: currentMedicalConditions,
-        surgical_history: surgicalHistory,
-        hospitalizations,
-        avatar_image_index: avatarNumber
-      }
-    };
-
-    const successHandler = response => {
-      const {
-        id,
-        // parent_id,
         first_name,
         last_name,
-        gender,
+        gender: genderMap,
         dob,
         allergies,
         birth_history,
@@ -134,24 +108,11 @@ class AddChildScreen extends React.Component {
         surgical_history,
         hospitalizations,
         avatar_image_index
-      } = response.data;
+      }
+    };
 
-      const newChild = {
-        id,
-        age: getAge(dob),
-        gender,
-        name: `${first_name} ${last_name}`,
-        birthDate: new Date(dob),
-        allergies: (allergies || "").split(", "),
-        birthHistory: birth_history || "",
-        surgicalHistory: surgical_history || "",
-        currentMedications: current_medications || "",
-        currentMedicalConditions: current_medical_conditions || "",
-        hospitalizations: hospitalizations || "",
-        avatarImageIndex: avatar_image_index || 0
-      };
-
-      userStore.addChild(newChild);
+    const successHandler = response => {
+      userStore.addChild(response.data);
       goBack();
     };
 
@@ -170,16 +131,16 @@ class AddChildScreen extends React.Component {
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
       gender,
-      firstName,
-      lastName,
-      birthDate,
-      birthHistory,
-      surgicalHistory,
-      currentMedications,
+      first_name,
+      last_name,
+      dob,
+      birth_history,
+      surgical_history,
+      current_medications,
       hospitalizations,
-      currentMedicalConditions,
+      current_medical_conditions,
       allergies,
-      avatarNumber
+      avatar_image_index
     } = this.state;
 
     return (
@@ -198,7 +159,7 @@ class AddChildScreen extends React.Component {
             <Avatar
               rounded
               size={120}
-              source={avatarImages[avatarNumber]}
+              source={avatarImages[avatar_image_index]}
               showEditButton={false}
             />
           </ViewCentered>
@@ -206,16 +167,16 @@ class AddChildScreen extends React.Component {
             <FormInputWrapper>
               <FormTextInput
                 label="First Name"
-                value={firstName}
-                onChangeText={this.handleInputChange("firstName")}
+                value={first_name}
+                onChangeText={this.handleInputChange("first_name")}
                 placeholder="First Name"
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Last Name"
-                value={lastName}
-                onChangeText={this.handleInputChange("lastName")}
+                value={last_name}
+                onChangeText={this.handleInputChange("last_name")}
                 placeholder="Last Name"
               />
             </FormInputWrapper>
@@ -230,35 +191,35 @@ class AddChildScreen extends React.Component {
             <FormInputWrapper>
             <FormMaskedTextInput
               label="Birth Date"
-              value={birthDate}
+              value={dob}
               placeholder="mm/dd/yyyy"
               keyboardType="number-pad"
               maskOptions={{ mask: "99/99/9999" }}
-              onChangeText={this.handleInputChange("birthDate")}
+              onChangeText={this.handleInputChange("dob")}
             />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Birth History"
-                value={birthHistory}
+                value={birth_history}
                 placeholder="Birth History"
-                onChangeText={this.handleInputChange("birthHistory")}
+                onChangeText={this.handleInputChange("birth_history")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Surgical History"
-                value={surgicalHistory}
+                value={surgical_history}
                 placeholder="Surgical History"
-                onChangeText={this.handleInputChange("surgicalHistory")}
+                onChangeText={this.handleInputChange("surgical_history")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Current Medications"
-                value={currentMedications}
+                value={current_medications}
                 placeholder="Current Medications"
-                onChangeText={this.handleInputChange("currentMedications")}
+                onChangeText={this.handleInputChange("current_medications")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -280,10 +241,10 @@ class AddChildScreen extends React.Component {
             <FormInputWrapper>
               <FormTextInput
                 label="Current Medical Conditions"
-                value={currentMedicalConditions}
+                value={current_medical_conditions}
                 placeholder="Current Medical Conditions"
                 onChangeText={this.handleInputChange(
-                  "currentMedicalConditions"
+                  "current_medical_conditions"
                 )}
               />
             </FormInputWrapper>

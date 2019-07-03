@@ -15,7 +15,6 @@ import {
 import { IllnessCard, ContentWrapper, MatchingMessageWrapper } from "./styles";
 import { colors } from "../../utils/constants";
 import { getChildren, getAddresses, getVisits } from "@services/opear-api";
-import { getAge } from "@utils";
 import InactiveUserBanner from "@components/banner";
 
 const imgRightArrow = require("../../../assets/images/Right_arrow.png");
@@ -31,7 +30,7 @@ class DashboardScreen extends React.Component {
     super(props);
 
     const {
-      store: { userStore, visitsStore }
+      store: { userStore }
     } = props;
 
     this.state = {
@@ -47,22 +46,7 @@ class DashboardScreen extends React.Component {
     };
 
     const getChildrenSuccessHandler = res => {
-      const childAdjustedArray = res.data.map(row => ({
-        id: row.id,
-        gender: row.gender || "",
-        name: `${row.first_name} ${row.last_name}`,
-        allergies: row.allergies,
-        dob: new Date(row.dob),
-        birth_history: row.birth_history || "",
-        surgical_history: row.surgical_history || "",
-        current_medications: row.current_medications || "",
-        hospitalizations: row.hospitalizations || "",
-        current_medical_conditions: row.current_medical_conditions || "",
-        avatar_image_index: row.avatar_image_index || 0
-      }));
-
-      // console.tron.log("Children list: ", childAdjustedArray);
-      userStore.setChildren(childAdjustedArray);
+      userStore.setChildren(res.data);
     };
 
     getChildren({ successHandler: getChildrenSuccessHandler });
