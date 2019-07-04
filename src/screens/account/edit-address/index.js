@@ -12,6 +12,7 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { FlexView, FormWrapper } from "../../../components/views";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -106,6 +107,7 @@ class EditAddressScreen extends React.Component {
     const { street, city, zip, name } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
           title="Edit Address"
           size="medium"

@@ -21,6 +21,7 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -128,6 +129,7 @@ class AddCardScreen extends React.Component {
     const { loading, isEditing, last4 } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
           title={isEditing ? "Edit Card" : "Add Card"}
           size="medium"

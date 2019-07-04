@@ -18,6 +18,7 @@ import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
 import { addressToString } from "../../../utils/helpers";
 import { GoogleMapsService } from "@services";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const { BLACK60 } = colors;
 
@@ -147,6 +148,7 @@ class VisitBookedScreen extends React.Component {
 
     return (
       <ScrollView padding={0} marginTop={24}>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View
           style={{
             paddingLeft: 16,

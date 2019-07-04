@@ -17,6 +17,7 @@ import {
 import { View, FlexView } from "../../components/views";
 import { ScrollView } from "../../components/views/scroll-view";
 import { colors } from "../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgAvatar = require("../../../assets/images/Placeholder_Photo.png");
 
@@ -63,6 +64,7 @@ class AccountScreen extends React.Component {
     const { name, email } = this.state;
     return (
       <ScrollView padding={16}>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader title="Account" size="medium" hasBackButton={false} />
         <InactiveUserBanner userIsActive={userStore.active} />
         <View style={{ padding: 16 }}>

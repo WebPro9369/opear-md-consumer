@@ -18,6 +18,7 @@ import { getValueById, getIndexByValue } from "@utils";
 import { formatAMPM } from "@utils/helpers";
 import { addressToString } from "../../../utils/helpers";
 import { GoogleMapsService } from "@services";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgDog = require("../../../../assets/images/Dog.png");
 
@@ -170,6 +171,7 @@ class VisitDetailsScreen extends React.Component {
 
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <HeaderWrapper>
           <NavHeader
             title="Visit Details"

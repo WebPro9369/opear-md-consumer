@@ -17,6 +17,7 @@ import { colors } from "../../utils/constants";
 import { getChildren, getAddresses, getVisits } from "@services/opear-api";
 import { getAge } from "@utils";
 import InactiveUserBanner from "@components/banner";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgRightArrow = require("../../../assets/images/Right_arrow.png");
 
@@ -130,6 +131,7 @@ class DashboardScreen extends React.Component {
 
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <HeaderWrapper>
           <NavHeader title="" size="medium" hasBackButton={false} />
         </HeaderWrapper>
