@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React from "react";
-
+import { Switch } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -12,7 +12,8 @@ import {
   ContainerView,
   HeaderWrapper,
   ViewCentered,
-  View
+  View,
+  FlexView
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
@@ -27,7 +28,23 @@ class SettingsScreen extends React.Component {
     store: PropTypes.observableObject.isRequired
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      smsNotification: false
+    };
+  }
+
+  onChangeSmsNotification = value => {
+    console.tron.log("Sms notification: ", value);
+    this.setState({
+      smsNotification: value
+    });
+  };
+
   render() {
+    const { smsNotification } = this.state;
     const {
       navigation: { navigate },
       store: { userStore }
@@ -98,6 +115,13 @@ class SettingsScreen extends React.Component {
               />
             </View>
           </View>
+          <FlexView style={{ padding: 16 }}>
+            <StyledText fontSize={20}>SMS Notifications</StyledText>
+            <Switch
+              value={smsNotification}
+              onValueChange={this.onChangeSmsNotification}
+            />
+          </FlexView>
         </ScrollView>
       </ContainerView>
     );
