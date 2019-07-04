@@ -13,7 +13,7 @@ import { ServiceButton } from "@components/service-button";
 import { ContainerView, HeaderWrapper, View } from "@components/views";
 import { ScrollView } from "@components/views/scroll-view";
 import { colors } from "@utils/constants";
-import { updateVisit, getCareProvider } from "@services/opear-api";
+import { updateVisit, getCareProvider, getVisit } from "@services/opear-api";
 import { getValueById, getIndexByValue } from "@utils";
 import { formatAMPM } from "@utils/helpers";
 import { addressToString } from "../../../utils/helpers";
@@ -39,15 +39,35 @@ class VisitDetailsScreen extends React.Component {
 
     const {
       navigation,
-      store: { visitsStore }
+      store: { visitsStore, userStore }
     } = props;
-    const visitID = navigation.getParam("visitID", false);
+    var visitID = navigation.getParam("visitID", false);
     // TODO: if (!visitID) error!
+    const routeInfo = navigation.getParam("routeInfo", false);
 
-    const visit = getValueById(visitsStore.visits, visitID);
+    if(!visitID) {
+      var splitRoute = routeInfo.split("/");
+      visitID = parseInt(splitRoute[1].split("=")[1]);
+    }
 
     this.state = {
       visitID,
+      visit: {
+        child: {
+          first_name: "",
+          last_name: "",
+          allergies: [","]
+        },
+        address: "",
+        parent: {
+          name: ""
+        },
+        symptoms: [","],
+        appointment_time: "",
+        reason: "",
+        parent_notes: "",
+        visit_notes: ""
+      },
       map: {
         latitude: 37.78825,
         longitude: -122.4324,
@@ -62,7 +82,34 @@ class VisitDetailsScreen extends React.Component {
       careProviderPhone: 0
     };
 
-    const careProviderSuccess = res => {
+    if(!routeInfo) {
+      this.setState({
+        visit: getValueById(visitsStore.visits, visitID)
+      });
+
+      careProviderHandler();
+      getGeoHandler();
+    }
+    else {
+      successHandler = res => {
+        this.setState({
+          visit: res.data
+        });
+
+        careProviderHandler();
+        getGeoHandler();
+      };
+
+      getVisit(userStore.id, visitID, {successHandler});
+    }
+
+
+  }
+
+  careProviderHandler () {
+    const { visit } = this.state;
+
+    careProviderSuccess = res => {
       this.setState({
         careProviderPhone: res.data.phone
       });
@@ -71,6 +118,10 @@ class VisitDetailsScreen extends React.Component {
     getCareProvider(visit.careProviderId, {
       successHandler: careProviderSuccess
     });
+  }
+
+  getGeoHandler () {
+    const { visit } = this.state;
 
     GoogleMapsService.getGeo(
       addressToString(visit.address),
@@ -134,12 +185,11 @@ class VisitDetailsScreen extends React.Component {
   render() {
     const {
       past,
-      navigation: { goBack },
+      navigation: { goBack, getParam },
       store: { visitsStore }
     } = this.props;
-    const { visitID, loaded, map, careProviderPhone } = this.state;
+    const { visit, visitID, loaded, map, careProviderPhone } = this.state;
 
-    const visit = getValueById(visitsStore.visits, visitID);
     const {
       child,
       address,
