@@ -31,7 +31,9 @@ class DeeplinkHandler extends React.Component {
 
     if (routeName === "newpwd") {
       navigate("AccountNewPwd", { routeInfo: route });
-    } else if ( routeName === "visitRequest") {
+    } else if ( routeName === "matchmakingReady") {
+      navigate("DashboardDefault", { routeInfo: route });
+    } else if ( routeName === "appointmentCancelled") {
       navigate("DashboardDefault", { routeInfo: route });
     } else if ( routeName === "upcomingVisit") {
       navigate("VisitsVisitDetails", { routeInfo: route });
