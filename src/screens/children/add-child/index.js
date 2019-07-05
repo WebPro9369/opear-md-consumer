@@ -189,14 +189,14 @@ class AddChildScreen extends React.Component {
               />
             </FormInputWrapper>
             <FormInputWrapper>
-            <FormMaskedTextInput
-              label="Birth Date"
-              value={dob}
-              placeholder="mm/dd/yyyy"
-              keyboardType="number-pad"
-              maskOptions={{ mask: "99/99/9999" }}
-              onChangeText={this.handleInputChange("dob")}
-            />
+              <FormMaskedTextInput
+                label="Birth Date"
+                value={dob}
+                placeholder="mm/dd/yyyy"
+                keyboardType="number-pad"
+                maskOptions={{ mask: "99/99/9999" }}
+                onChangeText={this.handleInputChange("dob")}
+              />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
