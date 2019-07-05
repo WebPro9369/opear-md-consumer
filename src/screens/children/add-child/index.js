@@ -82,7 +82,8 @@ class AddChildScreen extends React.Component {
     if (!dateRegex1.test(dob) && !dateRegex2.test(dob)) {
       return Alert.alert(
         "There was an issue",
-        "Please enter Date of Birth in mm/dd/yyyy format");
+        "Please enter Date of Birth in mm/dd/yyyy format"
+      );
     }
 
     let genderMap = 0;
@@ -100,11 +101,7 @@ class AddChildScreen extends React.Component {
         first_name,
         last_name,
         gender: genderMap,
-<<<<<<< HEAD
         dob: new Date(dob),
-=======
-        dob,
->>>>>>> 40036245d34ceb05f7b2c40e2d3978a09c51acef
         allergies,
         birth_history,
         current_medications,
@@ -193,16 +190,6 @@ class AddChildScreen extends React.Component {
               />
             </FormInputWrapper>
             <FormInputWrapper>
-<<<<<<< HEAD
-            <FormMaskedTextInput
-              label="Birth Date"
-              value={dob}
-              placeholder="mm/dd/yyyy"
-              keyboardType="number-pad"
-              maskOptions={{ mask: "99/99/9999" }}
-              onChangeText={this.handleInputChange("dob")}
-            />
-=======
               <FormMaskedTextInput
                 label="Birth Date"
                 value={dob}
@@ -211,7 +198,6 @@ class AddChildScreen extends React.Component {
                 maskOptions={{ mask: "99/99/9999" }}
                 onChangeText={this.handleInputChange("dob")}
               />
->>>>>>> 40036245d34ceb05f7b2c40e2d3978a09c51acef
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
