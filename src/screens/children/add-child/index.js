@@ -100,7 +100,7 @@ class AddChildScreen extends React.Component {
         first_name,
         last_name,
         gender: genderMap,
-        dob,
+        dob: new Date(dob),
         allergies,
         birth_history,
         current_medications,
