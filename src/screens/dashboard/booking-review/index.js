@@ -111,8 +111,8 @@ class BookingReviewScreen extends React.Component {
 
     const { parentNotes } = this.state;
 
-    const childName =
-      children[getIndexByValue(children, visitRequest.pickedChild)].name;
+    const child = children[getIndexByValue(children, visitRequest.pickedChild)];
+    const childName = `${child.first_name} ${child.last_name}`;
     const addressStreet =
       addresses[getIndexByValue(addresses, visitRequest.pickedAddress)].street;
     const { date, time, cost } = visitRequest;
