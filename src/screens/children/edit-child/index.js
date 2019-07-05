@@ -90,7 +90,12 @@ class EditChildScreen extends React.Component {
     if (!dateRegex1.test(birthDate) && !dateRegex2.test(birthDate)) {
       return Alert.alert(
         "There was an issue",
+<<<<<<< HEAD
         "Please enter Date of Birth in mm/dd/yyyy format");
+=======
+        "Please enter Date of Birth in mm/dd/yyyy format"
+      );
+>>>>>>> 40036245d34ceb05f7b2c40e2d3978a09c51acef
     }
 
     const data = {
@@ -134,8 +139,8 @@ class EditChildScreen extends React.Component {
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
       gender,
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       birthDate,
       birth_history,
       surgical_history,

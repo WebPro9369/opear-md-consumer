@@ -36,8 +36,8 @@ class SelectProviderScreen extends React.Component {
       if  (!res.data) return;
 
       const providers = res.data.map(visitRequest => {
-        const { 
-          id: visitRequestID, 
+        const {
+          id: visitRequestID,
           visit_id: visitID,
           care_provider_id: careProviderID,
           care_provider: {
@@ -78,10 +78,10 @@ class SelectProviderScreen extends React.Component {
       navigate("DashboardDefault");
     };
 
-    updateVisitRequests(visitID, visitRequestID, {
-      accepted: true,
-      successHandler
-    });
+    updateVisitRequests(visitID, visitRequestID,
+      { accepted: true },
+      { successHandler }
+    );
   };
 
   render() {
