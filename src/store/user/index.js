@@ -32,6 +32,7 @@ export const UserStore = types
     password: types.optional(types.string, ""),
     birthday: types.Date,
     phone: types.string,
+    avatar: types.string,
     acceptedPrivacy: types.boolean,
     acceptedTermsOfService: types.boolean,
     payment_accounts: types.array(PaymentAccountStore),
@@ -102,6 +103,10 @@ export const UserStore = types
     },
     setPassword(value) {
       self.password = value;
+      return self;
+    },
+    setAvatar(value) {
+      self.avatar = value;
       return self;
     },
     setZip(value) {
