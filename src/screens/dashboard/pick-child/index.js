@@ -8,6 +8,8 @@ import { ContainerView, View, FlexView } from "../../../components/views";
 import { ServiceButton } from "../../../components/service-button";
 import { ChildCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
+import { getAge } from "../../../utils";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -59,6 +61,7 @@ class PickChildScreen extends React.Component {
     const { pickedChild, children } = this.state;
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View
           style={{
             paddingLeft: 16,
@@ -96,10 +99,10 @@ class PickChildScreen extends React.Component {
             {children.map(child => (
               <ChildCard
                 key={child.id}
-                name={child.name}
-                age={child.age}
+                name={`${child.first_name} ${child.last_name}`}
+                age={getAge(child.dob)}
                 avatarImg={imgFoxLarge}
-                selected={child.selected}
+                selected={pickedChild && child.id === pickedChild.id}
                 onPress={() => {
                   let selectedChild = null;
                   const newChildren = children.map(ch => {

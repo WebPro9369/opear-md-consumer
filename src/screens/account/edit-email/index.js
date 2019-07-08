@@ -10,6 +10,7 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import InactiveUserBanner from "@components/banner"
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -61,6 +62,7 @@ class EditEmailScreen extends React.Component {
     const { email } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
           title="Edit email"
           size="medium"

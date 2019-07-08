@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable import/no-unresolved */
 import React from "react";
 import PropTypes from "prop-types";
@@ -9,6 +10,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { View, Alert } from "react-native";
 import { inject, observer } from "mobx-react";
 import { formatTimeStr } from "@utils/helpers";
+import { registerVisit } from "@services/opear-api";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, FlexView } from "../../../components/views";
@@ -18,7 +20,7 @@ import { ContentButton } from "../../account/settings/styles";
 import { ContentWrapper, AdditionalInput } from "./styles";
 import { colors } from "../../../utils/constants";
 import { getIndexByValue } from "@utils";
-import { registerVisit } from "@services/opear-api";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -32,24 +34,7 @@ class BookingReviewScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    const {
-      store: {
-        userStore: { children, addresses, visitRequest }
-      }
-    } = props;
-
-    const childName =
-      children[getIndexByValue(children, visitRequest.pickedChild)].name;
-    const addressStreet =
-      addresses[getIndexByValue(addresses, visitRequest.pickedAddress)].street;
-
     this.state = {
-      name: childName,
-      address: addressStreet,
-      date: visitRequest.date,
-      time: visitRequest.time,
-      // card: null,
-      price: visitRequest.cost,
       parentNotes: ""
     };
 
@@ -82,10 +67,10 @@ class BookingReviewScreen extends React.Component {
 
     const formattedDate = new Date(visitRequest.date);
 
-    var hour = Math.floor(visitRequest.time);
-    var minutes = 0;
+    const hour = Math.floor(visitRequest.time);
+    let minutes = 0;
 
-    if(visitRequest.time%1 == 0.5) {
+    if (visitRequest.time % 1 === 0.5) {
       minutes = 30;
     }
     const completedDate = new Date(
@@ -96,8 +81,7 @@ class BookingReviewScreen extends React.Component {
       minutes
     );
 
-    const data =
-    {
+    const data = {
       visit: {
         child_id: visitRequest.pickedChild,
         address_id: visitRequest.pickedAddress,
@@ -115,20 +99,28 @@ class BookingReviewScreen extends React.Component {
       navigate("DashboardDefault");
     };
 
-    registerVisit(data, { successHandler });
+    return registerVisit(data, { successHandler });
   };
 
   render() {
     const {
       navigation: { goBack, push },
       store: {
-        userStore: { payment_accounts }
+        userStore: { children, addresses, visitRequest, payment_accounts }
       }
     } = this.props;
-    const { name, address, date, time, price, parentNotes } = this.state;
+
+    const { parentNotes } = this.state;
+
+    const child = children[getIndexByValue(children, visitRequest.pickedChild)];
+    const childName = `${child.first_name} ${child.last_name}`;
+    const addressStreet =
+      addresses[getIndexByValue(addresses, visitRequest.pickedAddress)].street;
+    const { date, time, cost } = visitRequest;
 
     return (
       <ContainerView padding={0}>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View
           style={{
             paddingLeft: 16,
@@ -158,7 +150,11 @@ class BookingReviewScreen extends React.Component {
             </StyledText>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 32 }}>
-            <ContentButton onPress={() => push("DashboardPickChild",{screenRef:"booking-review"})}>
+            <ContentButton
+              onPress={() =>
+                push("DashboardPickChild", { screenRef: "booking-review" })
+              }
+            >
               <FlexView>
                 <Avatar rounded size={40} source={imgFoxLarge} />
                 <StyledText
@@ -166,7 +162,7 @@ class BookingReviewScreen extends React.Component {
                   fontSize={16}
                   style={{ marginLeft: 12 }}
                 >
-                  {name}
+                  {childName}
                 </StyledText>
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
@@ -185,7 +181,7 @@ class BookingReviewScreen extends React.Component {
                   fontSize={16}
                   style={{ marginLeft: 12 }}
                 >
-                  {address}
+                  {addressStreet}
                 </StyledText>
               </FlexView>
               <MaterialIcons name="edit" size={24} color={colors.BLACK87} />
@@ -215,7 +211,7 @@ class BookingReviewScreen extends React.Component {
             </ContentButton>
             <FlexView>
               <View style={{ flex: 1, marginRight: 4 }}>
-                {(!payment_accounts || payment_accounts.length === 0) &&
+                {(!payment_accounts || payment_accounts.length === 0) && (
                   <ContentButton
                     onPress={() =>
                       push("DashboardPaymentDefault", {
@@ -235,12 +231,9 @@ class BookingReviewScreen extends React.Component {
                       <StyledText fontSize={16}>Add card</StyledText>
                     </FlexView>
                   </ContentButton>
-                }
-                {payment_accounts && payment_accounts.length > 0 &&
-                  <ContentButton
-                    onPress={() => {}}
-                    disabled={true}
-                  >
+                )}
+                {payment_accounts && payment_accounts.length > 0 && (
+                  <ContentButton onPress={() => {}} disabled>
                     <FlexView justifyContent="center">
                       <AntDesign
                         name="creditcard"
@@ -250,20 +243,24 @@ class BookingReviewScreen extends React.Component {
                           marginRight: 12
                         }}
                       />
-                      <StyledText fontSize={16}>{`****${payment_accounts[payment_accounts.length - 1].last4}`}</StyledText>
+                      <StyledText fontSize={16}>
+                        {`****${
+                          payment_accounts[payment_accounts.length - 1].last4
+                        }`}
+                      </StyledText>
                     </FlexView>
                   </ContentButton>
-                }
+                )}
               </View>
               <View style={{ flex: 1, marginLeft: 4 }}>
-                <ContentButton disabled={true}>
+                <ContentButton disabled>
                   <StyledText
                     fontFamily="FlamaMedium"
                     fontSize={20}
                     color={colors.MIDGREY}
                   >
                     {"$"}
-                    {price.toFixed(2)}
+                    {cost.toFixed(2)}
                   </StyledText>
                 </ContentButton>
               </View>

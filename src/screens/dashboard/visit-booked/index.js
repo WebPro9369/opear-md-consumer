@@ -14,6 +14,7 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { ProviderCard, BookedDetailCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const { BLACK60 } = colors;
 const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
@@ -98,6 +99,7 @@ class VisitBookedScreen extends React.Component {
             onPressBackButton={() => goBack()}
           />
         </View> */}
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View style={{ marginTop: 44 }}>
           <ContentWrapper>
             <StyledText fontFamily="FlamaMedium" fontSize={28} lineHeight={40}>
