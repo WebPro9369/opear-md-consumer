@@ -3,6 +3,7 @@ import { types } from "mobx-state-tree";
 
 const AddressStore = types
   .model("AddressStore", {
+    id: types.number,
     name: types.string,
     street: types.string,
     city: types.string,
