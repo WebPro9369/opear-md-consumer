@@ -33,7 +33,7 @@ class AccountScreen extends React.Component {
 
     const {
       store: {
-        userStore: { name, email }
+        userStore: { name, email}
       }
     } = props;
 
@@ -41,6 +41,15 @@ class AccountScreen extends React.Component {
       name,
       email
     };
+  }
+
+  componentDidMount() {
+    const { navigation, store: { userStore } } = this.props;
+    this._onFocusListener = navigation.addListener("didFocus", () => {
+      console.tron.log("focus");
+      console.tron.log(userStore);
+      this.forceUpdate();
+    });
   }
 
   openURL = url => {
@@ -62,6 +71,18 @@ class AccountScreen extends React.Component {
       store: { userStore }
     } = this.props;
     const { name, email } = this.state;
+
+    const { avatar } = userStore;
+
+    var avatarOptions = { source: imgAvatar };
+
+    if(avatar != "/images/original/missing.png") {
+      avatarOptions = {
+        source:
+        { uri : avatar}
+      };
+    }
+
     return (
       <ScrollView padding={16}>
         <DeeplinkHandler navigation={this.props.navigation}/>
@@ -69,7 +90,11 @@ class AccountScreen extends React.Component {
         <InactiveUserBanner userIsActive={userStore.active} />
         <View style={{ padding: 16 }}>
           <FlexView justifyContent="start">
-            <Avatar rounded size={80} source={imgAvatar} />
+            <Avatar
+              {...avatarOptions}
+              rounded
+              size={80}
+            />
             <View style={{ paddingLeft: 20 }}>
               <StyledText fontSize={16}>{name}</StyledText>
               <StyledText fontSize={16} fontFamily="FlamaLight">
