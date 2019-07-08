@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -75,7 +76,6 @@
 		F35FECFF81AF4305B9D3C201 /* FlamaMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9A7A323A2034A4B8419A806 /* FlamaMedium.otf */; };
 		F3C30A4A947FED15228F1279 /* libPods-opearTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BA969097C8719A334582381 /* libPods-opearTests.a */; };
 		F96FBB1275974A4DA91D5168 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8615C17EB81A4F609BB99927 /* libRNGestureHandler.a */; };
-		15490633F01D4455B3C5CF27 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 16FB0339ABF849C08FC8F4FE /* Fontisto.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -537,7 +537,6 @@
 		F2C3B50B69504A69A2EAF51C /* Flama-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Flama-Light.otf"; path = "../assets/fonts/Flama-Light.otf"; sourceTree = "<group>"; };
 		F90F5B98FBCE4DDD928EA6C6 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		FE423E204B5D41A18078659C /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
-		16FB0339ABF849C08FC8F4FE /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -976,7 +975,6 @@
 				6A676253C7754668A8398222 /* Flama.otf */,
 				06C051C73697429992900251 /* FlamaLight.otf */,
 				E9A7A323A2034A4B8419A806 /* FlamaMedium.otf */,
-				16FB0339ABF849C08FC8F4FE /* Fontisto.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1618,7 +1616,6 @@
 				3FD72F5A713F46E7850943DA /* Flama.otf in Resources */,
 				41E9734C28CD49B69390B680 /* FlamaLight.otf in Resources */,
 				F35FECFF81AF4305B9D3C201 /* FlamaMedium.otf in Resources */,
-				15490633F01D4455B3C5CF27 /* Fontisto.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
