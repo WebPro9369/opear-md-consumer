@@ -22,7 +22,8 @@ PushNotification.configure({
   },
   onNotification(notification) {
     if (console.tron) console.tron.log("NOTIFICATION:", notification);
-  }
+  },
+  senderID: "95891248163"
 });
 
 AppRegistry.registerComponent(appName, () => App);
