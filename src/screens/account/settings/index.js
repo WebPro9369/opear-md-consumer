@@ -79,7 +79,7 @@ class SettingsScreen extends React.Component {
         };
 
         const data = {
-          care_provider: {
+          parent: {
             avatar: {
               uri: source.uri
             }
