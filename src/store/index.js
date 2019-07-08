@@ -34,6 +34,7 @@ const MainStore = types.model("MainStore", {
     firstName: "",
     lastName: "",
     email: "",
+    avatar: "",
     birthday: new Date("1970-01-01"),
     acceptedTermsOfService: false,
     acceptedPrivacy: false,

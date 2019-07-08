@@ -79,10 +79,10 @@ class SelectProviderScreen extends React.Component {
       navigate("DashboardDefault");
     };
 
-    updateVisitRequests(visitID, visitRequestID, {
-      accepted: true,
-      successHandler
-    });
+    updateVisitRequests(visitID, visitRequestID,
+      { accepted: true },
+      { successHandler }
+    );
   };
 
   render() {
