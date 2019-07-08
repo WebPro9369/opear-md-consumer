@@ -30,14 +30,14 @@ class EditAddressScreen extends React.Component {
     } = props;
 
     const address = addresses.length ? addresses[addresses.length - 1] : {};
-    const { id, name, street, city, zip } = address;
+    const { id, name, street, city, zip, state } = address;
 
     this.state = {
       id,
       name,
       street,
       city,
-      // state,
+      state,
       zip
     };
 
@@ -56,7 +56,7 @@ class EditAddressScreen extends React.Component {
       store: { userStore }
     } = this.props;
 
-    const { id, street, city, zip, name } = this.state;
+    const { id, street, city, zip, name, state } = this.state;
     const data =
       // parent: {
       //   address: [
@@ -64,7 +64,8 @@ class EditAddressScreen extends React.Component {
         name,
         street,
         city,
-        zip
+        zip,
+        state
         // }
         //   ]
         // }
@@ -79,14 +80,16 @@ class EditAddressScreen extends React.Component {
         street: street || "",
         city: city || "",
         state: state || "",
-        zip: zip || ""
+        zip: zip || "",
+        state: state || ""
       };
 
       userStore.address
         .setName(name || "")
         .setStreet(street || "")
         .setCity(city || "")
-        .setZipCode(zip || "");
+        .setZipCode(zip || "")
+        .setState(state || "");
 
       console.tron.log("addresses: ", newAddress);
 
@@ -103,7 +106,7 @@ class EditAddressScreen extends React.Component {
       navigation: { goBack },
       store: { userStore }
     } = this.props;
-    const { street, city, zip, name } = this.state;
+    const { street, city, zip, name, state } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <NavHeader
@@ -142,6 +145,13 @@ class EditAddressScreen extends React.Component {
                 onChangeText={this.handleInputChange("zip")}
               />
             </FlexView>
+          </FormInputView>
+          <FormInputView>
+            <FormTextInput
+              label="State"
+              value={state}
+              onChangeText={this.handleInputChange("state")}
+            />
           </FormInputView>
           <FormInputView>
             <FormTextInput
