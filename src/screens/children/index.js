@@ -11,6 +11,7 @@ import { colors, avatarImages } from "../../utils/constants";
 import { getAge } from "../../utils";
 import { getChildren } from "@services/opear-api";
 import InactiveUserBanner from "@components/banner"
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -39,6 +40,7 @@ class ManageChildrenScreen extends React.Component {
     const { children } = userStore;
     return (
       <ScrollView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View style={{ paddingTop: 44 }}>
           <View style={{ paddingLeft: 16, paddingRight: 16 }}>
             <StyledText

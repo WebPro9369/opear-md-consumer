@@ -16,6 +16,7 @@ import {
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const { MIDGREY } = colors;
 const imgAvatar = require("../../../../assets/images/Placeholder_Photo.png");
@@ -37,6 +38,7 @@ class SettingsScreen extends React.Component {
 
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <HeaderWrapper>
           <NavHeader
             title="Settings"

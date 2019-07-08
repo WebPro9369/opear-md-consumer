@@ -14,6 +14,7 @@ import {
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { registerAddress } from "@services/opear-api";
 import InactiveUserBanner from "@components/banner"
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -35,7 +36,8 @@ class AddAddressScreen extends React.Component {
       locationName: "",
       street: "",
       city: "",
-      zip: ""
+      zip: "",
+      state: ""
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -61,7 +63,8 @@ class AddAddressScreen extends React.Component {
       locationName,
       street,
       city,
-      zip
+      zip,
+      state
     } = this.state;
 
     if (!zip) return Alert.alert("Please enter your zip code");
@@ -81,7 +84,8 @@ class AddAddressScreen extends React.Component {
         name: locationName,
         street: street,
         city: city,
-        zip: zip
+        zip: zip,
+        state: state
       }
     }
 
@@ -93,7 +97,7 @@ class AddAddressScreen extends React.Component {
         name,
         street,
         city,
-        //state,
+        state,
         zip
       }
 
@@ -111,9 +115,10 @@ class AddAddressScreen extends React.Component {
       navigation: { goBack },
       store: { userStore }
     } = this.props;
-    const { locationName, street, city, zip } = this.state;
+    const { locationName, street, city, zip, state } = this.state;
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <HeaderWrapper>
           <NavHeader
             title="Add address"
@@ -153,6 +158,14 @@ class AddAddressScreen extends React.Component {
                 keyboardType="number-pad"
                 maxLength={5}
                 onChangeText={this.handleInputChange("zip")}
+              />
+            </FormInputWrapper>
+            <FormInputWrapper>
+              <FormTextInput
+                label="State"
+                value={state}
+                onChangeText={this.handleInputChange("state")}
+                placeholder="State"
               />
             </FormInputWrapper>
           </FormWrapper>

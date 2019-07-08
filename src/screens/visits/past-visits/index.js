@@ -14,6 +14,7 @@ import { VisitDetailCard } from "@components/cards";
 import { colors } from "@utils/constants";
 import { getAge } from "@utils/helpers";
 import { getVisits } from "@services/opear-api";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgFox = require("../../../../assets/images/Fox.png");
 
@@ -96,6 +97,7 @@ class PastVisitsScreen extends React.Component {
 
     return (
       <ContainerView style={{ marginTop: 0 }}>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <ScrollView padding={0}>
           <View style={{ paddingTop: 24 }}>
             <ContentWrapper>{visitsDisplayStack}</ContentWrapper>

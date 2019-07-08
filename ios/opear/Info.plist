@@ -84,6 +84,7 @@
 		<string>Flama.otf</string>
 		<string>FlamaLight.otf</string>
 		<string>FlamaMedium.otf</string>
+		<string>Fontisto.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

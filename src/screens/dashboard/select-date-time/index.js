@@ -10,6 +10,7 @@ import {
   TimeSelector
 } from "../../../components/date-time-selectors";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -87,6 +88,7 @@ class SelectDateTimeScreen extends React.Component {
 
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View
           style={{
             paddingLeft: 16,

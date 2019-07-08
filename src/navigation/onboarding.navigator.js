@@ -4,6 +4,7 @@ import NameCaptureScreen from "../screens/onboarding/name-capture";
 import EmailCaptureScreen from "../screens/onboarding/email-capture";
 import CreatePasswordScreen from "../screens/onboarding/create-password";
 import PhoneNumberScreen from "../screens/onboarding/phone-number";
+import AvatarUploadScreen from "@screens/onboarding/avatar-upload";
 
 const OnboardingNavigator = createStackNavigator(
   {
@@ -24,6 +25,9 @@ const OnboardingNavigator = createStackNavigator(
     },
     PhoneNumber: {
       screen: PhoneNumberScreen
+    },
+    AvatarUpload: {
+      screen: AvatarUploadScreen
     }
   },
   {

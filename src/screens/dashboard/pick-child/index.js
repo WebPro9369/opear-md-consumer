@@ -9,6 +9,7 @@ import { ServiceButton } from "../../../components/service-button";
 import { ChildCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
 import { getAge } from "../../../utils";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -60,6 +61,7 @@ class PickChildScreen extends React.Component {
     const { pickedChild, children } = this.state;
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View
           style={{
             paddingLeft: 16,
