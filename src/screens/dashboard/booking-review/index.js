@@ -20,7 +20,6 @@ import { ContentButton } from "../../account/settings/styles";
 import { ContentWrapper, AdditionalInput } from "./styles";
 import { colors } from "../../../utils/constants";
 import { getIndexByValue } from "@utils";
-import { registerVisit } from "@services/opear-api";
 import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
