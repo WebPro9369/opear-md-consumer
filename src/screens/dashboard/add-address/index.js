@@ -14,6 +14,7 @@ import {
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { registerAddress } from "@services/opear-api";
 import InactiveUserBanner from "@components/banner"
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -117,6 +118,7 @@ class AddAddressScreen extends React.Component {
     const { locationName, street, city, zip, state } = this.state;
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <HeaderWrapper>
           <NavHeader
             title="Add address"

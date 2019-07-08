@@ -15,6 +15,7 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard, ProviderStarsCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const { BLACK60 } = colors;
 
@@ -96,6 +97,7 @@ class BookingReceiptScreen extends React.Component {
 
     return (
       <ScrollView padding={0} marginTop={24}>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View style={{ marginTop: 16 }}>
           <ContentWrapper>
             <FlexView justifyContent="center">

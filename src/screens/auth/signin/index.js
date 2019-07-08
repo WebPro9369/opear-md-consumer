@@ -12,6 +12,7 @@ import { colors } from "../../../utils/constants";
 import { getParent, getApiToken } from "@services/opear-api";
 import { userFromResult } from "@utils";
 import { storeNotificationToken } from "@services/authentication";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 class SignInScreen extends React.Component {
@@ -117,6 +118,7 @@ class SignInScreen extends React.Component {
         enabled
         style={{ backgroundColor: colors.DARKSKYBLUE, height: "100%" }}
       >
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
           title="Sign In"
           size="medium"

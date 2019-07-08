@@ -9,6 +9,7 @@ import { ScrollView } from "../../components/views/scroll-view";
 import { ChildCard } from "../../components/cards";
 import { colors, avatarImages } from "../../utils/constants";
 import InactiveUserBanner from "@components/banner"
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -39,6 +40,7 @@ class ManageChildrenScreen extends React.Component {
     const { children } = this.state;
     return (
       <ScrollView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View style={{ paddingTop: 44 }}>
           <View style={{ paddingLeft: 16, paddingRight: 16 }}>
             <StyledText

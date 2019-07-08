@@ -11,6 +11,7 @@ import { FormInputWrapper, FormWrapper } from "@components/views";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 import { passwordReset } from "@services/opear-api";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 class ForgotPwdScreen extends React.Component {
@@ -83,6 +84,7 @@ class ForgotPwdScreen extends React.Component {
         enabled
         style={{ backgroundColor: colors.DARKSKYBLUE, height: "100%" }}
       >
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
           title="Forgot Password"
           size="medium"

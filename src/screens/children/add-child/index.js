@@ -21,6 +21,7 @@ import {
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors, avatarImages } from "../../../utils/constants";
 import { getAge } from "@utils";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -184,6 +185,7 @@ class AddChildScreen extends React.Component {
 
     return (
       <ContainerView behavior="padding" enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <HeaderWrapper>
           <NavHeader
             title="Add Child"

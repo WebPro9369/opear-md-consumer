@@ -20,6 +20,8 @@ import { ContentButton } from "../../account/settings/styles";
 import { ContentWrapper, AdditionalInput } from "./styles";
 import { colors } from "../../../utils/constants";
 import { getIndexByValue } from "@utils";
+import { registerVisit } from "@services/opear-api";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -119,6 +121,7 @@ class BookingReviewScreen extends React.Component {
 
     return (
       <ContainerView padding={0}>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View
           style={{
             paddingLeft: 16,
