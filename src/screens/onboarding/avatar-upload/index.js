@@ -270,8 +270,6 @@ class PhoneNumberScreen extends Component {
             uncheckedIcon="square-o"
             checkedColor={colors.SEAFOAMBLUE}
           />
-        </View>
-        <View style={{ flex: 1, justifyContent: "flex-end" }}>
           <Image
             source={imgProgressbar}
             resizeMode="contain"
