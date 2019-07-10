@@ -237,16 +237,16 @@ class AddCardScreen extends React.Component {
               placeholder="Full Name"
             />
           </FormInputView>
+          <FormInputView>
+            <ServiceButton
+              title={!isEditing ? "Save Card" : "Edit Card"}
+              onPress={async () => {
+                await this.saveCardHandler();
+              }}
+              loading={loading}
+            />
+          </FormInputView>
         </FormWrapper>
-        <FormInputView>
-          <ServiceButton
-            title={!isEditing ? "Save Card" : "Edit Card"}
-            onPress={async () => {
-              await this.saveCardHandler();
-            }}
-            loading={loading}
-          />
-        </FormInputView>
       </KeyboardAvoidingView>
     );
   }
