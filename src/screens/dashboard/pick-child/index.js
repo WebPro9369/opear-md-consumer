@@ -1,7 +1,9 @@
+/* eslint-disable import/no-unresolved */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View, FlexView } from "../../../components/views";
@@ -9,7 +11,6 @@ import { ServiceButton } from "../../../components/service-button";
 import { ChildCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
 import { getAge } from "../../../utils";
-import { DeeplinkHandler } from "@components/deeplink-handler";
 import { avatarImages } from "@utils/constants";
 
 @inject("store")
@@ -54,13 +55,13 @@ class PickChildScreen extends React.Component {
   };
 
   render() {
-    const {
-      navigation: { goBack, navigate }
-    } = this.props;
+    const { navigation } = this.props;
+    const { goBack, navigate } = navigation;
     const { pickedChild, children } = this.state;
+
     return (
       <ContainerView>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <View
           style={{
             paddingLeft: 16,
@@ -100,8 +101,8 @@ class PickChildScreen extends React.Component {
                 key={child.id}
                 name={`${child.first_name} ${child.last_name}`}
                 age={getAge(child.dob)}
+                selected={pickedChild && child.id === pickedChild}
                 avatarImg={avatarImages[child.avatar_image_index]}
-                selected={pickedChild && child.id === pickedChild.id}
                 onPress={() => {
                   let selectedChild = null;
                   const newChildren = children.map(ch => {
