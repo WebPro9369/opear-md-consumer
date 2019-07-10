@@ -32,7 +32,8 @@ class RootContainer extends React.Component {
 
     this.state = {
       firstTime: true,
-      active: true
+      active: true,
+      authenticated: true
     };
   }
 
@@ -75,16 +76,22 @@ class RootContainer extends React.Component {
           console.tron.log("BiometryType: ", biometryType);
           TouchID.authenticate()
             .then(() => {
-              Alert.alert("Authenticated Successfully");
+              this.setState({ authenticated: true }, () =>
+                Alert.alert("Authenticated Successfully")
+              );
             })
             .catch(error => {
               console.tron.log(error);
-              Alert.alert("Authentication failed.");
+              this.setState({ authenticated: false }, () =>
+                Alert.alert("Authentication failed.")
+              );
             });
         })
         .catch(error => {
           console.tron.log("TouchID not supported: ", error);
-          Alert.alert("Touch ID is not supported.");
+          this.setState({ authenticated: true }, () =>
+            Alert.alert("Touch ID is not supported.")
+          );
         });
     }
   };
@@ -115,13 +122,14 @@ class RootContainer extends React.Component {
   };
 
   render() {
+    const { authenticated } = this.state;
     return (
       <UserInactivity
         timeForInactivity={15 * 60 * 1000}
         onAction={this.onAction}
       >
         <ThemeProvider theme={colors}>
-          <Root>
+          <Root style={authenticated ? null : { display: "none" }}>
             <StatusBar />
             <AppNavigationContainer />
           </Root>
