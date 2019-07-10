@@ -5,6 +5,7 @@ import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import InactiveUserBanner from "@components/banner";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 import { StyledText } from "../../../components/text";
 import { InputButton } from "../../../components/input-button";
 import { NavHeader } from "../../../components/nav-header";
@@ -16,7 +17,6 @@ import {
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
-import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const { MIDGREY } = colors;
 const imgAvatar = require("../../../../assets/images/Placeholder_Photo.png");
@@ -30,15 +30,17 @@ class SettingsScreen extends React.Component {
 
   render() {
     const {
-      navigation: { navigate },
+      navigation,
       store: { userStore }
     } = this.props;
-
-    const { name, address, email, phone } = userStore;
+    const { navigate } = navigation;
+    const { name, addresses, email, phone } = userStore;
+    const address =
+      addresses && addresses.length ? addresses[addresses.length - 1] : {};
 
     return (
       <ContainerView>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <HeaderWrapper>
           <NavHeader
             title="Settings"
