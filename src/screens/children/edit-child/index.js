@@ -99,7 +99,7 @@ class EditChildScreen extends React.Component {
         first_name,
         last_name,
         gender,
-        dob: birthDate.toISOString(),
+        dob: new Date(birthDate),
         allergies,
         birth_history,
         current_medications,
