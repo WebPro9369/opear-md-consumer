@@ -78,14 +78,17 @@ class UpcomingVisitsScreen extends React.Component {
         : "N/A";
 
       return visitsDisplayStack.push(
-        <View key={`visit-detail-wrapper-${visit.id}`} style={{ marginBottom: 9 }}>
+        <View
+          key={`visit-detail-wrapper-${visit.id}`}
+          style={{ marginBottom: 9 }}
+        >
           <VisitDetailCard
-          key={`visit-detail-${visit.id}`}
+            key={`visit-detail-${visit.id}`}
             avatarImg={imgFox}
             name={childName}
             illness={visit.reason}
             time={formattedTime[1]}
-            address={{ street: visit.address.street }}
+            address={visit.address}
             onPress={() =>
               navigate("VisitsVisitDetails", {
                 visitID: visit.id
@@ -98,7 +101,7 @@ class UpcomingVisitsScreen extends React.Component {
 
     return (
       <ContainerView style={{ marginTop: 0 }}>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={this.props.navigation} />
         <ScrollView padding={0}>
           <View style={{ paddingTop: 24 }}>
             <ContentWrapper>{visitsDisplayStack}</ContentWrapper>
