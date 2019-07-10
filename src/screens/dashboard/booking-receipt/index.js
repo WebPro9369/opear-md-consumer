@@ -16,11 +16,11 @@ import { BookedDetailCard, ProviderStarsCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
 import { DeeplinkHandler } from "@components/deeplink-handler";
+import { avatarImages } from "@utils/constants";
 
 const { BLACK60 } = colors;
 
 const doctorImg = require("../../../../assets/images/Doctor.png");
-const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
 
 @inject("store")
 @observer
@@ -141,7 +141,7 @@ class BookingReceiptScreen extends React.Component {
             <BookedDetailCard
               type="Child"
               text={child}
-              icon={<Avatar rounded size={30} source={foxLargeImg} />}
+              icon={<Avatar rounded size={30} source={avatarImages[child.avatar_image_index]} />}
             />
             <BookedDetailCard
               type="Address"

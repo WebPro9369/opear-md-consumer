@@ -10,8 +10,7 @@ import { ChildCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
 import { getAge } from "../../../utils";
 import { DeeplinkHandler } from "@components/deeplink-handler";
-
-const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
+import { avatarImages } from "@utils/constants";
 
 @inject("store")
 @observer
@@ -101,7 +100,7 @@ class PickChildScreen extends React.Component {
                 key={child.id}
                 name={`${child.first_name} ${child.last_name}`}
                 age={getAge(child.dob)}
-                avatarImg={imgFoxLarge}
+                avatarImg={avatarImages[child.avatar_image_index]}
                 selected={pickedChild && child.id === pickedChild.id}
                 onPress={() => {
                   let selectedChild = null;

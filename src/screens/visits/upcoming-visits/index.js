@@ -16,8 +16,7 @@ import { VisitDetailCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
 import { getAge } from "../../../utils";
 import { DeeplinkHandler } from "@components/deeplink-handler";
-
-const imgFox = require("../../../../assets/images/Fox.png");
+import { avatarImages } from "@utils/constants";
 
 @inject("store")
 @observer
@@ -81,7 +80,7 @@ class UpcomingVisitsScreen extends React.Component {
         <View key={`visit-detail-wrapper-${visit.id}`} style={{ marginBottom: 9 }}>
           <VisitDetailCard
           key={`visit-detail-${visit.id}`}
-            avatarImg={imgFox}
+            avatarImg={avatarImages[visit.child.avatar_image_index]}
             name={childName}
             illness={visit.reason}
             time={formattedTime[1]}
