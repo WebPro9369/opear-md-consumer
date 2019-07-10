@@ -11,8 +11,7 @@ import { ServiceButton } from "../../../components/service-button";
 import { ChildCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
 import { getAge } from "../../../utils";
-
-const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
+import { avatarImages } from "@utils/constants";
 
 @inject("store")
 @observer
@@ -102,8 +101,8 @@ class PickChildScreen extends React.Component {
                 key={child.id}
                 name={`${child.first_name} ${child.last_name}`}
                 age={getAge(child.dob)}
-                avatarImg={imgFoxLarge}
                 selected={pickedChild && child.id === pickedChild}
+                avatarImg={avatarImages[child.avatar_image_index]}
                 onPress={() => {
                   let selectedChild = null;
                   const newChildren = children.map(ch => {
