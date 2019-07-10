@@ -12,7 +12,7 @@ import { registerParent } from "@services/opear-api";
 import { colors } from "@utils/constants"
 import { storeNotificationToken } from "@services/authentication";
 
-const imgProgressbar = require("../../../../assets/images/ProgressBar5.png");
+const imgProgressbar = require("../../../../assets/images/ProgressBar4.png");
 
 @inject("store")
 @observer
