@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import { Dimensions } from "react-native";
 
 const DEVICE_WIDTH = Dimensions.get("window").width;
@@ -44,7 +45,7 @@ const avatarImages = [
 
 const MAX_STARS = 5;
 
-const SUBSCRIPTIONS_ACTIVE_START_DATE = new Date("2018-12-31");
+const SUBSCRIPTIONS_ACTIVE_START_DATE = new Date("2019-09-30");
 
 export {
   DEVICE_WIDTH,
