@@ -300,8 +300,6 @@ class EditChildScreen extends React.Component {
                 onChangeText={this.handleInputChange(
                   "current_medical_conditions"
                 )}
-                returnKeyType="next"
-                blurOnSubmit={false}
                 ref={input => (this.inputRefs.currentMedicalConditions = input)}
               />
             </FormInputWrapper>

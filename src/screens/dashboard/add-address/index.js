@@ -1,36 +1,32 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable no-shadow */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { View, Alert } from "react-native";
-import { FormTextInput } from "../../../components/text";
-import { NavHeader } from "../../../components/nav-header";
-import { ServiceButton } from "../../../components/service-button";
+import { FormTextInput } from "@components/text";
+import { NavHeader } from "@components/nav-header";
+import { ServiceButton } from "@components/service-button";
 import {
   ContainerView,
   HeaderWrapper,
   FormInputWrapper,
   FormWrapper
-} from "../../../components/views";
-
-import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
+} from "@components/views";
+import { KeyboardScrollView } from "@components/views/keyboard-scroll-view";
 import { registerAddress } from "@services/opear-api";
-import InactiveUserBanner from "@components/banner"
+import InactiveUserBanner from "@components/banner";
 import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
 class AddAddressScreen extends React.Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
-
-    const {
-      store: {
-        userStore
-      }
-    } = props;
 
     this.state = {
       locationName: "",
@@ -42,6 +38,7 @@ class AddAddressScreen extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
 
+    this.inputRefs = {};
   }
 
   handleInputChange = name => value => {
@@ -51,21 +48,12 @@ class AddAddressScreen extends React.Component {
   };
 
   onSubmit = () => {
-
     const {
       navigation: { goBack },
-      store: {
-        userStore
-      }
+      store: { userStore }
     } = this.props;
 
-    const {
-      locationName,
-      street,
-      city,
-      zip,
-      state
-    } = this.state;
+    const { locationName, street, city, zip, state } = this.state;
 
     if (!zip) return Alert.alert("Please enter your zip code");
 
@@ -74,20 +62,19 @@ class AddAddressScreen extends React.Component {
     if (!dateRegex1.test(zip)) {
       return Alert.alert(
         "There was an issue",
-        "Please enter your 5-digit Zip Code");
+        "Please enter your 5-digit Zip Code"
+      );
     }
 
-    const data =
-    {
-      address:
-      {
+    const data = {
+      address: {
         name: locationName,
-        street: street,
-        city: city,
-        zip: zip,
-        state: state
+        street,
+        city,
+        zip,
+        state
       }
-    }
+    };
 
     const successHandler = response => {
       const { id, name, street, city, state, zip } = response.data;
@@ -99,26 +86,26 @@ class AddAddressScreen extends React.Component {
         city,
         state,
         zip
-      }
+      };
 
       userStore.addAddress(newAddress);
 
       goBack();
     };
 
-    registerAddress(data, { successHandler });
-
-  }
+    return registerAddress(data, { successHandler });
+  };
 
   render() {
     const {
-      navigation: { goBack },
+      navigation,
       store: { userStore }
     } = this.props;
+    const { goBack } = navigation;
     const { locationName, street, city, zip, state } = this.state;
     return (
       <ContainerView>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <HeaderWrapper>
           <NavHeader
             title="Add address"
@@ -136,6 +123,12 @@ class AddAddressScreen extends React.Component {
                 value={locationName}
                 onChangeText={this.handleInputChange("locationName")}
                 placeholder="Location Name"
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.locationName = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.street.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -144,11 +137,25 @@ class AddAddressScreen extends React.Component {
                 value={street}
                 onChangeText={this.handleInputChange("street")}
                 placeholder="Street"
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.street = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.city.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
-              <FormTextInput label="City" value={city} placeholder="City"
-              onChangeText={this.handleInputChange("city")} />
+              <FormTextInput
+                label="City"
+                value={city}
+                placeholder="City"
+                onChangeText={this.handleInputChange("city")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.city = input)}
+                onSubmitEditing={() => this.inputRefs.zip.getInnerRef().focus()}
+              />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
@@ -158,6 +165,7 @@ class AddAddressScreen extends React.Component {
                 keyboardType="number-pad"
                 maxLength={5}
                 onChangeText={this.handleInputChange("zip")}
+                ref={input => (this.inputRefs.city = input)}
               />
             </FormInputWrapper>
             <FormInputWrapper>
