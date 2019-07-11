@@ -7,10 +7,11 @@ import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, ButtonGroup } from "react-native-elements";
 import InactiveUserBanner from "@components/banner";
 import { updateChild } from "@services/opear-api";
-import { FormTextInput } from "../../../components/text";
 import { FormMaskedTextInput } from "@components/text-masked";
-import { NavHeader } from "../../../components/nav-header";
-import { ServiceButton } from "../../../components/service-button";
+import { DeeplinkHandler } from "@components/deeplink-handler";
+import { FormTextInput } from "@components/text";
+import { NavHeader } from "@components/nav-header";
+import { ServiceButton } from "@components/service-button";
 import {
   ContainerView,
   FormInputWrapper,
@@ -18,14 +19,11 @@ import {
   FormWrapper,
   ViewCentered,
   View
-} from "../../../components/views";
-import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import { avatarImages } from "../../../utils/constants";
-import { getAge, getValueById, getIndexByValue } from "@utils";
+} from "@components/views";
+import { KeyboardScrollView } from "@components/views/keyboard-scroll-view";
+import { getValueById, getIndexByValue } from "@utils";
+import { avatarImages } from "@utils/constants";
 import { getFormattedDate } from "@utils/helpers";
-import { DeeplinkHandler } from "@components/deeplink-handler";
-
-const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
 @inject("store")
 @observer
@@ -91,7 +89,8 @@ class EditChildScreen extends React.Component {
     if (!dateRegex1.test(birthDate) && !dateRegex2.test(birthDate)) {
       return Alert.alert(
         "There was an issue",
-        "Please enter Date of Birth in mm/dd/yyyy format");
+        "Please enter Date of Birth in mm/dd/yyyy format"
+      );
     }
 
     const data = {
@@ -117,7 +116,7 @@ class EditChildScreen extends React.Component {
       navigation.goBack();
     };
 
-    updateChild(childID, data, { successHandler });
+    return updateChild(childID, data, { successHandler });
   };
 
   updateIndex(index) {
@@ -126,9 +125,9 @@ class EditChildScreen extends React.Component {
   }
 
   render() {
-    const { navigation,
-      store:
-      {
+    const {
+      navigation,
+      store: {
         userStore: { active }
       }
     } = this.props;
@@ -149,7 +148,7 @@ class EditChildScreen extends React.Component {
 
     return (
       <ContainerView behavior="padding" enabled>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <HeaderWrapper>
           <NavHeader
             title="Edit Child"
