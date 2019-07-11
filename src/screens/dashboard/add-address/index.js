@@ -15,6 +15,7 @@ import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-vi
 import { registerAddress } from "@services/opear-api";
 import InactiveUserBanner from "@components/banner"
 import { DeeplinkHandler } from "@components/deeplink-handler";
+import { GoogleMapsService } from "@services";
 
 @inject("store")
 @observer
@@ -41,7 +42,7 @@ class AddAddressScreen extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-
+    this.updateAddressHandler = this.updateAddressHandler.bind(this);
   }
 
   handleInputChange = name => value => {
@@ -50,8 +51,7 @@ class AddAddressScreen extends React.Component {
     });
   };
 
-  onSubmit = () => {
-
+  updateAddressHandler = () => {
     const {
       navigation: { goBack },
       store: {
@@ -66,16 +66,6 @@ class AddAddressScreen extends React.Component {
       zip,
       state
     } = this.state;
-
-    if (!zip) return Alert.alert("Please enter your zip code");
-
-    const dateRegex1 = /^\d\d\d\d\d$/;
-
-    if (!dateRegex1.test(zip)) {
-      return Alert.alert(
-        "There was an issue",
-        "Please enter your 5-digit Zip Code");
-    }
 
     const data =
     {
@@ -107,7 +97,44 @@ class AddAddressScreen extends React.Component {
     };
 
     registerAddress(data, { successHandler });
+  }
 
+  onSubmit = () => {
+    const {
+      locationName,
+      street,
+      city,
+      zip,
+      state
+    } = this.state;
+
+    if (!zip) return Alert.alert("Please enter your zip code");
+
+    const dateRegex1 = /^\d\d\d\d\d$/;
+
+    if (!dateRegex1.test(zip)) {
+      return Alert.alert(
+        "There was an issue",
+        "Please enter your 5-digit Zip Code");
+    }
+
+    const address = street + ", " + city + ", " + state + " " + zip
+
+    GoogleMapsService.getGeo(address,
+      innerRes => {
+        const { data } = innerRes;
+
+        if(data.status == "ZERO_RESULTS") {
+          return Alert.alert("Unable to verify address","We couldn't validate your address. Please try again, or contact support for assitance.");
+        }
+
+        this.updateAddressHandler();
+
+      },
+      () => {
+        return Alert.alert("Unable to reach address services", "Please contact support for assistance.");
+      }
+    );
   }
 
   render() {
