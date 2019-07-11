@@ -13,7 +13,7 @@ import { ServiceButton } from "@components/service-button";
 import { ContainerView, HeaderWrapper, View } from "@components/views";
 import { ScrollView } from "@components/views/scroll-view";
 import { colors } from "@utils/constants";
-import { updateVisit, getCareProvider, getVisit } from "@services/opear-api";
+import { updateVisit, getCareProvider, getVisits } from "@services/opear-api";
 import { getValueById, getIndexByValue } from "@utils";
 import { formatAMPM } from "@utils/helpers";
 import { addressToString } from "../../../utils/helpers";
@@ -39,35 +39,19 @@ class VisitDetailsScreen extends React.Component {
 
     const {
       navigation,
-      store: { visitsStore, userStore }
+      store: { visitsStore }
     } = props;
-    var visitID = navigation.getParam("visitID", false);
+    let visitID = navigation.getParam("visitID", false);
     // TODO: if (!visitID) error!
     const routeInfo = navigation.getParam("routeInfo", false);
 
-    if(!visitID) {
-      var splitRoute = routeInfo.split("/");
-      visitID = parseInt(splitRoute[1].split("=")[1]);
+    if (!visitID) {
+      const splitRoute = routeInfo.split("/");
+      visitID = parseInt(splitRoute[1].split("=")[1], 10);
     }
 
     this.state = {
       visitID,
-      visit: {
-        child: {
-          first_name: "",
-          last_name: "",
-          allergies: [","]
-        },
-        address: "",
-        parent: {
-          name: ""
-        },
-        symptoms: [","],
-        appointment_time: "",
-        reason: "",
-        parent_notes: "",
-        visit_notes: ""
-      },
       map: {
         latitude: 37.78825,
         longitude: -122.4324,
@@ -82,34 +66,27 @@ class VisitDetailsScreen extends React.Component {
       careProviderPhone: 0
     };
 
-    if(!routeInfo) {
-      this.setState({
-        visit: getValueById(visitsStore.visits, visitID)
+    if (routeInfo || !getValueById(visitsStore.visits, visitID)) {
+      getVisits({
+        successHandler: res => {
+          visitsStore.setVisits(Object.values(res.data).flat());
+          this.careProviderHandler();
+          this.getGeoHandler();
+        }
       });
-
-      careProviderHandler();
-      getGeoHandler();
+    } else {
+      this.careProviderHandler();
+      this.getGeoHandler();
     }
-    else {
-      successHandler = res => {
-        this.setState({
-          visit: res.data
-        });
-
-        careProviderHandler();
-        getGeoHandler();
-      };
-
-      getVisit(userStore.id, visitID, {successHandler});
-    }
-
-
   }
 
-  careProviderHandler () {
-    const { visit } = this.state;
+  careProviderHandler() {
+    const {
+      store: { visitsStore }
+    } = this.props;
+    const visit = getValueById(visitsStore.visits, this.state.visitID);
 
-    careProviderSuccess = res => {
+    const careProviderSuccess = res => {
       this.setState({
         careProviderPhone: res.data.phone
       });
@@ -121,7 +98,10 @@ class VisitDetailsScreen extends React.Component {
   }
 
   getGeoHandler () {
-    const { visit } = this.state;
+    const {
+      store: { visitsStore }
+    } = this.props;
+    const visit = getValueById(visitsStore.visits, this.state.visitID);
 
     GoogleMapsService.getGeo(
       addressToString(visit.address),
@@ -185,11 +165,12 @@ class VisitDetailsScreen extends React.Component {
   render() {
     const {
       past,
-      navigation: { goBack, getParam },
+      navigation: { goBack },
       store: { visitsStore }
     } = this.props;
-    const { visit, visitID, loaded, map, careProviderPhone } = this.state;
+    const { visitID, loaded, map, careProviderPhone } = this.state;
 
+    const visit = getValueById(visitsStore.visits, visitID);
     const {
       child,
       address,
@@ -272,7 +253,7 @@ class VisitDetailsScreen extends React.Component {
               />
               <LargeBookedDetailCard
                 type="Allergies"
-                text={child.allergies.join(", ")}
+                text={child.allergies}
                 disabled
               />
               <LargeBookedDetailCard
