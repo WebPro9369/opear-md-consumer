@@ -7,7 +7,8 @@ import { inject, observer, PropTypes } from "mobx-react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { createPaymentAccount } from "@services/opear-api";
 import InactiveUserBanner from "@components/banner";
-import { FormTextInput } from "../../../components/text";
+import { DeeplinkHandler } from "@components/deeplink-handler";
+import { FormTextInput, StyledText } from "../../../components/text";
 import { FormMaskedTextInput } from "../../../components/text-masked";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -21,7 +22,7 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
-import { DeeplinkHandler } from "@components/deeplink-handler";
+import { MessageWrapper } from "./styles";
 
 @inject("store")
 @observer
@@ -126,17 +127,21 @@ class AddCardScreen extends React.Component {
 
   render() {
     const {
-      navigation: { navigate },
-      store: { cardStore, userStore }
+      navigation,
+      store: {
+        cardStore,
+        userStore,
+        applicationStore: { ConsumerSubscriptionsActive }
+      }
     } = this.props;
-
+    const { navigate } = navigation;
     const { cardInfo } = cardStore;
     const { expiryYear, expiryMonth, cvv, fullName } = cardInfo || {};
 
     const { loading, isEditing, last4, cardInput } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <NavHeader
           title={isEditing ? "Edit Card" : "Add Card"}
           size="medium"
@@ -152,6 +157,14 @@ class AddCardScreen extends React.Component {
           hasBackButton
         />
         <InactiveUserBanner userIsActive={userStore.active} />
+        {ConsumerSubscriptionsActive && (
+          <MessageWrapper>
+            <StyledText fontSize={16}>
+              You will be charged an annual subscription of $99 when you
+              complete this visit.
+            </StyledText>
+          </MessageWrapper>
+        )}
         <FormWrapper>
           <FormInputView>
             <FormTextInput

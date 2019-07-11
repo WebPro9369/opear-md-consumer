@@ -11,6 +11,9 @@ import { View, Alert } from "react-native";
 import { inject, observer } from "mobx-react";
 import { formatTimeStr } from "@utils/helpers";
 import { registerVisit } from "@services/opear-api";
+import { getValueById } from "@utils";
+import { DeeplinkHandler } from "@components/deeplink-handler";
+import { avatarImages } from "@utils/constants";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, FlexView } from "../../../components/views";
@@ -19,9 +22,6 @@ import { ServiceButton } from "../../../components/service-button";
 import { ContentButton } from "../../account/settings/styles";
 import { ContentWrapper, AdditionalInput } from "./styles";
 import { colors } from "../../../utils/constants";
-import { getIndexByValue } from "@utils";
-import { DeeplinkHandler } from "@components/deeplink-handler";
-import { avatarImages } from "@utils/constants";
 
 @inject("store")
 @observer
@@ -103,23 +103,25 @@ class BookingReviewScreen extends React.Component {
 
   render() {
     const {
-      navigation: { goBack, push },
+      navigation,
       store: {
         userStore: { children, addresses, visitRequest, payment_accounts }
       }
     } = this.props;
+    const { goBack, push } = navigation;
 
     const { parentNotes } = this.state;
 
-    const child = children[getIndexByValue(children, visitRequest.pickedChild)];
+    const child = getValueById(children, visitRequest.pickedChild);
     const childName = `${child.first_name} ${child.last_name}`;
-    const addressStreet =
-      addresses[getIndexByValue(addresses, visitRequest.pickedAddress)].street;
+    const addressStreet = (
+      getValueById(addresses, visitRequest.pickedAddress) || {}
+    ).street;
     const { date, time, cost } = visitRequest;
 
     return (
       <ContainerView padding={0}>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <View
           style={{
             paddingLeft: 16,
@@ -155,7 +157,11 @@ class BookingReviewScreen extends React.Component {
               }
             >
               <FlexView>
-                <Avatar rounded size={40} source={avatarImages[child.avatar_image_index]} />
+                <Avatar
+                  rounded
+                  size={40}
+                  source={avatarImages[child.avatar_image_index]}
+                />
                 <StyledText
                   fontFamily="Flama"
                   fontSize={16}
