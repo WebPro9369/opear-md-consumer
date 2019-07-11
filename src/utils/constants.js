@@ -44,4 +44,13 @@ const avatarImages = [
 
 const MAX_STARS = 5;
 
-export { DEVICE_WIDTH, DEVICE_HEIGHT, MAX_STARS, colors, avatarImages };
+const SUBSCRIPTIONS_ACTIVE_START_DATE = new Date("2018-12-31");
+
+export {
+  DEVICE_WIDTH,
+  DEVICE_HEIGHT,
+  MAX_STARS,
+  colors,
+  avatarImages,
+  SUBSCRIPTIONS_ACTIVE_START_DATE
+};

@@ -3,7 +3,8 @@ import { types } from "mobx-state-tree";
 
 export const ApplicationStore = types
   .model("ApplicationStore", {
-    SplashShowing: types.boolean
+    SplashShowing: types.boolean,
+    ConsumerSubscriptionsActive: false
   })
   .views(self => ({
     getSplashShowing() {
@@ -13,6 +14,11 @@ export const ApplicationStore = types
   .actions(self => ({
     hideSplash() {
       self.SplashShowing = false;
+      return self;
+    },
+    setSubscriptionsActive(value) {
+      self.ConsumerSubscriptionsActive = value;
+      return self;
     }
   }));
 

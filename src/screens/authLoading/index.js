@@ -3,8 +3,12 @@ import React, { Component } from "react";
 import { ActivityIndicator, Linking, View } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { getParent } from "@services/opear-api";
-import { getAuthentication, removeAuthentication } from "@services/authentication";
+import {
+  getAuthentication,
+  removeAuthentication
+} from "@services/authentication";
 import { userFromResult } from "@utils";
+import { SUBSCRIPTIONS_ACTIVE_START_DATE } from "@utils/constants";
 
 @inject("store")
 @observer
@@ -19,9 +23,14 @@ class AuthLoadingScreen extends Component {
 
   bootstrapAsync = async () => {
     const {
-      store: { userStore },
+      store: { applicationStore, userStore },
       navigation: { navigate }
     } = this.props;
+
+    applicationStore.setSubscriptionsActive(
+      new Date() > SUBSCRIPTIONS_ACTIVE_START_DATE
+    );
+
     try {
       const {
         id,
@@ -30,7 +39,8 @@ class AuthLoadingScreen extends Component {
         wasAuthenticated
       } = await getAuthentication();
 
-      if (!isAuthenticated && wasAuthenticated) return navigate("Authenticating");
+      if (!isAuthenticated && wasAuthenticated)
+        return navigate("Authenticating");
       if (!isAuthenticated) return navigate("Authenticating");
 
       userStore.setAuthentication({ id, apiKey });
