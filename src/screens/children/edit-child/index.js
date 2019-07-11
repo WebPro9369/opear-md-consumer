@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable no-shadow */
 /* eslint-disable camelcase */
@@ -54,6 +55,8 @@ class EditChildScreen extends React.Component {
 
     this.updateIndex = this.updateIndex.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+
+    this.inputRefs = {};
   }
 
   handleInputChange = name => value => {
@@ -173,6 +176,12 @@ class EditChildScreen extends React.Component {
                 label="First Name"
                 value={first_name}
                 onChangeText={this.handleInputChange("first_name")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.firstName = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.lastName.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -180,6 +189,13 @@ class EditChildScreen extends React.Component {
                 label="Last Name"
                 value={last_name}
                 onChangeText={this.handleInputChange("last_name")}
+                placeholder="Last Name"
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.lastName = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.birthDate.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -194,53 +210,99 @@ class EditChildScreen extends React.Component {
               <FormMaskedTextInput
                 label="Birth Date"
                 value={birthDate}
+                placeholder="mm/dd/yyyy"
                 keyboardType="number-pad"
                 maskOptions={{ mask: "99/99/9999" }}
                 onChangeText={this.handleInputChange("birthDate")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.birthDate = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.birthHistory.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Birth History"
                 value={birth_history}
+                placeholder="Birth History"
                 onChangeText={this.handleInputChange("birth_history")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.birthHistory = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.surgicalHistory.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Surgical History"
                 value={surgical_history}
+                placeholder="Surgical History"
                 onChangeText={this.handleInputChange("surgical_history")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.surgicalHistory = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.currentMedications.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Current Medications"
                 value={current_medications}
+                placeholder="Current Medications"
                 onChangeText={this.handleInputChange("current_medications")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.currentMedications = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.hospitalizations.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Hospitalizations"
                 value={hospitalizations}
+                placeholder="Hospitalizations"
                 onChangeText={this.handleInputChange("hospitalizations")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.hospitalizations = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.allergies.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Allergies"
                 value={allergies}
+                placeholder="Allergies"
                 onChangeText={this.handleInputChange("allergies")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.allergies = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.currentMedicalConditions.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Current Medical Conditions"
                 value={current_medical_conditions}
+                placeholder="Current Medical Conditions"
                 onChangeText={this.handleInputChange(
                   "current_medical_conditions"
                 )}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.currentMedicalConditions = input)}
               />
             </FormInputWrapper>
           </FormWrapper>

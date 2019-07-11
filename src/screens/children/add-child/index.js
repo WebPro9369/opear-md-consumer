@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable camelcase */
@@ -48,6 +49,8 @@ class AddChildScreen extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.updateIndex = this.updateIndex.bind(this);
+
+    this.inputRefs = {};
   }
 
   handleInputChange = name => value => {
@@ -174,6 +177,12 @@ class AddChildScreen extends React.Component {
                 value={first_name}
                 onChangeText={this.handleInputChange("first_name")}
                 placeholder="First Name"
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.firstName = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.lastName.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -182,6 +191,12 @@ class AddChildScreen extends React.Component {
                 value={last_name}
                 onChangeText={this.handleInputChange("last_name")}
                 placeholder="Last Name"
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.lastName = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.birthDate.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -200,6 +215,12 @@ class AddChildScreen extends React.Component {
                 keyboardType="number-pad"
                 maskOptions={{ mask: "99/99/9999" }}
                 onChangeText={this.handleInputChange("dob")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.birthDate = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.birthHistory.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -208,6 +229,12 @@ class AddChildScreen extends React.Component {
                 value={birth_history}
                 placeholder="Birth History"
                 onChangeText={this.handleInputChange("birth_history")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.birthHistory = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.surgicalHistory.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -216,6 +243,12 @@ class AddChildScreen extends React.Component {
                 value={surgical_history}
                 placeholder="Surgical History"
                 onChangeText={this.handleInputChange("surgical_history")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.surgicalHistory = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.currentMedications.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -224,6 +257,12 @@ class AddChildScreen extends React.Component {
                 value={current_medications}
                 placeholder="Current Medications"
                 onChangeText={this.handleInputChange("current_medications")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.currentMedications = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.hospitalizations.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -232,6 +271,12 @@ class AddChildScreen extends React.Component {
                 value={hospitalizations}
                 placeholder="Hospitalizations"
                 onChangeText={this.handleInputChange("hospitalizations")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.hospitalizations = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.allergies.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -240,6 +285,12 @@ class AddChildScreen extends React.Component {
                 value={allergies}
                 placeholder="Allergies"
                 onChangeText={this.handleInputChange("allergies")}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.allergies = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.currentMedicalConditions.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -250,6 +301,9 @@ class AddChildScreen extends React.Component {
                 onChangeText={this.handleInputChange(
                   "current_medical_conditions"
                 )}
+                returnKeyType="next"
+                blurOnSubmit={false}
+                ref={input => (this.inputRefs.currentMedicalConditions = input)}
               />
             </FormInputWrapper>
           </FormWrapper>
