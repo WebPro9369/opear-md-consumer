@@ -173,7 +173,7 @@ class SelectSymptomsScreen extends React.Component {
                 value={otherInputText}
                 onChangeText={this.handleInputChange("otherInputText")}
               />
-              <View style={{ padding: 16 }}>
+              <View style={{ paddingTop: 16, paddingBottom: 48 }}>
                 <ServiceButton title="Next" onPress={this.onSubmit} />
               </View>
             </ContentWrapper>
