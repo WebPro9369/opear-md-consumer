@@ -111,7 +111,7 @@ class EditAddressScreen extends React.Component {
         const { data } = innerRes;
 
         if(data.status == "ZERO_RESULTS") {
-          return Alert.alert("Unable to verify address","We couldn't validate your address. Please try again, or contact support for assitance.");
+          return Alert.alert("Unable to verify address","We couldn't validate your address. Please try again, or contact support for assistance.");
         }
 
         this.updateAddressHandler();
