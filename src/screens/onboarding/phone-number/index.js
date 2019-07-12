@@ -4,7 +4,7 @@ import { CheckBox } from "react-native-elements";
 import { TextInputMask } from "react-native-masked-text";
 import { inject, observer, PropTypes } from "mobx-react";
 // import { KeyboardAvoidingView } from "@components/views/keyboard-view";
-import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
+import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 import { ServiceButton } from "@components/service-button";
 import { StyledText, StyledTextInput } from "@components/text";
 import { NavHeader } from "@components/nav-header";
@@ -61,12 +61,7 @@ class PhoneNumberScreen extends Component {
     const { phone, acceptedPrivacy, acceptedTermsOfService } = this.state;
 
     return (
-      <KeyboardScrollView
-        behavior="padding"
-        contentContainerStyle={{ flex: 1, justifyContent: "flex-end" }}
-        keyboardShouldPersistTaps="handled"
-        enableOnAndroid
-      >
+      <KeyboardAvoidingView behavior="padding" enabled>
         <View>
           <NavHeader
             hasBackButton
@@ -106,7 +101,7 @@ class PhoneNumberScreen extends Component {
             onPress={this.onSubmit}
           />
         </View>
-      </KeyboardScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }
