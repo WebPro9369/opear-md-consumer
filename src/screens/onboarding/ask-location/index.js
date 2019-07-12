@@ -6,6 +6,7 @@ import { ServiceButton } from "@components/service-button";
 import { StyledText, StyledTextInput } from "@components/text";
 import { NavHeader } from "@components/nav-header";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgProgressbar = require("../../../../assets/images/ProgressBar1.png");
 
@@ -86,6 +87,7 @@ class AskLocationScreen extends Component {
     } = this.props;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View>
           <NavHeader
             title="Welcome to opear"

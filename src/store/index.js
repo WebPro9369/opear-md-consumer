@@ -31,15 +31,14 @@ const MainStore = types.model("MainStore", {
     apiKey: "",
     active: false,
     name: "",
-    firstName: "",
-    lastName: "",
     email: "",
+    avatar: "",
     birthday: new Date("1970-01-01"),
-    acceptedTermsOfService: false,
-    acceptedPrivacy: false,
+    accepted_terms_of_service: false,
+    accepted_privacy: false,
     phone: "",
     payment_accounts: [],
-    notificationToken: "",
+    notification_token: "",
     visitRequest: {
       symptoms: [""],
       reason: "",
@@ -50,14 +49,12 @@ const MainStore = types.model("MainStore", {
       cost: 150
     },
     address: {
+      id: -1,
       name: "",
       street: "",
       city: "",
       state: "",
-      zip: "",
-      apartmentNumber: "",
-      latitude: "",
-      longitude: ""
+      zip: ""
     }
   }),
   visitsStore: types.optional(VisitsStore, {

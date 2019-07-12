@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-unresolved */
 import React from "react";
-import { Alert } from "react-native";
+import { Alert, Linking } from "react-native";
 import { inject, PropTypes } from "mobx-react";
 import { FormTextInput, StyledText } from "@components/text";
 import { NavHeader } from "@components/nav-header";
@@ -12,6 +12,7 @@ import { colors } from "../../../utils/constants";
 import { getParent, getApiToken } from "@services/opear-api";
 import { userFromResult } from "@utils";
 import { storeNotificationToken } from "@services/authentication";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 class SignInScreen extends React.Component {
@@ -26,6 +27,30 @@ class SignInScreen extends React.Component {
       password: ""
     };
   }
+
+  componentDidMount() {
+    Linking.addEventListener("url", this.handleOpenURL);
+  }
+
+  componentWillUnmount() {
+    Linking.removeEventListener("url", this.handleOpenURL);
+  }
+
+  handleOpenURL = url => {
+    this.navigate(url);
+  };
+
+  navigate = url => {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    const route = url.url.replace(/.*?:\/\//g, "");
+    const routeName = route.split("/")[0];
+
+    if (routeName === "newpwd") {
+      navigate("AccountNewPwd", { routeInfo: route });
+    }
+  };
 
   onSubmit = () => {
     const { email, password } = this.state;
@@ -93,6 +118,7 @@ class SignInScreen extends React.Component {
         enabled
         style={{ backgroundColor: colors.DARKSKYBLUE, height: "100%" }}
       >
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
           title="Sign In"
           size="medium"

@@ -2,10 +2,11 @@
 /* eslint-disable no-shadow */
 /* eslint-disable camelcase */
 import React from "react";
+import { Alert } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar, ButtonGroup } from "react-native-elements";
 import InactiveUserBanner from "@components/banner";
-import { getChild, updateChild } from "@services/opear-api";
+import { updateChild } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { FormMaskedTextInput } from "@components/text-masked";
 import { NavHeader } from "../../../components/nav-header";
@@ -19,9 +20,10 @@ import {
   View
 } from "../../../components/views";
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import { colors, avatarImages } from "../../../utils/constants";
+import { avatarImages } from "../../../utils/constants";
 import { getAge, getValueById, getIndexByValue } from "@utils";
 import { getFormattedDate } from "@utils/helpers";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -44,19 +46,12 @@ class EditChildScreen extends React.Component {
 
     const childID = navigation.getParam("childID", 0);
     const child = getValueById(children, childID) || {};
-    const nameSplitted = (child.name || "").split(" ");
-    const firstName = nameSplitted[0];
-    const lastName = nameSplitted.length > 1 ? nameSplitted[1] : "";
-    const birthDate = getFormattedDate(new Date(child.birthDate));
-    const avatarImageIndex = child.avatarImageIndex;
+    const birthDate = getFormattedDate(new Date(child.dob));
 
     this.state = {
       childID,
       ...child,
-      firstName,
-      lastName,
-      birthDate,
-      avatarImageIndex
+      birthDate
     };
 
     this.updateIndex = this.updateIndex.bind(this);
@@ -78,16 +73,16 @@ class EditChildScreen extends React.Component {
     const {
       childID,
       gender,
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       birthDate,
-      birthHistory,
-      surgicalHistory,
-      currentMedications,
+      birth_history,
+      surgical_history,
+      current_medications,
       hospitalizations,
-      currentMedicalConditions,
+      current_medical_conditions,
       allergies,
-      avatarImageIndex
+      avatar_image_index
     } = this.state;
 
     const dateRegex1 = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
@@ -99,38 +94,12 @@ class EditChildScreen extends React.Component {
         "Please enter Date of Birth in mm/dd/yyyy format");
     }
 
-    let allergiesArray = [];
-
-    if (allergies.indexOf(",") > -1) {
-      allergiesArray = allergies.split(", ");
-    } else {
-      allergiesArray = allergies;
-    }
-
     const data = {
       child: {
-        first_name: firstName,
-        last_name: lastName,
-        gender,
-        dob: birthDate,
-        allergies: allergiesArray,
-        birth_history: birthHistory,
-        current_medications: currentMedications,
-        current_medical_conditions: currentMedicalConditions,
-        surgical_history: surgicalHistory,
-        hospitalizations,
-        avatar_image_index: avatarImageIndex
-      }
-    };
-
-    const successHandler = res => {
-      const {
-        id,
-        // parent_id,
         first_name,
         last_name,
         gender,
-        dob,
+        dob: new Date(birthDate),
         allergies,
         birth_history,
         current_medications,
@@ -138,26 +107,13 @@ class EditChildScreen extends React.Component {
         surgical_history,
         hospitalizations,
         avatar_image_index
-      } = res.data;
+      }
+    };
 
-      const editedChild = {
-        id,
-        age: getAge(dob),
-        gender,
-        name: `${first_name} ${last_name}`,
-        birthDate: new Date(dob),
-        allergies: (allergies || "").split(", "),
-        birthHistory: birth_history || "",
-        surgicalHistory: surgical_history || "",
-        currentMedications: current_medications || "",
-        currentMedicalConditions: current_medical_conditions || "",
-        hospitalizations: hospitalizations || "",
-        avatarImageIndex: avatar_image_index || 0,
-      };
-
+    const successHandler = res => {
       const index = getIndexByValue(userStore.children, childID);
 
-      userStore.setChild(index, editedChild);
+      userStore.setChild(index, res.data);
       navigation.goBack();
     };
 
@@ -179,20 +135,21 @@ class EditChildScreen extends React.Component {
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
       gender,
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       birthDate,
-      birthHistory,
-      surgicalHistory,
-      currentMedications,
+      birth_history,
+      surgical_history,
+      current_medications,
       hospitalizations,
-      currentMedicalConditions,
+      current_medical_conditions,
       allergies,
-      avatarImageIndex
+      avatar_image_index
     } = this.state;
 
     return (
       <ContainerView behavior="padding" enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <HeaderWrapper>
           <NavHeader
             title="Edit Child"
@@ -207,7 +164,7 @@ class EditChildScreen extends React.Component {
             <Avatar
               rounded
               size={120}
-              source={avatarImages[avatarImageIndex]}
+              source={avatarImages[avatar_image_index]}
               showEditButton={false}
             />
           </ViewCentered>
@@ -215,15 +172,15 @@ class EditChildScreen extends React.Component {
             <FormInputWrapper>
               <FormTextInput
                 label="First Name"
-                value={firstName}
-                onChangeText={this.handleInputChange("firstName")}
+                value={first_name}
+                onChangeText={this.handleInputChange("first_name")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Last Name"
-                value={lastName}
-                onChangeText={this.handleInputChange("lastName")}
+                value={last_name}
+                onChangeText={this.handleInputChange("last_name")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -246,22 +203,22 @@ class EditChildScreen extends React.Component {
             <FormInputWrapper>
               <FormTextInput
                 label="Birth History"
-                value={birthHistory}
-                onChangeText={this.handleInputChange("birthHistory")}
+                value={birth_history}
+                onChangeText={this.handleInputChange("birth_history")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Surgical History"
-                value={surgicalHistory}
-                onChangeText={this.handleInputChange("surgicalHistory")}
+                value={surgical_history}
+                onChangeText={this.handleInputChange("surgical_history")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Current Medications"
-                value={currentMedications}
-                onChangeText={this.handleInputChange("currentMedications")}
+                value={current_medications}
+                onChangeText={this.handleInputChange("current_medications")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -274,16 +231,16 @@ class EditChildScreen extends React.Component {
             <FormInputWrapper>
               <FormTextInput
                 label="Allergies"
-                value={allergies.join(", ")}
+                value={allergies}
                 onChangeText={this.handleInputChange("allergies")}
               />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput
                 label="Current Medical Conditions"
-                value={currentMedicalConditions}
+                value={current_medical_conditions}
                 onChangeText={this.handleInputChange(
-                  "currentMedicalConditions"
+                  "current_medical_conditions"
                 )}
               />
             </FormInputWrapper>

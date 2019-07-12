@@ -21,6 +21,7 @@ import {
   FormInputView
 } from "../../../components/views/keyboard-view";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -41,7 +42,8 @@ class AddCardScreen extends React.Component {
     this.state = {
       loading: false,
       isEditing: params && params.last4 && params.last4.length === 4,
-      last4: params && params.last4
+      last4: params && params.last4,
+      cardInput: ""
     };
   }
 
@@ -50,21 +52,27 @@ class AddCardScreen extends React.Component {
       store: { cardStore, userStore }
     } = this.props;
     const { id } = userStore;
-    const {
-      cardNumber,
-      expiryYear,
-      expiryMonth,
-      cvv,
-      fullName
-    } = cardStore.cardInfo;
+    const { expiryYear, expiryMonth, cvv, fullName } = cardStore.cardInfo;
+
+    const { cardInput } = this.state;
+
+    // Validate card number
+    const cardRegExp = /^[0-9]{16}$/g;
+    const amexRegExp = /^3[47][0-9]{13}$/g;
+    if (!cardRegExp.test(cardInput) && !amexRegExp.test(cardInput)) {
+      Alert.alert("Error", "Invalid card number.");
+      return false;
+    }
 
     const params = {
-      number: cardNumber,
+      number: cardInput,
       expMonth: expiryMonth,
       expYear: expiryYear,
       cvc: cvv,
       name: fullName
     };
+
+    console.tron.log("Payment params: ", params);
 
     this.setState({ loading: true });
 
@@ -99,6 +107,7 @@ class AddCardScreen extends React.Component {
       Alert.alert("Error", "There was an error saving your card.");
       this.setState({ loading: false });
     }
+    return true;
   };
 
   previousScreen() {
@@ -122,12 +131,12 @@ class AddCardScreen extends React.Component {
     } = this.props;
 
     const { cardInfo } = cardStore;
-    const { cardNumber, expiryYear, expiryMonth, cvv, fullName } =
-      cardInfo || {};
+    const { expiryYear, expiryMonth, cvv, fullName } = cardInfo || {};
 
-    const { loading, isEditing, last4 } = this.state;
+    const { loading, isEditing, last4, cardInput } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
           title={isEditing ? "Edit Card" : "Add Card"}
           size="medium"
@@ -145,19 +154,17 @@ class AddCardScreen extends React.Component {
         <InactiveUserBanner userIsActive={userStore.active} />
         <FormWrapper>
           <FormInputView>
-            <FormMaskedTextInput
+            <FormTextInput
               label="Card Number"
-              value={cardNumber}
+              value={cardInput}
               placeholder={
                 isEditing
                   ? `Current Card ending in ${last4}`
                   : "1234 5678 3456 2456"
               }
-              maskOptions={{ mask: "9999 9999 9999 9999" }}
               onChangeText={value =>
-                cardStore.setCardInfo({
-                  ...cardInfo,
-                  cardNumber: value
+                this.setState({
+                  cardInput: value
                 })
               }
               rightIcon={
@@ -230,16 +237,16 @@ class AddCardScreen extends React.Component {
               placeholder="Full Name"
             />
           </FormInputView>
+          <FormInputView>
+            <ServiceButton
+              title={!isEditing ? "Save Card" : "Edit Card"}
+              onPress={async () => {
+                await this.saveCardHandler();
+              }}
+              loading={loading}
+            />
+          </FormInputView>
         </FormWrapper>
-        <FormInputView>
-          <ServiceButton
-            title={!isEditing ? "Save Card" : "Edit Card"}
-            onPress={async () => {
-              await this.saveCardHandler();
-            }}
-            loading={loading}
-          />
-        </FormInputView>
       </KeyboardAvoidingView>
     );
   }

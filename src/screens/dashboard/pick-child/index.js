@@ -1,15 +1,17 @@
+/* eslint-disable import/no-unresolved */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View, FlexView } from "../../../components/views";
 import { ServiceButton } from "../../../components/service-button";
 import { ChildCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
-
-const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
+import { getAge } from "../../../utils";
+import { avatarImages } from "@utils/constants";
 
 @inject("store")
 @observer
@@ -53,12 +55,13 @@ class PickChildScreen extends React.Component {
   };
 
   render() {
-    const {
-      navigation: { goBack, navigate }
-    } = this.props;
+    const { navigation } = this.props;
+    const { goBack, navigate } = navigation;
     const { pickedChild, children } = this.state;
+
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={navigation} />
         <View
           style={{
             paddingLeft: 16,
@@ -96,10 +99,10 @@ class PickChildScreen extends React.Component {
             {children.map(child => (
               <ChildCard
                 key={child.id}
-                name={child.name}
-                age={child.age}
-                avatarImg={imgFoxLarge}
-                selected={child.selected}
+                name={`${child.first_name} ${child.last_name}`}
+                age={getAge(child.dob)}
+                selected={pickedChild && child.id === pickedChild}
+                avatarImg={avatarImages[child.avatar_image_index]}
                 onPress={() => {
                   let selectedChild = null;
                   const newChildren = children.map(ch => {

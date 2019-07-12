@@ -3,6 +3,7 @@
 import { types } from "mobx-state-tree";
 import { setAuthentication } from "@services/authentication";
 import AddressStore from "@store/address";
+import ChildStore from "../child";
 // import ChildStore from "@store/child";
 
 const PaymentAccountStore = types
@@ -32,36 +33,33 @@ export const UserStore = types
     password: types.optional(types.string, ""),
     birthday: types.Date,
     phone: types.string,
-    acceptedPrivacy: types.boolean,
-    acceptedTermsOfService: types.boolean,
+    accepted_privacy: types.boolean,
+    accepted_terms_of_service: types.boolean,
+    avatar: types.string,
     payment_accounts: types.array(PaymentAccountStore),
-    notificationToken: types.string,
-    addresses: types.array(
-      types.model({
-        id: types.number,
-        name: types.string,
-        street: types.string,
-        city: types.string,
-        state: types.optional(types.string, ""),
-        zip: types.string
-      })
-    ),
-    children: types.array(
-      types.model({
-        id: types.number,
-        age: types.number,
-        gender: types.string,
-        name: types.string,
-        birthDate: types.Date,
-        birthHistory: types.optional(types.string, ""),
-        surgicalHistory: types.optional(types.string, ""),
-        currentMedications: types.optional(types.string, ""),
-        hospitalizations: types.optional(types.string, ""),
-        currentMedicalConditions: types.optional(types.string, ""),
-        allergies: types.array(types.string, ""),
-        avatarImageIndex: types.number
-      })
-    ),
+    notification_token: types.string,
+    addresses: types.array(AddressStore, {
+      id: -1,
+      name: "",
+      street: "",
+      city: "",
+      state: "",
+      zip: ""
+    }),
+    children: types.array(ChildStore, {
+      id: -1,
+      gender: "",
+      avatar_image_index: 0,
+      first_name: "",
+      last_name: "",
+      dob: "01/01/1900",
+      surgical_history: "",
+      current_medications: "",
+      birth_history: "",
+      hospitalizations: "",
+      current_medical_conditions: "",
+      allergies: ""
+    }),
     visitRequest: types.model({
       symptoms: types.array(types.string, ""),
       reason: types.string,
@@ -72,14 +70,12 @@ export const UserStore = types
       cost: types.number
     }),
     address: types.optional(AddressStore, {
+      id: -1,
       name: "",
       street: "",
       city: "",
       state: "",
-      zip: "",
-      apartmentNumber: "",
-      latitude: "",
-      longitude: ""
+      zip: ""
     })
   })
   .actions(self => ({
@@ -102,6 +98,10 @@ export const UserStore = types
     },
     setPassword(value) {
       self.password = value;
+      return self;
+    },
+    setAvatar(value) {
+      self.avatar = value;
       return self;
     },
     setZip(value) {
