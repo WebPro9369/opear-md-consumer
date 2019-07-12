@@ -9,6 +9,7 @@ import { FormWrapper } from "../../../components/views";
 import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
 import { updateParent } from "@services/opear-api"
 import InactiveUserBanner from "@components/banner"
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -64,6 +65,7 @@ class EditPhoneNumberScreen extends React.Component {
     const { phone } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
           title="Edit phone number"
           size="medium"

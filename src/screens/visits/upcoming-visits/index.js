@@ -15,8 +15,8 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { VisitDetailCard } from "../../../components/cards";
 import { colors } from "../../../utils/constants";
 import { getAge } from "../../../utils";
-
-const imgFox = require("../../../../assets/images/Fox.png");
+import { DeeplinkHandler } from "@components/deeplink-handler";
+import { avatarImages } from "@utils/constants";
 
 @inject("store")
 @observer
@@ -80,7 +80,7 @@ class UpcomingVisitsScreen extends React.Component {
         <View key={`visit-detail-wrapper-${visit.id}`} style={{ marginBottom: 9 }}>
           <VisitDetailCard
           key={`visit-detail-${visit.id}`}
-            avatarImg={imgFox}
+            avatarImg={avatarImages[visit.child.avatar_image_index]}
             name={childName}
             illness={visit.reason}
             time={formattedTime[1]}
@@ -97,6 +97,7 @@ class UpcomingVisitsScreen extends React.Component {
 
     return (
       <ContainerView style={{ marginTop: 0 }}>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <ScrollView padding={0}>
           <View style={{ paddingTop: 24 }}>
             <ContentWrapper>{visitsDisplayStack}</ContentWrapper>

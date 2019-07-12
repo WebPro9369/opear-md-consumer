@@ -6,6 +6,7 @@ import { ContainerView, View } from "../../../components/views";
 import { ProviderCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import  { getVisitRequests, updateVisitRequests } from "@services/opear-api";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 class SelectProviderScreen extends React.Component {
   constructor(props) {
@@ -92,6 +93,7 @@ class SelectProviderScreen extends React.Component {
 
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View
           style={{
             paddingLeft: 16,

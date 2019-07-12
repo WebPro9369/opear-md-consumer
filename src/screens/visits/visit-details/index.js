@@ -13,11 +13,12 @@ import { ServiceButton } from "@components/service-button";
 import { ContainerView, HeaderWrapper, View } from "@components/views";
 import { ScrollView } from "@components/views/scroll-view";
 import { colors } from "@utils/constants";
-import { updateVisit, getCareProvider } from "@services/opear-api";
+import { updateVisit, getCareProvider, getVisits } from "@services/opear-api";
 import { getValueById, getIndexByValue } from "@utils";
 import { formatAMPM } from "@utils/helpers";
 import { addressToString } from "../../../utils/helpers";
 import { GoogleMapsService } from "@services";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgDog = require("../../../../assets/images/Dog.png");
 
@@ -40,10 +41,14 @@ class VisitDetailsScreen extends React.Component {
       navigation,
       store: { visitsStore }
     } = props;
-    const visitID = navigation.getParam("visitID", false);
+    let visitID = navigation.getParam("visitID", false);
     // TODO: if (!visitID) error!
+    const routeInfo = navigation.getParam("routeInfo", false);
 
-    const visit = getValueById(visitsStore.visits, visitID);
+    if (!visitID) {
+      const splitRoute = routeInfo.split("/");
+      visitID = parseInt(splitRoute[1].split("=")[1], 10);
+    }
 
     this.state = {
       visitID,
@@ -61,6 +66,26 @@ class VisitDetailsScreen extends React.Component {
       careProviderPhone: 0
     };
 
+    if (routeInfo || !getValueById(visitsStore.visits, visitID)) {
+      getVisits({
+        successHandler: res => {
+          visitsStore.setVisits(Object.values(res.data).flat());
+          this.careProviderHandler();
+          this.getGeoHandler();
+        }
+      });
+    } else {
+      this.careProviderHandler();
+      this.getGeoHandler();
+    }
+  }
+
+  careProviderHandler() {
+    const {
+      store: { visitsStore }
+    } = this.props;
+    const visit = getValueById(visitsStore.visits, this.state.visitID);
+
     const careProviderSuccess = res => {
       this.setState({
         careProviderPhone: res.data.phone
@@ -70,6 +95,13 @@ class VisitDetailsScreen extends React.Component {
     getCareProvider(visit.careProviderId, {
       successHandler: careProviderSuccess
     });
+  }
+
+  getGeoHandler () {
+    const {
+      store: { visitsStore }
+    } = this.props;
+    const visit = getValueById(visitsStore.visits, this.state.visitID);
 
     GoogleMapsService.getGeo(
       addressToString(visit.address),
@@ -170,6 +202,7 @@ class VisitDetailsScreen extends React.Component {
 
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <HeaderWrapper>
           <NavHeader
             title="Visit Details"
@@ -220,7 +253,7 @@ class VisitDetailsScreen extends React.Component {
               />
               <LargeBookedDetailCard
                 type="Allergies"
-                text={child.allergies.join(", ")}
+                text={child.allergies}
                 disabled
               />
               <LargeBookedDetailCard

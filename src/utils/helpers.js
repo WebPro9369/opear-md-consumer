@@ -31,13 +31,13 @@ export const formatTimeStr = time => {
   if (hour === 23 && min > 0.5) {
     return "Midnight";
   }
-  if (min !== 0 || min !== 0.5) {
+  if (min !== 0 && min !== 0.5) {
     min = (Math.round(min * 2) / 2).toFixed(1);
   }
   const timeStr =
     hour >= 12
-      ? `${hour - 12 || 12}${min === 0.5 ? ":30" : ""}pm`
-      : `${hour || 12}${min === 0.5 ? ":30" : ""}am`;
+      ? `${hour - 12 || 12}${min == 0.5 ? ":30" : ""}pm`
+      : `${hour || 12}${min == 0.5 ? ":30" : ""}am`;
 
   return timeStr;
 };

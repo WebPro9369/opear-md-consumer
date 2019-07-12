@@ -21,6 +21,7 @@ import {
 import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
 import { colors, avatarImages } from "../../../utils/constants";
 import { getAge } from "@utils";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -42,7 +43,7 @@ class AddChildScreen extends React.Component {
       current_medications: "",
       hospitalizations: "",
       current_medical_conditions: "",
-      allergies: ","
+      allergies: "",
       avatar_image_index: Math.floor(Math.random() * 4)
     };
 
@@ -82,7 +83,8 @@ class AddChildScreen extends React.Component {
     if (!dateRegex1.test(dob) && !dateRegex2.test(dob)) {
       return Alert.alert(
         "There was an issue",
-        "Please enter Date of Birth in mm/dd/yyyy format");
+        "Please enter Date of Birth in mm/dd/yyyy format"
+      );
     }
 
     let genderMap = 0;
@@ -100,7 +102,7 @@ class AddChildScreen extends React.Component {
         first_name,
         last_name,
         gender: genderMap,
-        dob,
+        dob: new Date(dob),
         allergies,
         birth_history,
         current_medications,
@@ -145,6 +147,7 @@ class AddChildScreen extends React.Component {
 
     return (
       <ContainerView behavior="padding" enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <HeaderWrapper>
           <NavHeader
             title="Add Child"
@@ -189,14 +192,14 @@ class AddChildScreen extends React.Component {
               />
             </FormInputWrapper>
             <FormInputWrapper>
-            <FormMaskedTextInput
-              label="Birth Date"
-              value={dob}
-              placeholder="mm/dd/yyyy"
-              keyboardType="number-pad"
-              maskOptions={{ mask: "99/99/9999" }}
-              onChangeText={this.handleInputChange("dob")}
-            />
+              <FormMaskedTextInput
+                label="Birth Date"
+                value={dob}
+                placeholder="mm/dd/yyyy"
+                keyboardType="number-pad"
+                maskOptions={{ mask: "99/99/9999" }}
+                onChangeText={this.handleInputChange("dob")}
+              />
             </FormInputWrapper>
             <FormInputWrapper>
               <FormTextInput

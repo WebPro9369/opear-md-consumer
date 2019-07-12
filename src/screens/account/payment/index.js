@@ -17,6 +17,7 @@ import {
 } from "./styles";
 import { ContainerView, View, FlexView } from "../../../components/views";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -89,6 +90,7 @@ class PaymentScreen extends React.Component {
 
     return (
       <ContainerView padding={16}>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
           title="Payment settings"
           size="medium"

@@ -8,6 +8,7 @@ import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View, FlexView } from "../../../components/views";
 import { ContentButton } from "./styles";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -61,6 +62,7 @@ class PickVisitAddressScreen extends React.Component {
     const { addresses } = this.state;
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View
           style={{
             paddingLeft: 16,

@@ -35,6 +35,7 @@ export const UserStore = types
     phone: types.string,
     accepted_privacy: types.boolean,
     accepted_terms_of_service: types.boolean,
+    avatar: types.string,
     payment_accounts: types.array(PaymentAccountStore),
     notification_token: types.string,
     addresses: types.array(AddressStore, {
@@ -69,6 +70,7 @@ export const UserStore = types
       cost: types.number
     }),
     address: types.optional(AddressStore, {
+      id: -1,
       name: "",
       street: "",
       city: "",
@@ -96,6 +98,10 @@ export const UserStore = types
     },
     setPassword(value) {
       self.password = value;
+      return self;
+    },
+    setAvatar(value) {
+      self.avatar = value;
       return self;
     },
     setZip(value) {

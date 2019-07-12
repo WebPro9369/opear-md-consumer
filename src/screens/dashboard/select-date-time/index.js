@@ -10,6 +10,7 @@ import {
   TimeSelector
 } from "../../../components/date-time-selectors";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -82,11 +83,12 @@ class SelectDateTimeScreen extends React.Component {
     }
 
     if (endHour === 23.5) {
-      hours.push({ key: `${23}`, value: 23.98 });
+      hours.push({ key: `${23.5}`, value: 23.98 });
     }
 
     return (
       <ContainerView>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View
           style={{
             paddingLeft: 16,

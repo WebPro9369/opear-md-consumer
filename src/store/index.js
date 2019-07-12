@@ -32,6 +32,7 @@ const MainStore = types.model("MainStore", {
     active: false,
     name: "",
     email: "",
+    avatar: "",
     birthday: new Date("1970-01-01"),
     accepted_terms_of_service: false,
     accepted_privacy: false,
@@ -48,6 +49,7 @@ const MainStore = types.model("MainStore", {
       cost: 150
     },
     address: {
+      id: -1,
       name: "",
       street: "",
       city: "",

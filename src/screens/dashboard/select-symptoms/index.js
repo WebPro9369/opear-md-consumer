@@ -11,6 +11,7 @@ import { ServiceButton } from "../../../components/service-button";
 import { ContentWrapper, CustomInput } from "./styles";
 import { MatchingMessageWrapper } from "../styles";
 import { colors } from "../../../utils/constants";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -94,6 +95,7 @@ class SelectSymptomsScreen extends React.Component {
 
     return (
       <KeyboardAvoidingView padding={0} behavior="padding" startFromTop enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <View
           style={{
             paddingLeft: 16,
@@ -172,12 +174,10 @@ class SelectSymptomsScreen extends React.Component {
                 value = {otherInputText}
                 onChangeText={this.handleInputChange("otherInputText")}
                 />
-              <View style={{ padding: 16 }}>
                 <ServiceButton
                   title={"Next"}
                   onPress={this.onSubmit}
                 />
-              </View>
             </ContentWrapper>
           </ScrollView>
         </ContainerView>

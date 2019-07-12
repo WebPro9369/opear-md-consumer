@@ -23,6 +23,7 @@ import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-vi
 import { avatarImages } from "../../../utils/constants";
 import { getAge, getValueById, getIndexByValue } from "@utils";
 import { getFormattedDate } from "@utils/helpers";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 
 const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
 
@@ -98,7 +99,7 @@ class EditChildScreen extends React.Component {
         first_name,
         last_name,
         gender,
-        dob: birthDate.toISOString(),
+        dob: new Date(birthDate),
         allergies,
         birth_history,
         current_medications,
@@ -134,8 +135,8 @@ class EditChildScreen extends React.Component {
     const buttons = ["Male", "Female", "Non-Binary"];
     const {
       gender,
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       birthDate,
       birth_history,
       surgical_history,
@@ -148,6 +149,7 @@ class EditChildScreen extends React.Component {
 
     return (
       <ContainerView behavior="padding" enabled>
+        <DeeplinkHandler navigation={this.props.navigation}/>
         <HeaderWrapper>
           <NavHeader
             title="Edit Child"
