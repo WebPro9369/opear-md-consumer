@@ -1,18 +1,20 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable import/no-unresolved */
 import React, { Component } from "react";
 import { Image, View, Alert, Linking } from "react-native";
-import { CheckBox, Avatar, Icon } from "react-native-elements";
-import { TextInputMask } from "react-native-masked-text";
+import { CheckBox, Avatar } from "react-native-elements";
+import ImagePicker from "react-native-image-picker";
 import { inject, observer, PropTypes } from "mobx-react";
 // import { KeyboardAvoidingView } from "@components/views/keyboard-view";
-import { KeyboardScrollView } from "../../../components/views/keyboard-scroll-view";
-import ImagePicker from "react-native-image-picker";
 import { ServiceButton } from "@components/service-button";
-import { StyledText, StyledTextInput } from "@components/text";
 import { ViewCentered } from "@components/views";
+import { KeyboardScrollView } from "@components/views/keyboard-scroll-view";
+import { StyledText } from "@components/text";
 import { NavHeader } from "@components/nav-header";
 import { registerParent } from "@services/opear-api";
-import { colors } from "@utils/constants"
 import { storeNotificationToken } from "@services/authentication";
+import { colors } from "@utils/constants";
 
 const imgProgressbar = require("../../../../assets/images/ProgressBar5.png");
 
@@ -20,14 +22,14 @@ const imgProgressbar = require("../../../../assets/images/ProgressBar5.png");
 @observer
 class PhoneNumberScreen extends Component {
   static propTypes = {
-      store: PropTypes.observableObject.isRequired
-    };
+    store: PropTypes.observableObject.isRequired
+  };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      avatarSource: { uri: ""},
+      avatarSource: { uri: "" },
       acceptedPrivacy: false,
       acceptedTermsOfService: false
     };
@@ -38,7 +40,11 @@ class PhoneNumberScreen extends Component {
       navigation: { navigate },
       store: { userStore }
     } = this.props;
-    const { avatarSource, acceptedPrivacy, acceptedTermsOfService } = this.state;
+    const {
+      avatarSource,
+      acceptedPrivacy,
+      acceptedTermsOfService
+    } = this.state;
 
     if (!acceptedPrivacy) {
       return Alert.alert("Please review our Privacy Policy to continue");
@@ -52,13 +58,7 @@ class PhoneNumberScreen extends Component {
       return Alert.alert("Please upload a profile picture to continue");
     }
 
-    const {
-      name,
-      email,
-      password,
-      address,
-      phone
-    } = userStore;
+    const { name, email, password, address, phone } = userStore;
 
     userStore.setAvatar(avatarSource.uri);
 
@@ -99,7 +99,7 @@ class PhoneNumberScreen extends Component {
       );
     };
 
-    registerParent(data, { successHandler, errorHandler });
+    return registerParent(data, { successHandler, errorHandler });
   };
 
   onAddAvatar = () => {
@@ -130,14 +130,18 @@ class PhoneNumberScreen extends Component {
 
   render() {
     const {
-      navigation: { navigate, goBack }
+      navigation: { goBack }
     } = this.props;
-    const { avatarSource, acceptedPrivacy, acceptedTermsOfService } = this.state;
+    const {
+      avatarSource,
+      acceptedPrivacy,
+      acceptedTermsOfService
+    } = this.state;
 
-    var avatarOptions = { icon: { name: "user", type: "font-awesome" } };
+    const avatarOptions = { icon: { name: "user", type: "font-awesome" } };
 
-    if(avatarSource.uri != "") {
-      avatarOptions = { source: { uri: avatarSource.uri } };
+    if (avatarSource.uri !== "") {
+      avatarOptions.source = { uri: avatarSource.uri };
     }
 
     return (
@@ -222,10 +226,10 @@ class PhoneNumberScreen extends Component {
           </StyledText>
           <CheckBox
             title="I have read and accept"
-            checked={this.state.acceptedPrivacy}
+            checked={acceptedPrivacy}
             onPress={() =>
               this.setState({
-                acceptedPrivacy: !this.state.acceptedPrivacy
+                acceptedPrivacy: !acceptedPrivacy
               })
             }
             size={36}
@@ -249,13 +253,13 @@ class PhoneNumberScreen extends Component {
             {
               "I hereby affirm that I read and understood Opear's Terms of Use and Privacy Policy and agree to be bound by their terms."
             }
-            </StyledText>
+          </StyledText>
           <CheckBox
             title="I have read and accept"
-            checked={this.state.acceptedTermsOfService}
+            checked={acceptedTermsOfService}
             onPress={() =>
               this.setState({
-                acceptedTermsOfService: !this.state.acceptedTermsOfService
+                acceptedTermsOfService: !acceptedTermsOfService
               })
             }
             size={36}
@@ -276,7 +280,7 @@ class PhoneNumberScreen extends Component {
             style={{ width: "100%", marginBottom: 16 }}
           />
           <ServiceButton
-            title="Authenticate"
+            title="Submit"
             style={{ marginBottom: 20 }}
             onPress={this.onSubmit}
           />
