@@ -56,8 +56,12 @@ class ManageVisitsScreen extends React.Component {
       return false;
     }
 
-    visitsStore.setVisits(Object.values(data).flat());
+    const visitArr = Object.values(data).reduce((acc, current) => {
+      (current || []).forEach(item => acc.push(item));
+      return acc;
+    }, []);
 
+    visitArr.forEach(visit => visitsStore.addVisit(visit));
     return true;
   };
 
