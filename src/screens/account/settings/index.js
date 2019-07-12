@@ -1,6 +1,8 @@
+/* eslint-disable no-shadow */
+/* eslint-disable camelcase */
 /* eslint-disable import/no-unresolved */
 import React from "react";
-import { Switch } from "react-native";
+import { ActivityIndicator, Alert, Switch } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -34,16 +36,49 @@ class SettingsScreen extends React.Component {
   constructor(props) {
     super(props);
 
+    const {
+      store: {
+        userStore: { sms_notification }
+      }
+    } = props;
+
     this.state = {
-      smsNotification: false
+      loading: false,
+      smsNotification: sms_notification,
+      avatarSource: {}
     };
   }
 
   onChangeSmsNotification = value => {
+    const {
+      store: { userStore }
+    } = this.props;
+
     console.tron.log("Sms notification: ", value);
+
+    const data = {
+      parent: {
+        sms_notification: value
+      }
+    };
+
+    const successHandler = ({ data: { sms_notification } }) => {
+      this.setState({ loading: false, smsNotification: sms_notification }, () =>
+        userStore.setSmsNotification(sms_notification)
+      );
+    };
+
+    const errorHandler = () => {
+      this.setState({ loading: false }, () =>
+        Alert.alert("Error", "Failed to update SMS Notification setting.")
+      );
+    };
+
     this.setState({
-      smsNotification: value
+      loading: true
     });
+
+    updateParent(userStore.id, data, { successHandler, errorHandler });
   };
 
   onAddAvatar = () => {
@@ -94,7 +129,7 @@ class SettingsScreen extends React.Component {
   };
 
   render() {
-    const { smsNotification } = this.state;
+    const { smsNotification, avatarSource, loading } = this.state;
     const {
       navigation,
       store: { userStore }
@@ -104,10 +139,9 @@ class SettingsScreen extends React.Component {
     const address =
       addresses && addresses.length ? addresses[addresses.length - 1] : {};
 
-    const { avatarSource } = this.state;
     const avatarOptions = { source: imgAvatar };
 
-    if (avatarSource.uri !== "/images/original/missing.png") {
+    if (avatarSource && avatarSource.uri !== "/images/original/missing.png") {
       avatarOptions.source = { uri: avatarSource.uri };
     }
 
@@ -123,74 +157,81 @@ class SettingsScreen extends React.Component {
           />
         </HeaderWrapper>
         <InactiveUserBanner userIsActive={userStore.active} />
-        <ScrollView>
-          <ViewCentered>
-            <Avatar
-              {...avatarOptions}
-              rounded
-              size={120}
-              showEditButton
-              editButton={{
-                containerStyle: {
-                  backgroundColor: colors.GREEN,
-                  borderRadius: 12
-                },
-                size: 24,
-                onPress: this.onAddAvatar
-              }}
-            />
+        {loading && (
+          <ViewCentered paddingBottom={12} style={{ flex: 1 }}>
+            <ActivityIndicator size="large" color={colors.SEAFOAMBLUE} />
           </ViewCentered>
-          <View>
-            <StyledText fontSize={24}>Personal Information</StyledText>
-            <View style={{ padding: 16 }}>
-              <InputButton
-                label="Name"
-                value={name}
-                icon={
-                  <FontAwesome name="angle-right" size={24} color={MIDGREY} />
-                }
-                onPress={() => navigate("SettingsEditName")}
+        )}
+        {!loading && (
+          <ScrollView>
+            <ViewCentered>
+              <Avatar
+                {...avatarOptions}
+                rounded
+                size={120}
+                showEditButton
+                editButton={{
+                  containerStyle: {
+                    backgroundColor: colors.GREEN,
+                    borderRadius: 12
+                  },
+                  size: 24,
+                  onPress: this.onAddAvatar
+                }}
               />
+            </ViewCentered>
+            <View>
+              <StyledText fontSize={24}>Personal Information</StyledText>
+              <View style={{ padding: 16 }}>
+                <InputButton
+                  label="Name"
+                  value={name}
+                  icon={
+                    <FontAwesome name="angle-right" size={24} color={MIDGREY} />
+                  }
+                  onPress={() => navigate("SettingsEditName")}
+                />
+              </View>
+              <View style={{ padding: 16 }}>
+                <InputButton
+                  label="Address"
+                  value={address.street}
+                  icon={
+                    <FontAwesome name="angle-right" size={24} color={MIDGREY} />
+                  }
+                  onPress={() => navigate("SettingsEditAdress")}
+                />
+              </View>
+              <View style={{ padding: 16 }}>
+                <InputButton
+                  label="Email"
+                  value={email}
+                  icon={
+                    <FontAwesome name="angle-right" size={24} color={MIDGREY} />
+                  }
+                  onPress={() => navigate("SettingsEditEmail")}
+                />
+              </View>
+              <View style={{ padding: 16 }}>
+                <InputButton
+                  label="Phone Number"
+                  value={phone}
+                  icon={
+                    <FontAwesome name="angle-right" size={24} color={MIDGREY} />
+                  }
+                  onPress={() => navigate("SettingsEditPhoneNumber")}
+                />
+              </View>
             </View>
-            <View style={{ padding: 16 }}>
-              <InputButton
-                label="Address"
-                value={address.street}
-                icon={
-                  <FontAwesome name="angle-right" size={24} color={MIDGREY} />
-                }
-                onPress={() => navigate("SettingsEditAdress")}
+            <FlexView style={{ padding: 16 }}>
+              <StyledText fontSize={20}>SMS Notifications</StyledText>
+              <Switch
+                value={smsNotification}
+                onValueChange={this.onChangeSmsNotification}
               />
-            </View>
-            <View style={{ padding: 16 }}>
-              <InputButton
-                label="Email"
-                value={email}
-                icon={
-                  <FontAwesome name="angle-right" size={24} color={MIDGREY} />
-                }
-                onPress={() => navigate("SettingsEditEmail")}
-              />
-            </View>
-            <View style={{ padding: 16 }}>
-              <InputButton
-                label="Phone Number"
-                value={phone}
-                icon={
-                  <FontAwesome name="angle-right" size={24} color={MIDGREY} />
-                }
-                onPress={() => navigate("SettingsEditPhoneNumber")}
-              />
-            </View>
-          </View>
-          <FlexView style={{ padding: 16 }}>
-            <StyledText fontSize={20}>SMS Notifications</StyledText>
-            <Switch
-              value={smsNotification}
-              onValueChange={this.onChangeSmsNotification}
-            />
-          </FlexView>
-        </ScrollView>
+            </FlexView>
+          </ScrollView>
+        )}
       </ContainerView>
     );
   }
