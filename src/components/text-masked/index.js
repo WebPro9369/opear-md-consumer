@@ -5,7 +5,7 @@ import { StyledText, Wrapper, FlexView, LeftFlexView } from "../text/styles";
 import { StyledMaskedTextInput } from "./styles";
 
 class FormMaskedTextInput extends React.Component {
-  getInnerRef = () => this.refInput;
+  getInnerRef = () => this.refInput && this.refInput.getElement();
 
   render() {
     const {

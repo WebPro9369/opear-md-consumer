@@ -4,7 +4,9 @@ import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import ImagePicker from "react-native-image-picker";
 import InactiveUserBanner from "@components/banner";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 import { StyledText } from "../../../components/text";
 import { InputButton } from "../../../components/input-button";
 import { NavHeader } from "../../../components/nav-header";
@@ -16,7 +18,7 @@ import {
 } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { colors } from "../../../utils/constants";
-import { DeeplinkHandler } from "@components/deeplink-handler";
+import { updateParent } from "@services/opear-api";
 
 const { MIDGREY } = colors;
 const imgAvatar = require("../../../../assets/images/Placeholder_Photo.png");
@@ -28,17 +30,90 @@ class SettingsScreen extends React.Component {
     store: PropTypes.observableObject.isRequired
   };
 
-  render() {
+  constructor(props) {
+    super(props);
+
     const {
-      navigation: { navigate },
+      store: {
+        userStore: { avatar }
+      }
+    } = this.props;
+
+    this.state = {
+      avatarSource: { uri: avatar}
+    };
+  }
+
+  onAddAvatar = () => {
+    const options = {
+      title: "Select Profile Picture"
+    };
+
+    const {
       store: { userStore }
     } = this.props;
 
-    const { name, address, email, phone } = userStore;
+    ImagePicker.showImagePicker(options, response => {
+      console.tron.log("Response = ", response);
+
+      if (response.didCancel) {
+        console.tron.log("User cancelled image picker");
+      } else if (response.error) {
+        console.tron.log("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.tron.log("User tapped custom button: ", response.customButton);
+      } else {
+        const source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source
+        });
+
+        userStore.setAvatar(source.uri);
+
+        successHandler = res => {
+          console.tron.log(res.data);
+        };
+
+        const data = {
+          parent: {
+            avatar: {
+              uri: source.uri
+            }
+          }
+        };
+
+        updateParent(userStore.id, data, { successHandler });
+      }
+    });
+  };
+
+  render() {
+    const {
+      navigation,
+      store: { userStore }
+    } = this.props;
+    const { navigate } = navigation;
+    const { name, addresses, email, phone } = userStore;
+    const address =
+      addresses && addresses.length ? addresses[addresses.length - 1] : {};
+
+    const { avatarSource } = this.state;
+    var avatarOptions = { source: imgAvatar };
+
+    if(avatarSource.uri != "/images/original/missing.png") {
+      avatarOptions = {
+        source:
+        { uri : avatarSource.uri}
+      };
+    }
 
     return (
       <ContainerView>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <HeaderWrapper>
           <NavHeader
             title="Settings"
@@ -51,10 +126,18 @@ class SettingsScreen extends React.Component {
         <ScrollView>
           <ViewCentered>
             <Avatar
+              {...avatarOptions}
               rounded
               size={120}
-              source={imgAvatar}
-              showEditButton={false}
+              showEditButton
+              editButton={{
+                containerStyle: {
+                  backgroundColor: colors.GREEN,
+                  borderRadius: 12
+                },
+                size: 24,
+                onPress: this.onAddAvatar
+              }}
             />
           </ViewCentered>
           <View>

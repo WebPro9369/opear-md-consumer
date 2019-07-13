@@ -19,7 +19,8 @@ export const userFromResult = (res, userStore) => {
     addresses,
     payment_accounts,
     // birthday,
-    zip
+    zip,
+    avatar
   } = res.data;
 
   // const dob = getFormattedDate(new Date(birthday));
@@ -34,6 +35,12 @@ export const userFromResult = (res, userStore) => {
     zip: a.zip || ""
   }));
 
+  var adjustedAvatar = avatar;
+
+  if(!avatar) {
+    adjustedAvatar = "/images/original/missing.png";
+  }
+
   userStore
     .setName(name)
     .setEmail(email)
@@ -42,7 +49,8 @@ export const userFromResult = (res, userStore) => {
     // .setBirthday(dob)
     .setPaymentAccounts(payment_accounts)
     .setZip(zip)
-    .setAddresses(addressesAdjusted);
+    .setAddresses(addressesAdjusted)
+    .setAvatar(adjustedAvatar);
 
   if (address) {
     userStore.address

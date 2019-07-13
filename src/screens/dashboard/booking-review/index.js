@@ -21,8 +21,7 @@ import { ContentWrapper, AdditionalInput } from "./styles";
 import { colors } from "../../../utils/constants";
 import { getIndexByValue } from "@utils";
 import { DeeplinkHandler } from "@components/deeplink-handler";
-
-const imgFoxLarge = require("../../../../assets/images/FoxLarge.png");
+import { avatarImages } from "@utils/constants";
 
 @inject("store")
 @observer
@@ -163,7 +162,7 @@ class BookingReviewScreen extends React.Component {
               }
             >
               <FlexView>
-                <Avatar rounded size={40} source={imgFoxLarge} />
+                <Avatar rounded size={40} source={avatarImages[child.avatar_image_index]} />
                 <StyledText
                   fontFamily="Flama"
                   fontSize={16}
