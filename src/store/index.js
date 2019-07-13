@@ -5,6 +5,7 @@ import { ApplicationStore } from "./app";
 import { ProviderStore } from "./provider";
 import { UserStore } from "./user";
 import { CardStore } from "./card";
+import { VisitRequestStore } from "./visit-request";
 
 const MainStore = types.model("MainStore", {
   applicationStore: types.optional(ApplicationStore, {
@@ -39,15 +40,6 @@ const MainStore = types.model("MainStore", {
     phone: "",
     payment_accounts: [],
     notification_token: "",
-    visitRequest: {
-      symptoms: [""],
-      reason: "",
-      pickedChild: 1,
-      pickedAddress: 1,
-      date: "",
-      time: 0,
-      cost: 150
-    },
     address: {
       id: -1,
       name: "",
@@ -59,6 +51,15 @@ const MainStore = types.model("MainStore", {
   }),
   visitsStore: types.optional(VisitsStore, {
     visits: []
+  }),
+  visitRequestStore: types.optional(VisitRequestStore, {
+    symptoms: [""],
+    reason: "",
+    pickedChild: 1,
+    pickedAddress: 1,
+    date: "",
+    time: 0,
+    cost: 150
   })
 });
 

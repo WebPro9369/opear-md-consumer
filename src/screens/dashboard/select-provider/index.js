@@ -5,7 +5,7 @@ import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View } from "../../../components/views";
 import { ProviderCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
-import  { getVisitRequests, updateVisitRequests } from "@services/opear-api";
+import { getVisitRequests, updateVisitRequests } from "@services/opear-api";
 import { DeeplinkHandler } from "@components/deeplink-handler";
 
 class SelectProviderScreen extends React.Component {
@@ -16,25 +16,23 @@ class SelectProviderScreen extends React.Component {
 
     this.state = {
       visitID: navigation.getParam("visitID", 0),
-      providers: [],
+      providers: []
     };
 
-    successHandler = res => {
-      const {
-        care_provider
-      } = res.data;
+    const successHandler = res => {
+      const { care_provider } = res.data;
 
       this.setState({
         providers: care_provider
       });
-    }
+    };
   }
 
   componentDidMount() {
     const { visitID } = this.state;
 
     const successHandler = res => {
-      if  (!res.data) return;
+      if (!res.data) return;
 
       const providers = res.data.map(visitRequest => {
         const {
@@ -44,10 +42,10 @@ class SelectProviderScreen extends React.Component {
           care_provider: {
             name,
             biography: bio,
-            work_history:  history,
+            work_history: history,
             avatar,
             rating,
-            specialties: badges,
+            specialties: badges
           }
         } = visitRequest;
 
@@ -60,12 +58,12 @@ class SelectProviderScreen extends React.Component {
           history: history.join(", "),
           avatar,
           rating,
-          badges,
-        }
+          badges
+        };
       });
 
       this.setState({ providers });
-    }
+    };
 
     getVisitRequests(visitID, { successHandler });
   }
@@ -79,7 +77,9 @@ class SelectProviderScreen extends React.Component {
       navigate("DashboardDefault");
     };
 
-    updateVisitRequests(visitID, visitRequestID,
+    updateVisitRequests(
+      visitID,
+      visitRequestID,
       { accepted: true },
       { successHandler }
     );
@@ -93,7 +93,7 @@ class SelectProviderScreen extends React.Component {
 
     return (
       <ContainerView>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={this.props.navigation} />
         <View
           style={{
             paddingLeft: 16,
@@ -126,7 +126,12 @@ class SelectProviderScreen extends React.Component {
                   history={item.work_history}
                   rating={item.rating}
                   badges={item.badges}
-                  onPress={() => this.providerSelectHandler({ visitID: item.visitID, visitRequestID: item.visitRequestID  })}
+                  onPress={() =>
+                    this.providerSelectHandler({
+                      visitID: item.visitID,
+                      visitRequestID: item.visitRequestID
+                    })
+                  }
                 />
               </View>
             )}

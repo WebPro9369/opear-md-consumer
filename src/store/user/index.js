@@ -60,15 +60,6 @@ export const UserStore = types
       current_medical_conditions: "",
       allergies: ""
     }),
-    visitRequest: types.model({
-      symptoms: types.array(types.string, ""),
-      reason: types.string,
-      pickedChild: types.number,
-      pickedAddress: types.number,
-      date: types.string,
-      time: types.number,
-      cost: types.number
-    }),
     address: types.optional(AddressStore, {
       id: -1,
       name: "",
@@ -127,31 +118,6 @@ export const UserStore = types
     addChild(value) {
       // console.tron.log(value);
       self.children.push(value);
-      return self;
-    },
-    setVisitRequest(value) {
-      self.visitRequest = value;
-      return self;
-    },
-    setVisitRequestSymptoms(value) {
-      self.visitRequest.symptoms.replace(value);
-      return self;
-    },
-    setVisitRequestReason(value) {
-        self.visitRequest.reason = value;
-        return self;
-    },
-    setVisitRequestPickedChild(value) {
-      self.visitRequest.pickedChild = value;
-      return self;
-    },
-    setVisitRequestPickedAddress(value) {
-      self.visitRequest.pickedAddress = value;
-      return self;
-    },
-    setVisitRequestDateTime(date, time) {
-      self.visitRequest.date = date;
-      self.visitRequest.time = time;
       return self;
     },
     setAcceptedPrivacy(value) {
