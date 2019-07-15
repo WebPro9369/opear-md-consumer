@@ -38,6 +38,7 @@ export const UserStore = types
     avatar: types.string,
     payment_accounts: types.array(PaymentAccountStore),
     notification_token: types.string,
+    sms_notification: types.boolean,
     addresses: types.array(AddressStore, {
       id: -1,
       name: "",
@@ -124,6 +125,10 @@ export const UserStore = types
       self.birthday = value;
       return self;
     },
+    setSmsNotification(value) {
+      self.sms_notification = value;
+      return self;
+    },
     addChild(value) {
       // console.tron.log(value);
       self.children.push(value);
@@ -138,8 +143,8 @@ export const UserStore = types
       return self;
     },
     setVisitRequestReason(value) {
-        self.visitRequest.reason = value;
-        return self;
+      self.visitRequest.reason = value;
+      return self;
     },
     setVisitRequestPickedChild(value) {
       self.visitRequest.pickedChild = value;
@@ -201,5 +206,5 @@ export const UserStore = types
     setNotificationToken(value) {
       self.notificationToken = value;
       return self;
-    },
+    }
   }));

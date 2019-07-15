@@ -39,6 +39,7 @@ const MainStore = types.model("MainStore", {
     phone: "",
     payment_accounts: [],
     notification_token: "",
+    sms_notification: false,
     visitRequest: {
       symptoms: [""],
       reason: "",

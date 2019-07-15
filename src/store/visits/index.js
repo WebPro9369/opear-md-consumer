@@ -51,7 +51,8 @@ export const VisitsStore = types
           zip: "",
           accepted_privacy: false,
           accepted_terms_of_service: false,
-          active: false
+          active: false,
+          sms_notification: false
         })
       })
     )
