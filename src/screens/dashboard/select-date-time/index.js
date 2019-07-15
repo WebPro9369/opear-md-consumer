@@ -2,6 +2,7 @@ import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { Alert, FlatList } from "react-native";
 import { DateTime } from "luxon";
+import { DeeplinkHandler } from "@components/deeplink-handler";
 import { StyledText } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView, View } from "../../../components/views";
@@ -10,7 +11,6 @@ import {
   TimeSelector
 } from "../../../components/date-time-selectors";
 import { colors } from "../../../utils/constants";
-import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -45,12 +45,12 @@ class SelectDateTimeScreen extends React.Component {
   onSubmit = () => {
     const {
       navigation: { getParam, navigate },
-      store: { userStore }
+      store: { visitRequestStore }
     } = this.props;
 
     const { selectedDate, selectedTime } = this.state;
 
-    userStore.setVisitRequestDateTime(selectedDate, selectedTime);
+    visitRequestStore.setVisitRequestDateTime(selectedDate, selectedTime);
 
     const screenRef = getParam("screenRef", null);
 
@@ -66,9 +66,8 @@ class SelectDateTimeScreen extends React.Component {
   };
 
   render() {
-    const {
-      navigation: { goBack }
-    } = this.props;
+    const { navigation } = this.props;
+    const { goBack } = navigation;
     const {
       // eslint-disable-next-line no-unused-vars
       selectedDate,
@@ -88,7 +87,7 @@ class SelectDateTimeScreen extends React.Component {
 
     return (
       <ContainerView>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <View
           style={{
             paddingLeft: 16,

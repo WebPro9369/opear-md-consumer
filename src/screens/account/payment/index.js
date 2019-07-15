@@ -46,7 +46,7 @@ class PaymentScreen extends React.Component {
     getParent(userStore.id, {
       successHandler: res => {
         if (res.status === 200) {
-          userFromResult(res, userStore);
+          userStore.setPaymentAccounts(res.data.payment_accounts || []);
           this.setState({
             loading: false
           });

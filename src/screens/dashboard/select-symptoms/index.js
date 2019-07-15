@@ -56,7 +56,7 @@ class SelectSymptomsScreen extends React.Component {
   onSubmit = () => {
     const {
       navigation,
-      store: { userStore }
+      store: { visitRequestStore }
     } = this.props;
 
     const illness = navigation.getParam("illness");
@@ -81,8 +81,8 @@ class SelectSymptomsScreen extends React.Component {
       symptoms.push(otherInputText);
     }
 
-    userStore.setVisitRequestSymptoms(symptoms);
-    userStore.setVisitRequestReason(illness);
+    visitRequestStore.setVisitRequestSymptoms(symptoms);
+    visitRequestStore.setVisitRequestReason(illness);
 
     navigation.navigate("DashboardPickChild");
   };
