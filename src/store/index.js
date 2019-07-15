@@ -40,6 +40,7 @@ const MainStore = types.model("MainStore", {
     phone: "",
     payment_accounts: [],
     notification_token: "",
+    sms_notification: false,
     address: {
       id: -1,
       name: "",
