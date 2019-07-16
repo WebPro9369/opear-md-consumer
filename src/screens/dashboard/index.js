@@ -31,7 +31,7 @@ class DashboardScreen extends React.Component {
     super(props);
 
     const {
-      store: { userStore }
+      store: { userStore, visitsStore }
     } = props;
 
     this.state = {
@@ -80,6 +80,7 @@ class DashboardScreen extends React.Component {
   getVisits = () => {
     const getVisitsSuccessHandler = res => {
       const visits = res.data;
+      const { visitsStore } = this.props;
       visitsStore.setVisits(Object.values(visits).flat());
       const dates = Object.keys(visits);
 
