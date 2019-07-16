@@ -183,8 +183,8 @@ class EditAddressScreen extends React.Component {
               onChangeText={this.handleInputChange("name")}
             />
           </FormInputView>
+          <ServiceButton title="Update Address" onPress={this.onSubmit} />
         </FormWrapper>
-        <ServiceButton title="Update Address" onPress={this.onSubmit} />
       </KeyboardAvoidingView>
     );
   }

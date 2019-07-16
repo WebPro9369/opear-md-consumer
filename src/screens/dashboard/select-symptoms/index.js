@@ -1,17 +1,18 @@
+/* eslint-disable import/no-unresolved */
 import React from "react";
 import { inject, observer, PropTypes } from "mobx-react";
 import { FlatList, View } from "react-native";
-import { StyledText, StyledTextInput, FormTextInput } from "../../../components/text";
+import { DeeplinkHandler } from "@components/deeplink-handler";
+import { StyledText, FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ContainerView } from "../../../components/views";
 import { KeyboardAvoidingView } from "../../../components/views/keyboard-view";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { CustomCheckBox } from "../../../components/checkbox";
 import { ServiceButton } from "../../../components/service-button";
-import { ContentWrapper, CustomInput } from "./styles";
+import { ContentWrapper } from "./styles";
 import { MatchingMessageWrapper } from "../styles";
 import { colors } from "../../../utils/constants";
-import { DeeplinkHandler } from "@components/deeplink-handler";
 
 @inject("store")
 @observer
@@ -55,9 +56,7 @@ class SelectSymptomsScreen extends React.Component {
   onSubmit = () => {
     const {
       navigation,
-      store: {
-        userStore
-      }
+      store: { visitRequestStore }
     } = this.props;
 
     const illness = navigation.getParam("illness");
@@ -72,18 +71,18 @@ class SelectSymptomsScreen extends React.Component {
       return arr.filter(e => e.type !== type);
     }
 
-    var symptoms = removeBool(checkListData, false);
+    let symptoms = removeBool(checkListData, false);
     symptoms = removeTypes(symptoms, "input");
     symptoms = removeTypes(symptoms, "button");
 
     symptoms = symptoms.map(value => value.string);
 
-    if(otherInputText != ""){
+    if (otherInputText !== "") {
       symptoms.push(otherInputText);
     }
 
-    userStore.setVisitRequestSymptoms(symptoms);
-    userStore.setVisitRequestReason(illness);
+    visitRequestStore.setVisitRequestSymptoms(symptoms);
+    visitRequestStore.setVisitRequestReason(illness);
 
     navigation.navigate("DashboardPickChild");
   };
@@ -95,7 +94,7 @@ class SelectSymptomsScreen extends React.Component {
 
     return (
       <KeyboardAvoidingView padding={0} behavior="padding" startFromTop enabled>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <View
           style={{
             paddingLeft: 16,
@@ -170,15 +169,12 @@ class SelectSymptomsScreen extends React.Component {
                 }}
               />
               <FormTextInput
-                placeholder={"Other"}
-                value = {otherInputText}
+                placeholder="Other"
+                value={otherInputText}
                 onChangeText={this.handleInputChange("otherInputText")}
-                />
-              <View style={{ padding: 16 }}>
-                <ServiceButton
-                  title={"Next"}
-                  onPress={this.onSubmit}
-                />
+              />
+              <View style={{ paddingTop: 16, paddingBottom: 48 }}>
+                <ServiceButton title="Next" onPress={this.onSubmit} />
               </View>
             </ContentWrapper>
           </ScrollView>

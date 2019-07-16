@@ -38,12 +38,12 @@ class PickChildScreen extends React.Component {
   onSubmit = () => {
     const {
       navigation: { getParam, navigate },
-      store: { userStore }
+      store: { visitRequestStore }
     } = this.props;
 
     const { pickedChild } = this.state;
 
-    userStore.setVisitRequestPickedChild(pickedChild);
+    visitRequestStore.setVisitRequestPickedChild(pickedChild);
 
     const screenRef = getParam("screenRef", null);
 
