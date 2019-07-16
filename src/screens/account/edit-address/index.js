@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-unresolved */
 import React from "react";
+import { Alert } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import InactiveUserBanner from "@components/banner";
 import { updateAddress } from "@services/opear-api";
@@ -13,6 +14,7 @@ import {
 } from "../../../components/views/keyboard-view";
 import { FlexView, FormWrapper } from "../../../components/views";
 import { DeeplinkHandler } from "@components/deeplink-handler";
+import { GoogleMapsService } from "@services";
 
 @inject("store")
 @observer
@@ -43,6 +45,7 @@ class EditAddressScreen extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.updateAddressHandler = this.updateAddressHandler.bind(this);
   }
 
   handleInputChange = name => value => {
@@ -51,7 +54,7 @@ class EditAddressScreen extends React.Component {
     });
   };
 
-  onSubmit = () => {
+  updateAddressHandler = () => {
     const {
       navigation: { goBack },
       store: { userStore }
@@ -59,17 +62,12 @@ class EditAddressScreen extends React.Component {
 
     const { id, street, city, zip, name, state } = this.state;
     const data =
-      // parent: {
-      //   address: [
       {
         name,
         street,
         city,
         zip,
         state
-        // }
-        //   ]
-        // }
       };
 
     const successHandler = res => {
@@ -100,6 +98,29 @@ class EditAddressScreen extends React.Component {
     };
 
     updateAddress(id, data, { successHandler });
+
+  };
+
+  onSubmit = () => {
+    const { id, street, city, zip, name, state } = this.state;
+
+    const address = street + ", " + city + ", " + state + " " + zip
+
+    GoogleMapsService.getGeo(address,
+      innerRes => {
+        const { data } = innerRes;
+
+        if(data.status == "ZERO_RESULTS") {
+          return Alert.alert("Unable to verify address","We couldn't validate your address. Please try again, or contact support for assistance.");
+        }
+
+        this.updateAddressHandler();
+
+      },
+      () => {
+        return Alert.alert("Unable to reach address services", "Please contact support for assistance.");
+      }
+    );
   };
 
   render() {

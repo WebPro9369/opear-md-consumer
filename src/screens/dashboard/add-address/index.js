@@ -17,6 +17,7 @@ import { KeyboardScrollView } from "@components/views/keyboard-scroll-view";
 import { registerAddress } from "@services/opear-api";
 import InactiveUserBanner from "@components/banner";
 import { DeeplinkHandler } from "@components/deeplink-handler";
+import { GoogleMapsService } from "@services";
 
 @inject("store")
 @observer
@@ -37,7 +38,8 @@ class AddAddressScreen extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
-
+    this.updateAddressHandler = this.updateAddressHandler.bind(this);
+    
     this.inputRefs = {};
   }
 
@@ -47,7 +49,7 @@ class AddAddressScreen extends React.Component {
     });
   };
 
-  onSubmit = () => {
+  updateAddressHandler = () => {
     const {
       navigation: { goBack },
       store: { userStore }
@@ -93,8 +95,46 @@ class AddAddressScreen extends React.Component {
       goBack();
     };
 
-    return registerAddress(data, { successHandler });
-  };
+    registerAddress(data, { successHandler });
+  }
+
+  onSubmit = () => {
+    const {
+      locationName,
+      street,
+      city,
+      zip,
+      state
+    } = this.state;
+
+    if (!zip) return Alert.alert("Please enter your zip code");
+
+    const dateRegex1 = /^\d\d\d\d\d$/;
+
+    if (!dateRegex1.test(zip)) {
+      return Alert.alert(
+        "There was an issue",
+        "Please enter your 5-digit Zip Code");
+    }
+
+    const address = street + ", " + city + ", " + state + " " + zip
+
+    GoogleMapsService.getGeo(address,
+      innerRes => {
+        const { data } = innerRes;
+
+        if(data.status == "ZERO_RESULTS") {
+          return Alert.alert("Unable to verify address","We couldn't validate your address. Please try again, or contact support for assistance.");
+        }
+
+        this.updateAddressHandler();
+
+      },
+      () => {
+        return Alert.alert("Unable to reach address services", "Please contact support for assistance.");
+      }
+    );
+  }
 
   render() {
     const {
