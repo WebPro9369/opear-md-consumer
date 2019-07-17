@@ -2,14 +2,14 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable import/no-unresolved */
 import React, { Component } from "react";
-import { Image, View, Alert, Linking } from "react-native";
+import { Image, Alert, Linking } from "react-native";
 import { CheckBox, Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-picker";
 import { inject, observer, PropTypes } from "mobx-react";
 // import { KeyboardAvoidingView } from "@components/views/keyboard-view";
 import { ServiceButton } from "@components/service-button";
-import { ViewCentered } from "@components/views";
-import { KeyboardScrollView } from "@components/views/keyboard-scroll-view";
+import { ViewCentered, ContainerView, HeaderWrapper } from "@components/views";
+import { ScrollView } from "@components/views/scroll-view";
 import { StyledText } from "@components/text";
 import { NavHeader } from "@components/nav-header";
 import { registerParent } from "@services/opear-api";
@@ -54,7 +54,7 @@ class PhoneNumberScreen extends Component {
       return Alert.alert("Please review our Terms of Service to continue");
     }
 
-    if (avatarSource.uri == "") {
+    if (avatarSource.uri === "") {
       return Alert.alert("Please upload a profile picture to continue");
     }
 
@@ -145,24 +145,16 @@ class PhoneNumberScreen extends Component {
     }
 
     return (
-      <KeyboardScrollView
-        behavior="padding"
-        contentContainerStyle={{ flex: 1, justifyContent: "flex-end" }}
-        keyboardShouldPersistTaps="handled"
-        enableOnAndroid
-      >
-        <View>
+      <ContainerView>
+        <HeaderWrapper>
           <NavHeader
-            hasBackButton
+            title="Please upload a profile picture"
             size="small"
+            hasBackButton
             onPressBackButton={() => goBack()}
           />
-          <StyledText
-            textAlign="left"
-            style={{ marginTop: 24, marginBottom: 24 }}
-          >
-            Please upload a profile picture
-          </StyledText>
+        </HeaderWrapper>
+        <ScrollView>
           <ViewCentered paddingTop={0}>
             <Avatar
               {...avatarOptions}
@@ -181,8 +173,6 @@ class PhoneNumberScreen extends Component {
               }}
             />
           </ViewCentered>
-        </View>
-        <View>
           <StyledText
             style={{
               fontSize: 16,
@@ -284,8 +274,8 @@ class PhoneNumberScreen extends Component {
             style={{ marginBottom: 20 }}
             onPress={this.onSubmit}
           />
-        </View>
-      </KeyboardScrollView>
+        </ScrollView>
+      </ContainerView>
     );
   }
 }

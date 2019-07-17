@@ -77,7 +77,7 @@ class PickChildScreen extends React.Component {
             onPressBackButton={() => goBack()}
           />
         </View>
-        <ScrollView>
+        <ScrollView style={{ paddingBottom: 16 }}>
           <View style={{ paddingLeft: 16, paddingRight: 16 }}>
             <StyledText
               fontFamily="FlamaMedium"
