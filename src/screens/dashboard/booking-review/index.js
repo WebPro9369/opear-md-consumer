@@ -114,12 +114,14 @@ class BookingReviewScreen extends React.Component {
 
     const { parentNotes } = this.state;
 
-    const child = getValueById(children, visitRequest.pickedChild);
+    console.tron.log(visitRequestStore);
+
+    const child = getValueById(children, visitRequestStore.pickedChild);
     const childName = `${child.first_name} ${child.last_name}`;
     const addressStreet = (
-      getValueById(addresses, visitRequest.pickedAddress) || {}
+      getValueById(addresses, visitRequestStore.pickedAddress) || {}
     ).street;
-    const { date, time, cost } = visitRequest;
+    const { date, time, cost } = visitRequestStore;
 
     return (
       <ContainerView padding={0}>
