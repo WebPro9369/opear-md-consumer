@@ -51,7 +51,8 @@ class BookingReviewScreen extends React.Component {
       navigation: { navigate },
       store: {
         providerStore,
-        userStore: { visitRequest, payment_accounts }
+        userStore: { payment_accounts },
+        visitRequestStore
       }
     } = this.props;
 
@@ -64,12 +65,12 @@ class BookingReviewScreen extends React.Component {
       );
     }
 
-    const formattedDate = new Date(visitRequest.date);
+    const formattedDate = new Date(visitRequestStore.date);
 
-    const hour = Math.floor(visitRequest.time);
+    const hour = Math.floor(visitRequestStore.time);
     let minutes = 0;
 
-    if (visitRequest.time % 1 === 0.5) {
+    if (visitRequestStore.time % 1 === 0.5) {
       minutes = 30;
     }
     const completedDate = new Date(
@@ -82,13 +83,13 @@ class BookingReviewScreen extends React.Component {
 
     const data = {
       visit: {
-        child_id: visitRequest.pickedChild,
-        address_id: visitRequest.pickedAddress,
-        reason: visitRequest.reason,
-        symptoms: visitRequest.symptoms,
+        child_id: visitRequestStore.pickedChild,
+        address_id: visitRequestStore.pickedAddress,
+        reason: visitRequestStore.reason,
+        symptoms: visitRequestStore.symptoms,
         appointment_time: completedDate,
         parent_notes: parentNotes,
-        payment_amount: visitRequest.cost,
+        payment_amount: visitRequestStore.cost,
         payment_account_id: payment_accounts[payment_accounts.length - 1].id // TODO: only allows one account
       }
     };
@@ -105,7 +106,8 @@ class BookingReviewScreen extends React.Component {
     const {
       navigation,
       store: {
-        userStore: { children, addresses, visitRequest, payment_accounts }
+        userStore: { children, addresses, payment_accounts },
+        visitRequestStore
       }
     } = this.props;
     const { goBack, push } = navigation;

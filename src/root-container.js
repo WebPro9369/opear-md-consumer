@@ -10,9 +10,9 @@ import AppNavigationContainer from "./navigation/main.navigator";
 import { colors } from "./utils/constants";
 
 stripe.setOptions({
-  publishableKey: "pk_test_icZtWoaCwbJCemzBqBdTV6Cb", // test key
-  // publishableKey: "pk_live_2YK7fEg9qnlrawyTukjyVUs9', // live key
-  androidPayMode: "test" // "production"
+  //publishableKey: "pk_test_icZtWoaCwbJCemzBqBdTV6Cb", // test key
+  publishableKey: "pk_live_2YK7fEg9qnlrawyTukjyVUs9", // live key
+  androidPayMode: "production" // "production"
 });
 
 const Root = styled.View`
