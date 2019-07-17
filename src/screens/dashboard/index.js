@@ -80,7 +80,8 @@ class DashboardScreen extends React.Component {
   getVisits = () => {
     const getVisitsSuccessHandler = res => {
       const visits = res.data;
-      const { visitsStore } = this.props;
+      const { store: { visitsStore } } = this.props;
+
       visitsStore.setVisits(Object.values(visits).flat());
       const dates = Object.keys(visits);
 
