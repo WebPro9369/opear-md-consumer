@@ -9,7 +9,8 @@ import { VisitRequestStore } from "./visit-request";
 
 const MainStore = types.model("MainStore", {
   applicationStore: types.optional(ApplicationStore, {
-    SplashShowing: true
+    SplashShowing: true,
+    ConsumerSubscriptionsActive: false
   }),
   providerStore: types.optional(ProviderStore, {
     appointment: false,
