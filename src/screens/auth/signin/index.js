@@ -8,7 +8,7 @@ import { NavHeader } from "@components/nav-header";
 import { ServiceButton } from "@components/service-button";
 import { ViewCentered, FormInputWrapper, FormWrapper } from "@components/views";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
-import { colors } from "../../../utils/constants";
+import { colors } from "@utils/constants";
 import { getParent, getApiToken } from "@services/opear-api";
 import { userFromResult } from "@utils";
 import { storeNotificationToken } from "@services/authentication";
@@ -23,8 +23,8 @@ class SignInScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: ""
+      email: "brenton@gmail.com",
+      password: "test123!"
     };
   }
 
@@ -111,6 +111,7 @@ class SignInScreen extends React.Component {
   };
 
   render() {
+    const { navigation } = this.props;
     const { email, password } = this.state;
     return (
       <KeyboardAvoidingView
@@ -118,7 +119,7 @@ class SignInScreen extends React.Component {
         enabled
         style={{ backgroundColor: colors.DARKSKYBLUE, height: "100%" }}
       >
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <NavHeader
           title="Sign In"
           size="medium"
