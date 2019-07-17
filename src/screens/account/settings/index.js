@@ -38,7 +38,7 @@ class SettingsScreen extends React.Component {
 
     const {
       store: {
-        userStore: { sms_notification }
+        userStore: { sms_notification, addresses }
       }
     } = props;
 
@@ -47,6 +47,13 @@ class SettingsScreen extends React.Component {
       smsNotification: sms_notification,
       avatarSource: {}
     };
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    this._onFocusListener = navigation.addListener("didFocus", () => {
+      this.forceUpdate();
+    });
   }
 
   onChangeSmsNotification = value => {
@@ -117,7 +124,7 @@ class SettingsScreen extends React.Component {
 
         const parts = source.uri.split('/');
         const name = parts[parts.length -1];
-        
+
         const data = new FormData();
         data.append('id', userStore.id);
         data.append('parent[avatar]', {
