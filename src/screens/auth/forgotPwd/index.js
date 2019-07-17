@@ -9,9 +9,9 @@ import { NavHeader } from "@components/nav-header";
 import { ServiceButton } from "@components/service-button";
 import { FormInputWrapper, FormWrapper } from "@components/views";
 import { KeyboardAvoidingView } from "@components/views/keyboard-view";
-import { passwordReset } from "@services/opear-api";
-import { colors } from "../../../utils/constants";
 import { DeeplinkHandler } from "@components/deeplink-handler";
+import { passwordReset } from "@services/opear-api";
+import { colors } from "@utils/constants";
 
 @inject("store")
 class ForgotPwdScreen extends React.Component {
@@ -20,6 +20,14 @@ class ForgotPwdScreen extends React.Component {
     this.state = {
       email: ""
     };
+  }
+
+  componentDidMount() {
+    Linking.addEventListener("url", this.handleOpenURL);
+  }
+
+  componentWillUnmount() {
+    Linking.removeEventListener("url", this.handleOpenURL);
   }
 
   onSubmit = () => {
@@ -42,14 +50,6 @@ class ForgotPwdScreen extends React.Component {
     passwordReset({ email }, { successHandler });
     return true;
   };
-
-  componentDidMount() {
-    Linking.addEventListener("url", this.handleOpenURL);
-  }
-
-  componentWillUnmount() {
-    Linking.removeEventListener("url", this.handleOpenURL);
-  }
 
   handleOpenURL = url => {
     this.navigate(url);
@@ -74,9 +74,8 @@ class ForgotPwdScreen extends React.Component {
   };
 
   render() {
-    const {
-      navigation: { goBack }
-    } = this.props;
+    const { navigation } = this.props;
+    const { goBack } = navigation;
     const { email } = this.state;
     return (
       <KeyboardAvoidingView
@@ -84,7 +83,7 @@ class ForgotPwdScreen extends React.Component {
         enabled
         style={{ backgroundColor: colors.DARKSKYBLUE, height: "100%" }}
       >
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <NavHeader
           title="Forgot Password"
           size="medium"

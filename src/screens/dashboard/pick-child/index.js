@@ -4,15 +4,14 @@ import { inject, observer, PropTypes } from "mobx-react";
 import { TouchableOpacity } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { DeeplinkHandler } from "@components/deeplink-handler";
-import { avatarImages } from "@utils/constants";
-import { StyledText } from "../../../components/text";
-import { NavHeader } from "../../../components/nav-header";
-import { ContainerView, View, FlexView } from "../../../components/views";
-import { ScrollView } from "../../../components/views/scroll-view";
-import { ServiceButton } from "../../../components/service-button";
-import { ChildCard } from "../../../components/cards";
-import { colors } from "../../../utils/constants";
-import { getAge } from "../../../utils";
+import { StyledText } from "@components/text";
+import { NavHeader } from "@components/nav-header";
+import { ContainerView, View, FlexView } from "@components/views";
+import { ScrollView } from "@components/views/scroll-view";
+import { ServiceButton } from "@components/service-button";
+import { ChildCard } from "@components/cards";
+import { getAge } from "@utils";
+import { avatarImages, colors } from "@utils/constants";
 
 @inject("store")
 @observer
@@ -145,7 +144,9 @@ class PickChildScreen extends React.Component {
             </View>
           </View>
           {pickedChild ? (
-            <View style={{ paddingLeft: 16, paddingRight: 16 }}>
+            <View
+              style={{ paddingLeft: 16, paddingRight: 16, paddingBottom: 48 }}
+            >
               <ServiceButton title="Select Child" onPress={this.onSubmit} />
             </View>
           ) : null}

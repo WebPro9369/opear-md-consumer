@@ -39,7 +39,7 @@ class AddAddressScreen extends React.Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.updateAddressHandler = this.updateAddressHandler.bind(this);
-    
+
     this.inputRefs = {};
   }
 
@@ -95,17 +95,11 @@ class AddAddressScreen extends React.Component {
       goBack();
     };
 
-    registerAddress(data, { successHandler });
-  }
+    return registerAddress(data, { successHandler });
+  };
 
   onSubmit = () => {
-    const {
-      locationName,
-      street,
-      city,
-      zip,
-      state
-    } = this.state;
+    const { street, city, zip, state } = this.state;
 
     if (!zip) return Alert.alert("Please enter your zip code");
 
@@ -114,27 +108,34 @@ class AddAddressScreen extends React.Component {
     if (!dateRegex1.test(zip)) {
       return Alert.alert(
         "There was an issue",
-        "Please enter your 5-digit Zip Code");
+        "Please enter your 5-digit Zip Code"
+      );
     }
 
-    const address = street + ", " + city + ", " + state + " " + zip
+    const address = `${street}, ${city}, ${state} ${zip}`;
 
-    GoogleMapsService.getGeo(address,
+    return GoogleMapsService.getGeo(
+      address,
       innerRes => {
         const { data } = innerRes;
 
-        if(data.status == "ZERO_RESULTS") {
-          return Alert.alert("Unable to verify address","We couldn't validate your address. Please try again, or contact support for assistance.");
+        if (data.status === "ZERO_RESULTS") {
+          return Alert.alert(
+            "Unable to verify address",
+            "We couldn't validate your address. Please try again, or contact support for assistance."
+          );
         }
 
-        this.updateAddressHandler();
-
+        return this.updateAddressHandler();
       },
       () => {
-        return Alert.alert("Unable to reach address services", "Please contact support for assistance.");
+        return Alert.alert(
+          "Unable to reach address services",
+          "Please contact support for assistance."
+        );
       }
     );
-  }
+  };
 
   render() {
     const {
@@ -159,6 +160,7 @@ class AddAddressScreen extends React.Component {
           <FormWrapper padding={32}>
             <FormInputWrapper>
               <FormTextInput
+                autoFocus
                 label="Location Name"
                 value={locationName}
                 onChangeText={this.handleInputChange("locationName")}
@@ -205,7 +207,10 @@ class AddAddressScreen extends React.Component {
                 keyboardType="number-pad"
                 maxLength={5}
                 onChangeText={this.handleInputChange("zip")}
-                ref={input => (this.inputRefs.city = input)}
+                ref={input => (this.inputRefs.zip = input)}
+                onSubmitEditing={() =>
+                  this.inputRefs.state.getInnerRef().focus()
+                }
               />
             </FormInputWrapper>
             <FormInputWrapper>
@@ -213,6 +218,7 @@ class AddAddressScreen extends React.Component {
                 label="State"
                 value={state}
                 onChangeText={this.handleInputChange("state")}
+                ref={input => (this.inputRefs.state = input)}
                 placeholder="State"
               />
             </FormInputWrapper>
