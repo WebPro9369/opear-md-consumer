@@ -48,6 +48,13 @@ class AddCardScreen extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { navigation } = this.props;
+    this._onFocusListener = navigation.addListener("didFocus", () => {
+      this.forceUpdate();
+    });
+  }
+
   saveCardHandler = async () => {
     const {
       store: { cardStore, userStore }
