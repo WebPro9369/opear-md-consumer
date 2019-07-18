@@ -4,7 +4,7 @@ import React from "react";
 import { Alert } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import InactiveUserBanner from "@components/banner";
-import { updateAddress } from "@services/opear-api";
+import { updateAddress, registerAddress } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -29,11 +29,20 @@ class EditAddressScreen extends React.Component {
     const {
       store: {
         userStore: { addresses }
+      },
+      navigation: {
+        state: { params }
       }
     } = props;
 
     const address = addresses.length ? addresses[addresses.length - 1] : {};
     const { id, name, street, city, zip, state } = address;
+
+    let isUpdating = true;
+
+    if(!street && !city && !zip) {
+      isUpdating = false;
+    }
 
     this.state = {
       id,
@@ -41,7 +50,8 @@ class EditAddressScreen extends React.Component {
       street,
       city,
       state,
-      zip
+      zip,
+      isUpdating
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -60,7 +70,7 @@ class EditAddressScreen extends React.Component {
       store: { userStore }
     } = this.props;
 
-    const { id, street, city, zip, name, state } = this.state;
+    const { id, street, city, zip, name, state, isUpdating } = this.state;
     const data =
       {
         name,
@@ -97,7 +107,11 @@ class EditAddressScreen extends React.Component {
       goBack();
     };
 
-    updateAddress(id, data, { successHandler });
+    if(isUpdating){
+      updateAddress(id, data, { successHandler });
+    } else {
+      registerAddress(data, { successHandler });
+    }
 
   };
 
@@ -128,12 +142,12 @@ class EditAddressScreen extends React.Component {
       navigation: { goBack },
       store: { userStore }
     } = this.props;
-    const { street, city, zip, name, state } = this.state;
+    const { street, city, zip, name, state, isUpdating } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
-          title="Edit Address"
+          title={!isUpdating ? "Add Address" : "Edit Address"}
           size="medium"
           hasBackButton
           onPressBackButton={() => goBack()}
@@ -183,7 +197,7 @@ class EditAddressScreen extends React.Component {
               onChangeText={this.handleInputChange("name")}
             />
           </FormInputView>
-          <ServiceButton title="Update Address" onPress={this.onSubmit} />
+          <ServiceButton title={!isUpdating ? "Add Address" : "Update Address"} onPress={this.onSubmit} />
         </FormWrapper>
       </KeyboardAvoidingView>
     );
