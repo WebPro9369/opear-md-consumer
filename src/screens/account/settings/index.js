@@ -38,14 +38,14 @@ class SettingsScreen extends React.Component {
 
     const {
       store: {
-        userStore: { sms_notification, addresses }
+        userStore: { sms_notification, avatar, addresses }
       }
     } = props;
 
     this.state = {
       loading: false,
       smsNotification: sms_notification,
-      avatarSource: {}
+      avatarSource: { uri: avatar }
     };
   }
 
