@@ -115,14 +115,13 @@ class RootContainer extends React.Component {
   };
 
   render() {
-    const { authenticated } = this.state;
     return (
       <UserInactivity
         timeForInactivity={15 * 60 * 1000}
         onAction={this.onAction}
       >
         <ThemeProvider theme={colors}>
-          <Root style={authenticated ? null : { display: "none" }}>
+          <Root>
             <StatusBar />
             <AppNavigationContainer
               ref={navigatorRef => {
