@@ -151,7 +151,7 @@ class BookingReviewScreen extends React.Component {
               color={colors.TEXT_GREEN}
               lineHeight={40}
             >
-              Respiratory
+              {visitRequestStore.reason}
             </StyledText>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 32 }}>
