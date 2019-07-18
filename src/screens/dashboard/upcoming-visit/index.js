@@ -52,6 +52,7 @@ class VisitBookedScreen extends React.Component {
       },
       providerID: 0,
       child: "Benjamin",
+      childAvatarIndex: 0,
       reason: "",
       address: "18 Mission St",
       time: "Sun Dec 31, 8am - 9am",
@@ -88,6 +89,7 @@ class VisitBookedScreen extends React.Component {
       this.setState({
         providerID: care_provider_id,
         child: child.first_name,
+        childAvatarIndex: child.avatar_image_index,
         address,
         time: new Date(appointment_time).toLocaleDateString(
           "en-US",
@@ -144,7 +146,7 @@ class VisitBookedScreen extends React.Component {
     const {
       navigation: { goBack }
     } = this.props;
-    const { providerData, child, address, time, region, reason } = this.state;
+    const { providerData, child, childAvatarIndex, address, time, region, reason } = this.state;
 
     return (
       <ScrollView padding={0} marginTop={24}>
@@ -219,7 +221,7 @@ class VisitBookedScreen extends React.Component {
             <BookedDetailCard
               type="Child"
               text={child}
-              icon={<Avatar rounded size={30} source={avatarImages[child.avatar_image_index]} />}
+              icon={<Avatar rounded size={30} source={avatarImages[childAvatarIndex]} />}
             />
             <BookedDetailCard
               type="Address"
