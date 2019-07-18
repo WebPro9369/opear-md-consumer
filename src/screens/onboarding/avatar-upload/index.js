@@ -62,16 +62,26 @@ class PhoneNumberScreen extends Component {
 
     userStore.setAvatar(avatarSource.uri);
 
+
+    let avatarFileName = '';
+    if (avatarSource.uri) {
+      const avatarFileNameParts = avatarSource.uri.split('/');
+      avatarFileName = avatarFileNameParts[avatarFileNameParts.length -1];
+    }
+
+
     const data = {
-      parent: {
-        name,
-        email,
-        phone,
-        password,
-        zip: address.zip,
-        accepted_privacy: acceptedPrivacy,
-        accepted_terms_of_service: acceptedTermsOfService,
-        avatar: { uri: avatarSource.uri }
+      name,
+      email,
+      phone,
+      password,
+      zip: address.zip,
+      accepted_privacy: acceptedPrivacy,
+      accepted_terms_of_service: acceptedTermsOfService,
+      avatar: {
+        name: avatarFileName,
+        uri: avatarSource.uri,
+        type: 'image/jpg'
       }
     };
 
@@ -99,7 +109,10 @@ class PhoneNumberScreen extends Component {
       );
     };
 
-    return registerParent(data, { successHandler, errorHandler });
+    const formData = new FormData();
+    Object.keys(data).forEach(key => formData.append(`parent[${key}]`, data[key]));
+
+    return registerParent(formData, { successHandler, errorHandler });
   };
 
   onAddAvatar = () => {
