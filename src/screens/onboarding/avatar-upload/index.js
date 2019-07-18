@@ -12,9 +12,10 @@ import { ViewCentered, ContainerView, HeaderWrapper } from "@components/views";
 import { ScrollView } from "@components/views/scroll-view";
 import { StyledText } from "@components/text";
 import { NavHeader } from "@components/nav-header";
-import { registerParent } from "@services/opear-api";
-import { storeNotificationToken } from "@services/authentication";
+import { registerParent, getParent } from "@services/opear-api";
+import { storeNotificationToken, removeAuthentication } from "@services/authentication";
 import { colors } from "@utils/constants";
+import { userFromResult } from "@utils";
 
 const imgProgressbar = require("../../../../assets/images/ProgressBar5.png");
 
@@ -62,13 +63,11 @@ class PhoneNumberScreen extends Component {
 
     userStore.setAvatar(avatarSource.uri);
 
-
     let avatarFileName = '';
     if (avatarSource.uri) {
       const avatarFileNameParts = avatarSource.uri.split('/');
       avatarFileName = avatarFileNameParts[avatarFileNameParts.length -1];
     }
-
 
     const data = {
       name,
@@ -99,7 +98,21 @@ class PhoneNumberScreen extends Component {
       userStore.setAcceptedPrivacy(acceptedPrivacy);
       userStore.setAcceptedTermsOfService(acceptedTermsOfService);
 
-      navigate("Tabs");
+      const innerSuccess = res => {
+        try {
+          userFromResult(res, userStore);
+          navigate("Tabs");
+        } catch {
+          removeAuthentication();
+          navigate("Authenticating");
+        }
+      };
+
+      const errorHandler = () => {
+        navigate("Authenticating");
+      };
+
+      return getParent(id, { successHandler: innerSuccess, errorHandler });
     };
 
     const errorHandler = () => {
