@@ -1,5 +1,6 @@
 import React from "react";
-import { Alert, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
+import { NavigationActions } from "react-navigation";
 import { ThemeProvider } from "styled-components";
 import { inject, observer, PropTypes } from "mobx-react";
 import UserInactivity from "react-native-user-inactivity";
@@ -8,6 +9,7 @@ import styled from "styled-components/native";
 import stripe from "tipsi-stripe";
 import AppNavigationContainer from "./navigation/main.navigator";
 import { colors } from "./utils/constants";
+import { removeAuthentication } from "./services/authentication";
 
 stripe.setOptions({
   publishableKey: "pk_test_icZtWoaCwbJCemzBqBdTV6Cb", // test key
@@ -70,29 +72,24 @@ class RootContainer extends React.Component {
       this.setState({
         firstTime: false
       });
-
+      const navRef = this.navigatorRef;
       TouchID.isSupported()
         .then(biometryType => {
           console.tron.log("BiometryType: ", biometryType);
           TouchID.authenticate()
-            .then(() => {
-              this.setState({ authenticated: true }, () =>
-                Alert.alert("Authenticated Successfully")
-              );
-            })
+            .then(() => {})
             .catch(error => {
               console.tron.log(error);
-              this.setState({ authenticated: false }, () =>
-                Alert.alert("Authentication failed.")
+              removeAuthentication();
+              const routeName = "Authenticating";
+              navRef.dispatch(
+                NavigationActions.navigate({
+                  routeName
+                })
               );
             });
         })
-        .catch(error => {
-          console.tron.log("TouchID not supported: ", error);
-          this.setState({ authenticated: true }, () =>
-            Alert.alert("Touch ID is not supported.")
-          );
-        });
+        .catch(() => {});
     }
   };
 
@@ -103,10 +100,6 @@ class RootContainer extends React.Component {
       }
     } = this.props;
     const { active } = this.state;
-
-    if (console.tron) {
-      // console.tron.log("Active now!", value, apiKey);
-    }
 
     this.setState({
       active: value
@@ -131,7 +124,11 @@ class RootContainer extends React.Component {
         <ThemeProvider theme={colors}>
           <Root style={authenticated ? null : { display: "none" }}>
             <StatusBar />
-            <AppNavigationContainer />
+            <AppNavigationContainer
+              ref={navigatorRef => {
+                this.navigatorRef = navigatorRef;
+              }}
+            />
           </Root>
         </ThemeProvider>
       </UserInactivity>
