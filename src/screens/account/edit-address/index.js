@@ -4,7 +4,7 @@ import React from "react";
 import { Alert } from "react-native";
 import { inject, observer, PropTypes } from "mobx-react";
 import InactiveUserBanner from "@components/banner";
-import { updateAddress, registerAddress } from "@services/opear-api";
+import { updateAddress, registerAddress, getAddresses } from "@services/opear-api";
 import { FormTextInput } from "../../../components/text";
 import { NavHeader } from "../../../components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
@@ -104,7 +104,23 @@ class EditAddressScreen extends React.Component {
 
       userStore.setAddress(newAddress);
 
-      goBack();
+      const getAddressesSuccessHandler = res => {
+        const addressAdjustedArray = res.data.map(row => ({
+          id: row.id,
+          name: row.name || "",
+          street: row.street || "",
+          city: row.city || "",
+          state: row.state || "",
+          zip: row.zip || ""
+        }));
+
+        userStore.setAddresses(addressAdjustedArray);
+
+        goBack();
+      };
+
+      getAddresses({ successHandler: getAddressesSuccessHandler });
+
     };
 
     if(isUpdating){
