@@ -38,10 +38,10 @@ class EditAddressScreen extends React.Component {
     const address = addresses.length ? addresses[addresses.length - 1] : {};
     const { id, name, street, city, zip, state } = address;
 
-    let isEditing = true;
+    let isUpdating = true;
 
     if(!street && !city && !zip) {
-      isEditing = false;
+      isUpdating = false;
     }
 
     this.state = {
@@ -51,7 +51,7 @@ class EditAddressScreen extends React.Component {
       city,
       state,
       zip,
-      isEditing
+      isUpdating
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -70,7 +70,7 @@ class EditAddressScreen extends React.Component {
       store: { userStore }
     } = this.props;
 
-    const { id, street, city, zip, name, state, isEditing } = this.state;
+    const { id, street, city, zip, name, state, isUpdating } = this.state;
     const data =
       {
         name,
@@ -107,7 +107,7 @@ class EditAddressScreen extends React.Component {
       goBack();
     };
 
-    if(isEditing){
+    if(isUpdating){
       updateAddress(id, data, { successHandler });
     } else {
       registerAddress(data, { successHandler });
@@ -142,12 +142,12 @@ class EditAddressScreen extends React.Component {
       navigation: { goBack },
       store: { userStore }
     } = this.props;
-    const { street, city, zip, name, state, isEditing } = this.state;
+    const { street, city, zip, name, state, isUpdating } = this.state;
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <DeeplinkHandler navigation={this.props.navigation}/>
         <NavHeader
-          title={!isEditing ? "Add Address" : "Edit Address"}
+          title={!isUpdating ? "Add Address" : "Edit Address"}
           size="medium"
           hasBackButton
           onPressBackButton={() => goBack()}
@@ -197,7 +197,7 @@ class EditAddressScreen extends React.Component {
               onChangeText={this.handleInputChange("name")}
             />
           </FormInputView>
-          <ServiceButton title={!isEditing ? "Add Address" : "Update Address"} onPress={this.onSubmit} />
+          <ServiceButton title={!isUpdating ? "Add Address" : "Update Address"} onPress={this.onSubmit} />
         </FormWrapper>
       </KeyboardAvoidingView>
     );
