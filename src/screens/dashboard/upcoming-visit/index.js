@@ -83,7 +83,8 @@ class VisitBookedScreen extends React.Component {
         weekday: "short",
         month: "short",
         day: "numeric",
-        hour: "numeric"
+        hour: "numeric",
+        minute: "numeric"
       };
 
       this.setState({
