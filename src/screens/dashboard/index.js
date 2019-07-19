@@ -71,6 +71,11 @@ class DashboardScreen extends React.Component {
   componentDidMount() {
     this.getVisits();
     this.timer = setInterval(() => this.getVisits(), 30000);
+
+    const { navigation } = this.props;
+    navigation.addListener("willFocus", () => {
+      this.getVisits();
+    });
   }
 
   componentWillUnmount() {
