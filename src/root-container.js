@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar } from "react-native";
+import { AppState, StatusBar } from "react-native";
 import { NavigationActions } from "react-navigation";
 import { ThemeProvider } from "styled-components";
 import { inject, observer, PropTypes } from "mobx-react";
@@ -9,6 +9,7 @@ import styled from "styled-components/native";
 import stripe from "tipsi-stripe";
 import AppNavigationContainer from "./navigation/main.navigator";
 import { colors } from "./utils/constants";
+import { hasCachedAuthentication } from "./services/authentication";
 import { removeAuthentication } from "./services/authentication";
 
 stripe.setOptions({
@@ -35,11 +36,14 @@ class RootContainer extends React.Component {
     this.state = {
       firstTime: true,
       active: true,
-      authenticated: true
+      authenticated: true,
+      appState: AppState.currentState,
     };
   }
 
   componentDidMount() {
+    AppState.addEventListener("change", this.handleAppStateChange);
+
     const {
       store: {
         userStore: { apiKey }
@@ -48,6 +52,18 @@ class RootContainer extends React.Component {
     if (apiKey) {
       this.showTouchId(false);
     }
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener("change", this.handleAppStateChange);
+  }
+
+  handleAppStateChange = nextAppState =>{
+    if (hasCachedAuthentication() && this.state.appState.match(/background/) && nextAppState === 'active') {
+      this.showTouchId(true);
+    }
+
+    this.setState({appState: nextAppState});
   }
 
   componentWillReceiveProps(nextProps) {

@@ -5,7 +5,7 @@ import {
 } from "@services/opear-api";
 
 export function setAuthentication({ id, apiKey }) {
-  Keychain.setGenericPassword(`${id}`, apiKey);
+  Keychain.setGenericPassword(`${id}`, ""); // Do not remember the api key
   API_SETTINGS.apiKey = apiKey;
 }
 
@@ -13,6 +13,10 @@ export function storeNotificationToken(id, notificationToken) {
   if (!notificationToken) return;
 
   updateParent(id, { notification_token: notificationToken });
+}
+
+export function hasCachedAuthentication() {
+  return API_SETTINGS.apiKey;
 }
 
 export async function getAuthentication() {
