@@ -74,6 +74,7 @@ class DashboardScreen extends React.Component {
 
     const { navigation } = this.props;
     navigation.addListener("willFocus", () => {
+      this.setState({ visitState: "" });
       this.getVisits();
     });
   }
