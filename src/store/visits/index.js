@@ -115,7 +115,7 @@ export const VisitsStore = types
       return self;
     },
     setVisits(visits) {
-      self.visits = visits;
+      self.visits.replace(visits);
       return self;
     },
     setVisitState(index, value) {
