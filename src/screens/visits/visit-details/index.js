@@ -138,7 +138,7 @@ class VisitDetailsScreen extends React.Component {
 
   cancelVisit = () => {
     const {
-      navigation: { goBack },
+      navigation: { navigate },
       store: { visitsStore }
     } = this.props;
 
@@ -152,7 +152,7 @@ class VisitDetailsScreen extends React.Component {
     const successHandler = () => {
       const index = getIndexByValue(visits, visitID);
       visitsStore.setVisitState(index, "canceled");
-      goBack();
+      navigate("DashboardDefault");
     };
 
     const errorHandler = () => {
