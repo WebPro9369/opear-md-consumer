@@ -87,7 +87,7 @@ ProviderCard.propTypes = {
   name: PropTypes.string.isRequired,
   bio: PropTypes.string,
   history: PropTypes.string,
-  rating: PropTypes.string,
+  rating: PropTypes.number,
   badges: PropTypes.arrayOf(PropTypes.string)
 };
 
@@ -179,11 +179,11 @@ export const ProviderStarsCard = ({
 );
 
 ProviderStarsCard.propTypes = {
-  avatarImg: PropTypes.number.isRequired,
+  avatarImg: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   bio: PropTypes.string,
   history: PropTypes.string,
-  rating: PropTypes.string,
+  rating: PropTypes.number,
   stars: PropTypes.number,
   editable: PropTypes.bool,
   onPressStar: PropTypes.func

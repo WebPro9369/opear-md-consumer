@@ -6,6 +6,7 @@ import { ProviderStore } from "./provider";
 import { UserStore } from "./user";
 import { CardStore } from "./card";
 import { VisitRequestStore } from "./visit-request";
+import { VisitReviewStore } from "./visit-review";
 
 const MainStore = types.model("MainStore", {
   applicationStore: types.optional(ApplicationStore, {
@@ -62,7 +63,8 @@ const MainStore = types.model("MainStore", {
     date: "",
     time: 0,
     cost: 150
-  })
+  }),
+  visitReviewStore: types.optional(VisitReviewStore, {})
 });
 
 export const mainStore = MainStore.create();
