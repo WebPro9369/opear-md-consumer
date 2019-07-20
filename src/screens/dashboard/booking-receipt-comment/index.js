@@ -257,6 +257,7 @@ class BookingReceiptCommentScreen extends React.Component {
             {(visitReviewStore.rating || visitReviewStore.body) && (
               <ServiceButton
                 title={visit.review ? "Update Review" : "Submit Review"}
+                style={{ marginBottom: 12 }}
                 onPress={() => this.saveReview()}
               />
             )}
