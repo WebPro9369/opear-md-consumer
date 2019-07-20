@@ -53,7 +53,7 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>$(PRODUCT_NAME) scan card use</string>
+	<string>We use your camera to take profile photos and scan cards</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Enabling Face ID allows you quick and secure access to your account.</string>
 	<key>NSHumanReadableCopyright</key>
