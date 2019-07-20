@@ -4,7 +4,7 @@ import { mainStore } from "./src/store";
 import debugConfig from "./config/debug-config";
 
 if (debugConfig.useReactotron) {
-  Reactotron.configure({ host: "0.tcp.ngrok.io", port: 19433 })
+  Reactotron.configure({ host: "localhost" })
     .useReactNative()
     .use(mst())
     .connect();
