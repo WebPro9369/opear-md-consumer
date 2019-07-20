@@ -64,7 +64,7 @@ const MainStore = types.model("MainStore", {
     time: 0,
     cost: 150
   }),
-  VisitReviewStore: types.optional(VisitReviewStore, {})
+  visitReviewStore: types.optional(VisitReviewStore, {})
 });
 
 export const mainStore = MainStore.create();

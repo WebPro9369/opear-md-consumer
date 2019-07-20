@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from "react";
 import { Avatar } from "react-native-elements";
 import { inject, observer, PropTypes } from "mobx-react";
@@ -9,6 +10,7 @@ import { addressToString, formatAMPM } from "@utils/helpers";
 import { DeeplinkHandler } from "@components/deeplink-handler";
 import { avatarImages } from "@utils/constants";
 import isEmpty from "lodash/isEmpty";
+import isNull from "lodash/isNull";
 import { registerReview, updateReview } from "@services/opear-api";
 import { ServiceButton } from "../../../components/service-button";
 import { StyledText, StyledTextInput } from "../../../components/text";
@@ -31,27 +33,24 @@ class BookingReceiptCommentScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    const {
-      navigation,
-      store: { visitReviewStore }
-    } = props;
-    visitReviewStore.clear();
+    const { navigation } = props;
     const visitID = navigation.getParam("visitID", 0);
     const providerData = navigation.getParam("providerData", null);
 
     this.state = {
       providerData,
-      visitID
+      visitID,
+      visitReviewStore: {}
     };
   }
 
   saveReview = () => {
     const {
       navigation,
-      store: { visitsStore, visitReviewStore }
+      store: { visitsStore }
     } = this.props;
     const { goBack } = navigation;
-    const { visitID } = this.state;
+    const { visitReviewStore, visitID } = this.state;
     const visit = getValueById(visitsStore.visits, visitID);
     const stars =
       visitReviewStore.rating || (visit.review ? visit.review.rating : 0);
@@ -66,9 +65,7 @@ class BookingReceiptCommentScreen extends React.Component {
     }
 
     const successHandler = res => {
-      const index = getIndexByValue(visitsStore, visitID);
       visit.review = res.data;
-      visitsStore.replaceVisit(index, visit);
       goBack();
     };
 
@@ -77,7 +74,7 @@ class BookingReceiptCommentScreen extends React.Component {
     };
 
     if (visit.review) {
-      updateReview(
+      return updateReview(
         visit.review.id,
         {
           review: {
@@ -90,41 +87,46 @@ class BookingReceiptCommentScreen extends React.Component {
         },
         { successHandler, errorHandler }
       );
-    } else {
-      registerReview(
-        {
-          review: {
-            visit_id: visitID,
-            body,
-            rating: stars,
-            parent_id: visit.parent_id,
-            care_provider_id: visit.care_provider_id
-          }
-        },
-        { successHandler, errorHandler }
-      );
     }
+
+    return registerReview(
+      {
+        review: {
+          visit_id: visitID,
+          body,
+          rating: stars,
+          parent_id: visit.parent_id,
+          care_provider_id: visit.care_provider_id
+        }
+      },
+      { successHandler, errorHandler }
+    );
   };
 
   setStars = event => {
-    const {
-      store: { visitReviewStore }
-    } = this.props;
-    visitReviewStore.setRating(event.key + 1);
+    const { visitReviewStore } = this.state;
+    this.setState({
+      visitReviewStore: {
+        ...visitReviewStore,
+        rating: event.key + 1
+      }
+    });
   };
 
   render() {
     const {
       navigation,
-      store: { visitsStore, visitReviewStore }
+      store: { visitsStore }
     } = this.props;
     const { goBack } = navigation;
-    const { providerData, visitID } = this.state;
+    const { visitReviewStore, providerData, visitID } = this.state;
     const visit = getValueById(visitsStore.visits, visitID);
-    const stars =
-      visitReviewStore.rating || (visit.review ? visit.review.rating : 0);
-    const body =
-      visitReviewStore.body || (visit.review ? visit.review.body : "");
+    const stars = isNull(visitReviewStore.rating)
+      ? (visit.review ? visit.review.rating : 0)
+      : visitReviewStore.rating;
+    const body = isNull(visitReviewStore.body)
+      ? (visit.review ? visit.review.body : "")
+      : visitReviewStore.body;
     return (
       <ScrollView padding={0} marginTop={24}>
         <DeeplinkHandler navigation={navigation} />
@@ -153,7 +155,7 @@ class BookingReceiptCommentScreen extends React.Component {
         <View style={{ marginTop: 16 }}>
           <ContentWrapper>
             <ProviderStarsCard
-              avatarImg={avatarImages[providerData.avatar]}
+              avatarImg={{ uri: providerData.avatar }}
               name={providerData.name}
               bio={providerData.bio}
               rating={providerData.rating}
@@ -162,7 +164,7 @@ class BookingReceiptCommentScreen extends React.Component {
               onPressStar={this.setStars}
             />
           </ContentWrapper>
-          <ContentWrapper style={{ paddingTop: 16, paddingBottom: 16 }}>
+          <ContentWrapper style={{ paddingTop: 16, paddingBottom: 16, minHeight: 160 }}>
             {stars > 0 && stars <= 3 && (
               <StyledText fontSize={14}>
                 Why was your review unsatisfactory?
@@ -178,7 +180,14 @@ class BookingReceiptCommentScreen extends React.Component {
                   : "Enter review comments here (optional)"
               }
               value={body}
-              onChangeText={value => visitReviewStore.setBody(value)}
+              onChangeText={value => {
+                this.setState({
+                  visitReviewStore: {
+                    ...visitReviewStore,
+                    body: value
+                  }
+                });
+              }}
               style={{
                 minHeight: 160,
                 padding: 20,
@@ -198,13 +207,13 @@ class BookingReceiptCommentScreen extends React.Component {
             <BookedDetailCard
               type="Child"
               text={`${visit.child.first_name} ${visit.child.last_name}`}
-              icon={(
-<Avatar
+              icon={
+                <Avatar
                   rounded
                   size={30}
                   source={avatarImages[visit.child.avatar_image_index]}
                 />
-)}
+              }
             />
             <BookedDetailCard
               type="Address"

@@ -178,7 +178,7 @@ class DashboardScreen extends React.Component {
       return (
         <TouchableOpacity
           onPress={() =>
-            navigate("BookingReceiptScreen", { visitID: reviewableVisit.id })
+            navigate("DashboardBookingReceipt", { visitID: reviewableVisit.id })
           }
         >
           <MatchingMessageWrapper>

@@ -13,7 +13,7 @@ export const VisitReviewStore = types
     clear() {
       self = {
         id: null,
-        stars: null,
+        rating: null,
         body: null
       };
       return self;

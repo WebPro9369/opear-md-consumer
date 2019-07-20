@@ -26,12 +26,7 @@ const imgDog = require("../../../../assets/images/Dog.png");
 @observer
 class VisitDetailsScreen extends React.Component {
   static propTypes = {
-    past: PropTypes.bool,
     store: MobXPropTypes.observableObject.isRequired
-  };
-
-  static defaultProps = {
-    past: false
   };
 
   constructor(props) {
@@ -143,7 +138,7 @@ class VisitDetailsScreen extends React.Component {
     const {
       navigation: { navigate }
     } = this.props;
-    navigate("BookingReceiptScreen", { visitID });
+    navigate("DashboardBookingReceipt", { visitID });
   };
 
   cancelVisit = () => {
@@ -174,7 +169,6 @@ class VisitDetailsScreen extends React.Component {
 
   render() {
     const {
-      past,
       navigation,
       store: { visitsStore }
     } = this.props;
@@ -182,6 +176,7 @@ class VisitDetailsScreen extends React.Component {
     const { visitID, loaded, map, careProviderPhone } = this.state;
 
     const visit = getValueById(visitsStore.visits, visitID);
+    const past = visit.state === "completed";
     const {
       child,
       address,

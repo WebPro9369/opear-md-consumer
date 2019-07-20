@@ -37,7 +37,7 @@ class BookingReceiptScreen extends React.Component {
     } = props;
 
     const visitID = navigation.getParam("visitID", 0);
-    const visit = getValueById(visitsStore, visitID);
+    const visit = getValueById(visitsStore.visits, visitID);
     // TODO: error if visitID = 0
     this.state = {
       visitID,
@@ -76,7 +76,7 @@ class BookingReceiptScreen extends React.Component {
     } = this.props;
     const { navigate } = navigation;
     const { providerData, visitID } = this.state;
-    const visit = getValueById(visitsStore.visit, visitID);
+    const visit = getValueById(visitsStore.visits, visitID);
 
     if (!providerData) {
       return (
@@ -116,13 +116,18 @@ class BookingReceiptScreen extends React.Component {
         <View style={{ marginTop: 16 }}>
           <ContentWrapper>
             <ProviderStarsCard
-              avatarImg={avatarImages[providerData.avatar]}
+              avatarImg={{ uri: providerData.avatar }}
               name={providerData.name}
               bio={providerData.bio}
               rating={providerData.rating}
               stars={visit.review ? visit.review.rating : 0}
-              editable
-              onPressStar={() => {}}
+              editable={!visit.review}
+              onPressStar={() =>
+                navigate("DashboardBookingReceiptComment", {
+                  visitID,
+                  providerData
+                })
+              }
             />
           </ContentWrapper>
           <ContentWrapper
