@@ -84,24 +84,27 @@ class VisitDetailsScreen extends React.Component {
     const {
       store: { visitsStore }
     } = this.props;
-    const visit = getValueById(visitsStore.visits, this.state.visitID);
+    const { visitID } = this.state;
+    const visit = getValueById(visitsStore.visits, visitID);
+    if (visit.care_provider_id) {
+      const careProviderSuccess = res => {
+        this.setState({
+          careProviderPhone: res.data.phone
+        });
+      };
 
-    const careProviderSuccess = res => {
-      this.setState({
-        careProviderPhone: res.data.phone
+      getCareProvider(visit.care_provider_id, {
+        successHandler: careProviderSuccess
       });
-    };
-
-    getCareProvider(visit.careProviderId, {
-      successHandler: careProviderSuccess
-    });
+    }
   }
 
-  getGeoHandler () {
+  getGeoHandler() {
     const {
       store: { visitsStore }
     } = this.props;
-    const visit = getValueById(visitsStore.visits, this.state.visitID);
+    const { map, visitID } = this.state;
+    const visit = getValueById(visitsStore.visits, visitID);
 
     GoogleMapsService.getGeo(
       addressToString(visit.address),
@@ -111,7 +114,7 @@ class VisitDetailsScreen extends React.Component {
           const { lat, lng } = data.results[0].geometry.location;
           this.setState({
             map: {
-              ...this.state.map,
+              ...map,
               latitude: lat,
               longitude: lng,
               latitudeDelta: 0.09,
@@ -120,13 +123,13 @@ class VisitDetailsScreen extends React.Component {
           });
         } else {
           this.setState({
-            region: null
+            map: null
           });
         }
       },
       () => {
         this.setState({
-          region: null
+          map: null
         });
       }
     );
@@ -135,6 +138,13 @@ class VisitDetailsScreen extends React.Component {
   componentWillUnmount() {
     navigator.geolocation.clearWatch(this.watchID);
   }
+
+  reviewVisit = visitID => {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    navigate("BookingReceiptScreen", { visitID });
+  };
 
   cancelVisit = () => {
     const {
@@ -165,9 +175,10 @@ class VisitDetailsScreen extends React.Component {
   render() {
     const {
       past,
-      navigation: { goBack },
+      navigation,
       store: { visitsStore }
     } = this.props;
+    const { goBack } = navigation;
     const { visitID, loaded, map, careProviderPhone } = this.state;
 
     const visit = getValueById(visitsStore.visits, visitID);
@@ -181,8 +192,6 @@ class VisitDetailsScreen extends React.Component {
       parent_notes,
       visit_notes
     } = visit;
-
-    console.tron.log(careProviderPhone);
 
     const childName = child.first_name
       ? `${child.first_name} ${child.last_name}`
@@ -202,7 +211,7 @@ class VisitDetailsScreen extends React.Component {
 
     return (
       <ContainerView>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <HeaderWrapper>
           <NavHeader
             title="Visit Details"
@@ -212,11 +221,13 @@ class VisitDetailsScreen extends React.Component {
           />
         </HeaderWrapper>
         <ScrollView padding={0}>
-          <MapView
-            style={{ alignSelf: "stretch", height: 200 }}
-            region={map}
-            initialRegion={map}
-          />
+          {map && (
+            <MapView
+              style={{ alignSelf: "stretch", height: 200 }}
+              region={map}
+              initialRegion={map}
+            />
+          )}
           <View style={{ padding: 16, marginTop: 16 }}>
             <VisitDetailCard
               avatarImg={imgDog}
@@ -277,6 +288,17 @@ class VisitDetailsScreen extends React.Component {
                   grey
                   title="Cancel Visit"
                   onPress={() => this.cancelVisit()}
+                />
+              </View>
+            </View>
+          ) : null}
+          {past ? (
+            <View style={{ marginTop: 48, paddingLeft: 16, paddingRight: 16 }}>
+              <View style={{ paddingTop: 6, paddingBottom: 6 }}>
+                <ServiceButton
+                  grey
+                  title="Review Visit"
+                  onPress={() => this.reviewVisit(visitID)}
                 />
               </View>
             </View>

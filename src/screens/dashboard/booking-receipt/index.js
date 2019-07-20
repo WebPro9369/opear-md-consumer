@@ -5,22 +5,21 @@ import { inject, observer, PropTypes } from "mobx-react";
 import { Avatar } from "react-native-elements";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-// import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { getIndexByValue } from "@utils";
+import { getValueById } from "@utils";
 import { getCareProvider } from "@services/opear-api";
+import { addressToString, formatAMPM } from "@utils/helpers";
+import { DeeplinkHandler } from "@components/deeplink-handler";
+import { avatarImages } from "@utils/constants";
+import { NavHeader } from "@components/nav-header";
 import { ServiceButton } from "../../../components/service-button";
 import { StyledText } from "../../../components/text";
-import { View, FlexView } from "../../../components/views";
+import { View, FlexView, HeaderWrapper } from "../../../components/views";
 import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard, ProviderStarsCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
-import { DeeplinkHandler } from "@components/deeplink-handler";
-import { avatarImages } from "@utils/constants";
 
 const { BLACK60 } = colors;
-
-const doctorImg = require("../../../../assets/images/Doctor.png");
 
 @inject("store")
 @observer
@@ -34,38 +33,26 @@ class BookingReceiptScreen extends React.Component {
 
     const {
       navigation,
-      store: { userStore }
+      store: { visitsStore }
     } = props;
 
     const visitID = navigation.getParam("visitID", 0);
-    const visits = navigation.getParam("visits", 0);
-
-    const visit = visits[visitID - 1];
-
+    const visit = getValueById(visitsStore, visitID);
+    // TODO: error if visitID = 0
     this.state = {
-      providerData: {
-        key: "1",
-        avartarImg: doctorImg,
-        name: "Dr. John Smith",
-        bio: "Hi, this is my bio",
-        symptom: "Respiratory",
-        rating: "4.5"
-      },
-      child:
-        userStore.children[getIndexByValue(userStore.children, visit.child_id)]
-          .name,
-      address:
-        userStore.addresses[
-          getIndexByValue(userStore.addresses, visit.address_id)
-        ].street,
-      time: visit.appointment_time,
-      card: "4985",
-      price: visit.payment_amount,
-      stars: 0
+      visitID,
+      providerData: null
     };
 
     const successHandler = res => {
-      const { name, biography, work_history, rating, specialties } = res.data;
+      const {
+        name,
+        biography,
+        work_history,
+        rating,
+        specialties,
+        avatar
+      } = res.data;
 
       this.setState({
         providerData: {
@@ -73,6 +60,7 @@ class BookingReceiptScreen extends React.Component {
           bio: biography,
           history: work_history.join(", "),
           rating,
+          avatar,
           badges: specialties
         }
       });
@@ -83,21 +71,26 @@ class BookingReceiptScreen extends React.Component {
 
   render() {
     const {
-      navigation: { navigate }
+      navigation,
+      store: { visitsStore }
     } = this.props;
-    const {
-      providerData,
-      child,
-      address,
-      time,
-      card,
-      price,
-      stars
-    } = this.state;
+    const { navigate } = navigation;
+    const { providerData, visitID } = this.state;
+    const visit = getValueById(visitsStore.visit, visitID);
+
+    if (!providerData) {
+      return (
+        <ScrollView>
+          <HeaderWrapper>
+            <NavHeader title="Loading..." size="medium" />
+          </HeaderWrapper>
+        </ScrollView>
+      );
+    }
 
     return (
       <ScrollView padding={0} marginTop={24}>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <View style={{ marginTop: 16 }}>
           <ContentWrapper>
             <FlexView justifyContent="center">
@@ -115,7 +108,7 @@ class BookingReceiptScreen extends React.Component {
                 lineHeight={40}
                 color={colors.TEXT_GREEN}
               >
-                {providerData.symptom}
+                {visit.reason}
               </StyledText>
             </FlexView>
           </ContentWrapper>
@@ -123,11 +116,11 @@ class BookingReceiptScreen extends React.Component {
         <View style={{ marginTop: 16 }}>
           <ContentWrapper>
             <ProviderStarsCard
-              avatarImg={providerData.avartarImg}
+              avatarImg={avatarImages[providerData.avatar]}
               name={providerData.name}
               bio={providerData.bio}
               rating={providerData.rating}
-              stars={stars}
+              stars={visit.review ? visit.review.rating : 0}
               editable
               onPressStar={() => {}}
             />
@@ -140,17 +133,23 @@ class BookingReceiptScreen extends React.Component {
           >
             <BookedDetailCard
               type="Child"
-              text={child}
-              icon={<Avatar rounded size={30} source={avatarImages[child.avatar_image_index]} />}
+              text={`${visit.child.first_name} ${visit.child.last_name}`}
+              icon={
+                <Avatar
+                  rounded
+                  size={30}
+                  source={avatarImages[visit.child.avatar_image_index]}
+                />
+              }
             />
             <BookedDetailCard
               type="Address"
-              text={address}
+              text={addressToString(visit.address)}
               icon={<EvilIcons name="location" size={30} color={BLACK60} />}
             />
             <BookedDetailCard
               type="Date &amp; Time"
-              text={time}
+              text={formatAMPM(new Date(visit.appointment_time))}
               icon={
                 // eslint-disable-next-line react/jsx-wrap-multilines
                 <FontAwesome
@@ -171,24 +170,24 @@ class BookingReceiptScreen extends React.Component {
               }}
             >
               <FlexView>
-                <StyledText fontSize={14} style={{ marginLeft: 20 }}>
-                  {card}
-                </StyledText>
-              </FlexView>
-              <FlexView>
                 <StyledText
                   fontFamily="FlamaMedium"
                   style={{ marginRight: 20 }}
                 >
-                  {price}
+                  {visit.payment_amount}
                 </StyledText>
               </FlexView>
             </FlexView>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 24 }}>
             <ServiceButton
-              title="Leave review"
-              onPress={() => navigate("DashboardBookingReceiptComment")}
+              title={visit.review ? "Update Review" : "Review Visit"}
+              onPress={() =>
+                navigate("DashboardBookingReceiptComment", {
+                  visitID,
+                  providerData
+                })
+              }
             />
           </ContentWrapper>
         </View>

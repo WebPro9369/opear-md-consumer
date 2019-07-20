@@ -37,7 +37,6 @@ class SelectProviderScreen extends React.Component {
       const providers = res.data.map(visitRequest => {
         const {
           id: visitRequestID,
-          visit_id: visitID,
           care_provider_id: careProviderID,
           care_provider: {
             name,
@@ -86,14 +85,13 @@ class SelectProviderScreen extends React.Component {
   };
 
   render() {
-    const {
-      navigation: { goBack }
-    } = this.props;
+    const { navigation } = this.props;
+    const { goBack } = navigation;
     const { providers } = this.state;
 
     return (
       <ContainerView>
-        <DeeplinkHandler navigation={this.props.navigation} />
+        <DeeplinkHandler navigation={navigation} />
         <View
           style={{
             paddingLeft: 16,

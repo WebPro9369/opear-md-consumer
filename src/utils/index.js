@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-// import { getFormattedDate } from "./helpers";
+import isEmpty from "lodash/isEmpty";
 
 export const formatCardInfo = data => ({
   cardNumber: data.cardNumber || "",
@@ -9,6 +9,22 @@ export const formatCardInfo = data => ({
   cardType: data.cardType || "",
   fullName: data.fullName || ""
 });
+
+export const isVisitActive = visit => {
+  const activeStates = [
+    "pending",
+    "matched",
+    "approving",
+    "scheduled",
+    "in_progress"
+  ];
+
+  return activeStates.includes(visit.state);
+};
+
+export const doesVisitNeedView = visit => {
+  return visit && visit.state === "completed" && isEmpty(visit.review);
+};
 
 export const userFromResult = (res, userStore) => {
   const {

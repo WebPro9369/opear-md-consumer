@@ -1,8 +1,15 @@
 import React from "react";
 import { Avatar } from "react-native-elements";
+import { inject, observer, PropTypes } from "mobx-react";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
+import { Alert } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { addressToString, formatAMPM } from "@utils/helpers";
+import { DeeplinkHandler } from "@components/deeplink-handler";
+import { avatarImages } from "@utils/constants";
+import isEmpty from "lodash/isEmpty";
+import { registerReview, updateReview } from "@services/opear-api";
 import { ServiceButton } from "../../../components/service-button";
 import { StyledText, StyledTextInput } from "../../../components/text";
 import { View, FlexView } from "../../../components/views";
@@ -10,60 +17,117 @@ import { ScrollView } from "../../../components/views/scroll-view";
 import { BookedDetailCard, ProviderStarsCard } from "../../../components/cards";
 import { ContentWrapper } from "../select-symptoms/styles";
 import { colors } from "../../../utils/constants";
-import { DeeplinkHandler } from "@components/deeplink-handler";
+import { getValueById, getIndexByValue } from "../../../utils";
 
 const { BLACK60 } = colors;
 
-const doctorImg = require("../../../../assets/images/Doctor.png");
-const foxLargeImg = require("../../../../assets/images/FoxLarge.png");
-
+@inject("store")
+@observer
 class BookingReceiptCommentScreen extends React.Component {
+  static propTypes = {
+    store: PropTypes.observableObject.isRequired
+  };
+
   constructor(props) {
     super(props);
 
+    const {
+      navigation,
+      store: { visitReviewStore }
+    } = props;
+    visitReviewStore.clear();
+    const visitID = navigation.getParam("visitID", 0);
+    const providerData = navigation.getParam("providerData", null);
+
     this.state = {
-      providerData: {
-        key: "1",
-        avartarImg: doctorImg,
-        name: "Dr. John Smith",
-        bio: "Hi, this is my bio",
-        symptom: "Respiratory",
-        rating: "4.5"
-      },
-      child: "Benjamin",
-      address: "18 Mission St",
-      time: "Sun Dec 31, 8am - 9am",
-      card: "4985",
-      price: "$150.00",
-      stars: 0
+      providerData,
+      visitID
     };
   }
 
+  saveReview = () => {
+    const {
+      navigation,
+      store: { visitsStore, visitReviewStore }
+    } = this.props;
+    const { goBack } = navigation;
+    const { visitID } = this.state;
+    const visit = getValueById(visitsStore.visits, visitID);
+    const stars =
+      visitReviewStore.rating || (visit.review ? visit.review.rating : 0);
+    const body =
+      visitReviewStore.body || (visit.review ? visit.review.body : "");
+
+    if (stars < 3 && isEmpty(body)) {
+      return Alert.alert(
+        "Error",
+        "Please let us know what was wrong with your visit"
+      );
+    }
+
+    const successHandler = res => {
+      const index = getIndexByValue(visitsStore, visitID);
+      visit.review = res.data;
+      visitsStore.replaceVisit(index, visit);
+      goBack();
+    };
+
+    const errorHandler = () => {
+      return Alert.alert("Error", "We had an issue saving your review.");
+    };
+
+    if (visit.review) {
+      updateReview(
+        visit.review.id,
+        {
+          review: {
+            visit_id: visitID,
+            body,
+            rating: stars,
+            parent_id: visit.parent_id,
+            care_provider_id: visit.care_provider_id
+          }
+        },
+        { successHandler, errorHandler }
+      );
+    } else {
+      registerReview(
+        {
+          review: {
+            visit_id: visitID,
+            body,
+            rating: stars,
+            parent_id: visit.parent_id,
+            care_provider_id: visit.care_provider_id
+          }
+        },
+        { successHandler, errorHandler }
+      );
+    }
+  };
+
   setStars = event => {
-    this.setState({
-      stars: event.key + 1
-    });
+    const {
+      store: { visitReviewStore }
+    } = this.props;
+    visitReviewStore.setRating(event.key + 1);
   };
 
   render() {
     const {
-      navigation: { navigate }
+      navigation,
+      store: { visitsStore, visitReviewStore }
     } = this.props;
-    const {
-      providerData,
-      child,
-      address,
-      time,
-      card,
-      price,
-      stars
-    } = this.state;
-
-    const onPressStar = this.setStars;
-
+    const { goBack } = navigation;
+    const { providerData, visitID } = this.state;
+    const visit = getValueById(visitsStore.visits, visitID);
+    const stars =
+      visitReviewStore.rating || (visit.review ? visit.review.rating : 0);
+    const body =
+      visitReviewStore.body || (visit.review ? visit.review.body : "");
     return (
       <ScrollView padding={0} marginTop={24}>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <View style={{ marginTop: 16 }}>
           <ContentWrapper>
             <FlexView justifyContent="center">
@@ -81,7 +145,7 @@ class BookingReceiptCommentScreen extends React.Component {
                 lineHeight={40}
                 color={colors.TEXT_GREEN}
               >
-                {providerData.symptom}
+                {visit.reason}
               </StyledText>
             </FlexView>
           </ContentWrapper>
@@ -89,13 +153,13 @@ class BookingReceiptCommentScreen extends React.Component {
         <View style={{ marginTop: 16 }}>
           <ContentWrapper>
             <ProviderStarsCard
-              avatarImg={providerData.avartarImg}
+              avatarImg={avatarImages[providerData.avatar]}
               name={providerData.name}
               bio={providerData.bio}
               rating={providerData.rating}
               stars={stars}
               editable
-              onPressStar={onPressStar}
+              onPressStar={this.setStars}
             />
           </ContentWrapper>
           <ContentWrapper style={{ paddingTop: 16, paddingBottom: 16 }}>
@@ -113,6 +177,8 @@ class BookingReceiptCommentScreen extends React.Component {
                   ? "Enter review comments here"
                   : "Enter review comments here (optional)"
               }
+              value={body}
+              onChangeText={value => visitReviewStore.setBody(value)}
               style={{
                 minHeight: 160,
                 padding: 20,
@@ -131,17 +197,23 @@ class BookingReceiptCommentScreen extends React.Component {
           >
             <BookedDetailCard
               type="Child"
-              text={child}
-              icon={<Avatar rounded size={30} source={foxLargeImg} />}
+              text={`${visit.child.first_name} ${visit.child.last_name}`}
+              icon={(
+<Avatar
+                  rounded
+                  size={30}
+                  source={avatarImages[visit.child.avatar_image_index]}
+                />
+)}
             />
             <BookedDetailCard
               type="Address"
-              text={address}
+              text={addressToString(visit.address)}
               icon={<EvilIcons name="location" size={30} color={BLACK60} />}
             />
             <BookedDetailCard
               type="Date &amp; Time"
-              text={time}
+              text={formatAMPM(new Date(visit.appointment_time))}
               icon={
                 // eslint-disable-next-line react/jsx-wrap-multilines
                 <FontAwesome
@@ -162,25 +234,30 @@ class BookingReceiptCommentScreen extends React.Component {
               }}
             >
               <FlexView>
-                <StyledText fontSize={14} style={{ marginLeft: 20 }}>
-                  {card}
-                </StyledText>
-              </FlexView>
-              <FlexView>
                 <StyledText
                   fontFamily="FlamaMedium"
                   style={{ marginRight: 20 }}
                 >
-                  {price}
+                  {visit.payment_amount}
                 </StyledText>
                 <MaterialIcons name="help" size={24} />
               </FlexView>
             </FlexView>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 24 }}>
+            {(visitReviewStore.rating || visitReviewStore.body) && (
+              <ServiceButton
+                title={visit.review ? "Update Review" : "Submit Review"}
+                onPress={() => this.saveReview()}
+              />
+            )}
             <ServiceButton
-              title="Back to dashboard"
-              onPress={() => navigate("DashboardDefault")}
+              title={
+                visitReviewStore.rating || visitReviewStore.body
+                  ? "Cancel Changes"
+                  : "Back to Receipt"
+              }
+              onPress={() => goBack()}
             />
           </ContentWrapper>
         </View>
