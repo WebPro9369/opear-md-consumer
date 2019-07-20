@@ -5,7 +5,7 @@ import {
 } from "@services/opear-api";
 
 export function setAuthentication({ id, apiKey }) {
-  Keychain.setGenericPassword(`${id}`, ""); // Do not remember the api key
+  Keychain.setGenericPassword(`${id}`, apiKey);
   API_SETTINGS.apiKey = apiKey;
 }
 
@@ -49,4 +49,5 @@ export async function getAuthentication() {
 
 export function removeAuthentication(id) {
   Keychain.setGenericPassword(`${id}`, "");
+  API_SETTINGS.apiKey = null;
 }
