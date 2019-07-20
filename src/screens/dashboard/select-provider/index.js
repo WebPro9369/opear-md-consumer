@@ -120,7 +120,7 @@ class SelectProviderScreen extends React.Component {
               <View style={{ marginTop: 8, marginBottom: 8 }}>
                 <ProviderCard
                   key={item.visitRequestID}
-                  avatarImg={item.avatar}
+                  avatarImg={{ uri: item.avatar }}
                   name={item.name}
                   bio={item.biography}
                   history={item.work_history}
