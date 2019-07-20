@@ -40,7 +40,10 @@ class BookingReceiptCommentScreen extends React.Component {
     this.state = {
       providerData,
       visitID,
-      visitReviewStore: {}
+      visitReviewStore: {
+        rating: null,
+        body: null
+      }
     };
   }
 
@@ -52,10 +55,12 @@ class BookingReceiptCommentScreen extends React.Component {
     const { goBack } = navigation;
     const { visitReviewStore, visitID } = this.state;
     const visit = getValueById(visitsStore.visits, visitID);
-    const stars =
-      visitReviewStore.rating || (visit.review ? visit.review.rating : 0);
-    const body =
-      visitReviewStore.body || (visit.review ? visit.review.body : "");
+    const stars = isNull(visitReviewStore.rating)
+      ? (visit.review ? visit.review.rating : 0)
+      : visitReviewStore.rating;
+    const body = isNull(visitReviewStore.body)
+      ? (visit.review ? visit.review.body : "")
+      : visitReviewStore.body;
 
     if (stars < 3 && isEmpty(body)) {
       return Alert.alert(
@@ -254,7 +259,7 @@ class BookingReceiptCommentScreen extends React.Component {
             </FlexView>
           </ContentWrapper>
           <ContentWrapper style={{ marginTop: 24 }}>
-            {(visitReviewStore.rating || visitReviewStore.body) && (
+            {(!isNull(visitReviewStore.rating) || !isNull(visitReviewStore.body)) && (
               <ServiceButton
                 title={visit.review ? "Update Review" : "Submit Review"}
                 style={{ marginBottom: 12 }}
@@ -263,7 +268,7 @@ class BookingReceiptCommentScreen extends React.Component {
             )}
             <ServiceButton
               title={
-                visitReviewStore.rating || visitReviewStore.body
+                (!isNull(visitReviewStore.rating) || !isNull(visitReviewStore.body))
                   ? "Cancel Changes"
                   : "Back to Receipt"
               }
