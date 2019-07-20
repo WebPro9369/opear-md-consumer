@@ -90,11 +90,7 @@ class AccountScreen extends React.Component {
         <InactiveUserBanner userIsActive={userStore.active} />
         <View style={{ padding: 16 }}>
           <FlexView justifyContent="start">
-            <Avatar
-              {...avatarOptions}
-              rounded
-              size={80}
-            />
+            <Avatar {...avatarOptions} rounded size={80} />
             <View style={{ paddingLeft: 20 }}>
               <StyledText fontSize={16}>{name}</StyledText>
               <StyledText fontSize={16} fontFamily="FlamaLight">

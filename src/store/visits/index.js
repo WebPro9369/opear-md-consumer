@@ -4,6 +4,7 @@ import { types } from "mobx-state-tree";
 import ChildStore from "../child";
 import AddressStore from "../address";
 import ParentStore from "../parent";
+import VisitReviewStore from "../visit-review";
 
 export const VisitsStore = types
   .model("VisitsStore", {
@@ -21,6 +22,7 @@ export const VisitsStore = types
         visit_notes: types.maybeNull(types.string),
         payment_amount: types.string,
         state: types.string,
+        review: types.maybeNull(VisitReviewStore),
         child: types.optional(ChildStore, {
           id: -1,
           gender: "",

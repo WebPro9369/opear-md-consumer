@@ -17,6 +17,7 @@ import { colors } from "../../utils/constants";
 import { getChildren, getAddresses, getVisits } from "@services/opear-api";
 import InactiveUserBanner from "@components/banner";
 import { DeeplinkHandler } from "@components/deeplink-handler";
+import { isVisitActive, doesVisitNeedView } from "@utils";
 
 const imgRightArrow = require("../../../assets/images/Right_arrow.png");
 
@@ -30,21 +31,18 @@ class DashboardScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    const {
-      store: { userStore, visitsStore }
-    } = props;
-
     this.state = {
-      userStore,
       illnessList: [
         { key: "1", string: "General", color: "#49AF67" },
         { key: "2", string: "Respiratory", color: "#0e7092" },
         { key: "3", string: "Abdominal", color: "#d7707d" },
         { key: "4", string: "Ear Nose Throat", color: "#6b82a3" }
-      ],
-      visitId: null,
-      visitState: ""
+      ]
     };
+
+    const {
+      store: { userStore }
+    } = this.props;
 
     const getChildrenSuccessHandler = res => {
       userStore.setChildren(res.data);
@@ -70,60 +68,145 @@ class DashboardScreen extends React.Component {
 
   componentDidMount() {
     this.getVisits();
-    this.timer = setInterval(() => this.getVisits(), 30000);
 
     const { navigation } = this.props;
     navigation.addListener("willFocus", () => {
-      this.setState({ visitState: "" });
+      clearTimeout(this.timer);
       this.getVisits();
     });
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
+    clearTimeout(this.timer);
   }
 
   getVisits = () => {
     const getVisitsSuccessHandler = res => {
-      const visits = res.data;
-      const { store: { visitsStore } } = this.props;
+      const visitsData = res.data;
+      const {
+        store: { visitsStore }
+      } = this.props;
 
-      visitsStore.setVisits(Object.values(visits).flat());
-      const dates = Object.keys(visits);
+      const visits = Object.values(visitsData).flat();
+      visitsStore.setVisits(visits);
 
-      for (const date of dates) {
-        const visitsOnDate = visits[date];
-
-        for (const visitOnDate of visitsOnDate) {
-          switch (visitOnDate.state) {
-            case "pending":
-            case "matched":
-            case "approving":
-            case "scheduled":
-            case "in_progress":
-              this.setState({ visitID: visitOnDate.id, visitState: visitOnDate.state });
-              break;
-          }
-        }
-      }
+      this.timer = setTimeout(() => this.getVisits(), 30000);
     };
 
     getVisits({ successHandler: getVisitsSuccessHandler });
   };
 
+  getBanner = () => {
+    const { navigation, store } = this.props;
+    const { navigate } = navigation;
+    const { userStore, visitsStore } = store;
+    if (!userStore.active) {
+      return <InactiveUserBanner userIsActive={userStore.active} />;
+    }
+
+    const activeVisit = visitsStore.visits.find(isVisitActive);
+    if (activeVisit) {
+      const visitID = activeVisit.id;
+      switch (activeVisit.state) {
+        case "pending":
+          return (
+            <MatchingMessageWrapper>
+              <StyledText fontSize={16} lineHeight={24}>
+                We are currently matching you with your care provider, be in
+                touch soon!
+              </StyledText>
+            </MatchingMessageWrapper>
+          );
+        case "matched":
+          return (
+            <TouchableOpacity
+              onPress={() => navigate("DashboardSelectProvider", { visitID })}
+            >
+              <MatchingMessageWrapper>
+                <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
+                  <StyledText fontSize={16} lineHeight={24}>
+                    Your care provider recommendations are ready!
+                  </StyledText>
+                  <Image source={imgRightArrow} width={25} />
+                </FlexView>
+              </MatchingMessageWrapper>
+            </TouchableOpacity>
+          );
+        case "approving":
+          return (
+            <MatchingMessageWrapper>
+              <StyledText fontSize={16} lineHeight={24}>
+                Your visit request has been sent to the care provider - check
+                back soon!
+              </StyledText>
+            </MatchingMessageWrapper>
+          );
+        case "scheduled":
+          return (
+            <TouchableOpacity
+              onPress={() => navigate("DashboardUpcomingVisit", { visitID })}
+            >
+              <MatchingMessageWrapper>
+                <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
+                  <StyledText fontSize={16} lineHeight={24}>
+                    Your care provider is on the way! Review details
+                  </StyledText>
+                  <Image source={imgRightArrow} width={25} />
+                </FlexView>
+              </MatchingMessageWrapper>
+            </TouchableOpacity>
+          );
+        case "in_progress":
+          return (
+            <TouchableOpacity
+              onPress={() => navigate("DashboardUpcomingVisit", { visitID })}
+            >
+              <MatchingMessageWrapper>
+                <StyledText fontSize={16} lineHeight={24}>
+                  Your Care Provider is on their way!
+                </StyledText>
+              </MatchingMessageWrapper>
+            </TouchableOpacity>
+          );
+        default:
+          break;
+      }
+    }
+
+    const reviewableVisit = visitsStore.visits.find(doesVisitNeedView);
+    if (reviewableVisit) {
+      return (
+        <TouchableOpacity
+          onPress={() =>
+            navigate("DashboardBookingReceipt", { visitID: reviewableVisit.id })
+          }
+        >
+          <MatchingMessageWrapper>
+            <StyledText fontSize={16} lineHeight={24}>
+              Leave a review for your last visit!
+            </StyledText>
+          </MatchingMessageWrapper>
+        </TouchableOpacity>
+      );
+    }
+
+    return null;
+  };
+
   render() {
-    const {
-      navigation: { navigate },
-      store
-    } = this.props;
-    const { providerStore } = store;
+    const { navigation, store } = this.props;
+    const { navigate } = navigation;
+    const { userStore, providerStore, visitsStore } = store;
     const { appointment } = providerStore;
 
-    const { userStore, illnessList, visitID, visitState } = this.state;
+    const { illnessList } = this.state;
+
+    const isVisitInProgress =
+      visitsStore.visits.length > 0 && visitsStore.visits.some(isVisitActive);
 
     return (
       <ContainerView>
-        <DeeplinkHandler navigation={this.props.navigation}/>
+        <DeeplinkHandler navigation={navigation} />
         <HeaderWrapper>
           <NavHeader title="" size="medium" hasBackButton={false} />
         </HeaderWrapper>
@@ -135,68 +218,7 @@ class DashboardScreen extends React.Component {
           </StyledText>
         </ContentWrapper>
 
-        <InactiveUserBanner userIsActive={userStore.active} />
-        {visitState === "pending" ? (
-          <MatchingMessageWrapper>
-            <StyledText fontSize={16} lineHeight={24}>
-              We are currently matching you with your care provider, be in touch
-              soon!
-            </StyledText>
-          </MatchingMessageWrapper>
-        ) : null}
-        {visitState === "matched" ? (
-          <TouchableOpacity
-            onPress={() =>
-              navigate("DashboardSelectProvider", { visitID: visitID })
-            }
-          >
-            <MatchingMessageWrapper>
-              <FlexView style={{ paddingTop: 16, paddingBottom: 16 }}>
-                <StyledText fontSize={16} lineHeight={24}>
-                  Your care provider recommendations are ready!
-                </StyledText>
-                <Image source={imgRightArrow} width={25} />
-              </FlexView>
-            </MatchingMessageWrapper>
-          </TouchableOpacity>
-        ) : null}
-        {visitState === "approving" ? (
-          <MatchingMessageWrapper>
-            <StyledText fontSize={16} lineHeight={24}>
-              Your visit request has been sent to the care provider - check back
-              soon!
-            </StyledText>
-          </MatchingMessageWrapper>
-        ) : null}
-        {visitState === "scheduled" ? (
-          <TouchableOpacity
-            onPress={() =>
-              navigate("DashboardUpcomingVisit", { visitID: visitID })
-            }
-          >
-            <MatchingMessageWrapper>
-              <FlexView style={{ paddingTop: 10, paddingBottom: 10 }}>
-                <StyledText fontSize={16} lineHeight={24}>
-                  Your care provider is on the way! Review details
-                </StyledText>
-                <Image source={imgRightArrow} width={25} />
-              </FlexView>
-            </MatchingMessageWrapper>
-          </TouchableOpacity>
-        ) : null}
-        {visitState === "in_progress" ? (
-          <TouchableOpacity
-            onPress={() =>
-              navigate("DashboardUpcomingVisit", { visitID: visitID })
-            }
-          >
-            <MatchingMessageWrapper>
-              <StyledText fontSize={16} lineHeight={24}>
-                Your Care Provider is on their way!
-              </StyledText>
-            </MatchingMessageWrapper>
-          </TouchableOpacity>
-        ) : null}
+        {this.getBanner()}
 
         <View style={{ marginTop: appointment ? 16 : 48, marginBottom: 40 }}>
           <ContentWrapper>
@@ -209,9 +231,16 @@ class DashboardScreen extends React.Component {
                     bgColor={item.color}
                     onPress={() => {
                       if (userStore.active) {
-                        navigate("DashboardSelectSymptoms", {
-                          illness: item.string
-                        });
+                        if (!isVisitInProgress) {
+                          navigate("DashboardSelectSymptoms", {
+                            illness: item.string
+                          });
+                        } else {
+                          Alert.alert(
+                            "Unavailable",
+                            "You currently have a visit in progress."
+                          );
+                        }
                       } else {
                         Alert.alert(
                           "Unavailable",
