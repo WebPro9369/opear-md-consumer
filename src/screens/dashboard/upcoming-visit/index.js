@@ -45,7 +45,7 @@ class VisitBookedScreen extends React.Component {
     // TODO: Replace dummy data
     this.state = {
       providerData: {
-        avartarImg: doctorImg,
+        avatarImg: doctorImg,
         name: "Dr. test John Smith",
         eta: "8:30am - 8:40am",
         phone: "+17174663337"
@@ -60,12 +60,13 @@ class VisitBookedScreen extends React.Component {
     };
 
     const careProviderSuccess = res => {
-      const { name, phone } = res.data;
+      const { name, phone, avatar } = res.data;
 
       this.setState({
         providerData: {
           name,
-          phone
+          phone,
+          avatar
         }
       });
     };
@@ -183,7 +184,11 @@ class VisitBookedScreen extends React.Component {
           )}
           <ContentWrapper style={{ marginTop: 0 }}>
             <ViewCentered>
-              <Avatar rounded size={150} source={doctorImg} />
+              <Avatar
+                rounded
+                size={150}
+                source={{ uri: providerData.avatar }}
+              />
               <View style={{ marginTop: 16, maxWidth: 240 }}>
                 <StyledText
                   fontFamily="FlamaMedium"
