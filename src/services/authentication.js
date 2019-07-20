@@ -15,6 +15,10 @@ export function storeNotificationToken(id, notificationToken) {
   updateParent(id, { notification_token: notificationToken });
 }
 
+export function hasCachedAuthentication() {
+  return API_SETTINGS.apiKey;
+}
+
 export async function getAuthentication() {
   let id;
   let apiKey;
@@ -45,4 +49,5 @@ export async function getAuthentication() {
 
 export function removeAuthentication(id) {
   Keychain.setGenericPassword(`${id}`, "");
+  API_SETTINGS.apiKey = null;
 }
