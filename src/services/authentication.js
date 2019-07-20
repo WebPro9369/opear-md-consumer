@@ -10,6 +10,10 @@ export function setAuthentication({ id, apiKey }) {
   API_SETTINGS.apiKey = apiKey;
 }
 
+export function hasCachedAuthentication() {
+  return API_SETTINGS.apiKey;
+}
+
 export function storeNotificationToken(id, notificationToken) {
   if (!notificationToken) return;
 
@@ -46,6 +50,7 @@ export async function getAuthentication() {
 
 export function removeAuthentication(id) {
   Keychain.setGenericPassword(`${id}`, "");
+  API_SETTINGS.apiKey = null;
 }
 
 export function requestTouchID({ onSuccess,  onFail }) {
