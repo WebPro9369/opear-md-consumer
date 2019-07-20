@@ -70,7 +70,8 @@ class BookingReceiptCommentScreen extends React.Component {
     }
 
     const successHandler = res => {
-      visit.review = res.data;
+      const index = getIndexByValue(visitsStore.visits, visitID);
+      visitsStore.setReview(index, res.data);
       goBack();
     };
 

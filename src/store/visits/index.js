@@ -95,6 +95,10 @@ export const VisitsStore = types
       self.visits[index].paymentAmount = value;
       return self;
     },
+    setReview(index, value) {
+      self.visits[index].review = value;
+      return self;
+    },
     addVisit(visit) {
       let found = false;
       (self.visits || []).forEach(v => {
