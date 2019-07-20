@@ -5,7 +5,9 @@ import { inject, observer, PropTypes } from "mobx-react";
 import { getParent } from "@services/opear-api";
 import {
   getAuthentication,
-  removeAuthentication
+  removeAuthentication,
+  requestTouchID,
+  hasCachedAuthentication
 } from "@services/authentication";
 import { userFromResult } from "@utils";
 import { SUBSCRIPTIONS_ACTIVE_START_DATE } from "@utils/constants";
@@ -42,6 +44,14 @@ class AuthLoadingScreen extends Component {
       if (!isAuthenticated && wasAuthenticated)
         return navigate("Authenticating");
       if (!isAuthenticated) return navigate("Authenticating");
+
+      const onFail = (error) => {
+        console.tron.log("TouchID error", error);
+        removeAuthentication();
+        navigate("Authenticating");
+      };
+
+      if (!hasCachedAuthentication()) requestTouchID({ onFail });
 
       userStore.setAuthentication({ id, apiKey });
 
