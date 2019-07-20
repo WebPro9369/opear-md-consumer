@@ -3,6 +3,7 @@ import {
   API_SETTINGS,
   updateParent
 } from "@services/opear-api";
+import TouchID from "react-native-touch-id";
 
 export function setAuthentication({ id, apiKey }) {
   Keychain.setGenericPassword(`${id}`, apiKey);
@@ -45,4 +46,20 @@ export async function getAuthentication() {
 
 export function removeAuthentication(id) {
   Keychain.setGenericPassword(`${id}`, "");
+}
+
+export function requestTouchID({ onSuccess,  onFail }) {
+  onSuccess = onSuccess || (() => {});
+  onFail = onFail || (() => {});
+
+  TouchID.isSupported()
+    .then(biometryType => {
+      console.tron.log("BiometryType: ", biometryType);
+      TouchID.authenticate('to authenticate back', {
+        passcodeFallback: true,
+      })
+        .then(onSuccess)
+        .catch(onFail);
+    })
+    .catch(onFail);
 }
