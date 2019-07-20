@@ -44,7 +44,6 @@ class AddCardScreen extends React.Component {
       loading: false,
       isEditing: params && params.last4 && params.last4.length === 4,
       last4: params && params.last4,
-      cardInput: ""
     };
   }
 
@@ -60,20 +59,18 @@ class AddCardScreen extends React.Component {
       store: { cardStore, userStore }
     } = this.props;
     const { id } = userStore;
-    const { expiryYear, expiryMonth, cvv, fullName } = cardStore.cardInfo;
-
-    const { cardInput } = this.state;
+    const { cardNumber, expiryYear, expiryMonth, cvv, fullName } = cardStore.cardInfo;
 
     // Validate card number
     const cardRegExp = /^[0-9]{16}$/g;
     const amexRegExp = /^3[47][0-9]{13}$/g;
-    if (!cardRegExp.test(cardInput) && !amexRegExp.test(cardInput)) {
+    if (!cardRegExp.test(cardNumber) && !amexRegExp.test(cardNumber)) {
       Alert.alert("Error", "Invalid card number.");
       return false;
     }
 
     const params = {
-      number: cardInput,
+      number: cardNumber,
       expMonth: expiryMonth,
       expYear: expiryYear,
       cvc: cvv,
@@ -143,9 +140,10 @@ class AddCardScreen extends React.Component {
     } = this.props;
     const { navigate } = navigation;
     const { cardInfo } = cardStore;
-    const { expiryYear, expiryMonth, cvv, fullName } = cardInfo || {};
+    const { cardNumber, expiryYear, expiryMonth, cvv, fullName } = cardInfo || {};
 
-    const { loading, isEditing, last4, cardInput } = this.state;
+    const { loading, isEditing, last4 } = this.state;
+
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
         <DeeplinkHandler navigation={navigation} />
@@ -176,15 +174,16 @@ class AddCardScreen extends React.Component {
           <FormInputView>
             <FormTextInput
               label="Card Number"
-              value={cardInput}
+              value={cardNumber}
               placeholder={
                 isEditing
                   ? `Current Card ending in ${last4}`
                   : "1234 5678 3456 2456"
               }
               onChangeText={value =>
-                this.setState({
-                  cardInput: value
+                cardStore.setCardInfo({
+                  ...cardInfo,
+                  cardNumber: value
                 })
               }
               rightIcon={
