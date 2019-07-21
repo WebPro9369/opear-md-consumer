@@ -117,12 +117,13 @@ class AddCardScreen extends React.Component {
 
   previousScreen() {
     const {
-      navigation: { getParam, navigate, goBack }
+      navigation: { getParam, navigate, pop, goBack }
     } = this.props;
 
     const screenRef = getParam("screenRef", null);
 
     if (screenRef) {
+      pop(); pop(); // pop(2) doesn't seem to work
       navigate("DashboardBookingReview", { screenRef });
     } else {
       goBack();
