@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable import/no-unresolved */
 import React, { Component } from "react";
-import { Image, Alert, Linking } from "react-native";
+import { Image, Alert, Linking, ActivityIndicator } from "react-native";
 import { CheckBox, Avatar } from "react-native-elements";
 import ImagePicker from "react-native-image-picker";
 import { inject, observer, PropTypes } from "mobx-react";
@@ -32,7 +32,8 @@ class PhoneNumberScreen extends Component {
     this.state = {
       avatarSource: { uri: "" },
       acceptedPrivacy: false,
-      acceptedTermsOfService: false
+      acceptedTermsOfService: false,
+      loading: false
     };
   }
 
@@ -116,12 +117,14 @@ class PhoneNumberScreen extends Component {
     };
 
     const errorHandler = () => {
+      this.setState({loading: false});
       return Alert.alert(
         "Uhoh",
         "Registration failed. Please ensure your information is correct, or contact help@opear.com."
       );
     };
 
+    this.setState({loading: true});
     const formData = new FormData();
     Object.keys(data).forEach(key => formData.append(`parent[${key}]`, data[key]));
 
@@ -161,7 +164,8 @@ class PhoneNumberScreen extends Component {
     const {
       avatarSource,
       acceptedPrivacy,
-      acceptedTermsOfService
+      acceptedTermsOfService,
+      loading
     } = this.state;
 
     const avatarOptions = { icon: { name: "user", type: "font-awesome" } };
@@ -295,11 +299,12 @@ class PhoneNumberScreen extends Component {
             resizeMode="contain"
             style={{ width: "100%", marginBottom: 16 }}
           />
+        {loading ? <ActivityIndicator size="large" color={colors.BLUE} /> :
           <ServiceButton
             title="Submit"
             style={{ marginBottom: 20 }}
             onPress={this.onSubmit}
-          />
+          />}
         </ScrollView>
       </ContainerView>
     );
