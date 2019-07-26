@@ -298,7 +298,7 @@ class DashboardScreen extends React.Component {
                 color: colors.BLACK60
               }}
             >
-              3.&nbsp;&nbsp;&nbsp;&nbsp;Choose a pediatrician!
+              3.&nbsp;&nbsp;&nbsp;&nbsp;Choose a licensed medical professional!
             </StyledText>
           </ContentWrapper>
         </View>
